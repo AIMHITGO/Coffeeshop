@@ -11,17 +11,16 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand Section */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="bg-gradient-to-br from-amber-500 to-amber-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg">
-                HP
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-white">Happy Place</h3>
-                <p className="text-sm text-gray-400">Coffee & Eats</p>
-              </div>
-            </div>
+            <Link to="/" className="inline-block">
+              <img 
+                src="https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Happy-Logo-1920w.png" 
+                alt="Happy Place Coffee & Eats"
+                className="h-16 w-auto"
+              />
+            </Link>
             <p className="text-gray-400 text-sm leading-relaxed">
-              A Latin-influenced, New-American daytime café bringing authentic flavors and craft coffee to Woodbridge, VA.
+              A family-owned, Latin-influenced café bringing authentic flavors and craft coffee to Woodbridge, VA. 
+              Where every guest is treated like family.
             </p>
             <div className="flex space-x-3">
               <a href="#" className="w-10 h-10 rounded-full bg-gray-800 hover:bg-amber-600 flex items-center justify-center transition-colors duration-300">
