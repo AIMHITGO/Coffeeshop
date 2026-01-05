@@ -209,37 +209,37 @@ export const blogPosts = [
     author: 'Happy Place Team',
     date: '2024-12-15',
     category: 'Coffee Culture',
-    image: 'https://images.pexels.com/photos/302887/pexels-photo-302887.jpeg',
+    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-903742886-1920w.jpg',
     featured: true
   },
   {
     id: '2',
     title: 'Behind the Scenes: Crafting Your Perfect Latte',
-    excerpt: 'Meet our baristas and learn about the care and precision that goes into every cup we serve.',
-    author: 'Maria Rodriguez',
+    excerpt: 'Meet our family and learn about the care and precision that goes into every cup we serve.',
+    author: 'The Happy Place Family',
     date: '2024-12-10',
     category: 'Behind the Scenes',
-    image: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg',
+    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-903742886-1920w.jpg',
     featured: true
   },
   {
     id: '3',
-    title: 'Seasonal Favorites: Winter Warmers',
-    excerpt: 'Explore our cozy winter menu featuring comfort foods and warming beverages perfect for the cold season.',
-    author: 'Chef Miguel',
+    title: 'Our Latin-Fusion Story: Food with Heart',
+    excerpt: 'Learn how our family recipes and Latin-American heritage inspire every dish we create.',
+    author: 'Happy Place Family',
     date: '2024-12-05',
-    category: 'Menu Highlights',
-    image: 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHxmb29kfGVufDB8fHx8MTc2NzYyNjQ2OHww&ixlib=rb-4.1.0&q=85',
+    category: 'Our Story',
+    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/1-GettyImages-488301561-1920w.jpg',
     featured: false
   },
   {
     id: '4',
-    title: 'Community Stories: Why Happy Place is Home',
-    excerpt: 'Hear from our loyal customers about what makes Happy Place Coffee & Eats special to them.',
+    title: 'Why Woodbridge Loves Happy Place',
+    excerpt: 'Hear from our loyal customers about what makes Happy Place Coffee & Eats their favorite local spot.',
     author: 'Happy Place Team',
     date: '2024-11-28',
     category: 'Community',
-    image: 'https://images.pexels.com/photos/35237767/pexels-photo-35237767.jpeg',
+    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-1367390655-1920w.jpg',
     featured: false
   }
 ];
@@ -287,25 +287,25 @@ export const testimonials = [
   {
     id: '1',
     name: 'Sarah Johnson',
-    role: 'Regular Customer',
-    content: 'Happy Place has become my second home. The coffee is incredible and the Latin fusion menu is unlike anything else in the area!',
+    role: 'Woodbridge Local',
+    content: 'Happy Place has become my family\'s second home. The owners treat you like family, and you can taste the love in every dish and every cup!',
     rating: 5,
-    image: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg'
+    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-1367390655-1920w.jpg'
   },
   {
     id: '2',
     name: 'Michael Torres',
     role: 'Food Enthusiast',
-    content: 'The Lomo Saltado is authentic and delicious. You can taste the love in every dish. This place is a gem!',
+    content: 'The Lomo Saltado is authentic perfection. This family-owned gem brings real Latin-American flavors to Woodbridge. I drive 30 minutes just to eat here!',
     rating: 5,
-    image: 'https://images.pexels.com/photos/302887/pexels-photo-302887.jpeg'
+    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/1-GettyImages-488301561-1920w.jpg'
   },
   {
     id: '3',
     name: 'Emily Chen',
     role: 'Coffee Lover',
-    content: 'Best latte art in town! The baristas here are true craftspeople. I love supporting this local business.',
+    content: 'Best coffee in Virginia! The baristas remember my name and my order. It\'s this personal touch that makes Happy Place truly special.',
     rating: 5,
-    image: 'https://images.pexels.com/photos/35237767/pexels-photo-35237767.jpeg'
+    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-903742886-1920w.jpg'
   }
 ];
