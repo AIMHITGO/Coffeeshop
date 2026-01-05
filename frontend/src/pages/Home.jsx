@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ArrowRight, Coffee, Heart, Star, Award, Clock, MapPin } from 'lucide-react';
+import { ArrowRight, Coffee, Heart, Star, Award, Clock, MapPin, Users } from 'lucide-react';
 import { menuCategories, testimonials, blogPosts } from '../data/mock';
 
 const Home = () => {
