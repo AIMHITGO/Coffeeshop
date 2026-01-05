@@ -151,32 +151,32 @@ const Home = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
               <div>
-                <span className="text-amber-600 font-semibold text-sm uppercase tracking-wider">Why Choose Us</span>
+                <span className="text-amber-600 font-semibold text-sm uppercase tracking-wider">Family-Owned & Proud</span>
                 <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-4">
                   More Than Just <span className="text-amber-600">Coffee</span>
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  We're a community hub where authentic Latin-American flavors meet American comfort, 
-                  crafted with passion and served with love.
+                  We're a family-run business where every recipe tells a story and every guest becomes part of our family. 
+                  Our Latin-American heritage and love for great coffee drive everything we do.
                 </p>
               </div>
 
               <div className="space-y-6">
                 {[
                   {
+                    icon: Heart,
+                    title: 'Family Recipes, Made with Love',
+                    description: 'Every dish is prepared using authentic family recipes passed down through generations. Real food, real flavor.'
+                  },
+                  {
                     icon: Coffee,
                     title: 'Barista-Crafted Excellence',
-                    description: 'Every cup is crafted by skilled baristas using premium beans and artisanal techniques.'
+                    description: 'Our coffee is brewed fresh all day long. Each cup crafted with care, precision, and passion.'
                   },
                   {
-                    icon: Heart,
-                    title: 'Authentic Latin Fusion',
-                    description: 'Experience genuine Latin-American flavors blended with New-American cuisine.'
-                  },
-                  {
-                    icon: Award,
-                    title: 'Family-Owned & Local',
-                    description: 'A local business that treats every customer like family, building community one cup at a time.'
+                    icon: Users,
+                    title: 'You\'re Family Here',
+                    description: 'We treat every guest like family. Come once as a customer, leave as a friend, return as family.'
                   }
                 ].map((feature, idx) => (
                   <div key={idx} className="flex items-start space-x-4 group">
@@ -197,8 +197,8 @@ const Home = () => {
             <div className="relative">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="https://images.pexels.com/photos/302887/pexels-photo-302887.jpeg"
-                  alt="Barista crafting coffee"
+                  src="https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-903742886-1920w.jpg"
+                  alt="Happy Place Coffee - Barista crafting your perfect cup"
                   className="w-full h-[600px] object-cover"
                 />
               </div>
