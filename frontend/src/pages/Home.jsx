@@ -15,8 +15,8 @@ const Home = () => {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.pexels.com/photos/35237767/pexels-photo-35237767.jpeg"
-            alt="Coffee shop interior"
+            src="https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-1367390655-1920w.jpg"
+            alt="Happy Place Coffee & Eats - Family owned coffee shop"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-amber-900/40"></div>
@@ -28,19 +28,19 @@ const Home = () => {
             <div className="inline-block">
               <span className="inline-flex items-center px-4 py-2 rounded-full bg-amber-500/20 backdrop-blur-sm border border-amber-400/30 text-amber-200 text-sm font-medium">
                 <Coffee className="w-4 h-4 mr-2" />
-                Local. Authentic. Crafted with Love
+                Family-Owned Since Day One
               </span>
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight">
               Your <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Happy Place</span>
               <br />
-              <span className="text-4xl md:text-5xl lg:text-6xl">Awaits</span>
+              <span className="text-4xl md:text-5xl lg:text-6xl">For Great Food & Coffee</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
-              Where Latin-American warmth meets craft coffee culture. 
-              Experience authentic fusion cuisine and barista-crafted beverages in Woodbridge, VA.
+              A unique Latin-American fusion café where family recipes meet craft coffee. 
+              Every dish made with love, every guest treated like family.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
@@ -65,9 +65,9 @@ const Home = () => {
             {/* Quick Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 max-w-4xl mx-auto">
               {[
-                { icon: Star, label: '5-Star Rated', value: '4.9/5' },
-                { icon: Coffee, label: 'Drinks Served', value: '50K+' },
-                { icon: Heart, label: 'Happy Customers', value: '10K+' },
+                { icon: Heart, label: 'Family Owned', value: 'Local' },
+                { icon: Coffee, label: 'Cups Served', value: '50K+' },
+                { icon: Star, label: 'Happy Guests', value: '10K+' },
                 { icon: Award, label: 'Years Serving', value: '5+' }
               ].map((stat, idx) => (
                 <div key={idx} className="text-center space-y-2">
