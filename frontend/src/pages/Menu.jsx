@@ -1,14 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { ShoppingBag, Plus, Minus } from 'lucide-react';
+import { ShoppingBag, Plus, Minus, Star } from 'lucide-react';
 import { menuCategories } from '../data/mock';
 import { toast } from 'sonner';
 
 const Menu = () => {
   const [cart, setCart] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState('breakfast');
+  const [selectedMainCategory, setSelectedMainCategory] = useState('featured');
+  const [activeDrinkSection, setActiveDrinkSection] = useState('coffee-espresso');
+  const drinkSectionRefs = useRef({});
+
+  // Best Selling Coffee Items
+  const bestSellingCoffee = [
+    menuCategories.find(cat => cat.id === 'specialty-lattes')?.items[2], // Latte
+    menuCategories.find(cat => cat.id === 'cold-brew-signature')?.items[0], // Cold Brew
+    menuCategories.find(cat => cat.id === 'specialty-lattes')?.items[0], // Cappuccino
+    menuCategories.find(cat => cat.id === 'cold-brew-signature')?.items[2], // Horchata & Espresso
+    menuCategories.find(cat => cat.id === 'coffee-espresso')?.items[0], // Drip Coffee
+    menuCategories.find(cat => cat.id === 'specialty-lattes')?.items[5], // Caramel Macchiato
+  ].filter(Boolean);
+
+  // Organize menu by main categories
+  const coffeeMenuCategories = menuCategories.filter(cat => 
+    ['coffee-espresso', 'specialty-lattes', 'cold-brew-signature', 'frappe', 'tea-non-coffee'].includes(cat.id)
+  );
+
+  const breakfastMenuCategories = menuCategories.filter(cat => 
+    ['breakfast-sandwiches', 'latino-breakfast'].includes(cat.id)
+  );
+
+  const dinnerMenuCategories = menuCategories.filter(cat => 
+    ['sandwiches', 'entrees', 'desserts'].includes(cat.id)
+  );
 
   const addToCart = (item) => {
     setCart(prev => ({
@@ -41,6 +66,99 @@ const Menu = () => {
       .toFixed(2);
   };
 
+  const scrollToDrinkSection = (sectionId) => {
+    drinkSectionRefs.current[sectionId]?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+    setActiveDrinkSection(sectionId);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sectionPositions = Object.keys(drinkSectionRefs.current).map(key => ({
+        id: key,
+        top: drinkSectionRefs.current[key]?.getBoundingClientRect().top
+      }));
+      
+      const current = sectionPositions.find(section => section.top >= 0 && section.top < 300);
+      if (current) {
+        setActiveDrinkSection(current.id);
+      }
+    };
+
+    if (selectedMainCategory === 'coffee') {
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [selectedMainCategory]);
+
+  const renderMenuItem = (item) => (
+    <Card
+      key={item.id}
+      className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-white"
+    >
+      <div className="relative h-48 overflow-hidden">
+        <img
+          src={item.image}
+          alt={item.name}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div className="absolute bottom-3 left-3">
+          <span className="px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded-full">
+            {item.category}
+          </span>
+        </div>
+      </div>
+
+      <CardContent className="p-6">
+        <div className="flex justify-between items-start mb-3">
+          <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
+          <span className="text-xl font-bold text-amber-600">${item.price.toFixed(2)}</span>
+        </div>
+        <p className="text-gray-600 mb-4 text-sm leading-relaxed">{item.description}</p>
+
+        {cart[item.id] ? (
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3 bg-amber-50 rounded-lg px-3 py-2">
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => removeFromCart(item.id)}
+                className="h-8 w-8 p-0 hover:bg-amber-100"
+              >
+                <Minus className="h-4 w-4" />
+              </Button>
+              <span className="font-bold text-gray-900 min-w-[20px] text-center">
+                {cart[item.id]}
+              </span>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => addToCart(item)}
+                className="h-8 w-8 p-0 hover:bg-amber-100"
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+            <span className="text-sm font-semibold text-amber-600">
+              ${(item.price * cart[item.id]).toFixed(2)}
+            </span>
+          </div>
+        ) : (
+          <Button
+            className="w-full bg-amber-600 hover:bg-amber-700 text-white"
+            onClick={() => addToCart(item)}
+          >
+            <ShoppingBag className="mr-2 h-4 w-4" />
+            Add to Order
+          </Button>
+        )}
+      </CardContent>
+    </Card>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-white pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,96 +172,124 @@ const Menu = () => {
           </p>
         </div>
 
-        {/* Tabs */}
-        <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="mb-8">
-          <TabsList className="w-full justify-start overflow-x-auto flex-wrap h-auto bg-white border shadow-sm p-2">
-            {menuCategories.map((category) => (
-              <TabsTrigger
-                key={category.id}
-                value={category.id}
-                className="px-6 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white"
-              >
-                {category.name}
-              </TabsTrigger>
-            ))}
+        {/* Main Category Tabs */}
+        <Tabs value={selectedMainCategory} onValueChange={setSelectedMainCategory} className="mb-8">
+          <TabsList className="w-full justify-center bg-white border shadow-sm p-2 mb-8">
+            <TabsTrigger
+              value="featured"
+              className="px-8 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-lg font-semibold"
+            >
+              Best Sellers
+            </TabsTrigger>
+            <TabsTrigger
+              value="coffee"
+              className="px-8 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-lg font-semibold"
+            >
+              Coffee Menu
+            </TabsTrigger>
+            <TabsTrigger
+              value="breakfast"
+              className="px-8 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-lg font-semibold"
+            >
+              Breakfast Menu
+            </TabsTrigger>
+            <TabsTrigger
+              value="dinner"
+              className="px-8 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-lg font-semibold"
+            >
+              Full Dinner Menu
+            </TabsTrigger>
           </TabsList>
 
-          {menuCategories.map((category) => (
-            <TabsContent key={category.id} value={category.id} className="mt-8">
-              <div className="mb-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
-                <p className="text-gray-600">{category.description}</p>
+          {/* FEATURED / BEST SELLERS */}
+          <TabsContent value="featured">
+            <div className="mb-8 text-center">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                <Star className="inline-block w-8 h-8 text-amber-500 mb-1 mr-2" />
+                Best Selling Coffee
+              </h2>
+              <p className="text-gray-600">Our most popular drinks - customer favorites!</p>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {bestSellingCoffee.map(item => renderMenuItem(item))}
+            </div>
+          </TabsContent>
+
+          {/* COFFEE MENU - Scrollable with Side Navigation */}
+          <TabsContent value="coffee">
+            <div className="flex gap-8">
+              {/* Side Navigation */}
+              <div className="hidden lg:block w-64 flex-shrink-0">
+                <div className="sticky top-24 bg-white rounded-lg shadow-lg p-4">
+                  <h3 className="text-lg font-bold text-gray-900 mb-4">Drink Categories</h3>
+                  <nav className="space-y-2">
+                    {coffeeMenuCategories.map((category) => (
+                      <button
+                        key={category.id}
+                        onClick={() => scrollToDrinkSection(category.id)}
+                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                          activeDrinkSection === category.id
+                            ? 'bg-amber-600 text-white'
+                            : 'text-gray-700 hover:bg-amber-50'
+                        }`}
+                      >
+                        {category.name}
+                      </button>
+                    ))}
+                  </nav>
+                </div>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {category.items.map((item) => (
-                  <Card
-                    key={item.id}
-                    className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-white"
+              {/* Scrollable Drinks List */}
+              <div className="flex-1">
+                {coffeeMenuCategories.map((category) => (
+                  <div
+                    key={category.id}
+                    ref={el => drinkSectionRefs.current[category.id] = el}
+                    className="mb-16 scroll-mt-24"
                   >
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute bottom-3 left-3">
-                        <span className="px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded-full">
-                          {item.category}
-                        </span>
-                      </div>
+                    <div className="mb-8">
+                      <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
+                      <p className="text-gray-600">{category.description}</p>
                     </div>
-
-                    <CardContent className="p-6">
-                      <div className="flex justify-between items-start mb-3">
-                        <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
-                        <span className="text-xl font-bold text-amber-600">${item.price.toFixed(2)}</span>
-                      </div>
-                      <p className="text-gray-600 mb-4 text-sm leading-relaxed">{item.description}</p>
-
-                      {cart[item.id] ? (
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-3 bg-amber-50 rounded-lg px-3 py-2">
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              onClick={() => removeFromCart(item.id)}
-                              className="h-8 w-8 p-0 hover:bg-amber-100"
-                            >
-                              <Minus className="h-4 w-4" />
-                            </Button>
-                            <span className="font-bold text-gray-900 min-w-[20px] text-center">
-                              {cart[item.id]}
-                            </span>
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              onClick={() => addToCart(item)}
-                              className="h-8 w-8 p-0 hover:bg-amber-100"
-                            >
-                              <Plus className="h-4 w-4" />
-                            </Button>
-                          </div>
-                          <span className="text-sm font-semibold text-amber-600">
-                            ${(item.price * cart[item.id]).toFixed(2)}
-                          </span>
-                        </div>
-                      ) : (
-                        <Button
-                          className="w-full bg-amber-600 hover:bg-amber-700 text-white"
-                          onClick={() => addToCart(item)}
-                        >
-                          <ShoppingBag className="mr-2 h-4 w-4" />
-                          Add to Order
-                        </Button>
-                      )}
-                    </CardContent>
-                  </Card>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {category.items.map(item => renderMenuItem(item))}
+                    </div>
+                  </div>
                 ))}
               </div>
-            </TabsContent>
-          ))}
+            </div>
+          </TabsContent>
+
+          {/* BREAKFAST MENU - With Sub-categories */}
+          <TabsContent value="breakfast">
+            {breakfastMenuCategories.map((category) => (
+              <div key={category.id} className="mb-12">
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
+                  <p className="text-gray-600">{category.description}</p>
+                </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {category.items.map(item => renderMenuItem(item))}
+                </div>
+              </div>
+            ))}
+          </TabsContent>
+
+          {/* FULL DINNER MENU - With Sub-categories */}
+          <TabsContent value="dinner">
+            {dinnerMenuCategories.map((category) => (
+              <div key={category.id} className="mb-12">
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
+                  <p className="text-gray-600">{category.description}</p>
+                </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {category.items.map(item => renderMenuItem(item))}
+                </div>
+              </div>
+            ))}
+          </TabsContent>
         </Tabs>
 
         {/* Floating Cart Summary */}
