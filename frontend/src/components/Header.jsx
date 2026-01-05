@@ -1,0 +1,143 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Menu, X, ShoppingBag, User, MapPin } from 'lucide-react';
+import { Button } from './ui/button';
+
+const Header = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'Menu', path: '/menu' },
+    { name: 'Rewards', path: '/rewards' },
+    { name: 'Blog', path: '/blog' },
+    { name: 'About', path: '/about' },
+    { name: 'Locations', path: '/locations' }
+  ];
+
+  return (
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-md shadow-lg' 
+          : 'bg-white/80 backdrop-blur-sm'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-3 group">
+            <div className="relative">
+              <div className="absolute inset-0 bg-amber-500 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
+              <div className="relative bg-gradient-to-br from-amber-600 to-amber-700 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-xl">
+                HP
+              </div>
+            </div>
+            <div className="hidden sm:block">
+              <span className="text-2xl font-bold bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 bg-clip-text text-transparent">
+                Happy Place
+              </span>
+              <p className="text-xs text-gray-600 -mt-1">Coffee & Eats</p>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="px-4 py-2 text-gray-700 hover:text-amber-700 font-medium transition-colors relative group"
+              >
+                {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 group-hover:w-full transition-all duration-300"></span>
+              </Link>
+            ))}
+          </nav>
+
+          {/* Actions */}
+          <div className="flex items-center space-x-3">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hidden sm:flex text-gray-700 hover:text-amber-700 hover:bg-amber-50"
+              onClick={() => navigate('/locations')}
+            >
+              <MapPin className="h-5 w-5" />
+            </Button>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hidden sm:flex text-gray-700 hover:text-amber-700 hover:bg-amber-50"
+              onClick={() => navigate('/rewards')}
+            >
+              <User className="h-5 w-5" />
+            </Button>
+
+            <Button
+              className="hidden sm:flex bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+              onClick={() => navigate('/menu')}
+            >
+              <ShoppingBag className="h-5 w-5 mr-2" />
+              Order Now
+            </Button>
+
+            {/* Mobile Menu Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden text-gray-700"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl">
+          <div className="px-4 py-6 space-y-3">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block px-4 py-3 text-gray-700 hover:bg-amber-50 hover:text-amber-700 rounded-lg font-medium transition-colors"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <Button
+              className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white shadow-lg"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                navigate('/menu');
+              }}
+            >
+              <ShoppingBag className="h-5 w-5 mr-2" />
+              Order Now
+            </Button>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Header;
