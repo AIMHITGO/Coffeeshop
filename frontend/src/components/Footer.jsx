@@ -13,9 +13,9 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="inline-block">
               <img 
-                src="https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Happy-Logo-1920w.png" 
+                src="https://customer-assets.emergentagent.com/job_local-sip/artifacts/l6mm4os6_Happy-Logo-1920w.webp" 
                 alt="Happy Place Coffee & Eats"
-                className="h-16 w-auto"
+                className="h-20 w-auto"
               />
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed">

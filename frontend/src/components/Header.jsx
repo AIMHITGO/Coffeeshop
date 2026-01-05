@@ -37,9 +37,9 @@ const Header = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <img 
-              src="https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Happy-Logo-1920w.png" 
+              src="https://customer-assets.emergentagent.com/job_local-sip/artifacts/l6mm4os6_Happy-Logo-1920w.webp" 
               alt="Happy Place Coffee & Eats"
-              className="h-12 w-auto transition-transform duration-300 group-hover:scale-105"
+              className="h-14 w-auto transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
