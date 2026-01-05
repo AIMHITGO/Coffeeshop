@@ -12,8 +12,8 @@ const About = () => {
             About <span className="text-amber-600">Happy Place</span>
           </h1>
           <p className="text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Where authentic Latin-American flavors meet New-American comfort, 
-            creating a community hub for coffee lovers and food enthusiasts
+            A family-owned café where authentic Latin-American flavors meet warm hospitality. 
+            Every dish tells a story, every guest becomes family.
           </p>
         </div>
 
@@ -21,8 +21,8 @@ const About = () => {
         <section className="grid lg:grid-cols-2 gap-16 items-center mb-24">
           <div className="relative">
             <img
-              src="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg"
-              alt="Coffee being poured"
+              src="https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/1-GettyImages-488301561-1920w.jpg"
+              alt="Happy Place Coffee & Eats - Our Story"
               className="rounded-3xl shadow-2xl w-full h-[600px] object-cover"
             />
             <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full blur-3xl opacity-20 -z-10"></div>
@@ -31,26 +31,25 @@ const About = () => {
           <div className="space-y-6">
             <div className="inline-block">
               <span className="px-4 py-2 bg-amber-100 text-amber-700 rounded-full text-sm font-semibold">
-                Our Story
+                Our Family Story
               </span>
             </div>
             <h2 className="text-4xl font-bold text-gray-900">
-              A Labor of <span className="text-amber-600">Love</span>
+              Built on <span className="text-amber-600">Family & Flavor</span>
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Happy Place Coffee & Eats was born from a simple dream: to create a welcoming space 
-              where the rich traditions of Latin-American coffee culture could blend seamlessly with 
-              New-American culinary innovation.
+              Happy Place Coffee & Eats is a family-owned dream come to life. We started with a simple vision: 
+              to create a welcoming space where authentic Latin-American flavors and craft coffee could bring 
+              people together.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Since opening our doors in Woodbridge, VA, we've been committed to serving not just 
-              exceptional coffee and food, but also fostering genuine connections within our community. 
-              Every cup is crafted with care, every dish prepared with passion, and every customer 
-              treated like family.
+              Every recipe on our menu has a story - from our grandmother's Lomo Saltado to our family's 
+              traditional Baleadas. We've brought these cherished recipes to Woodbridge, VA, blending them 
+              with New-American culinary creativity.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Our unique Latin-influenced menu celebrates authentic flavors while embracing modern 
-              culinary techniques, creating an unforgettable dining experience from breakfast through dinner.
+              Being family-owned means we're here every day, greeting you with a smile, remembering your 
+              favorite order, and making sure every visit feels like coming home. That's the Happy Place difference.
             </p>
           </div>
         </section>
