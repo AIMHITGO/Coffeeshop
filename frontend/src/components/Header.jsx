@@ -36,18 +36,11 @@ const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <div className="relative">
-              <div className="absolute inset-0 bg-amber-500 rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity"></div>
-              <div className="relative bg-gradient-to-br from-amber-600 to-amber-700 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-xl">
-                HP
-              </div>
-            </div>
-            <div className="hidden sm:block">
-              <span className="text-2xl font-bold bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600 bg-clip-text text-transparent">
-                Happy Place
-              </span>
-              <p className="text-xs text-gray-600 -mt-1">Coffee & Eats</p>
-            </div>
+            <img 
+              src="https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Happy-Logo-1920w.png" 
+              alt="Happy Place Coffee & Eats"
+              className="h-12 w-auto transition-transform duration-300 group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Navigation */}
