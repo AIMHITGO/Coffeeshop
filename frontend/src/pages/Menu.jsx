@@ -3,66 +3,86 @@ import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { ShoppingBag, Plus, Minus, Star } from 'lucide-react';
-import { menuCategories } from '../data/mock';
+import { menuCategories, bestSellers, nutritionalDisclaimer } from '../data/mock';
 import { toast } from 'sonner';
 
 const Menu = () => {
   const [cart, setCart] = useState({});
+  const [selectedSizes, setSelectedSizes] = useState({});
   const [selectedMainCategory, setSelectedMainCategory] = useState('featured');
   const [activeDrinkSection, setActiveDrinkSection] = useState('coffee-espresso');
   const drinkSectionRefs = useRef({});
 
-  // Best Selling Coffee Items
-  const bestSellingCoffee = [
-    menuCategories.find(cat => cat.id === 'specialty-lattes')?.items[2], // Latte
-    menuCategories.find(cat => cat.id === 'cold-brew-signature')?.items[0], // Cold Brew
-    menuCategories.find(cat => cat.id === 'specialty-lattes')?.items[0], // Cappuccino
-    menuCategories.find(cat => cat.id === 'cold-brew-signature')?.items[2], // Horchata & Espresso
-    menuCategories.find(cat => cat.id === 'coffee-espresso')?.items[0], // Drip Coffee
-    menuCategories.find(cat => cat.id === 'specialty-lattes')?.items[5], // Caramel Macchiato
-  ].filter(Boolean);
+  // Get best selling items from references
+  const bestSellingCoffee = bestSellers.map(ref => {
+    const category = menuCategories.find(cat => cat.id === ref.categoryId);
+    return category?.items.find(item => item.id === ref.itemId);
+  }).filter(Boolean);
 
   // Organize menu by main categories
   const coffeeMenuCategories = menuCategories.filter(cat => 
-    ['coffee-espresso', 'specialty-lattes', 'cold-brew-signature', 'frappe', 'tea-non-coffee'].includes(cat.id)
+    ['coffee-espresso', 'cold-brew-signature', 'frappe', 'tea-non-coffee'].includes(cat.id)
   );
 
-  const breakfastMenuCategories = menuCategories.filter(cat => 
-    ['breakfast-sandwiches', 'latino-breakfast'].includes(cat.id)
-  );
-
-  const dinnerMenuCategories = menuCategories.filter(cat => 
-    ['sandwiches', 'entrees', 'desserts'].includes(cat.id)
-  );
-
-  const addToCart = (item) => {
-    setCart(prev => ({
-      ...prev,
-      [item.id]: (prev[item.id] || 0) + 1
-    }));
-    toast.success(`${item.name} added to cart!`);
+  const getSelectedSize = (itemId, item) => {
+    if (selectedSizes[itemId] !== undefined) {
+      return selectedSizes[itemId];
+    }
+    // Default to first size (usually smallest)
+    return 0;
   };
 
-  const removeFromCart = (itemId) => {
+  const setSelectedSize = (itemId, sizeIndex) => {
+    setSelectedSizes(prev => ({
+      ...prev,
+      [itemId]: sizeIndex
+    }));
+  };
+
+  const getCartKey = (itemId, sizeIndex) => `${itemId}-${sizeIndex}`;
+
+  const addToCart = (item, sizeIndex) => {
+    const key = getCartKey(item.id, sizeIndex);
+    const sizeInfo = item.sizes[sizeIndex];
+    setCart(prev => ({
+      ...prev,
+      [key]: {
+        item,
+        sizeIndex,
+        quantity: (prev[key]?.quantity || 0) + 1
+      }
+    }));
+    toast.success(`${item.name} (${sizeInfo.size}) added to cart!`);
+  };
+
+  const removeFromCart = (itemId, sizeIndex) => {
+    const key = getCartKey(itemId, sizeIndex);
     setCart(prev => {
       const newCart = { ...prev };
-      if (newCart[itemId] > 1) {
-        newCart[itemId]--;
+      if (newCart[key]?.quantity > 1) {
+        newCart[key] = { ...newCart[key], quantity: newCart[key].quantity - 1 };
       } else {
-        delete newCart[itemId];
+        delete newCart[key];
       }
       return newCart;
     });
   };
 
+  const getCartQuantity = (itemId, sizeIndex) => {
+    const key = getCartKey(itemId, sizeIndex);
+    return cart[key]?.quantity || 0;
+  };
+
   const getTotalItems = () => {
-    return Object.values(cart).reduce((sum, qty) => sum + qty, 0);
+    return Object.values(cart).reduce((sum, entry) => sum + entry.quantity, 0);
   };
 
   const getTotalPrice = () => {
-    return menuCategories
-      .flatMap(cat => cat.items)
-      .reduce((sum, item) => sum + (item.price * (cart[item.id] || 0)), 0)
+    return Object.values(cart)
+      .reduce((sum, entry) => {
+        const price = entry.item.sizes[entry.sizeIndex].price;
+        return sum + (price * entry.quantity);
+      }, 0)
       .toFixed(2);
   };
 
@@ -93,76 +113,97 @@ const Menu = () => {
     }
   }, [selectedMainCategory]);
 
-  const renderMenuItem = (item) => (
-    <Card
-      key={item.id}
-      className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-white"
-    >
-      <div className="relative h-48 overflow-hidden bg-white">
-        <img
-          src={item.image}
-          alt={item.name}
-          className="w-full h-full object-contain p-2"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
-        <div className="absolute bottom-3 left-3">
-          <span className="px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded-full">
-            {item.size}
-          </span>
-        </div>
-      </div>
+  const renderMenuItem = (item) => {
+    const currentSizeIndex = getSelectedSize(item.id, item);
+    const currentSize = item.sizes[currentSizeIndex];
+    const cartQty = getCartQuantity(item.id, currentSizeIndex);
 
-      <CardContent className="p-6">
-        <div className="flex justify-between items-start mb-3">
-          <div>
+    return (
+      <Card
+        key={item.id}
+        className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-white"
+      >
+        <div className="relative h-48 overflow-hidden bg-white">
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-full h-full object-contain p-2"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+        </div>
+
+        <CardContent className="p-6">
+          <div className="mb-3">
             <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
-            {item.calories !== undefined && (
-              <span className="text-xs text-gray-500">{item.calories} cal</span>
-            )}
+            <p className="text-gray-600 text-sm leading-relaxed mt-1">{item.description}</p>
           </div>
-          <span className="text-xl font-bold text-amber-600">${item.price.toFixed(2)}</span>
-        </div>
-        <p className="text-gray-600 mb-4 text-sm leading-relaxed">{item.description}</p>
 
-        {cart[item.id] ? (
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3 bg-amber-50 rounded-lg px-3 py-2">
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={() => removeFromCart(item.id)}
-                className="h-8 w-8 p-0 hover:bg-amber-100"
-              >
-                <Minus className="h-4 w-4" />
-              </Button>
-              <span className="font-bold text-gray-900 min-w-[20px] text-center">
-                {cart[item.id]}
-              </span>
-              <Button
-                size="sm"
-                variant="ghost"
-                onClick={() => addToCart(item)}
-                className="h-8 w-8 p-0 hover:bg-amber-100"
-              >
-                <Plus className="h-4 w-4" />
-              </Button>
+          {/* Size Selector */}
+          <div className="mb-4">
+            <div className="flex flex-wrap gap-2">
+              {item.sizes.map((sizeOption, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedSize(item.id, idx)}
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                    currentSizeIndex === idx
+                      ? 'bg-amber-600 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-amber-50'
+                  }`}
+                >
+                  <span className="block">{sizeOption.size}</span>
+                  <span className="block text-xs">${sizeOption.price.toFixed(2)}</span>
+                </button>
+              ))}
             </div>
-            <span className="text-sm font-semibold text-amber-600">
-              ${(item.price * cart[item.id]).toFixed(2)}
-            </span>
           </div>
-        ) : (
-          <Button
-            className="w-full bg-amber-600 hover:bg-amber-700 text-white"
-            onClick={() => addToCart(item)}
-          >
-            <ShoppingBag className="mr-2 h-4 w-4" />
-            Add to Order
-          </Button>
-        )}
-      </CardContent>
-    </Card>
-  );
+
+          {/* Calories for selected size */}
+          {currentSize.calories !== undefined && (
+            <p className="text-xs text-gray-500 mb-4">{currentSize.calories} cal</p>
+          )}
+
+          {/* Add to Cart */}
+          {cartQty > 0 ? (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3 bg-amber-50 rounded-lg px-3 py-2">
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => removeFromCart(item.id, currentSizeIndex)}
+                  className="h-8 w-8 p-0 hover:bg-amber-100"
+                >
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <span className="font-bold text-gray-900 min-w-[20px] text-center">
+                  {cartQty}
+                </span>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => addToCart(item, currentSizeIndex)}
+                  className="h-8 w-8 p-0 hover:bg-amber-100"
+                >
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
+              <span className="text-sm font-semibold text-amber-600">
+                ${(currentSize.price * cartQty).toFixed(2)}
+              </span>
+            </div>
+          ) : (
+            <Button
+              className="w-full bg-amber-600 hover:bg-amber-700 text-white"
+              onClick={() => addToCart(item, currentSizeIndex)}
+            >
+              <ShoppingBag className="mr-2 h-4 w-4" />
+              Add to Order
+            </Button>
+          )}
+        </CardContent>
+      </Card>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-white pt-24 pb-16">
@@ -262,38 +303,32 @@ const Menu = () => {
                     </div>
                   </div>
                 ))}
+                
+                {/* Nutritional Disclaimer */}
+                <div className="mt-12 p-6 bg-gray-50 rounded-lg">
+                  <h3 className="text-sm font-semibold text-gray-700 mb-2">Nutritional Information</h3>
+                  <p className="text-xs text-gray-500 leading-relaxed">{nutritionalDisclaimer}</p>
+                </div>
               </div>
             </div>
           </TabsContent>
 
-          {/* BREAKFAST MENU - With Sub-categories */}
+          {/* BREAKFAST MENU - Placeholder */}
           <TabsContent value="breakfast">
-            {breakfastMenuCategories.map((category) => (
-              <div key={category.id} className="mb-12">
-                <div className="mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
-                  <p className="text-gray-600">{category.description}</p>
-                </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {category.items.map(item => renderMenuItem(item))}
-                </div>
-              </div>
-            ))}
+            <div className="text-center py-16">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Breakfast Menu</h2>
+              <p className="text-gray-600 mb-4">Our delicious breakfast options are coming soon!</p>
+              <p className="text-gray-500">Check back later for our full breakfast selection including sandwiches and Latino favorites.</p>
+            </div>
           </TabsContent>
 
-          {/* FULL DINNER MENU - With Sub-categories */}
+          {/* FULL DINNER MENU - Placeholder */}
           <TabsContent value="dinner">
-            {dinnerMenuCategories.map((category) => (
-              <div key={category.id} className="mb-12">
-                <div className="mb-8">
-                  <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
-                  <p className="text-gray-600">{category.description}</p>
-                </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {category.items.map(item => renderMenuItem(item))}
-                </div>
-              </div>
-            ))}
+            <div className="text-center py-16">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Full Dinner Menu</h2>
+              <p className="text-gray-600 mb-4">Our dinner menu is coming soon!</p>
+              <p className="text-gray-500">Check back later for our full dinner selection including sandwiches, entrees, and desserts.</p>
+            </div>
           </TabsContent>
         </Tabs>
 
@@ -307,19 +342,16 @@ const Menu = () => {
               </div>
             </div>
             <div className="space-y-2 mb-4 max-h-48 overflow-y-auto">
-              {menuCategories
-                .flatMap(cat => cat.items)
-                .filter(item => cart[item.id])
-                .map(item => (
-                  <div key={item.id} className="flex justify-between text-sm">
-                    <span className="text-gray-700">
-                      {cart[item.id]}x {item.name}
-                    </span>
-                    <span className="font-semibold text-gray-900">
-                      ${(item.price * cart[item.id]).toFixed(2)}
-                    </span>
-                  </div>
-                ))}
+              {Object.values(cart).map((entry, idx) => (
+                <div key={idx} className="flex justify-between text-sm">
+                  <span className="text-gray-700">
+                    {entry.quantity}x {entry.item.name} ({entry.item.sizes[entry.sizeIndex].size})
+                  </span>
+                  <span className="font-semibold text-gray-900">
+                    ${(entry.item.sizes[entry.sizeIndex].price * entry.quantity).toFixed(2)}
+                  </span>
+                </div>
+              ))}
             </div>
             <div className="border-t pt-4 mb-4">
               <div className="flex justify-between items-center">
