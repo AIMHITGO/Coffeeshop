@@ -1013,5 +1013,108 @@ export const menuCategories = [
   }
 ];
 
-// Continue with rest of the data (breakfast, lunch/dinner, locations, etc.)
-// Food menu categories remain the same as previous version...
+// Testimonials data
+export const testimonials = [
+  {
+    id: 1,
+    name: 'Maria Rodriguez',
+    role: 'Regular Customer',
+    content: 'Best coffee in Woodbridge! The Little Havana Cappuccino is absolutely divine. The family atmosphere makes every visit feel like coming home.',
+    rating: 5
+  },
+  {
+    id: 2,
+    name: 'James Thompson',
+    role: 'Local Business Owner',
+    content: 'I host all my morning meetings here. The coffee is consistently excellent, and the staff remembers my order. True community gem!',
+    rating: 5
+  },
+  {
+    id: 3,
+    name: 'Sofia Martinez',
+    role: 'Coffee Enthusiast',
+    content: 'Finally found a place that does authentic Latin coffee drinks right! The Horchata Cold Brew is my new obsession. Highly recommend!',
+    rating: 5
+  }
+];
+
+// Blog posts data
+export const blogPosts = [
+  {
+    id: 1,
+    title: 'The Art of the Perfect Espresso Shot',
+    excerpt: 'Discover the secrets behind our barista-crafted espresso and what makes it special.',
+    content: 'At Happy Place, every espresso shot is pulled with precision and care...',
+    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Espresso-0e3f8f36-1920w.png',
+    category: 'Coffee Culture',
+    author: 'Happy Place Team',
+    date: 'December 15, 2025',
+    featured: true
+  },
+  {
+    id: 2,
+    title: 'Our Latin-American Coffee Heritage',
+    excerpt: 'Learn about the family traditions that inspire our unique menu offerings.',
+    content: 'Coffee has always been at the heart of Latin-American culture...',
+    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Little-Havana-Capuccino-1920w.png',
+    category: 'Our Story',
+    author: 'Happy Place Family',
+    date: 'December 10, 2025',
+    featured: true
+  },
+  {
+    id: 3,
+    title: 'Cold Brew vs Iced Coffee: Know the Difference',
+    excerpt: 'Understanding what makes our slow-steeped cold brew uniquely smooth.',
+    content: 'Many coffee lovers confuse cold brew with iced coffee, but they are quite different...',
+    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/COLD-Brew-1920w.png',
+    category: 'Coffee 101',
+    author: 'Happy Place Team',
+    date: 'December 5, 2025',
+    featured: false
+  }
+];
+
+// Location data
+export const locationData = {
+  name: 'Happy Place Coffee & Eats',
+  address: '13840 Smoketown Road',
+  city: 'Woodbridge',
+  state: 'VA',
+  zip: '22192',
+  phone: '(571) 552-4070',
+  email: 'hello@happyplacecoffeeandeats.com',
+  hours: {
+    weekday: '8:00 AM - 8:00 PM',
+    saturday: '8:00 AM - 8:00 PM',
+    sunday: '8:00 AM - 5:00 PM'
+  },
+  coordinates: {
+    lat: 38.6584,
+    lng: -77.3064
+  }
+};
+
+// About page content
+export const aboutContent = {
+  story: `Happy Place Coffee & Eats started as a dream - a dream to create a space where everyone feels welcome, 
+  where the coffee is always fresh, and where Latin-American flavors meet American comfort food. 
+  We're a family-owned business that believes in quality ingredients, authentic recipes, and treating every guest like family.`,
+  mission: `Our mission is to be your happy place - a welcoming neighborhood café where you can enjoy 
+  exceptional coffee, delicious food, and genuine hospitality. We source the finest ingredients 
+  and craft every drink and dish with love and attention to detail.`,
+  values: [
+    {
+      title: 'Family First',
+      description: 'We treat our team and customers like family, creating a warm and welcoming environment for everyone.'
+    },
+    {
+      title: 'Quality Always',
+      description: 'From our Jessy\'s Premium Coffee beans to our fresh ingredients, we never compromise on quality.'
+    },
+    {
+      title: 'Community Focused',
+      description: 'We\'re proud to be a part of the Woodbridge community and give back whenever we can.'
+    }
+  ]
+};
