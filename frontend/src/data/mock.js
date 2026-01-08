@@ -623,3 +623,33 @@ export const aboutContent = {
     }
   ]
 };
+
+// Coffee story for About page
+export const coffeeStory = `Happy Place Coffee & Eats started as a dream - a dream to create a space where everyone feels welcome, 
+where the coffee is always fresh, and where Latin-American flavors meet American comfort food. 
+We're a family-owned business that believes in quality ingredients, authentic recipes, and treating every guest like family.`;
+
+// Locations data (array format for compatibility)
+export const locations = [locationData];
+
+// Loyalty tiers for Rewards page
+export const loyaltyTiers = [
+  {
+    name: 'Coffee Lover',
+    points: 0,
+    benefits: ['Earn 1 point per $1 spent', 'Birthday drink on us', 'Member-only promotions'],
+    color: 'amber'
+  },
+  {
+    name: 'Coffee Enthusiast', 
+    points: 100,
+    benefits: ['Earn 1.25 points per $1 spent', 'Free drink every 125 points', 'Early access to new menu items'],
+    color: 'orange'
+  },
+  {
+    name: 'Coffee Connoisseur',
+    points: 500,
+    benefits: ['Earn 1.5 points per $1 spent', 'Free drink every 100 points', 'Exclusive tasting events'],
+    color: 'red'
+  }
+];
