@@ -213,6 +213,78 @@ frontend:
         agent: "testing"
         comment: "✅ Special size cases work correctly - Espresso shows Single/Double/Triple options, Short Black shows 'Small Only', Coffee & Milk (Doppio) shows '6 oz' single size option"
 
+  - task: "Updated Card Layout and Button Alignment"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Card layout verified - 'Add to Order' buttons properly aligned at bottom of cards using flex-grow spacer, text doesn't overflow with line-clamp-2 for descriptions, calories correctly show '0 cal' for all items"
+
+  - task: "New Categories in Side Navigation"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Side navigation shows all new categories in correct order: Coffee & Espresso, Cappuccino (NEW), Custom Drip (NEW), Cold Brew & Signature Beverages, Frappés, Tea Options (renamed from Tea & Non-Coffee), Non-Coffee (NEW - separated category)"
+
+  - task: "Fruit Tea Shaker Integration"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Fruit Tea Shaker integration implemented - Iced Tea and Iced Tea Lemonade cards have 'Add Fruit Tea Shaker (Free)' dropdown with options: Strawberry Lemon, Passion Fruit, Yuzu Citrus. No standalone Fruit Tea Shaker card exists (as expected)"
+
+  - task: "Customization Feature Coffee & Espresso"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Customization feature working - Coffee & Espresso drinks have 'Customize Your Drink' expandable button with Settings icon, expands to show Milk Option dropdown, Add-ons checkboxes (Whipped Cream, Honey Boba, Brown Sugar Jelly), Syrup dropdown, and Sauce dropdown"
+
+  - task: "Floating Cart Features"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Floating cart features implemented - appears on item addition with 'Your Order' title and item count badge, minimize/expand functionality with chevron buttons, item list with hover delete (trash) icons, total display and Checkout button. Cart positioned fixed bottom-right with proper styling"
+
+  - task: "Non-Coffee Category"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Non-Coffee category properly separated and contains expected items: Hot Cocoa, Vanilla Steamer, Vanilla Frappé. Category accessible via side navigation and displays correctly"
+
 metadata:
   created_by: "testing_agent"
   version: "1.0"
