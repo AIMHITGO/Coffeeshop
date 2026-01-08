@@ -1,5 +1,5 @@
-// Complete Coffee & Drink Menu Data from Happy Place Spreadsheet (UPDATED)
-// Each drink now has multiple sizes on a single card
+// Complete Coffee & Drink Menu Data - Version 2
+// Updated based on "Coffee Menu Data v1.xlsx" and "Updates to the Coffee Menu.docx"
 
 export const brandAssets = {
   logo: 'https://customer-assets.emergentagent.com/job_local-sip/artifacts/l6mm4os6_Happy-Logo-1920w.webp',
@@ -11,12 +11,63 @@ export const brandAssets = {
   ]
 };
 
-// Coffee & Drink Menu Categories - Restructured with sizes per drink
+// Customization options for Coffee & Espresso drinks
+export const coffeeCustomizations = {
+  milk: [
+    { id: 'oat-milk', name: 'Oat Milk', price: 0.80, calories: '10-20 per oz' },
+    { id: 'almond-milk', name: 'Almond Milk', price: 0.80, calories: '10-20 per oz' },
+    { id: 'soy-milk', name: 'Soy Milk', price: 0.80, calories: '10-20 per oz' },
+    { id: '2-percent', name: '2% Milk', price: 0, calories: 0 },
+    { id: 'whole-milk', name: 'Whole Milk', price: 0, calories: 0 },
+    { id: 'nonfat-milk', name: 'Nonfat Milk', price: 0, calories: 0 },
+    { id: 'half-half', name: 'Half & Half', price: 0.65, calories: 0 },
+    { id: 'heavy-cream', name: 'Heavy Cream', price: 0.80, calories: 0 }
+  ],
+  addOns: [
+    { id: 'whipped-cream', name: 'Whipped Cream', price: 0.50, calories: 100 },
+    { id: 'honey-boba', name: 'Honey Boba', price: 0.75, calories: 40 },
+    { id: 'brown-sugar-jelly', name: 'Brown Sugar Jelly', price: 0.75, calories: 40 }
+  ],
+  syrups: [
+    { id: 'vanilla', name: 'Vanilla Syrup', price: 0.60, calories: '0-30 per pump' },
+    { id: 'sf-vanilla', name: 'Sugar-Free Vanilla', price: 0.60, calories: 0 },
+    { id: 'caramel', name: 'Caramel Syrup', price: 0.60, calories: '0-30 per pump' },
+    { id: 'hazelnut', name: 'French Hazelnut', price: 0.60, calories: '0-30 per pump' },
+    { id: 'coconut', name: 'Coconut Syrup', price: 0.60, calories: '0-30 per pump' },
+    { id: 'honey', name: 'Honey Syrup', price: 0.60, calories: '0-30 per pump' },
+    { id: 'brown-sugar', name: 'Brown Sugar Syrup', price: 0.60, calories: '0-30 per pump' },
+    { id: 'chicory', name: 'Chicory Syrup', price: 0.60, calories: '0-30 per pump' },
+    { id: 'simple', name: 'Simple Syrup', price: 0.60, calories: '0-30 per pump' }
+  ],
+  sauces: [
+    { id: 'chocolate', name: 'Chocolate Sauce', price: 0.80, calories: '15-60' },
+    { id: 'white-chocolate', name: 'White Chocolate Sauce', price: 0.80, calories: '15-60' },
+    { id: 'caramel-sauce', name: 'Caramel Sauce', price: 0.80, calories: '15-60' }
+  ],
+  shots: [
+    { id: 'espresso-shot', name: 'Extra Espresso Shot', price: 1.00, calories: 10 },
+    { id: 'decaf-shot', name: 'Decaf Shot', price: 1.00, calories: 10 }
+  ],
+  toppings: [
+    { id: 'caramel-drizzle', name: 'Caramel Drizzle', price: 0.80, calories: 0 },
+    { id: 'cinnamon', name: 'Cinnamon', price: 0, calories: 0 }
+  ]
+};
+
+// Fruit Tea Shaker flavors (free add-on for Iced Tea and Iced Tea Lemonade)
+export const fruitTeaShakerFlavors = [
+  { id: 'strawberry-lemon', name: 'Strawberry Lemon', price: 0 },
+  { id: 'passion-fruit', name: 'Passion Fruit', price: 0 },
+  { id: 'yuzu-citrus', name: 'Yuzu Citrus', price: 0 }
+];
+
+// Menu Categories - Restructured per requirements
 export const menuCategories = [
   {
     id: 'coffee-espresso',
     name: 'Coffee & Espresso',
     description: 'Jessy\'s Premium Coffee - Fresh Roasted 100% Arabica Beans',
+    hasCustomization: true,
     items: [
       {
         id: 'drip-coffee',
@@ -37,9 +88,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CAF-C3-89-AU-LAIT---FEATURED-DARK-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 3.55, calories: 25 },
-          { size: 'Medium', price: 4.00, calories: 25 },
-          { size: 'Large', price: 4.45, calories: 15 }
+          { size: 'Small', price: 3.55, calories: 0 },
+          { size: 'Medium', price: 4.00, calories: 0 },
+          { size: 'Large', price: 4.45, calories: 0 }
         ]
       },
       {
@@ -49,9 +100,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Espresso-0e3f8f36-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Single', price: 3.00, calories: 10 },
-          { size: 'Double', price: 4.65, calories: 10 },
-          { size: 'Triple', price: 6.30, calories: 10 }
+          { size: 'Single', price: 3.00, calories: 0 },
+          { size: 'Double', price: 4.65, calories: 0 },
+          { size: 'Triple', price: 6.30, calories: 0 }
         ]
       },
       {
@@ -61,9 +112,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Americano-10cad5cd-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 3.75, calories: 15 },
-          { size: 'Medium', price: 4.75, calories: 15 },
-          { size: 'Large', price: 4.85, calories: 15 }
+          { size: 'Small', price: 3.75, calories: 0 },
+          { size: 'Medium', price: 4.75, calories: 0 },
+          { size: 'Large', price: 4.85, calories: 0 }
         ]
       },
       {
@@ -73,7 +124,7 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Short-Black-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small Only', price: 3.75, calories: 10 }
+          { size: 'Small Only', price: 3.75, calories: 0 }
         ]
       },
       {
@@ -83,43 +134,19 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/long-black-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 4.00, calories: 10 },
-          { size: 'Medium', price: 5.00, calories: 10 },
-          { size: 'Large', price: 6.00, calories: 10 }
+          { size: 'Small', price: 4.00, calories: 0 },
+          { size: 'Medium', price: 5.00, calories: 0 },
+          { size: 'Large', price: 6.00, calories: 0 }
         ]
       },
       {
         id: 'coffee-milk',
         name: 'Coffee & Milk (Doppio)',
-        description: '2 espresso shots with milk - 6 oz only',
+        description: '2 espresso shots with milk',
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/drip-coffee-898d1d72-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: '6 oz', price: 5.50, calories: 80 }
-        ]
-      },
-      {
-        id: 'cappuccino',
-        name: 'Cappuccino',
-        description: 'Rich espresso artfully balanced with freshly micro-foamed milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Capuccino-3f36d8f2-1920w.png',
-        category: 'Coffee & Espresso',
-        sizes: [
-          { size: 'Small', price: 4.25, calories: 80 },
-          { size: 'Medium', price: 4.95, calories: 70 },
-          { size: 'Large', price: 5.45, calories: 50 }
-        ]
-      },
-      {
-        id: 'little-havana-cappuccino',
-        name: 'Little Havana Cappuccino',
-        description: 'Cuban-inspired cappuccino with Latin flair',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Little-Havana-Capuccino-1920w.png',
-        category: 'Coffee & Espresso',
-        sizes: [
-          { size: 'Small', price: 4.90, calories: 160 },
-          { size: 'Medium', price: 5.60, calories: 140 },
-          { size: 'Large', price: 6.00, calories: 120 }
+          { size: '6 oz', price: 5.50, calories: 0 }
         ]
       },
       {
@@ -129,9 +156,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/caffe-latte-990b710d-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 5.80, calories: 160 },
-          { size: 'Medium', price: 6.60, calories: 140 },
-          { size: 'Large', price: 7.50, calories: 120 }
+          { size: 'Small', price: 5.80, calories: 0 },
+          { size: 'Medium', price: 6.60, calories: 0 },
+          { size: 'Large', price: 7.50, calories: 0 }
         ]
       },
       {
@@ -141,9 +168,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Flat---white-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 5.80, calories: 160 },
-          { size: 'Medium', price: 6.60, calories: 140 },
-          { size: 'Large', price: 7.50, calories: 120 }
+          { size: 'Small', price: 5.80, calories: 0 },
+          { size: 'Medium', price: 6.60, calories: 0 },
+          { size: 'Large', price: 7.50, calories: 0 }
         ]
       },
       {
@@ -153,9 +180,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Vanilla-Latte-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.56, calories: 240 },
-          { size: 'Medium', price: 7.74, calories: 220 },
-          { size: 'Large', price: 8.67, calories: 170 }
+          { size: 'Small', price: 6.56, calories: 0 },
+          { size: 'Medium', price: 7.74, calories: 0 },
+          { size: 'Large', price: 8.67, calories: 0 }
         ]
       },
       {
@@ -165,9 +192,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Caramel-Machiato-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.00, calories: 240 },
-          { size: 'Medium', price: 6.45, calories: 250 },
-          { size: 'Large', price: 7.05, calories: 240 }
+          { size: 'Small', price: 6.00, calories: 0 },
+          { size: 'Medium', price: 6.45, calories: 0 },
+          { size: 'Large', price: 7.05, calories: 0 }
         ]
       },
       {
@@ -177,9 +204,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/cafe-mocha-8f4d3834-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.50, calories: 420 },
-          { size: 'Medium', price: 6.95, calories: 350 },
-          { size: 'Large', price: 7.55, calories: 300 }
+          { size: 'Small', price: 6.50, calories: 0 },
+          { size: 'Medium', price: 6.95, calories: 0 },
+          { size: 'Large', price: 7.55, calories: 0 }
         ]
       },
       {
@@ -189,9 +216,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/White-chocolate-Mocha-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.60, calories: 480 },
-          { size: 'Medium', price: 6.95, calories: 410 },
-          { size: 'Large', price: 7.55, calories: 360 }
+          { size: 'Small', price: 6.60, calories: 0 },
+          { size: 'Medium', price: 6.95, calories: 0 },
+          { size: 'Large', price: 7.55, calories: 0 }
         ]
       },
       {
@@ -201,10 +228,79 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Dark-chocolate-Mocha-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.50, calories: 480 },
-          { size: 'Medium', price: 6.95, calories: 400 },
-          { size: 'Large', price: 7.55, calories: 360 }
+          { size: 'Small', price: 6.50, calories: 0 },
+          { size: 'Medium', price: 6.95, calories: 0 },
+          { size: 'Large', price: 7.55, calories: 0 }
         ]
+      }
+    ]
+  },
+  {
+    id: 'cappuccino',
+    name: 'Cappuccino',
+    description: 'Rich espresso artfully balanced with freshly micro-foamed milk',
+    hasCustomization: true,
+    isCustomizable: true,
+    items: [
+      {
+        id: 'cappuccino',
+        name: 'Cappuccino',
+        description: 'The essence of handcrafting - our rich espresso artfully balanced with freshly micro-foamed milk',
+        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Capuccino-3f36d8f2-1920w.png',
+        category: 'Cappuccino',
+        sizes: [
+          { size: 'Small', price: 4.25, calories: 0 },
+          { size: 'Medium', price: 4.95, calories: 0 },
+          { size: 'Large', price: 5.45, calories: 0 }
+        ],
+        customOptions: {
+          milk: ['2% Milk', 'Whole Milk', 'Nonfat Milk', 'Oat Milk (+$0.82)', 'Almond Milk (+$0.82)', 'Half & Half (+$0.65)', 'Heavy Cream (+$0.08)'],
+          foam: ['Regular', 'Dry', 'Wet'],
+          milkTemp: ['Warm', 'Regular', 'Extra Hot'],
+          shots: ['Add shots (max 10)'],
+          pull: ['Long pull', 'Regular pull', 'Short pull'],
+          decaf: ['Decaf', 'None']
+        }
+      },
+      {
+        id: 'little-havana-cappuccino',
+        name: 'Little Havana Cappuccino',
+        description: 'Cuban-inspired cappuccino with Latin flair',
+        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Little-Havana-Capuccino-1920w.png',
+        category: 'Cappuccino',
+        sizes: [
+          { size: 'Small', price: 4.90, calories: 0 },
+          { size: 'Medium', price: 5.60, calories: 0 },
+          { size: 'Large', price: 6.00, calories: 0 }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'custom-drip',
+    name: 'Custom Drip',
+    description: 'A signature rotation of Happy Place Jessy\'s Premium Coffee Dark Roast',
+    hasCustomization: true,
+    isCustomizable: true,
+    items: [
+      {
+        id: 'premium-dark-roast',
+        name: 'Premium Dark Roast',
+        description: 'A signature rotation brewed every 30 minutes for the most flavorful cup',
+        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/drip-coffee-898d1d72-1920w.png',
+        category: 'Custom Drip',
+        sizes: [
+          { size: 'Small', price: 3.00, calories: 0 },
+          { size: 'Medium', price: 3.45, calories: 0 },
+          { size: 'Large', price: 3.85, calories: 0 }
+        ],
+        customOptions: {
+          roast: ['Featured Dark Roast', 'House Espresso Blend'],
+          roomForMilk: ['Room for Milk', 'No Room'],
+          addMilk: ['Splash of Half & Half', 'Splash of Whole Milk', 'Splash of 2% Milk', 'Splash of Nonfat Milk', 'Splash of Almond Milk', 'Splash of Oat Milk', 'Splash of Heavy Cream', 'None'],
+          sweeteners: ['Raw Sugar (+20 cal)', 'None'],
+          decaf: ['Decaf', 'None']
+        }
       }
     ]
   },
@@ -212,6 +308,7 @@ export const menuCategories = [
     id: 'cold-brew-signature',
     name: 'Cold Brew & Signature Beverages',
     description: 'Innovative cold coffee creations',
+    hasCustomization: false,
     items: [
       {
         id: 'cold-brew',
@@ -232,19 +329,19 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Cold Brew',
         sizes: [
-          { size: 'Small', price: 5.85, calories: 150 },
-          { size: 'Medium', price: 6.25, calories: 150 },
-          { size: 'Large', price: 6.95, calories: 150 }
+          { size: 'Small', price: 5.85, calories: 0 },
+          { size: 'Medium', price: 6.25, calories: 0 },
+          { size: 'Large', price: 6.95, calories: 0 }
         ]
       },
       {
         id: 'horchata-espresso',
         name: 'Horchata & Espresso',
-        description: 'Creamy horchata with bold espresso - Medium only',
+        description: 'Creamy horchata with bold espresso',
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata---Espresso-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Medium Only', price: 7.65, calories: 230 }
+          { size: 'Medium Only', price: 7.65, calories: 0 }
         ]
       },
       {
@@ -254,7 +351,7 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Medium', price: 7.40, calories: 380 }
+          { size: 'Medium', price: 7.40, calories: 0 }
         ]
       },
       {
@@ -264,9 +361,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 6.00, calories: 300 },
-          { size: 'Medium', price: 6.65, calories: 230 },
-          { size: 'Large', price: 6.95, calories: 150 }
+          { size: 'Small', price: 6.00, calories: 0 },
+          { size: 'Medium', price: 6.65, calories: 0 },
+          { size: 'Large', price: 6.95, calories: 0 }
         ]
       },
       {
@@ -276,9 +373,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 6.00, calories: 380 },
-          { size: 'Medium', price: 6.65, calories: 300 },
-          { size: 'Large', price: 6.95, calories: 230 }
+          { size: 'Small', price: 6.00, calories: 0 },
+          { size: 'Medium', price: 6.65, calories: 0 },
+          { size: 'Large', price: 6.95, calories: 0 }
         ]
       },
       {
@@ -288,9 +385,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 6.50, calories: 610 },
-          { size: 'Medium', price: 7.20, calories: 460 },
-          { size: 'Large', price: 7.55, calories: 400 }
+          { size: 'Small', price: 6.50, calories: 0 },
+          { size: 'Medium', price: 7.20, calories: 0 },
+          { size: 'Large', price: 7.55, calories: 0 }
         ]
       },
       {
@@ -300,9 +397,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice+Brown+sugar+Matcha+OAT+LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 6.65, calories: 570 },
-          { size: 'Medium', price: 7.35, calories: 440 },
-          { size: 'Large', price: 7.75, calories: 370 }
+          { size: 'Small', price: 6.65, calories: 0 },
+          { size: 'Medium', price: 7.35, calories: 0 },
+          { size: 'Large', price: 7.75, calories: 0 }
         ]
       }
     ]
@@ -311,6 +408,7 @@ export const menuCategories = [
     id: 'frappe',
     name: 'Frappés',
     description: 'Blended cold brew drinks topped with whipped cream',
+    hasCustomization: false,
     items: [
       {
         id: 'mocha-frappe',
@@ -319,9 +417,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/cafe-mocha-8f4d3834-1920w.png',
         category: 'Frappé',
         sizes: [
-          { size: 'Small', price: 5.15, calories: 370 },
-          { size: 'Medium', price: 5.75, calories: 330 },
-          { size: 'Large', price: 6.25, calories: 250 }
+          { size: 'Small', price: 5.15, calories: 0 },
+          { size: 'Medium', price: 5.75, calories: 0 },
+          { size: 'Large', price: 6.25, calories: 0 }
         ]
       },
       {
@@ -331,9 +429,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Caramel-Machiato-1920w.png',
         category: 'Frappé',
         sizes: [
-          { size: 'Small', price: 5.25, calories: 600 },
-          { size: 'Medium', price: 5.85, calories: 530 },
-          { size: 'Large', price: 6.35, calories: 420 }
+          { size: 'Small', price: 5.25, calories: 0 },
+          { size: 'Medium', price: 5.85, calories: 0 },
+          { size: 'Large', price: 6.35, calories: 0 }
         ]
       },
       {
@@ -343,23 +441,24 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice+Matcha+frappe-1920w.jpg',
         category: 'Frappé',
         sizes: [
-          { size: 'Small', price: 5.15, calories: 600 },
-          { size: 'Medium', price: 5.85, calories: 470 },
-          { size: 'Large', price: 6.35, calories: 370 }
+          { size: 'Small', price: 5.15, calories: 0 },
+          { size: 'Medium', price: 5.85, calories: 0 },
+          { size: 'Large', price: 6.35, calories: 0 }
         ]
       }
     ]
   },
   {
-    id: 'tea-non-coffee',
-    name: 'Tea & Non-Coffee',
-    description: 'Alternative beverages for non-coffee drinkers',
+    id: 'tea-options',
+    name: 'Tea Options',
+    description: 'Premium tea beverages',
+    hasCustomization: false,
     items: [
       {
         id: 'brewed-tea',
         name: 'Brewed Tea',
         description: 'Black, green, or herbal',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
+        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice+Matcha+frappe-1920w.jpg',
         category: 'Tea',
         sizes: [
           { size: 'Small', price: 3.00, calories: 0 },
@@ -373,9 +472,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice-Matcha-1920w.png',
         category: 'Tea',
         sizes: [
-          { size: 'Small', price: 4.75, calories: 300 },
-          { size: 'Medium', price: 5.50, calories: 230 },
-          { size: 'Large', price: 5.90, calories: 150 }
+          { size: 'Small', price: 4.75, calories: 0 },
+          { size: 'Medium', price: 5.50, calories: 0 },
+          { size: 'Large', price: 5.90, calories: 0 }
         ]
       },
       {
@@ -385,9 +484,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
         category: 'Tea',
         sizes: [
-          { size: 'Small', price: 5.45, calories: 290 },
-          { size: 'Medium', price: 5.95, calories: 240 },
-          { size: 'Large', price: 6.45, calories: 200 }
+          { size: 'Small', price: 5.45, calories: 0 },
+          { size: 'Medium', price: 5.95, calories: 0 },
+          { size: 'Large', price: 6.45, calories: 0 }
         ]
       },
       {
@@ -396,6 +495,7 @@ export const menuCategories = [
         description: 'Black, green, or wild berry hibiscus',
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
         category: 'Tea',
+        hasFruitTeaShaker: true,
         sizes: [
           { size: 'Small', price: 3.00, calories: 0 },
           { size: 'Medium', price: 3.55, calories: 0 },
@@ -408,22 +508,21 @@ export const menuCategories = [
         description: 'Refreshing blend of iced tea and lemonade',
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
         category: 'Tea',
+        hasFruitTeaShaker: true,
         sizes: [
-          { size: 'Small', price: 3.75, calories: 90 },
-          { size: 'Medium', price: 4.35, calories: 50 },
-          { size: 'Large', price: 4.75, calories: 40 }
+          { size: 'Small', price: 3.75, calories: 0 },
+          { size: 'Medium', price: 4.35, calories: 0 },
+          { size: 'Large', price: 4.75, calories: 0 }
         ]
-      },
-      {
-        id: 'fruit-tea-shaker',
-        name: 'Fruit Tea Shaker',
-        description: 'Iced tea lemonade shaken with fruit purée & fruit slices. Flavors: Strawberry Lemon, Passion Fruit, Yuzu Citrus',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
-        category: 'Tea',
-        sizes: [
-          { size: 'One Size', price: 5.00, calories: 150 }
-        ]
-      },
+      }
+    ]
+  },
+  {
+    id: 'non-coffee',
+    name: 'Non-Coffee',
+    description: 'Delicious beverages without coffee',
+    hasCustomization: false,
+    items: [
       {
         id: 'hot-cocoa',
         name: 'Hot Cocoa',
@@ -431,9 +530,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
         category: 'Non-Coffee',
         sizes: [
-          { size: 'Small', price: 4.40, calories: 340 },
-          { size: 'Medium', price: 4.70, calories: 300 },
-          { size: 'Large', price: 5.10, calories: 210 }
+          { size: 'Small', price: 4.40, calories: 0 },
+          { size: 'Medium', price: 4.70, calories: 0 },
+          { size: 'Large', price: 5.10, calories: 0 }
         ]
       },
       {
@@ -443,21 +542,21 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Vanilla-Latte-1920w.png',
         category: 'Non-Coffee',
         sizes: [
-          { size: 'Small', price: 3.80, calories: 260 },
-          { size: 'Medium', price: 4.20, calories: 190 },
-          { size: 'Large', price: 4.50, calories: 160 }
+          { size: 'Small', price: 3.80, calories: 0 },
+          { size: 'Medium', price: 4.20, calories: 0 },
+          { size: 'Large', price: 4.50, calories: 0 }
         ]
       },
       {
         id: 'vanilla-frappe-non-coffee',
-        name: 'Vanilla Frappé (Non-Coffee)',
+        name: 'Vanilla Frappé',
         description: 'Creamy vanilla blended drink - no coffee',
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Vanilla-Latte-1920w.png',
         category: 'Non-Coffee',
         sizes: [
-          { size: 'Small', price: 5.15, calories: 260 },
-          { size: 'Medium', price: 5.75, calories: 190 },
-          { size: 'Large', price: 6.25, calories: 160 }
+          { size: 'Small', price: 5.15, calories: 0 },
+          { size: 'Medium', price: 5.75, calories: 0 },
+          { size: 'Large', price: 6.25, calories: 0 }
         ]
       }
     ]
@@ -468,52 +567,11 @@ export const menuCategories = [
 export const bestSellers = [
   { categoryId: 'coffee-espresso', itemId: 'latte' },
   { categoryId: 'cold-brew-signature', itemId: 'cold-brew' },
-  { categoryId: 'coffee-espresso', itemId: 'cappuccino' },
+  { categoryId: 'cappuccino', itemId: 'cappuccino' },
   { categoryId: 'cold-brew-signature', itemId: 'horchata-espresso' },
   { categoryId: 'coffee-espresso', itemId: 'drip-coffee' },
   { categoryId: 'coffee-espresso', itemId: 'caramel-macchiato' }
 ];
-
-// Customization options from spreadsheet
-export const customizationOptions = {
-  addOns: [
-    { name: 'Brown Sugar Jelly', price: 0.75, calories: 40 },
-    { name: 'Honey Boba', price: 0.75, calories: 40 },
-    { name: 'Whipped Cream', price: 0.50, calories: 100 }
-  ],
-  milkOptions: [
-    { name: 'Whole Milk', upcharge: 0 },
-    { name: 'Nonfat Milk', upcharge: 0 },
-    { name: '2% Milk', upcharge: 0 },
-    { name: 'Oat Milk', upcharge: 0.80 },
-    { name: 'Almond Milk', upcharge: 0.80 },
-    { name: 'Half & Half', upcharge: 0.80 },
-    { name: 'Heavy Cream', upcharge: 0.80 }
-  ],
-  syrups: [
-    { name: 'Vanilla Syrup', price: 0.60, calories: '60-150' },
-    { name: 'Sugar-Free Vanilla Syrup', price: 0.60, calories: 0 },
-    { name: 'Brown Sugar Syrup', price: 0.60, calories: '60-150' },
-    { name: 'Chicory Syrup', price: 0.60, calories: '60-150' },
-    { name: 'Coconut Syrup', price: 0.60, calories: '60-150' },
-    { name: 'French Hazelnut Syrup', price: 0.60, calories: '60-150' },
-    { name: 'Honey Syrup', price: 0.60, calories: '60-150' },
-    { name: 'Simple Syrup', price: 0.60, calories: '60-150' }
-  ],
-  sauces: [
-    { name: 'Caramel Sauce', price: 0.80, calories: '60-180' },
-    { name: 'Chocolate Sauce', price: 0.80, calories: '50-150' },
-    { name: 'White Chocolate Sauce', price: 0.80, calories: '50-150' }
-  ],
-  shots: [
-    { name: 'Extra Espresso Shot', price: 1.65, calories: 10 },
-    { name: 'Decaf Shot', price: 1.65, calories: 10 }
-  ],
-  toppings: [
-    { name: 'Caramel Drizzle', price: 0.80 },
-    { name: 'Cinnamon', price: 0 }
-  ]
-};
 
 // Nutritional disclaimer
 export const nutritionalDisclaimer = `Milk-based beverage calories are calculated using 2% milk, except where noted. Additional nutritional information is available upon request. 2,000 calories a day is used for general nutrition advice, but calorie needs vary. Sugar-free, light, or decaf options may be available. We cannot guarantee that our products are free of allergens (including dairy, egg, soy, tree nuts, wheat, and others) as we use shared equipment to store, prepare, and serve them.`;
@@ -625,9 +683,7 @@ export const aboutContent = {
 };
 
 // Coffee story for About page
-export const coffeeStory = `Happy Place Coffee & Eats started as a dream - a dream to create a space where everyone feels welcome, 
-where the coffee is always fresh, and where Latin-American flavors meet American comfort food. 
-We're a family-owned business that believes in quality ingredients, authentic recipes, and treating every guest like family.`;
+export const coffeeStory = aboutContent.story;
 
 // Locations data (array format for compatibility)
 export const locations = [locationData];
