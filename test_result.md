@@ -285,6 +285,90 @@ frontend:
         agent: "testing"
         comment: "✅ Non-Coffee category properly separated and contains expected items: Hot Cocoa, Vanilla Steamer, Vanilla Frappé. Category accessible via side navigation and displays correctly"
 
+  - task: "Menu v2 Tab Alignment"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Menu tabs (Best Sellers, Coffee & Drinks, Breakfast, Dinner) are properly aligned and centered within the tab bar. All 4 tabs found in correct positions with proper spacing."
+
+  - task: "Individual Card Expansion v2"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL: Individual card expansion not working properly. When clicking 'Customize Your Drink' on one card, multiple cards (2) remain expanded instead of only one. Cards also do not collapse after adding to cart. The expandedItemId state management needs fixing to ensure only one card expands at a time."
+
+  - task: "Calorie Counter Functionality v2"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ CRITICAL: Calorie counter functionality working perfectly. Initial display shows '0 cal', updates to '100 cal' when Whipped Cream is selected, increases to '115 cal' when Vanilla Syrup is added. Calorie numbers are properly highlighted in amber/orange color when > 0."
+
+  - task: "Multi-Select Syrups v2"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ CRITICAL: Multi-select syrups working correctly. 'Syrups (Select Multiple)' label is displayed, syrups are shown as checkboxes (not dropdown), found 7 syrup checkboxes, multiple selections work (tested Vanilla + Caramel simultaneously)."
+
+  - task: "Multi-Select Sauces v2"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ CRITICAL: Multi-select sauces working correctly. 'Sauces (Select Multiple)' label is displayed, sauces are shown as checkboxes, found 3 sauce checkboxes, multiple selections work properly."
+
+  - task: "Price and Calorie Display on Customizations v2"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Price and calorie display working on most customizations. Milk options show both price AND calories (e.g., 'Oat Milk - +$0.80 / 10-20 per oz'), add-ons show both (e.g., 'Whipped Cream +$0.50 / 100 cal'), syrups show both (e.g., 'Vanilla Syrup +$0.60 / 0-30 per pump'), toppings show both price/Free and calories. Minor: Some section headers (Sauces, Shots) don't show individual item details in labels but items themselves do."
+
+  - task: "Add to Cart with Customizations v2"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Add to cart with customizations working. Cart appears after adding item, shows customization price (+$3.30 for Latte with customizations), displays correct total ($9.10). Cart properly shows '1x Latte Small (+$3.30)' format. Minor: Card does not collapse after adding to cart (related to card expansion issue)."
+
 metadata:
   created_by: "testing_agent"
   version: "1.1"
