@@ -10,23 +10,51 @@ const Menu = () => {
   const [cart, setCart] = useState({});
   const [selectedSizes, setSelectedSizes] = useState({});
   const [selectedMainCategory, setSelectedMainCategory] = useState('featured');
-  const [activeDrinkSection, setActiveDrinkSection] = useState('coffee-espresso');
+  const [activeDrinkSection, setActiveDrinkSection] = useState('best-sellers');
   const [isCartMinimized, setIsCartMinimized] = useState(false);
-  const [expandedItemId, setExpandedItemId] = useState(null); // Only one card expands at a time
+  const [expandedItemId, setExpandedItemId] = useState(null);
   const [itemCustomizations, setItemCustomizations] = useState({});
   const [selectedFruitTea, setSelectedFruitTea] = useState({});
   const drinkSectionRefs = useRef({});
+  const cartRef = useRef(null);
 
   // Get best selling items from references
   const bestSellingCoffee = bestSellers.map(ref => {
     const category = menuCategories.find(cat => cat.id === ref.categoryId);
-    return category?.items.find(item => item.id === ref.itemId);
+    const item = category?.items.find(item => item.id === ref.itemId);
+    if (item) {
+      return { ...item, isBestSeller: true };
+    }
+    return null;
   }).filter(Boolean);
 
-  // Organize menu by main categories
-  const coffeeMenuCategories = menuCategories.filter(cat => 
-    ['coffee-espresso', 'cappuccino', 'custom-drip', 'cold-brew-signature', 'frappe', 'tea-options', 'non-coffee'].includes(cat.id)
-  );
+  // Add Best Sellers as first category in side nav
+  const coffeeMenuCategories = [
+    {
+      id: 'best-sellers',
+      name: 'Best Sellers',
+      description: 'Our most popular drinks - customer favorites!',
+      hasCustomization: true,
+      items: bestSellingCoffee
+    },
+    ...menuCategories.filter(cat => 
+      ['coffee-espresso', 'cappuccino', 'custom-drip', 'cold-brew-signature', 'frappe', 'tea-options', 'non-coffee'].includes(cat.id)
+    )
+  ];
+
+  // Click outside to collapse cart
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (cartRef.current && !cartRef.current.contains(event.target)) {
+        setIsCartMinimized(true);
+      }
+    };
+
+    if (Object.keys(cart).length > 0 && !isCartMinimized) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [cart, isCartMinimized]);
 
   const getSelectedSize = (itemId) => {
     if (selectedSizes[itemId] !== undefined) {
@@ -81,7 +109,6 @@ const Menu = () => {
       customizations.syrups.forEach(syrupId => {
         const syrup = coffeeCustomizations.syrups.find(s => s.id === syrupId);
         if (syrup) {
-          // Use average of range if string, otherwise use number
           const cal = typeof syrup.calories === 'number' ? syrup.calories : 15;
           addedCalories += cal;
         }
@@ -251,6 +278,11 @@ const Menu = () => {
       return newCart;
     });
     toast.success('Item removed from cart');
+  };
+
+  const clearCart = () => {
+    setCart({});
+    toast.success('Cart cleared');
   };
 
   const getCartQuantity = (itemId, sizeIndex) => {
@@ -494,6 +526,12 @@ const Menu = () => {
           style={isExpanded ? { minHeight: 'auto' } : {}}
         >
           <div className="relative h-48 overflow-hidden bg-white flex-shrink-0">
+            {item.isBestSeller && (
+              <div className="absolute top-2 left-2 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center z-10">
+                <Star className="w-3 h-3 mr-1" fill="white" />
+                Best Seller
+              </div>
+            )}
             <img
               src={item.image}
               alt={item.name}
@@ -616,34 +654,36 @@ const Menu = () => {
           </p>
         </div>
 
-        {/* Main Category Tabs - Fixed Alignment */}
+        {/* Main Category Tabs - Fixed/Sticky */}
         <Tabs value={selectedMainCategory} onValueChange={setSelectedMainCategory} className="mb-8">
-          <TabsList className="w-full bg-white border shadow-sm p-1 mb-8 flex justify-center items-center gap-1">
-            <TabsTrigger
-              value="featured"
-              className="flex-1 max-w-[200px] px-4 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-sm font-semibold rounded-md"
-            >
-              Best Sellers
-            </TabsTrigger>
-            <TabsTrigger
-              value="coffee"
-              className="flex-1 max-w-[200px] px-4 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-sm font-semibold rounded-md"
-            >
-              Coffee & Drinks
-            </TabsTrigger>
-            <TabsTrigger
-              value="breakfast"
-              className="flex-1 max-w-[200px] px-4 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-sm font-semibold rounded-md"
-            >
-              Breakfast
-            </TabsTrigger>
-            <TabsTrigger
-              value="dinner"
-              className="flex-1 max-w-[200px] px-4 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-sm font-semibold rounded-md"
-            >
-              Dinner
-            </TabsTrigger>
-          </TabsList>
+          <div className="sticky top-0 z-40 bg-gradient-to-b from-amber-50/95 to-amber-50/80 backdrop-blur-sm py-4 -mx-4 px-4">
+            <TabsList className="w-full bg-white border shadow-sm p-1 flex justify-center items-center gap-1 rounded-lg">
+              <TabsTrigger
+                value="featured"
+                className="flex-1 max-w-[200px] px-4 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-sm font-semibold rounded-md"
+              >
+                Best Sellers
+              </TabsTrigger>
+              <TabsTrigger
+                value="coffee"
+                className="flex-1 max-w-[200px] px-4 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-sm font-semibold rounded-md"
+              >
+                Coffee & Drinks
+              </TabsTrigger>
+              <TabsTrigger
+                value="breakfast"
+                className="flex-1 max-w-[200px] px-4 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-sm font-semibold rounded-md"
+              >
+                Breakfast
+              </TabsTrigger>
+              <TabsTrigger
+                value="dinner"
+                className="flex-1 max-w-[200px] px-4 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-sm font-semibold rounded-md"
+              >
+                Dinner
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
           {/* FEATURED / BEST SELLERS */}
           <TabsContent value="featured">
@@ -667,7 +707,7 @@ const Menu = () => {
           {/* COFFEE MENU - Scrollable with Side Navigation */}
           <TabsContent value="coffee">
             <div className="flex gap-8">
-              {/* Side Navigation */}
+              {/* Side Navigation - Fixed/Sticky */}
               <div className="hidden lg:block w-64 flex-shrink-0">
                 <div className="sticky top-24 bg-white rounded-lg shadow-lg p-4">
                   <h3 className="text-lg font-bold text-gray-900 mb-4">Drink Categories</h3>
@@ -676,12 +716,15 @@ const Menu = () => {
                       <button
                         key={category.id}
                         onClick={() => scrollToDrinkSection(category.id)}
-                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors text-sm ${
+                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center ${
                           activeDrinkSection === category.id
                             ? 'bg-amber-600 text-white'
                             : 'text-gray-700 hover:bg-amber-50'
                         }`}
                       >
+                        {category.id === 'best-sellers' && (
+                          <Star className={`w-4 h-4 mr-2 ${activeDrinkSection === category.id ? 'text-white' : 'text-amber-500'}`} />
+                        )}
                         {category.name}
                       </button>
                     ))}
@@ -698,7 +741,12 @@ const Menu = () => {
                     className="mb-16 scroll-mt-24"
                   >
                     <div className="mb-8">
-                      <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
+                      <h2 className="text-3xl font-bold text-gray-900 mb-2 flex items-center">
+                        {category.id === 'best-sellers' && (
+                          <Star className="w-8 h-8 text-amber-500 mr-2" />
+                        )}
+                        {category.name}
+                      </h2>
                       <p className="text-gray-600">{category.description}</p>
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -707,10 +755,10 @@ const Menu = () => {
                   </div>
                 ))}
                 
-                {/* Nutritional Disclaimer */}
-                <div className="mt-12 p-6 bg-gray-50 rounded-lg">
-                  <h3 className="text-sm font-semibold text-gray-700 mb-2">Nutritional Information</h3>
-                  <p className="text-xs text-gray-500 leading-relaxed">{nutritionalDisclaimer}</p>
+                {/* Nutritional Disclaimer - ENLARGED */}
+                <div className="mt-12 p-8 bg-gray-100 rounded-xl border border-gray-200">
+                  <h3 className="text-lg font-bold text-gray-800 mb-4">Nutritional Information</h3>
+                  <p className="text-base text-gray-600 leading-relaxed">{nutritionalDisclaimer}</p>
                 </div>
               </div>
             </div>
@@ -737,21 +785,36 @@ const Menu = () => {
 
         {/* Floating Cart Summary */}
         {getTotalItems() > 0 && (
-          <div className={`fixed bottom-8 right-8 bg-white rounded-2xl shadow-2xl border-2 border-amber-200 max-w-sm z-[100] transition-all duration-300 ${isCartMinimized ? 'w-auto' : 'w-80'}`}>
+          <div 
+            ref={cartRef}
+            className={`fixed bottom-8 right-8 bg-white rounded-2xl shadow-2xl border-2 border-amber-200 max-w-sm z-[100] transition-all duration-300 ${isCartMinimized ? 'w-auto' : 'w-80'}`}
+          >
             {/* Cart Header with Minimize */}
-            <div className="flex items-center justify-between p-4 border-b">
+            <div 
+              className="flex items-center justify-between p-4 border-b cursor-pointer"
+              onClick={() => setIsCartMinimized(!isCartMinimized)}
+            >
               <div className="flex items-center">
                 <h3 className="text-lg font-bold text-gray-900">Your Order</h3>
                 <div className="bg-amber-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm ml-2">
                   {getTotalItems()}
                 </div>
               </div>
-              <button
-                onClick={() => setIsCartMinimized(!isCartMinimized)}
-                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
-              >
+              <div className="flex items-center gap-2">
+                {!isCartMinimized && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      clearCart();
+                    }}
+                    className="p-1 hover:bg-red-50 rounded-full transition-colors text-gray-400 hover:text-red-500"
+                    title="Clear cart"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
                 {isCartMinimized ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-              </button>
+              </div>
             </div>
 
             {/* Cart Content - Collapsible */}
@@ -776,7 +839,7 @@ const Menu = () => {
                         </span>
                         <button
                           onClick={() => deleteFromCart(key)}
-                          className="p-1 text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                          className="p-1 text-gray-400 hover:text-red-500 transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
