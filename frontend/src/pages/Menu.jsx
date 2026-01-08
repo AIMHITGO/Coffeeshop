@@ -98,23 +98,28 @@ const Menu = () => {
       key={item.id}
       className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-white"
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-48 overflow-hidden bg-white">
         <img
           src={item.image}
           alt={item.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-contain p-2"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
         <div className="absolute bottom-3 left-3">
           <span className="px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded-full">
-            {item.category}
+            {item.size}
           </span>
         </div>
       </div>
 
       <CardContent className="p-6">
         <div className="flex justify-between items-start mb-3">
-          <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
+          <div>
+            <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
+            {item.calories !== undefined && (
+              <span className="text-xs text-gray-500">{item.calories} cal</span>
+            )}
+          </div>
           <span className="text-xl font-bold text-amber-600">${item.price.toFixed(2)}</span>
         </div>
         <p className="text-gray-600 mb-4 text-sm leading-relaxed">{item.description}</p>
@@ -185,7 +190,7 @@ const Menu = () => {
               value="coffee"
               className="px-8 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-lg font-semibold"
             >
-              Coffee Menu
+              Coffee & Drink Menu
             </TabsTrigger>
             <TabsTrigger
               value="breakfast"
