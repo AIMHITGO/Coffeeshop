@@ -293,7 +293,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "All menu page functionality tested successfully"
+    - "All updated menu page features tested successfully"
   stuck_tasks: []
   test_all: true
   test_priority: "completed"
