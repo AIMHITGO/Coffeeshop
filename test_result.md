@@ -377,10 +377,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "All updated menu page features tested successfully"
-  stuck_tasks: []
-  test_all: true
-  test_priority: "completed"
+    - "Individual Card Expansion v2"
+  stuck_tasks:
+    - "Individual Card Expansion v2"
+  test_all: false
+  test_priority: "high_first"
 
 agent_communication:
   - agent: "testing"
