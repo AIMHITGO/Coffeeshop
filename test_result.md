@@ -369,6 +369,90 @@ frontend:
         agent: "testing"
         comment: "✅ Add to cart with customizations working. Cart appears after adding item, shows customization price (+$3.30 for Latte with customizations), displays correct total ($9.10). Cart properly shows '1x Latte Small (+$3.30)' format. Minor: Card does not collapse after adding to cart (related to card expansion issue)."
 
+  - task: "Best Sellers in Side Navigation v3"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Best Sellers appears as FIRST item in side navigation with star icon. Clicking on Best Sellers in side nav correctly scrolls to Best Sellers section. Navigation and visual elements working perfectly."
+
+  - task: "Best Seller Badges on Cards v3"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Found 6 Best Seller badges on cards with orange background and star icons. Badges properly display 'Best Seller' text with white star icons on amber-500 background."
+
+  - task: "Sticky/Fixed Menu Bar v3"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Menu tabs (Best Sellers, Coffee & Drinks, Breakfast, Dinner) remain visible when scrolled with proper sticky behavior. Semi-transparent background styling with backdrop-blur and gradient classes applied correctly."
+
+  - task: "Cart Item Deletion v3"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ CRITICAL: Cart item deletion working correctly. Successfully removes specific items from cart using trash icon, cart total updates correctly, and removed items show 'Add to Order' button again."
+
+  - task: "Clear Entire Cart v3"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Clear cart functionality working. Clear cart button (trash icon next to 'Your Order' header) successfully removes all items and cart disappears completely."
+
+  - task: "Click Outside to Collapse Cart v3"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 1
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ Click outside to collapse cart not working properly. Cart expands correctly when clicked, but does not collapse when clicking outside the cart area. The useEffect click outside handler may need adjustment."
+
+  - task: "Nutritional Information Enlarged v3"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ Nutritional Information section has enlarged text styling. Heading uses text-lg class and body text uses text-base class, making it properly visible and readable at normal view."
+
 metadata:
   created_by: "testing_agent"
   version: "1.1"
