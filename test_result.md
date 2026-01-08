@@ -461,9 +461,10 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Individual Card Expansion v2"
+    - "Click Outside to Collapse Cart v3"
   stuck_tasks:
     - "Individual Card Expansion v2"
+    - "Click Outside to Collapse Cart v3"
   test_all: false
   test_priority: "high_first"
 
