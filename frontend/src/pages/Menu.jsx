@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { ShoppingBag, Plus, Minus, Star } from 'lucide-react';
-import { menuCategories, bestSellers, nutritionalDisclaimer } from '../data/mock';
+import { ShoppingBag, Plus, Minus, Star, Trash2, ChevronDown, ChevronUp, X, Settings } from 'lucide-react';
+import { menuCategories, bestSellers, nutritionalDisclaimer, coffeeCustomizations, fruitTeaShakerFlavors } from '../data/mock';
 import { toast } from 'sonner';
 
 const Menu = () => {
@@ -11,6 +11,10 @@ const Menu = () => {
   const [selectedSizes, setSelectedSizes] = useState({});
   const [selectedMainCategory, setSelectedMainCategory] = useState('featured');
   const [activeDrinkSection, setActiveDrinkSection] = useState('coffee-espresso');
+  const [isCartMinimized, setIsCartMinimized] = useState(false);
+  const [expandedCustomizations, setExpandedCustomizations] = useState({});
+  const [itemCustomizations, setItemCustomizations] = useState({});
+  const [selectedFruitTea, setSelectedFruitTea] = useState({});
   const drinkSectionRefs = useRef({});
 
   // Get best selling items from references
@@ -21,14 +25,13 @@ const Menu = () => {
 
   // Organize menu by main categories
   const coffeeMenuCategories = menuCategories.filter(cat => 
-    ['coffee-espresso', 'cold-brew-signature', 'frappe', 'tea-non-coffee'].includes(cat.id)
+    ['coffee-espresso', 'cappuccino', 'custom-drip', 'cold-brew-signature', 'frappe', 'tea-options', 'non-coffee'].includes(cat.id)
   );
 
-  const getSelectedSize = (itemId, item) => {
+  const getSelectedSize = (itemId) => {
     if (selectedSizes[itemId] !== undefined) {
       return selectedSizes[itemId];
     }
-    // Default to first size (usually smallest)
     return 0;
   };
 
@@ -41,15 +44,37 @@ const Menu = () => {
 
   const getCartKey = (itemId, sizeIndex) => `${itemId}-${sizeIndex}`;
 
+  const toggleCustomization = (itemId) => {
+    setExpandedCustomizations(prev => ({
+      ...prev,
+      [itemId]: !prev[itemId]
+    }));
+  };
+
+  const updateItemCustomization = (itemId, type, value) => {
+    setItemCustomizations(prev => ({
+      ...prev,
+      [itemId]: {
+        ...prev[itemId],
+        [type]: value
+      }
+    }));
+  };
+
   const addToCart = (item, sizeIndex) => {
     const key = getCartKey(item.id, sizeIndex);
     const sizeInfo = item.sizes[sizeIndex];
+    const customizations = itemCustomizations[item.id] || {};
+    const fruitTea = selectedFruitTea[item.id] || null;
+    
     setCart(prev => ({
       ...prev,
       [key]: {
         item,
         sizeIndex,
-        quantity: (prev[key]?.quantity || 0) + 1
+        quantity: (prev[key]?.quantity || 0) + 1,
+        customizations,
+        fruitTea
       }
     }));
     toast.success(`${item.name} (${sizeInfo.size}) added to cart!`);
@@ -66,6 +91,15 @@ const Menu = () => {
       }
       return newCart;
     });
+  };
+
+  const deleteFromCart = (key) => {
+    setCart(prev => {
+      const newCart = { ...prev };
+      delete newCart[key];
+      return newCart;
+    });
+    toast.success('Item removed from cart');
   };
 
   const getCartQuantity = (itemId, sizeIndex) => {
@@ -113,17 +147,134 @@ const Menu = () => {
     }
   }, [selectedMainCategory]);
 
-  const renderMenuItem = (item) => {
-    const currentSizeIndex = getSelectedSize(item.id, item);
+  const renderCustomizationSection = (item, categoryHasCustomization) => {
+    if (!categoryHasCustomization) return null;
+
+    const isExpanded = expandedCustomizations[item.id];
+    const currentCustomizations = itemCustomizations[item.id] || {};
+
+    return (
+      <div className="mt-4 border-t pt-4">
+        <button
+          onClick={() => toggleCustomization(item.id)}
+          className="flex items-center justify-between w-full text-sm font-medium text-amber-600 hover:text-amber-700"
+        >
+          <span className="flex items-center">
+            <Settings className="w-4 h-4 mr-2" />
+            Customize Your Drink
+          </span>
+          {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+        </button>
+
+        {isExpanded && (
+          <div className="mt-4 space-y-4 text-sm">
+            {/* Milk Options */}
+            <div>
+              <label className="block font-medium text-gray-700 mb-2">Milk Option</label>
+              <select
+                value={currentCustomizations.milk || ''}
+                onChange={(e) => updateItemCustomization(item.id, 'milk', e.target.value)}
+                className="w-full p-2 border rounded-lg text-sm"
+              >
+                <option value="">Default (2% Milk)</option>
+                {coffeeCustomizations.milk.map(opt => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.name} {opt.price > 0 ? `(+$${opt.price.toFixed(2)})` : ''}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Add-ons */}
+            <div>
+              <label className="block font-medium text-gray-700 mb-2">Add-ons</label>
+              <div className="space-y-2">
+                {coffeeCustomizations.addOns.map(addon => (
+                  <label key={addon.id} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={currentCustomizations[addon.id] || false}
+                      onChange={(e) => updateItemCustomization(item.id, addon.id, e.target.checked)}
+                      className="mr-2 rounded border-gray-300"
+                    />
+                    <span>{addon.name} (+${addon.price.toFixed(2)}, {addon.calories} cal)</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Syrups */}
+            <div>
+              <label className="block font-medium text-gray-700 mb-2">Syrup</label>
+              <select
+                value={currentCustomizations.syrup || ''}
+                onChange={(e) => updateItemCustomization(item.id, 'syrup', e.target.value)}
+                className="w-full p-2 border rounded-lg text-sm"
+              >
+                <option value="">No Syrup</option>
+                {coffeeCustomizations.syrups.map(opt => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.name} (+${opt.price.toFixed(2)})
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Sauce */}
+            <div>
+              <label className="block font-medium text-gray-700 mb-2">Sauce</label>
+              <select
+                value={currentCustomizations.sauce || ''}
+                onChange={(e) => updateItemCustomization(item.id, 'sauce', e.target.value)}
+                className="w-full p-2 border rounded-lg text-sm"
+              >
+                <option value="">No Sauce</option>
+                {coffeeCustomizations.sauces.map(opt => (
+                  <option key={opt.id} value={opt.id}>
+                    {opt.name} (+${opt.price.toFixed(2)})
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const renderFruitTeaShakerOption = (item) => {
+    if (!item.hasFruitTeaShaker) return null;
+
+    return (
+      <div className="mt-3 p-3 bg-amber-50 rounded-lg">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Add Fruit Tea Shaker (Free)
+        </label>
+        <select
+          value={selectedFruitTea[item.id] || ''}
+          onChange={(e) => setSelectedFruitTea(prev => ({ ...prev, [item.id]: e.target.value }))}
+          className="w-full p-2 border rounded-lg text-sm"
+        >
+          <option value="">No Fruit Tea Shaker</option>
+          {fruitTeaShakerFlavors.map(flavor => (
+            <option key={flavor.id} value={flavor.id}>{flavor.name}</option>
+          ))}
+        </select>
+      </div>
+    );
+  };
+
+  const renderMenuItem = (item, categoryHasCustomization = false) => {
+    const currentSizeIndex = getSelectedSize(item.id);
     const currentSize = item.sizes[currentSizeIndex];
     const cartQty = getCartQuantity(item.id, currentSizeIndex);
 
     return (
       <Card
         key={item.id}
-        className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-white"
+        className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 bg-white flex flex-col h-full"
       >
-        <div className="relative h-48 overflow-hidden bg-white">
+        <div className="relative h-48 overflow-hidden bg-white flex-shrink-0">
           <img
             src={item.image}
             alt={item.name}
@@ -132,74 +283,85 @@ const Menu = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
         </div>
 
-        <CardContent className="p-6">
-          <div className="mb-3">
-            <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
-            <p className="text-gray-600 text-sm leading-relaxed mt-1">{item.description}</p>
+        <CardContent className="p-6 flex flex-col flex-grow">
+          <div className="mb-3 flex-shrink-0">
+            <h3 className="text-xl font-bold text-gray-900 line-clamp-1">{item.name}</h3>
+            <p className="text-gray-600 text-sm leading-relaxed mt-1 line-clamp-2 min-h-[40px]">{item.description}</p>
           </div>
 
           {/* Size Selector */}
-          <div className="mb-4">
+          <div className="mb-3 flex-shrink-0">
             <div className="flex flex-wrap gap-2">
               {item.sizes.map((sizeOption, idx) => (
                 <button
                   key={idx}
                   onClick={() => setSelectedSize(item.id, idx)}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all flex-1 min-w-[70px] ${
                     currentSizeIndex === idx
                       ? 'bg-amber-600 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-amber-50'
                   }`}
                 >
-                  <span className="block">{sizeOption.size}</span>
-                  <span className="block text-xs">${sizeOption.price.toFixed(2)}</span>
+                  <span className="block text-xs">{sizeOption.size}</span>
+                  {sizeOption.price > 0 && (
+                    <span className="block text-xs">${sizeOption.price.toFixed(2)}</span>
+                  )}
                 </button>
               ))}
             </div>
           </div>
 
           {/* Calories for selected size */}
-          {currentSize.calories !== undefined && (
-            <p className="text-xs text-gray-500 mb-4">{currentSize.calories} cal</p>
-          )}
+          <p className="text-xs text-gray-500 mb-3 flex-shrink-0">{currentSize.calories} cal</p>
 
-          {/* Add to Cart */}
-          {cartQty > 0 ? (
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3 bg-amber-50 rounded-lg px-3 py-2">
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => removeFromCart(item.id, currentSizeIndex)}
-                  className="h-8 w-8 p-0 hover:bg-amber-100"
-                >
-                  <Minus className="h-4 w-4" />
-                </Button>
-                <span className="font-bold text-gray-900 min-w-[20px] text-center">
-                  {cartQty}
+          {/* Fruit Tea Shaker Option */}
+          {renderFruitTeaShakerOption(item)}
+
+          {/* Customization Section */}
+          {renderCustomizationSection(item, categoryHasCustomization)}
+
+          {/* Spacer to push button to bottom */}
+          <div className="flex-grow"></div>
+
+          {/* Add to Cart - Always at bottom */}
+          <div className="mt-4 flex-shrink-0">
+            {cartQty > 0 ? (
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3 bg-amber-50 rounded-lg px-3 py-2">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => removeFromCart(item.id, currentSizeIndex)}
+                    className="h-8 w-8 p-0 hover:bg-amber-100"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <span className="font-bold text-gray-900 min-w-[20px] text-center">
+                    {cartQty}
+                  </span>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => addToCart(item, currentSizeIndex)}
+                    className="h-8 w-8 p-0 hover:bg-amber-100"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+                <span className="text-sm font-semibold text-amber-600">
+                  ${(currentSize.price * cartQty).toFixed(2)}
                 </span>
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  onClick={() => addToCart(item, currentSizeIndex)}
-                  className="h-8 w-8 p-0 hover:bg-amber-100"
-                >
-                  <Plus className="h-4 w-4" />
-                </Button>
               </div>
-              <span className="text-sm font-semibold text-amber-600">
-                ${(currentSize.price * cartQty).toFixed(2)}
-              </span>
-            </div>
-          ) : (
-            <Button
-              className="w-full bg-amber-600 hover:bg-amber-700 text-white"
-              onClick={() => addToCart(item, currentSizeIndex)}
-            >
-              <ShoppingBag className="mr-2 h-4 w-4" />
-              Add to Order
-            </Button>
-          )}
+            ) : (
+              <Button
+                className="w-full bg-amber-600 hover:bg-amber-700 text-white"
+                onClick={() => addToCart(item, currentSizeIndex)}
+              >
+                <ShoppingBag className="mr-2 h-4 w-4" />
+                Add to Order
+              </Button>
+            )}
+          </div>
         </CardContent>
       </Card>
     );
@@ -220,28 +382,28 @@ const Menu = () => {
 
         {/* Main Category Tabs */}
         <Tabs value={selectedMainCategory} onValueChange={setSelectedMainCategory} className="mb-8">
-          <TabsList className="w-full justify-center bg-white border shadow-sm p-2 mb-8">
+          <TabsList className="w-full justify-center bg-white border shadow-sm p-2 mb-8 flex-wrap">
             <TabsTrigger
               value="featured"
-              className="px-8 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-lg font-semibold"
+              className="px-6 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-base font-semibold"
             >
               Best Sellers
             </TabsTrigger>
             <TabsTrigger
               value="coffee"
-              className="px-8 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-lg font-semibold"
+              className="px-6 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-base font-semibold"
             >
               Coffee & Drink Menu
             </TabsTrigger>
             <TabsTrigger
               value="breakfast"
-              className="px-8 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-lg font-semibold"
+              className="px-6 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-base font-semibold"
             >
               Breakfast Menu
             </TabsTrigger>
             <TabsTrigger
               value="dinner"
-              className="px-8 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-lg font-semibold"
+              className="px-6 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-base font-semibold"
             >
               Full Dinner Menu
             </TabsTrigger>
@@ -257,7 +419,12 @@ const Menu = () => {
               <p className="text-gray-600">Our most popular drinks - customer favorites!</p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {bestSellingCoffee.map(item => renderMenuItem(item))}
+              {bestSellingCoffee.map(item => {
+                const category = menuCategories.find(cat => 
+                  cat.items.some(i => i.id === item.id)
+                );
+                return renderMenuItem(item, category?.hasCustomization || false);
+              })}
             </div>
           </TabsContent>
 
@@ -273,7 +440,7 @@ const Menu = () => {
                       <button
                         key={category.id}
                         onClick={() => scrollToDrinkSection(category.id)}
-                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${
+                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors text-sm ${
                           activeDrinkSection === category.id
                             ? 'bg-amber-600 text-white'
                             : 'text-gray-700 hover:bg-amber-50'
@@ -299,7 +466,7 @@ const Menu = () => {
                       <p className="text-gray-600">{category.description}</p>
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {category.items.map(item => renderMenuItem(item))}
+                      {category.items.map(item => renderMenuItem(item, category.hasCustomization))}
                     </div>
                   </div>
                 ))}
@@ -334,37 +501,66 @@ const Menu = () => {
 
         {/* Floating Cart Summary */}
         {getTotalItems() > 0 && (
-          <div className="fixed bottom-8 right-8 bg-white rounded-2xl shadow-2xl p-6 border-2 border-amber-200 max-w-sm z-40">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-bold text-gray-900">Your Order</h3>
-              <div className="bg-amber-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold">
-                {getTotalItems()}
-              </div>
-            </div>
-            <div className="space-y-2 mb-4 max-h-48 overflow-y-auto">
-              {Object.values(cart).map((entry, idx) => (
-                <div key={idx} className="flex justify-between text-sm">
-                  <span className="text-gray-700">
-                    {entry.quantity}x {entry.item.name} ({entry.item.sizes[entry.sizeIndex].size})
-                  </span>
-                  <span className="font-semibold text-gray-900">
-                    ${(entry.item.sizes[entry.sizeIndex].price * entry.quantity).toFixed(2)}
-                  </span>
+          <div className={`fixed bottom-8 right-8 bg-white rounded-2xl shadow-2xl border-2 border-amber-200 max-w-sm z-40 transition-all duration-300 ${isCartMinimized ? 'w-auto' : 'w-80'}`}>
+            {/* Cart Header with Minimize */}
+            <div className="flex items-center justify-between p-4 border-b">
+              <div className="flex items-center">
+                <h3 className="text-lg font-bold text-gray-900">Your Order</h3>
+                <div className="bg-amber-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm ml-2">
+                  {getTotalItems()}
                 </div>
-              ))}
-            </div>
-            <div className="border-t pt-4 mb-4">
-              <div className="flex justify-between items-center">
-                <span className="text-lg font-bold text-gray-900">Total</span>
-                <span className="text-2xl font-bold text-amber-600">${getTotalPrice()}</span>
               </div>
+              <button
+                onClick={() => setIsCartMinimized(!isCartMinimized)}
+                className="p-1 hover:bg-gray-100 rounded-full transition-colors"
+              >
+                {isCartMinimized ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+              </button>
             </div>
-            <Button
-              className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white py-6"
-              onClick={() => toast.success('Checkout feature coming soon!')}
-            >
-              Checkout
-            </Button>
+
+            {/* Cart Content - Collapsible */}
+            {!isCartMinimized && (
+              <div className="p-4">
+                <div className="space-y-3 mb-4 max-h-48 overflow-y-auto">
+                  {Object.entries(cart).map(([key, entry]) => (
+                    <div key={key} className="flex items-center justify-between text-sm group">
+                      <div className="flex-1">
+                        <span className="text-gray-700">
+                          {entry.quantity}x {entry.item.name}
+                        </span>
+                        <span className="text-gray-500 text-xs block">
+                          {entry.item.sizes[entry.sizeIndex].size}
+                          {entry.fruitTea && ` + ${fruitTeaShakerFlavors.find(f => f.id === entry.fruitTea)?.name}`}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold text-gray-900">
+                          ${(entry.item.sizes[entry.sizeIndex].price * entry.quantity).toFixed(2)}
+                        </span>
+                        <button
+                          onClick={() => deleteFromCart(key)}
+                          className="p-1 text-gray-400 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="border-t pt-4 mb-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-lg font-bold text-gray-900">Total</span>
+                    <span className="text-2xl font-bold text-amber-600">${getTotalPrice()}</span>
+                  </div>
+                </div>
+                <Button
+                  className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white py-6"
+                  onClick={() => toast.success('Checkout feature coming soon!')}
+                >
+                  Checkout
+                </Button>
+              </div>
+            )}
           </div>
         )}
       </div>
