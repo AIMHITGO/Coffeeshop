@@ -45,14 +45,23 @@ const Menu = () => {
   // Click outside to collapse cart
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Check if click is outside cart
       if (cartRef.current && !cartRef.current.contains(event.target)) {
         setIsCartMinimized(true);
       }
     };
 
+    // Only add listener when cart has items and is NOT minimized
     if (Object.keys(cart).length > 0 && !isCartMinimized) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      // Use setTimeout to avoid immediate trigger on the same click that expanded the cart
+      const timeoutId = setTimeout(() => {
+        document.addEventListener('click', handleClickOutside, true);
+      }, 100);
+      
+      return () => {
+        clearTimeout(timeoutId);
+        document.removeEventListener('click', handleClickOutside, true);
+      };
     }
   }, [cart, isCartMinimized]);
 
