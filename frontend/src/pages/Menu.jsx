@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { ShoppingBag, Plus, Minus, Star, Trash2, ChevronDown, ChevronUp, Settings, RotateCcw } from 'lucide-react';
+import { ShoppingBag, Plus, Minus, Star, Trash2, ChevronDown, ChevronUp, Settings, RotateCcw, Maximize2, Minimize2, X } from 'lucide-react';
 import { menuCategories, bestSellers, nutritionalDisclaimer, coffeeCustomizations, fruitTeaShakerFlavors } from '../data/mock';
 import { toast } from 'sonner';
 
@@ -11,8 +11,9 @@ const Menu = () => {
   const [selectedSizes, setSelectedSizes] = useState({});
   const [selectedMainCategory, setSelectedMainCategory] = useState('featured');
   const [activeDrinkSection, setActiveDrinkSection] = useState('best-sellers');
-  const [isCartMinimized, setIsCartMinimized] = useState(false);
-  const [expandedCardKey, setExpandedCardKey] = useState(null); // Changed to track unique card key (categoryId-itemId)
+  // Cart states: 'minimized' | 'regular' | 'expanded'
+  const [cartState, setCartState] = useState('regular');
+  const [expandedCardKey, setExpandedCardKey] = useState(null);
   const [itemCustomizations, setItemCustomizations] = useState({});
   const [selectedFruitTea, setSelectedFruitTea] = useState({});
   const [blockNextClick, setBlockNextClick] = useState(false);
