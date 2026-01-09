@@ -404,6 +404,81 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ Menu tabs (Best Sellers, Coffee & Drinks, Breakfast, Dinner) remain visible when scrolled with proper sticky behavior. Semi-transparent background styling with backdrop-blur and gradient classes applied correctly."
+      - working: true
+        agent: "testing"
+        comment: "✅ V4 TESTING: Sticky menu bar works perfectly on ALL menu pages. Tested scrolling on Best Sellers, Coffee & Drinks, Breakfast, and Dinner tabs - menu tabs remain visible and sticky in all cases, even with deep scrolling (2000px). Sticky positioning with proper backdrop styling confirmed working."
+
+  - task: "Scrollbar on Customization Dropdown v4"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ V4 CRITICAL: Customization dropdown has proper scrollbar functionality. Section has max-height: 320px and overflow-y: auto, allowing independent scrolling within the customization area. Scrolling works correctly without affecting page scroll."
+
+  - task: "Auto-Collapse Expanded Card When Clicking Outside v4"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ V4 CRITICAL: Auto-collapse functionality working perfectly. When clicking outside an expanded card (tested by clicking page title), the card automatically collapses. First click only collapses without triggering other actions as expected."
+
+  - task: "Customizations Persist Until Added/Deleted v4"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ V4 CRITICAL: Customizations persist correctly. Selected Whipped Cream and Vanilla Syrup, collapsed card, verified 'Modified' badge appears, re-expanded card and customizations remained selected. Calorie counter shows 115 cal with added customizations and updates properly."
+
+  - task: "Clear Option for Customizations v4"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ V4 CRITICAL: 'Clear All Customizations' button found and working perfectly. Clicking the red button with rotate icon clears ALL customizations (Whipped Cream and Vanilla Syrup), resets calorie counter to 0 cal, and resets price to base price."
+
+  - task: "Reset Item Card When Deleted from Cart v4"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ V4 CRITICAL: Card reset functionality working correctly. Added Latte with customizations to cart, deleted item using trash icon, verified card resets to show 'Add to Order' button and customizations are cleared. Toast notification 'Item removed from cart' appears as expected."
+
+  - task: "Price Display Logic v4"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ V4: Price display logic working correctly. Cards without customizations and not in cart do NOT show 'Total Price'. Cards with customizations show 'Total Price: $X.XX'. Cards in cart display price information. Logic follows expected behavior pattern."
 
   - task: "Cart Item Deletion v3"
     implemented: true
