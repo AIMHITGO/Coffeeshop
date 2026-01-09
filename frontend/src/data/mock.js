@@ -373,9 +373,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 4.95, calories: 0 },
-          { size: 'Medium', price: 4.70, calories: 0 },
-          { size: 'Large', price: 5.00, calories: 0 }
+          { size: 'Small', price: 4.95, calories: 150 },
+          { size: 'Medium', price: 4.70, calories: 190 },
+          { size: 'Large', price: 5.00, calories: 270 }
         ]
       },
       {
@@ -385,9 +385,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 6.50, calories: 0 },
-          { size: 'Medium', price: 7.20, calories: 0 },
-          { size: 'Large', price: 7.55, calories: 0 }
+          { size: 'Small', price: 6.50, calories: 180 },
+          { size: 'Medium', price: 7.20, calories: 240 },
+          { size: 'Large', price: 7.55, calories: 330 }
         ]
       },
       {
@@ -397,9 +397,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice+Brown+sugar+Matcha+OAT+LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 6.65, calories: 190 },
-          { size: 'Medium', price: 6.95, calories: 260 },
-          { size: 'Large', price: 6.95, calories: 260 }
+          { size: 'Small', price: 6.65, calories: 240 },
+          { size: 'Medium', price: 6.95, calories: 330 },
+          { size: 'Large', price: 6.95, calories: 400 }
         ]
       }
     ]
@@ -417,9 +417,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/cafe-mocha-8f4d3834-1920w.png',
         category: 'Frappé',
         sizes: [
-          { size: 'Small', price: 3.75, calories: 250 },
-          { size: 'Medium', price: 4.35, calories: 300 },
-          { size: 'Large', price: 5.10, calories: 600 }
+          { size: 'Small', price: 3.75, calories: 410 },
+          { size: 'Medium', price: 4.35, calories: 500 },
+          { size: 'Large', price: 5.10, calories: 580 }
         ]
       },
       {
@@ -429,9 +429,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Caramel-Machiato-1920w.png',
         category: 'Frappé',
         sizes: [
-          { size: 'Small', price: 3.75, calories: 40 },
-          { size: 'Medium', price: 4.25, calories: 50 },
-          { size: 'Large', price: 4.65, calories: 60 }
+          { size: 'Small', price: 3.75, calories: 380 },
+          { size: 'Medium', price: 4.25, calories: 460 },
+          { size: 'Large', price: 4.65, calories: 530 }
         ]
       },
       {
@@ -441,9 +441,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice+Matcha+frappe-1920w.jpg',
         category: 'Frappé',
         sizes: [
-          { size: 'Small', price: 3.75, calories: 40 },
-          { size: 'Medium', price: 4.25, calories: 50 },
-          { size: 'Large', price: 4.65, calories: 60 }
+          { size: 'Small', price: 3.75, calories: 320 },
+          { size: 'Medium', price: 4.25, calories: 400 },
+          { size: 'Large', price: 4.65, calories: 470 }
         ]
       }
     ]
@@ -472,9 +472,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice-Matcha-1920w.png',
         category: 'Tea',
         sizes: [
-          { size: 'Small', price: 5.95, calories: 340 },
-          { size: 'Medium', price: 5.50, calories: 300 },
-          { size: 'Large', price: 6.25, calories: 570 }
+          { size: 'Small', price: 5.95, calories: 170 },
+          { size: 'Medium', price: 5.50, calories: 240 },
+          { size: 'Large', price: 6.25, calories: 310 }
         ]
       },
       {
@@ -484,9 +484,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
         category: 'Tea',
         sizes: [
-          { size: 'Small', price: 3.75, calories: 90 },
-          { size: 'Medium', price: 4.35, calories: 150 },
-          { size: 'Large', price: 4.75, calories: 160 }
+          { size: 'Small', price: 3.75, calories: 150 },
+          { size: 'Medium', price: 4.35, calories: 210 },
+          { size: 'Large', price: 4.75, calories: 270 }
         ]
       },
       {
@@ -497,9 +497,9 @@ export const menuCategories = [
         category: 'Tea',
         hasFruitTeaShaker: true,
         sizes: [
-          { size: 'Small', price: 3.75, calories: 40 },
-          { size: 'Medium', price: 4.15, calories: 50 },
-          { size: 'Large', price: 4.50, calories: 60 }
+          { size: 'Small', price: 3.75, calories: 50 },
+          { size: 'Medium', price: 4.15, calories: 60 },
+          { size: 'Large', price: 4.50, calories: 90 }
         ]
       },
       {
@@ -510,9 +510,9 @@ export const menuCategories = [
         category: 'Tea',
         hasFruitTeaShaker: true,
         sizes: [
-          { size: 'Small', price: 3.75, calories: 40 },
-          { size: 'Medium', price: 4.25, calories: 50 },
-          { size: 'Large', price: 4.50, calories: 60 }
+          { size: 'Small', price: 3.75, calories: 70 },
+          { size: 'Medium', price: 4.25, calories: 90 },
+          { size: 'Large', price: 4.50, calories: 120 }
         ]
       }
     ]
