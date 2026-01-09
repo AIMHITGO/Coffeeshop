@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from './components/ui/sonner';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import BackToTopButton from './components/BackToTopButton';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Rewards from './pages/Rewards';
@@ -26,6 +27,7 @@ function App() {
           <Route path="/contact" element={<Locations />} />
         </Routes>
         <Footer />
+        <BackToTopButton />
         <Toaster position="top-right" />
       </BrowserRouter>
     </div>

@@ -25,6 +25,13 @@ const Header = () => {
     { name: 'Locations', path: '/locations' }
   ];
 
+  const handleNavClick = (path) => {
+    navigate(path);
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 0);
+  };
+
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -47,14 +54,14 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <Link
+              <button
                 key={link.path}
-                to={link.path}
+                onClick={() => handleNavClick(link.path)}
                 className="px-4 py-2 text-gray-700 hover:text-amber-700 font-medium transition-colors relative group"
               >
                 {link.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 group-hover:w-full transition-all duration-300"></span>
-              </Link>
+              </button>
             ))}
           </nav>
 
@@ -64,7 +71,7 @@ const Header = () => {
               variant="ghost"
               size="icon"
               className="hidden sm:flex text-gray-700 hover:text-amber-700 hover:bg-amber-50"
-              onClick={() => navigate('/locations')}
+              onClick={() => handleNavClick('/locations')}
             >
               <MapPin className="h-5 w-5" />
             </Button>
@@ -73,14 +80,14 @@ const Header = () => {
               variant="ghost"
               size="icon"
               className="hidden sm:flex text-gray-700 hover:text-amber-700 hover:bg-amber-50"
-              onClick={() => navigate('/rewards')}
+              onClick={() => handleNavClick('/rewards')}
             >
               <User className="h-5 w-5" />
             </Button>
 
             <Button
               className="hidden sm:flex bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={() => navigate('/menu')}
+              onClick={() => handleNavClick('/menu')}
             >
               <ShoppingBag className="h-5 w-5 mr-2" />
               Order Now
@@ -108,20 +115,22 @@ const Header = () => {
         <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl">
           <div className="px-4 py-6 space-y-3">
             {navLinks.map((link) => (
-              <Link
+              <button
                 key={link.path}
-                to={link.path}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block px-4 py-3 text-gray-700 hover:bg-amber-50 hover:text-amber-700 rounded-lg font-medium transition-colors"
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleNavClick(link.path);
+                }}
+                className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-amber-50 hover:text-amber-700 rounded-lg font-medium transition-colors"
               >
                 {link.name}
-              </Link>
+              </button>
             ))}
             <Button
               className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white shadow-lg"
               onClick={() => {
                 setIsMobileMenuOpen(false);
-                navigate('/menu');
+                handleNavClick('/menu');
               }}
             >
               <ShoppingBag className="h-5 w-5 mr-2" />
