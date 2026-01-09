@@ -722,51 +722,16 @@ const Menu = () => {
 
             {/* Add to Cart */}
             <div className="mt-4 flex-shrink-0">
-              {cartQty > 0 ? (
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3 bg-amber-50 rounded-lg px-3 py-2">
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeFromCart(item.id, currentSizeIndex);
-                      }}
-                      className="h-8 w-8 p-0 hover:bg-amber-100"
-                    >
-                      <Minus className="h-4 w-4" />
-                    </Button>
-                    <span className="font-bold text-gray-900 min-w-[20px] text-center">
-                      {cartQty}
-                    </span>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        addToCart(item, currentSizeIndex, cardKey);
-                      }}
-                      className="h-8 w-8 p-0 hover:bg-amber-100"
-                    >
-                      <Plus className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <span className="text-sm font-semibold text-amber-600">
-                    ${(totalPrice * cartQty).toFixed(2)}
-                  </span>
-                </div>
-              ) : (
-                <Button
-                  className="w-full bg-amber-600 hover:bg-amber-700 text-white"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    addToCart(item, currentSizeIndex, cardKey);
-                  }}
-                >
-                  <ShoppingBag className="mr-2 h-4 w-4" />
-                  Add to Order {showPrice && customizationPrice > 0 && `($${totalPrice.toFixed(2)})`}
-                </Button>
-              )}
+              <Button
+                className="w-full bg-amber-600 hover:bg-amber-700 text-white"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  addToCart(item, currentSizeIndex, cardKey);
+                }}
+              >
+                <ShoppingBag className="mr-2 h-4 w-4" />
+                Add to Order {showPrice && customizationPrice > 0 && `($${totalPrice.toFixed(2)})`}
+              </Button>
             </div>
           </CardContent>
         </Card>
