@@ -204,9 +204,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/cafe-mocha-8f4d3834-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.50, calories: 360 },
-          { size: 'Medium', price: 6.95, calories: 410 },
-          { size: 'Large', price: 7.55, calories: 480 }
+          { size: 'Small', price: 6.50, calories: 250 },
+          { size: 'Medium', price: 6.95, calories: 350 },
+          { size: 'Large', price: 7.55, calories: 420 }
         ]
       },
       {
@@ -216,9 +216,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/White-chocolate-Mocha-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 5.15, calories: 290 },
-          { size: 'Medium', price: 5.75, calories: 440 },
-          { size: 'Large', price: 6.25, calories: 570 }
+          { size: 'Small', price: 5.15, calories: 270 },
+          { size: 'Medium', price: 5.75, calories: 370 },
+          { size: 'Large', price: 6.25, calories: 440 }
         ]
       },
       {
@@ -228,9 +228,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Dark-chocolate-Mocha-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.00, calories: 300 },
-          { size: 'Medium', price: 6.45, calories: 350 },
-          { size: 'Large', price: 7.05, calories: 420 }
+          { size: 'Small', price: 6.00, calories: 240 },
+          { size: 'Medium', price: 6.45, calories: 340 },
+          { size: 'Large', price: 7.05, calories: 410 }
         ]
       }
     ]
@@ -249,9 +249,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Capuccino-3f36d8f2-1920w.png',
         category: 'Cappuccino',
         sizes: [
-          { size: 'Small', price: 4.65, calories: 120 },
-          { size: 'Medium', price: 5.10, calories: 140 },
-          { size: 'Large', price: 5.50, calories: 160 }
+          { size: 'Small', price: 4.65, calories: 70 },
+          { size: 'Medium', price: 5.10, calories: 110 },
+          { size: 'Large', price: 5.50, calories: 140 }
         ],
         customOptions: {
           milk: ['2% Milk', 'Whole Milk', 'Nonfat Milk', 'Oat Milk (+$0.82)', 'Almond Milk (+$0.82)', 'Half & Half (+$0.65)', 'Heavy Cream (+$0.08)'],
@@ -269,9 +269,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Little-Havana-Capuccino-1920w.png',
         category: 'Cappuccino',
         sizes: [
-          { size: 'Small', price: 4.90, calories: 0 },
-          { size: 'Medium', price: 5.60, calories: 0 },
-          { size: 'Large', price: 6.00, calories: 0 }
+          { size: 'Small', price: 4.90, calories: 140 },
+          { size: 'Medium', price: 5.60, calories: 190 },
+          { size: 'Large', price: 6.00, calories: 260 }
         ]
       }
     ]
@@ -291,8 +291,8 @@ export const menuCategories = [
         category: 'Custom Drip',
         sizes: [
           { size: 'Small', price: 3.00, calories: 0 },
-          { size: 'Medium', price: 3.45, calories: 0 },
-          { size: 'Large', price: 3.85, calories: 0 }
+          { size: 'Medium', price: 3.45, calories: 5 },
+          { size: 'Large', price: 3.85, calories: 10 }
         ],
         customOptions: {
           roast: ['Featured Dark Roast', 'House Espresso Blend'],
@@ -317,9 +317,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/COLD-Brew-1920w.png',
         category: 'Cold Brew',
         sizes: [
-          { size: 'Small', price: 3.75, calories: 0 },
-          { size: 'Medium', price: 3.95, calories: 0 },
-          { size: 'Large', price: 4.45, calories: 80 }
+          { size: 'Small', price: 3.75, calories: 5 },
+          { size: 'Medium', price: 3.95, calories: 5 },
+          { size: 'Large', price: 4.45, calories: 5 }
         ]
       },
       {
@@ -329,9 +329,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Cold Brew',
         sizes: [
-          { size: 'Small', price: 5.25, calories: 0 },
-          { size: 'Medium', price: 4.75, calories: 0 },
-          { size: 'Large', price: 5.50, calories: 26 }
+          { size: 'Small', price: 5.25, calories: 90 },
+          { size: 'Medium', price: 4.75, calories: 120 },
+          { size: 'Large', price: 5.50, calories: 170 }
         ]
       },
       {
@@ -341,7 +341,7 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata---Espresso-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Medium Only', price: 7.65, calories: 0 }
+          { size: 'Medium Only', price: 7.65, calories: 180 }
         ]
       },
       {
@@ -351,7 +351,7 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Medium', price: 7.40, calories: 0 }
+          { size: 'Medium', price: 7.40, calories: 230 }
         ]
       },
       {
@@ -361,9 +361,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 3.75, calories: 0 },
-          { size: 'Medium', price: 3.55, calories: 0 },
-          { size: 'Large', price: 4.25, calories: 0 }
+          { size: 'Small', price: 3.75, calories: 120 },
+          { size: 'Medium', price: 3.55, calories: 160 },
+          { size: 'Large', price: 4.25, calories: 220 }
         ]
       },
       {
