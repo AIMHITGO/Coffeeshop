@@ -530,9 +530,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
         category: 'Non-Coffee',
         sizes: [
-          { size: 'Small', price: 3.00, calories: 0 },
-          { size: 'Medium', price: 3.55, calories: 0 },
-          { size: 'Large', price: 3.45, calories: 0 }
+          { size: 'Small', price: 3.00, calories: 250 },
+          { size: 'Medium', price: 3.55, calories: 300 },
+          { size: 'Large', price: 3.45, calories: 340 }
         ]
       },
       {
@@ -542,9 +542,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Vanilla-Latte-1920w.png',
         category: 'Non-Coffee',
         sizes: [
-          { size: 'Small', price: 3.00, calories: 0 },
-          { size: 'Medium', price: 3.55, calories: 0 },
-          { size: 'Large', price: 3.45, calories: 0 }
+          { size: 'Small', price: 3.00, calories: 180 },
+          { size: 'Medium', price: 3.55, calories: 240 },
+          { size: 'Large', price: 3.45, calories: 300 }
         ]
       },
       {
@@ -554,9 +554,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Vanilla-Latte-1920w.png',
         category: 'Non-Coffee',
         sizes: [
-          { size: 'Small', price: 3.00, calories: 0 },
-          { size: 'Medium', price: 3.55, calories: 0 },
-          { size: 'Large', price: 3.45, calories: 0 }
+          { size: 'Small', price: 3.00, calories: 250 },
+          { size: 'Medium', price: 3.55, calories: 320 },
+          { size: 'Large', price: 3.45, calories: 380 }
         ]
       }
     ]
