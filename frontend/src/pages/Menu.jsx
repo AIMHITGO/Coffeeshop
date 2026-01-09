@@ -377,7 +377,90 @@ const Menu = () => {
       clearItemCustomizations(entry.item.id);
     });
     setCart({});
+    setEditingCartKey(null);
     toast.success('Cart cleared');
+  };
+
+  // Start editing a cart item
+  const startEditingCartItem = (cartKey, entry) => {
+    const { item, sizeIndex, customizations, fruitTea } = entry;
+    
+    // Set the editing cart key
+    setEditingCartKey(cartKey);
+    
+    // Load the item's customizations into the form
+    setItemCustomizations(prev => ({
+      ...prev,
+      [item.id]: customizations
+    }));
+    
+    // Set the selected size
+    setSelectedSizes(prev => ({
+      ...prev,
+      [item.id]: sizeIndex
+    }));
+    
+    // Set fruit tea selection if applicable
+    if (fruitTea) {
+      setSelectedFruitTea(prev => ({
+        ...prev,
+        [item.id]: fruitTea
+      }));
+    }
+    
+    // Expand the corresponding card
+    const cardKey = getCardKey(entry.item.category || 'default', item.id);
+    setExpandedCardKey(cardKey);
+    
+    // Scroll to the item
+    const element = document.getElementById(`item-${item.id}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    toast.info('Editing item - make your changes and click "Update Order"');
+  };
+
+  // Update an existing cart item
+  const updateCartItem = (item, sizeIndex, cardKey) => {
+    if (!editingCartKey) return;
+    
+    const customizations = itemCustomizations[item.id] || {};
+    const fruitTea = selectedFruitTea[item.id] || null;
+    const customizationPrice = calculateCustomizationPrice(item.id);
+    
+    // Get the old cart entry to preserve quantity
+    const oldEntry = cart[editingCartKey];
+    const quantity = oldEntry?.quantity || 1;
+    
+    // Delete the old cart entry
+    const newCart = { ...cart };
+    delete newCart[editingCartKey];
+    
+    // Create new key with updated customizations
+    const newKey = getCartItemKey(item.id, sizeIndex, customizations, fruitTea);
+    
+    // Add updated item to cart
+    newCart[newKey] = {
+      item,
+      sizeIndex,
+      quantity,
+      customizations,
+      fruitTea,
+      customizationPrice
+    };
+    
+    setCart(newCart);
+    toast.success('Order updated successfully!');
+    
+    // Clear customizations and editing state
+    clearItemCustomizations(item.id);
+    setEditingCartKey(null);
+    
+    // Collapse the card
+    if (expandedCardKey === cardKey) {
+      setExpandedCardKey(null);
+    }
   };
 
   const getCartQuantity = (itemId, sizeIndex) => {
