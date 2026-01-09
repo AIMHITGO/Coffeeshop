@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
@@ -12,10 +12,10 @@ const Menu = () => {
   const [selectedMainCategory, setSelectedMainCategory] = useState('featured');
   const [activeDrinkSection, setActiveDrinkSection] = useState('best-sellers');
   const [isCartMinimized, setIsCartMinimized] = useState(false);
-  const [expandedItemId, setExpandedItemId] = useState(null);
+  const [expandedCardKey, setExpandedCardKey] = useState(null); // Changed to track unique card key (categoryId-itemId)
   const [itemCustomizations, setItemCustomizations] = useState({});
   const [selectedFruitTea, setSelectedFruitTea] = useState({});
-  const [blockNextClick, setBlockNextClick] = useState(false); // Block next click after collapsing
+  const [blockNextClick, setBlockNextClick] = useState(false);
   const drinkSectionRefs = useRef({});
   const cartRef = useRef(null);
   const expandedCardRef = useRef(null);
@@ -44,26 +44,25 @@ const Menu = () => {
     )
   ];
 
-  // Click outside to collapse expanded card - FIRST click only collapses, doesn't register other clicks
+  // Helper to create unique card key (section + item)
+  const getCardKey = (categoryId, itemId) => `${categoryId}-${itemId}`;
+
+  // Click outside to collapse expanded card
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (expandedItemId && expandedCardRef.current && !expandedCardRef.current.contains(event.target)) {
-        // Collapse the card
-        setExpandedItemId(null);
-        // Block the next click from registering
+      if (expandedCardKey && expandedCardRef.current && !expandedCardRef.current.contains(event.target)) {
+        setExpandedCardKey(null);
         setBlockNextClick(true);
-        // Prevent default and stop propagation
         event.preventDefault();
         event.stopPropagation();
       }
     };
 
-    if (expandedItemId) {
-      // Use capture phase to intercept clicks before they reach other elements
+    if (expandedCardKey) {
       document.addEventListener('click', handleClickOutside, true);
       return () => document.removeEventListener('click', handleClickOutside, true);
     }
-  }, [expandedItemId]);
+  }, [expandedCardKey]);
 
   // Reset blockNextClick after a short delay
   useEffect(() => {
@@ -109,16 +108,16 @@ const Menu = () => {
     }));
   };
 
-  const getCartKey = (itemId, sizeIndex) => `${itemId}-${sizeIndex}`;
+  const getCartItemKey = (itemId, sizeIndex) => `${itemId}-${sizeIndex}`;
 
-  // Toggle customization - only one card at a time
-  const toggleCustomization = (itemId) => {
-    if (blockNextClick) return; // Block if we just collapsed
+  // Toggle customization - uses unique card key (categoryId-itemId)
+  const toggleCustomization = (cardKey) => {
+    if (blockNextClick) return;
     
-    if (expandedItemId === itemId) {
-      setExpandedItemId(null);
+    if (expandedCardKey === cardKey) {
+      setExpandedCardKey(null);
     } else {
-      setExpandedItemId(itemId);
+      setExpandedCardKey(cardKey);
     }
   };
 
@@ -134,7 +133,6 @@ const Menu = () => {
       delete newFruitTea[itemId];
       return newFruitTea;
     });
-    // Reset size to default (0)
     setSelectedSizes(prev => {
       const newSizes = { ...prev };
       delete newSizes[itemId];
@@ -151,7 +149,6 @@ const Menu = () => {
     
     let addedCalories = 0;
     
-    // Milk option calories
     if (customizations.milk) {
       const milkOption = coffeeCustomizations.milk.find(m => m.id === customizations.milk);
       if (milkOption && typeof milkOption.calories === 'number') {
@@ -159,14 +156,12 @@ const Menu = () => {
       }
     }
     
-    // Add-ons calories
     coffeeCustomizations.addOns.forEach(addon => {
       if (customizations[addon.id]) {
         addedCalories += addon.calories || 0;
       }
     });
     
-    // Syrups calories (can be multiple)
     if (customizations.syrups && Array.isArray(customizations.syrups)) {
       customizations.syrups.forEach(syrupId => {
         const syrup = coffeeCustomizations.syrups.find(s => s.id === syrupId);
@@ -177,7 +172,6 @@ const Menu = () => {
       });
     }
     
-    // Sauces calories (can be multiple)
     if (customizations.sauces && Array.isArray(customizations.sauces)) {
       customizations.sauces.forEach(sauceId => {
         const sauce = coffeeCustomizations.sauces.find(s => s.id === sauceId);
@@ -188,7 +182,6 @@ const Menu = () => {
       });
     }
     
-    // Shots calories
     if (customizations.shots && Array.isArray(customizations.shots)) {
       customizations.shots.forEach(shotId => {
         const shot = coffeeCustomizations.shots.find(s => s.id === shotId);
@@ -198,7 +191,6 @@ const Menu = () => {
       });
     }
     
-    // Toppings calories
     coffeeCustomizations.toppings.forEach(topping => {
       if (customizations[topping.id]) {
         addedCalories += topping.calories || 0;
@@ -213,7 +205,6 @@ const Menu = () => {
     const customizations = itemCustomizations[itemId] || {};
     let addedPrice = 0;
     
-    // Milk option price
     if (customizations.milk) {
       const milkOption = coffeeCustomizations.milk.find(m => m.id === customizations.milk);
       if (milkOption) {
@@ -221,14 +212,12 @@ const Menu = () => {
       }
     }
     
-    // Add-ons price
     coffeeCustomizations.addOns.forEach(addon => {
       if (customizations[addon.id]) {
         addedPrice += addon.price || 0;
       }
     });
     
-    // Syrups price (can be multiple)
     if (customizations.syrups && Array.isArray(customizations.syrups)) {
       customizations.syrups.forEach(syrupId => {
         const syrup = coffeeCustomizations.syrups.find(s => s.id === syrupId);
@@ -238,7 +227,6 @@ const Menu = () => {
       });
     }
     
-    // Sauces price (can be multiple)
     if (customizations.sauces && Array.isArray(customizations.sauces)) {
       customizations.sauces.forEach(sauceId => {
         const sauce = coffeeCustomizations.sauces.find(s => s.id === sauceId);
@@ -248,7 +236,6 @@ const Menu = () => {
       });
     }
     
-    // Shots price
     if (customizations.shots && Array.isArray(customizations.shots)) {
       customizations.shots.forEach(shotId => {
         const shot = coffeeCustomizations.shots.find(s => s.id === shotId);
@@ -258,7 +245,6 @@ const Menu = () => {
       });
     }
     
-    // Toppings price
     coffeeCustomizations.toppings.forEach(topping => {
       if (customizations[topping.id]) {
         addedPrice += topping.price || 0;
@@ -287,7 +273,6 @@ const Menu = () => {
     }));
   };
 
-  // Toggle multi-select options (syrups, sauces, shots)
   const toggleMultiSelect = (itemId, category, optionId) => {
     setItemCustomizations(prev => {
       const current = prev[itemId]?.[category] || [];
@@ -306,9 +291,9 @@ const Menu = () => {
   };
 
   const addToCart = (item, sizeIndex) => {
-    if (blockNextClick) return; // Block if we just collapsed
+    if (blockNextClick) return;
     
-    const key = getCartKey(item.id, sizeIndex);
+    const key = getCartItemKey(item.id, sizeIndex);
     const sizeInfo = item.sizes[sizeIndex];
     const customizations = itemCustomizations[item.id] || {};
     const fruitTea = selectedFruitTea[item.id] || null;
@@ -331,20 +316,19 @@ const Menu = () => {
     clearItemCustomizations(item.id);
     
     // Collapse the card after adding to cart
-    setExpandedItemId(null);
+    setExpandedCardKey(null);
   };
 
   const removeFromCart = (itemId, sizeIndex) => {
     if (blockNextClick) return;
     
-    const key = getCartKey(itemId, sizeIndex);
+    const key = getCartItemKey(itemId, sizeIndex);
     setCart(prev => {
       const newCart = { ...prev };
       if (newCart[key]?.quantity > 1) {
         newCart[key] = { ...newCart[key], quantity: newCart[key].quantity - 1 };
       } else {
         delete newCart[key];
-        // Reset the item's card when deleted from cart
         clearItemCustomizations(itemId);
       }
       return newCart;
@@ -357,7 +341,6 @@ const Menu = () => {
       delete newCart[key];
       return newCart;
     });
-    // Reset the item's card when deleted from cart
     if (itemId) {
       clearItemCustomizations(itemId);
     }
@@ -365,7 +348,6 @@ const Menu = () => {
   };
 
   const clearCart = () => {
-    // Reset all item cards for items in cart
     Object.values(cart).forEach(entry => {
       clearItemCustomizations(entry.item.id);
     });
@@ -374,7 +356,7 @@ const Menu = () => {
   };
 
   const getCartQuantity = (itemId, sizeIndex) => {
-    const key = getCartKey(itemId, sizeIndex);
+    const key = getCartItemKey(itemId, sizeIndex);
     return cart[key]?.quantity || 0;
   };
 
@@ -421,10 +403,11 @@ const Menu = () => {
     }
   }, [selectedMainCategory]);
 
-  const renderCustomizationSection = (item, categoryHasCustomization) => {
+  // Render customization section - takes unique cardKey
+  const renderCustomizationSection = (item, categoryHasCustomization, cardKey) => {
     if (!categoryHasCustomization) return null;
 
-    const isExpanded = expandedItemId === item.id;
+    const isExpanded = expandedCardKey === cardKey;
     const currentCustomizations = itemCustomizations[item.id] || {};
     const itemHasCustomizations = hasCustomizations(item.id);
 
@@ -433,7 +416,7 @@ const Menu = () => {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            toggleCustomization(item.id);
+            toggleCustomization(cardKey);
           }}
           className="flex items-center justify-between w-full text-sm font-medium text-amber-600 hover:text-amber-700"
         >
@@ -449,7 +432,6 @@ const Menu = () => {
 
         {isExpanded && (
           <div className="mt-4 space-y-4 text-sm bg-white max-h-80 overflow-y-auto pr-2">
-            {/* Clear Customizations Button */}
             {itemHasCustomizations && (
               <button
                 onClick={(e) => {
@@ -483,7 +465,7 @@ const Menu = () => {
               </select>
             </div>
 
-            {/* Add-ons (checkboxes) */}
+            {/* Add-ons */}
             <div>
               <label className="block font-medium text-gray-700 mb-2">Add-ons</label>
               <div className="space-y-2">
@@ -505,7 +487,7 @@ const Menu = () => {
               </div>
             </div>
 
-            {/* Syrups (multi-select checkboxes) */}
+            {/* Syrups */}
             <div>
               <label className="block font-medium text-gray-700 mb-2">Syrups (Select Multiple)</label>
               <div className="space-y-2">
@@ -527,7 +509,7 @@ const Menu = () => {
               </div>
             </div>
 
-            {/* Sauces (multi-select checkboxes) */}
+            {/* Sauces */}
             <div>
               <label className="block font-medium text-gray-700 mb-2">Sauces (Select Multiple)</label>
               <div className="space-y-2">
@@ -549,7 +531,7 @@ const Menu = () => {
               </div>
             </div>
 
-            {/* Shots (multi-select checkboxes) */}
+            {/* Shots */}
             <div>
               <label className="block font-medium text-gray-700 mb-2">Extra Shots</label>
               <div className="space-y-2">
@@ -571,7 +553,7 @@ const Menu = () => {
               </div>
             </div>
 
-            {/* Toppings (checkboxes) */}
+            {/* Toppings */}
             <div>
               <label className="block font-medium text-gray-700 mb-2">Toppings</label>
               <div className="space-y-2">
@@ -595,7 +577,6 @@ const Menu = () => {
               </div>
             </div>
 
-            {/* Customization Summary */}
             {calculateCustomizationPrice(item.id) > 0 && (
               <div className="pt-3 border-t bg-amber-50 -mx-2 px-2 py-2 mt-4 rounded">
                 <div className="flex justify-between text-sm font-medium">
@@ -635,22 +616,22 @@ const Menu = () => {
     );
   };
 
-  const renderMenuItem = (item, categoryHasCustomization = false) => {
+  // Render menu item - takes categoryId to create unique card key
+  const renderMenuItem = (item, categoryHasCustomization = false, categoryId = 'default') => {
+    const cardKey = getCardKey(categoryId, item.id);
     const currentSizeIndex = getSelectedSize(item.id);
     const currentSize = item.sizes[currentSizeIndex];
     const cartQty = getCartQuantity(item.id, currentSizeIndex);
-    const isExpanded = expandedItemId === item.id;
+    const isExpanded = expandedCardKey === cardKey;
     const totalCalories = calculateTotalCalories(item, item.id);
     const customizationPrice = calculateCustomizationPrice(item.id);
     const totalPrice = currentSize.price + customizationPrice;
     const itemHasCustomizations = hasCustomizations(item.id);
-
-    // Only show price if item is in cart OR has customizations
     const showPrice = cartQty > 0 || itemHasCustomizations;
 
     return (
       <div
-        key={item.id}
+        key={cardKey}
         className={`relative ${isExpanded ? 'z-50' : 'z-0'}`}
       >
         <Card
@@ -719,13 +700,11 @@ const Menu = () => {
             {/* Fruit Tea Shaker Option */}
             {renderFruitTeaShakerOption(item)}
 
-            {/* Customization Section */}
-            {renderCustomizationSection(item, categoryHasCustomization)}
+            {/* Customization Section - pass unique cardKey */}
+            {renderCustomizationSection(item, categoryHasCustomization, cardKey)}
 
-            {/* Spacer to push button to bottom (only when not expanded) */}
             {!isExpanded && <div className="flex-grow"></div>}
 
-            {/* Price Display - Only show if in cart or has customizations */}
             {showPrice && customizationPrice > 0 && (
               <div className="mt-3 flex justify-between items-center text-sm">
                 <span className="text-gray-600">Total Price:</span>
@@ -733,7 +712,7 @@ const Menu = () => {
               </div>
             )}
 
-            {/* Add to Cart - Always at bottom */}
+            {/* Add to Cart */}
             <div className="mt-4 flex-shrink-0">
               {cartQty > 0 ? (
                 <div className="flex items-center justify-between">
@@ -784,7 +763,6 @@ const Menu = () => {
           </CardContent>
         </Card>
         
-        {/* Placeholder to maintain grid space when card is expanded */}
         {isExpanded && <div className="h-[600px]"></div>}
       </div>
     );
@@ -834,7 +812,7 @@ const Menu = () => {
             </TabsList>
           </div>
 
-          {/* FEATURED / BEST SELLERS */}
+          {/* FEATURED / BEST SELLERS - Use 'featured' as categoryId */}
           <TabsContent value="featured">
             <div className="mb-8 text-center">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">
@@ -848,15 +826,15 @@ const Menu = () => {
                 const category = menuCategories.find(cat => 
                   cat.items.some(i => i.id === item.id)
                 );
-                return renderMenuItem(item, category?.hasCustomization || false);
+                return renderMenuItem(item, category?.hasCustomization || false, 'featured');
               })}
             </div>
           </TabsContent>
 
-          {/* COFFEE MENU - Scrollable with Side Navigation */}
+          {/* COFFEE MENU */}
           <TabsContent value="coffee">
             <div className="flex gap-8">
-              {/* Side Navigation - Fixed/Sticky */}
+              {/* Side Navigation */}
               <div className="hidden lg:block w-64 flex-shrink-0">
                 <div className="sticky top-24 bg-white rounded-lg shadow-lg p-4">
                   <h3 className="text-lg font-bold text-gray-900 mb-4">Drink Categories</h3>
@@ -899,12 +877,12 @@ const Menu = () => {
                       <p className="text-gray-600">{category.description}</p>
                     </div>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {category.items.map(item => renderMenuItem(item, category.hasCustomization))}
+                      {category.items.map(item => renderMenuItem(item, category.hasCustomization, category.id))}
                     </div>
                   </div>
                 ))}
                 
-                {/* Nutritional Disclaimer - ENLARGED */}
+                {/* Nutritional Disclaimer */}
                 <div className="mt-12 p-8 bg-gray-100 rounded-xl border border-gray-200">
                   <h3 className="text-lg font-bold text-gray-800 mb-4">Nutritional Information</h3>
                   <p className="text-base text-gray-600 leading-relaxed">{nutritionalDisclaimer}</p>
@@ -913,7 +891,7 @@ const Menu = () => {
             </div>
           </TabsContent>
 
-          {/* BREAKFAST MENU - Placeholder */}
+          {/* BREAKFAST MENU */}
           <TabsContent value="breakfast">
             <div className="text-center py-16">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Breakfast Menu</h2>
@@ -922,7 +900,7 @@ const Menu = () => {
             </div>
           </TabsContent>
 
-          {/* FULL DINNER MENU - Placeholder */}
+          {/* FULL DINNER MENU */}
           <TabsContent value="dinner">
             <div className="text-center py-16">
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Full Dinner Menu</h2>
@@ -938,7 +916,6 @@ const Menu = () => {
             ref={cartRef}
             className={`fixed bottom-8 right-8 bg-white rounded-2xl shadow-2xl border-2 border-amber-200 max-w-sm z-[100] transition-all duration-300 ${isCartMinimized ? 'w-auto' : 'w-80'}`}
           >
-            {/* Cart Header with Minimize */}
             <div 
               className="flex items-center justify-between p-4 border-b cursor-pointer"
               onClick={() => setIsCartMinimized(!isCartMinimized)}
@@ -966,7 +943,6 @@ const Menu = () => {
               </div>
             </div>
 
-            {/* Cart Content - Collapsible */}
             {!isCartMinimized && (
               <div className="p-4">
                 <div className="space-y-3 mb-4 max-h-48 overflow-y-auto">
