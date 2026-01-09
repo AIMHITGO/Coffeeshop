@@ -408,15 +408,30 @@ const Menu = () => {
       }));
     }
     
+    // Find the category ID for this item
+    let categoryId = 'default';
+    const category = coffeeMenuCategories.find(cat => 
+      cat.items.some(i => i.id === item.id)
+    );
+    if (category) {
+      categoryId = category.id;
+    }
+    
     // Expand the corresponding card
-    const cardKey = getCardKey(entry.item.category || 'default', item.id);
+    const cardKey = getCardKey(categoryId, item.id);
     setExpandedCardKey(cardKey);
     
-    // Scroll to the item
-    const element = document.getElementById(`item-${item.id}`);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Scroll to the item and switch to coffee menu if needed
+    if (selectedMainCategory !== 'coffee') {
+      setSelectedMainCategory('coffee');
     }
+    
+    setTimeout(() => {
+      const element = document.getElementById(`item-${item.id}`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 100);
     
     toast.info('Editing item - make your changes and click "Update Order"');
   };
