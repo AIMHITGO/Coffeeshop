@@ -1068,7 +1068,11 @@ const Menu = () => {
               <div className="p-4">
                 <div className="space-y-3 mb-4 max-h-48 overflow-y-auto">
                   {Object.entries(cart).map(([key, entry]) => (
-                    <div key={key} className="flex items-center justify-between text-sm group">
+                    <div 
+                      key={key} 
+                      className="flex items-center justify-between text-sm group cursor-pointer hover:bg-amber-50 rounded-lg p-2 -mx-2 transition-colors"
+                      onClick={() => startEditingCartItem(key, entry)}
+                    >
                       <div className="flex-1">
                         <span className="text-gray-700">
                           {entry.quantity}x {entry.item.name}
@@ -1083,7 +1087,10 @@ const Menu = () => {
                           ${((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity).toFixed(2)}
                         </span>
                         <button
-                          onClick={() => deleteFromCart(key, entry.item.id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            deleteFromCart(key, entry.item.id);
+                          }}
                           className="p-1 text-gray-400 hover:text-red-500 transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
