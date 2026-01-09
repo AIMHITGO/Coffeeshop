@@ -916,40 +916,83 @@ const Menu = () => {
           </TabsContent>
         </Tabs>
 
-        {/* Floating Cart Summary */}
+        {/* Floating Cart - Three stages: minimized, regular, expanded */}
         {getTotalItems() > 0 && (
           <div 
             ref={cartRef}
-            className={`fixed bottom-8 right-8 bg-white rounded-2xl shadow-2xl border-2 border-amber-200 max-w-sm z-[100] transition-all duration-300 ${isCartMinimized ? 'w-auto' : 'w-80'}`}
+            className={`fixed bg-white rounded-2xl shadow-2xl border-2 border-amber-200 z-[100] transition-all duration-300 ${
+              cartState === 'expanded' 
+                ? 'bottom-4 right-4 left-4 md:left-auto md:right-8 md:w-[500px] max-h-[80vh]' 
+                : cartState === 'regular'
+                  ? 'bottom-8 right-8 w-80'
+                  : 'bottom-8 right-8 w-auto'
+            }`}
           >
+            {/* Cart Header */}
             <div 
-              className="flex items-center justify-between p-4 border-b cursor-pointer"
-              onClick={() => setIsCartMinimized(!isCartMinimized)}
+              className={`flex items-center justify-between p-4 border-b ${cartState === 'minimized' ? 'cursor-pointer' : ''}`}
+              onClick={() => {
+                if (cartState === 'minimized') {
+                  setCartState('regular');
+                }
+              }}
             >
               <div className="flex items-center">
+                <ShoppingBag className="w-5 h-5 text-amber-600 mr-2" />
                 <h3 className="text-lg font-bold text-gray-900">Your Order</h3>
                 <div className="bg-amber-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold text-sm ml-2">
                   {getTotalItems()}
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                {!isCartMinimized && (
+              <div className="flex items-center gap-1">
+                {/* Clear Cart Button - only in regular and expanded */}
+                {cartState !== 'minimized' && (
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       clearCart();
                     }}
-                    className="p-1 hover:bg-red-50 rounded-full transition-colors text-gray-400 hover:text-red-500"
+                    className="p-1.5 hover:bg-red-50 rounded-full transition-colors text-gray-400 hover:text-red-500"
                     title="Clear cart"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 )}
-                {isCartMinimized ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                
+                {/* Expand/Shrink Button - toggle between regular and expanded */}
+                {cartState !== 'minimized' && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCartState(cartState === 'expanded' ? 'regular' : 'expanded');
+                    }}
+                    className="p-1.5 hover:bg-gray-100 rounded-full transition-colors text-gray-500"
+                    title={cartState === 'expanded' ? 'Shrink cart' : 'Expand cart'}
+                  >
+                    {cartState === 'expanded' ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+                  </button>
+                )}
+                
+                {/* Minimize Button - minimize to header only */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (cartState === 'minimized') {
+                      setCartState('regular');
+                    } else {
+                      setCartState('minimized');
+                    }
+                  }}
+                  className="p-1.5 hover:bg-gray-100 rounded-full transition-colors text-gray-500"
+                  title={cartState === 'minimized' ? 'Show cart' : 'Minimize cart'}
+                >
+                  {cartState === 'minimized' ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                </button>
               </div>
             </div>
 
-            {!isCartMinimized && (
+            {/* Regular Cart View */}
+            {cartState === 'regular' && (
               <div className="p-4">
                 <div className="space-y-3 mb-4 max-h-48 overflow-y-auto">
                   {Object.entries(cart).map(([key, entry]) => (
@@ -960,7 +1003,6 @@ const Menu = () => {
                         </span>
                         <span className="text-gray-500 text-xs block">
                           {entry.item.sizes[entry.sizeIndex].size}
-                          {entry.fruitTea && ` + ${fruitTeaShakerFlavors.find(f => f.id === entry.fruitTea)?.name}`}
                           {entry.customizationPrice > 0 && ` (+$${entry.customizationPrice.toFixed(2)})`}
                         </span>
                       </div>
@@ -990,6 +1032,158 @@ const Menu = () => {
                 >
                   Checkout
                 </Button>
+              </div>
+            )}
+
+            {/* Expanded Cart View - Detailed with full customizations */}
+            {cartState === 'expanded' && (
+              <div className="p-6 overflow-y-auto max-h-[calc(80vh-80px)]">
+                <div className="space-y-6 mb-6">
+                  {Object.entries(cart).map(([key, entry]) => {
+                    const customizations = entry.customizations || {};
+                    const hasCustomizations = Object.keys(customizations).length > 0 || entry.fruitTea;
+                    
+                    return (
+                      <div key={key} className="bg-gray-50 rounded-xl p-4 relative">
+                        {/* Delete Button */}
+                        <button
+                          onClick={() => deleteFromCart(key, entry.item.id)}
+                          className="absolute top-3 right-3 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                        
+                        <div className="flex gap-4">
+                          {/* Drink Image */}
+                          <div className="w-20 h-20 flex-shrink-0 bg-white rounded-lg overflow-hidden">
+                            <img 
+                              src={entry.item.image} 
+                              alt={entry.item.name}
+                              className="w-full h-full object-contain p-1"
+                            />
+                          </div>
+                          
+                          {/* Drink Details */}
+                          <div className="flex-1 pr-6">
+                            <div className="flex items-start justify-between">
+                              <div>
+                                <h4 className="font-bold text-gray-900 text-lg">{entry.item.name}</h4>
+                                <p className="text-amber-600 font-medium">{entry.item.sizes[entry.sizeIndex].size}</p>
+                              </div>
+                              <div className="text-right">
+                                <p className="font-bold text-gray-900">
+                                  ${((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity).toFixed(2)}
+                                </p>
+                                <p className="text-gray-500 text-sm">Qty: {entry.quantity}</p>
+                              </div>
+                            </div>
+                            
+                            {/* Customizations Display */}
+                            {hasCustomizations && (
+                              <div className="mt-3 pt-3 border-t border-gray-200">
+                                <p className="text-sm font-medium text-gray-700 mb-2">Customizations:</p>
+                                <ul className="space-y-1 text-sm text-gray-600">
+                                  {/* Milk */}
+                                  {customizations.milk && (
+                                    <li className="flex items-center">
+                                      <span className="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
+                                      {coffeeCustomizations.milk.find(m => m.id === customizations.milk)?.name}
+                                    </li>
+                                  )}
+                                  
+                                  {/* Add-ons */}
+                                  {coffeeCustomizations.addOns.map(addon => 
+                                    customizations[addon.id] && (
+                                      <li key={addon.id} className="flex items-center">
+                                        <span className="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
+                                        {addon.name}
+                                      </li>
+                                    )
+                                  )}
+                                  
+                                  {/* Syrups */}
+                                  {customizations.syrups?.map(syrupId => {
+                                    const syrup = coffeeCustomizations.syrups.find(s => s.id === syrupId);
+                                    return syrup && (
+                                      <li key={syrupId} className="flex items-center">
+                                        <span className="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
+                                        {syrup.name}
+                                      </li>
+                                    );
+                                  })}
+                                  
+                                  {/* Sauces */}
+                                  {customizations.sauces?.map(sauceId => {
+                                    const sauce = coffeeCustomizations.sauces.find(s => s.id === sauceId);
+                                    return sauce && (
+                                      <li key={sauceId} className="flex items-center">
+                                        <span className="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
+                                        {sauce.name}
+                                      </li>
+                                    );
+                                  })}
+                                  
+                                  {/* Shots */}
+                                  {customizations.shots?.map(shotId => {
+                                    const shot = coffeeCustomizations.shots.find(s => s.id === shotId);
+                                    return shot && (
+                                      <li key={shotId} className="flex items-center">
+                                        <span className="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
+                                        {shot.name}
+                                      </li>
+                                    );
+                                  })}
+                                  
+                                  {/* Toppings */}
+                                  {coffeeCustomizations.toppings.map(topping => 
+                                    customizations[topping.id] && (
+                                      <li key={topping.id} className="flex items-center">
+                                        <span className="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
+                                        {topping.name}
+                                      </li>
+                                    )
+                                  )}
+                                  
+                                  {/* Fruit Tea Shaker */}
+                                  {entry.fruitTea && (
+                                    <li className="flex items-center">
+                                      <span className="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
+                                      Fruit Tea: {fruitTeaShakerFlavors.find(f => f.id === entry.fruitTea)?.name}
+                                    </li>
+                                  )}
+                                </ul>
+                                
+                                {entry.customizationPrice > 0 && (
+                                  <p className="mt-2 text-sm text-amber-600 font-medium">
+                                    Customization adds: +${entry.customizationPrice.toFixed(2)}
+                                  </p>
+                                )}
+                              </div>
+                            )}
+                            
+                            {!hasCustomizations && (
+                              <p className="mt-2 text-sm text-gray-400 italic">No customizations</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                
+                {/* Total and Checkout */}
+                <div className="border-t pt-4">
+                  <div className="flex justify-between items-center mb-4">
+                    <span className="text-xl font-bold text-gray-900">Order Total</span>
+                    <span className="text-3xl font-bold text-amber-600">${getTotalPrice()}</span>
+                  </div>
+                  <Button
+                    className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white py-6 text-lg"
+                    onClick={() => toast.success('Checkout feature coming soon!')}
+                  >
+                    Proceed to Checkout
+                  </Button>
+                </div>
               </div>
             )}
           </div>
