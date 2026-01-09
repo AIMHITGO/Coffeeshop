@@ -820,17 +820,21 @@ const Menu = () => {
               </div>
             )}
 
-            {/* Add to Cart */}
+            {/* Add to Cart / Update Order */}
             <div className="mt-4 flex-shrink-0">
               <Button
                 className="w-full bg-amber-600 hover:bg-amber-700 text-white"
                 onClick={(e) => {
                   e.stopPropagation();
-                  addToCart(item, currentSizeIndex, cardKey);
+                  if (editingCartKey) {
+                    updateCartItem(item, currentSizeIndex, cardKey);
+                  } else {
+                    addToCart(item, currentSizeIndex, cardKey);
+                  }
                 }}
               >
                 <ShoppingBag className="mr-2 h-4 w-4" />
-                Add to Order {showPrice && customizationPrice > 0 && `($${totalPrice.toFixed(2)})`}
+                {editingCartKey ? 'Update Order' : 'Add to Order'} {showPrice && customizationPrice > 0 && `($${totalPrice.toFixed(2)})`}
               </Button>
             </div>
           </CardContent>
