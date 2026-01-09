@@ -315,10 +315,10 @@ const Menu = () => {
   const addToCart = (item, sizeIndex, cardKey) => {
     if (blockNextClick) return;
     
-    const key = getCartItemKey(item.id, sizeIndex);
-    const sizeInfo = item.sizes[sizeIndex];
     const customizations = itemCustomizations[item.id] || {};
     const fruitTea = selectedFruitTea[item.id] || null;
+    const key = getCartItemKey(item.id, sizeIndex, customizations, fruitTea);
+    const sizeInfo = item.sizes[sizeIndex];
     const customizationPrice = calculateCustomizationPrice(item.id);
     
     setCart(prev => ({
