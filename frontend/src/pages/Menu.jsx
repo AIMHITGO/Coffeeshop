@@ -114,7 +114,23 @@ const Menu = () => {
     }));
   };
 
-  const getCartItemKey = (itemId, sizeIndex) => `${itemId}-${sizeIndex}`;
+  const getCartItemKey = (itemId, sizeIndex, customizations = {}, fruitTea = null) => {
+    // Create a unique key based on item, size, and customizations
+    const customKey = JSON.stringify({
+      milk: customizations.milk || 'default',
+      addOns: Object.keys(customizations).filter(k => 
+        ['whipped-cream', 'honey-boba', 'brown-sugar-jelly'].includes(k) && customizations[k]
+      ).sort(),
+      syrups: (customizations.syrups || []).sort(),
+      sauces: (customizations.sauces || []).sort(),
+      shots: (customizations.shots || []).sort(),
+      toppings: Object.keys(customizations).filter(k => 
+        coffeeCustomizations.toppings.some(t => t.id === k) && customizations[k]
+      ).sort(),
+      fruitTea: fruitTea
+    });
+    return `${itemId}-${sizeIndex}-${btoa(customKey)}`;
+  };
 
   // Toggle customization - uses unique card key (categoryId-itemId)
   const toggleCustomization = (cardKey) => {
