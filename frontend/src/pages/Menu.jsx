@@ -296,7 +296,7 @@ const Menu = () => {
     });
   };
 
-  const addToCart = (item, sizeIndex) => {
+  const addToCart = (item, sizeIndex, cardKey) => {
     if (blockNextClick) return;
     
     const key = getCartItemKey(item.id, sizeIndex);
@@ -322,7 +322,9 @@ const Menu = () => {
     clearItemCustomizations(item.id);
     
     // Collapse the card after adding to cart
-    setExpandedCardKey(null);
+    if (expandedCardKey === cardKey) {
+      setExpandedCardKey(null);
+    }
   };
 
   const removeFromCart = (itemId, sizeIndex) => {
@@ -922,10 +924,10 @@ const Menu = () => {
             ref={cartRef}
             className={`fixed bg-white rounded-2xl shadow-2xl border-2 border-amber-200 z-[100] transition-all duration-300 ${
               cartState === 'expanded' 
-                ? 'bottom-4 right-4 left-4 md:left-auto md:right-8 md:w-[500px] max-h-[80vh]' 
+                ? 'bottom-20 right-4 left-4 md:left-auto md:right-8 md:w-[500px] max-h-[70vh]' 
                 : cartState === 'regular'
-                  ? 'bottom-8 right-8 w-80'
-                  : 'bottom-8 right-8 w-auto'
+                  ? 'bottom-20 right-8 w-80'
+                  : 'bottom-20 right-8 w-auto'
             }`}
           >
             {/* Cart Header */}
