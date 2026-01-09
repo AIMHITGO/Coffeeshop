@@ -76,9 +76,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/drip-coffee-898d1d72-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 3.70, calories: 0 },
-          { size: 'Medium', price: 3.85, calories: 0 },
-          { size: 'Large', price: 4.25, calories: 0 }
+          { size: 'Small', price: 3.55, calories: 50 },
+          { size: 'Medium', price: 3.75, calories: 15 },
+          { size: 'Large', price: 4.00, calories: 70 }
         ]
       },
       {
@@ -124,7 +124,7 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Short-Black-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small Only', price: 3.75, calories: 0 }
+          { size: 'Small Only', price: 3.00, calories: 0 }
         ]
       },
       {
@@ -134,9 +134,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/long-black-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 4.00, calories: 0 },
-          { size: 'Medium', price: 5.00, calories: 0 },
-          { size: 'Large', price: 6.00, calories: 0 }
+          { size: 'Small', price: 3.70, calories: 0 },
+          { size: 'Medium', price: 4.00, calories: 0 },
+          { size: 'Large', price: 4.25, calories: 0 }
         ]
       },
       {
@@ -156,9 +156,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/caffe-latte-990b710d-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 5.80, calories: 0 },
-          { size: 'Medium', price: 6.60, calories: 0 },
-          { size: 'Large', price: 7.50, calories: 0 }
+          { size: 'Small', price: 5.00, calories: 25 },
+          { size: 'Medium', price: 4.25, calories: 0 },
+          { size: 'Large', price: 5.50, calories: 26 }
         ]
       },
       {
@@ -168,9 +168,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Flat---white-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 5.80, calories: 0 },
-          { size: 'Medium', price: 6.60, calories: 0 },
-          { size: 'Large', price: 7.50, calories: 0 }
+          { size: 'Small', price: 6.00, calories: 330 },
+          { size: 'Medium', price: 5.60, calories: 250 },
+          { size: 'Large', price: 4.90, calories: 240 }
         ]
       },
       {
@@ -180,9 +180,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Vanilla-Latte-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.56, calories: 0 },
-          { size: 'Medium', price: 7.74, calories: 0 },
-          { size: 'Large', price: 8.67, calories: 0 }
+          { size: 'Small', price: 5.85, calories: 150 },
+          { size: 'Medium', price: 6.25, calories: 230 },
+          { size: 'Large', price: 6.65, calories: 260 }
         ]
       },
       {
@@ -192,9 +192,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Caramel-Machiato-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.00, calories: 0 },
-          { size: 'Medium', price: 6.45, calories: 0 },
-          { size: 'Large', price: 7.05, calories: 0 }
+          { size: 'Small', price: 4.25, calories: 120 },
+          { size: 'Medium', price: 4.95, calories: 140 },
+          { size: 'Large', price: 5.45, calories: 160 }
         ]
       },
       {
@@ -204,9 +204,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/cafe-mocha-8f4d3834-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.50, calories: 0 },
-          { size: 'Medium', price: 6.95, calories: 0 },
-          { size: 'Large', price: 7.55, calories: 0 }
+          { size: 'Small', price: 6.50, calories: 360 },
+          { size: 'Medium', price: 6.95, calories: 410 },
+          { size: 'Large', price: 7.55, calories: 480 }
         ]
       },
       {
@@ -216,9 +216,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/White-chocolate-Mocha-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.60, calories: 0 },
-          { size: 'Medium', price: 6.95, calories: 0 },
-          { size: 'Large', price: 7.55, calories: 0 }
+          { size: 'Small', price: 5.15, calories: 290 },
+          { size: 'Medium', price: 5.75, calories: 440 },
+          { size: 'Large', price: 6.25, calories: 570 }
         ]
       },
       {
@@ -228,9 +228,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Dark-chocolate-Mocha-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.50, calories: 0 },
-          { size: 'Medium', price: 6.95, calories: 0 },
-          { size: 'Large', price: 7.55, calories: 0 }
+          { size: 'Small', price: 6.00, calories: 300 },
+          { size: 'Medium', price: 6.45, calories: 350 },
+          { size: 'Large', price: 7.05, calories: 420 }
         ]
       }
     ]
