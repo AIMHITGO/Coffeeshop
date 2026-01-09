@@ -17,6 +17,7 @@ const Menu = () => {
   const [itemCustomizations, setItemCustomizations] = useState({});
   const [selectedFruitTea, setSelectedFruitTea] = useState({});
   const [blockNextClick, setBlockNextClick] = useState(false);
+  const [editingCartKey, setEditingCartKey] = useState(null); // Track which cart item is being edited
   const drinkSectionRefs = useRef({});
   const cartRef = useRef(null);
   const expandedCardRef = useRef(null);
