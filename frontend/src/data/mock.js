@@ -682,8 +682,25 @@ export const aboutContent = {
   ]
 };
 
-// Coffee story for About page
-export const coffeeStory = aboutContent.story;
+// Coffee story for About page - structured for About.jsx
+export const coffeeStory = {
+  intro: `Happy Place Coffee & Eats started as a dream - a dream to create a space where everyone feels welcome, where the coffee is always fresh, and where Latin-American flavors meet American comfort food.`,
+  subtitle: 'Our Story',
+  sections: [
+    {
+      title: 'Family-Owned & Operated',
+      content: `We're a family-owned business that believes in quality ingredients, authentic recipes, and treating every guest like family. Every cup we serve is crafted with love and attention to detail.`
+    },
+    {
+      title: 'Jessy\'s Premium Coffee',
+      content: `Our signature Jessy's Premium Coffee is fresh roasted 100% Arabica beans, sourced from the world's finest coffee-growing regions. We offer 12+ single-origin coffees including Colombian Supremo, Ethiopian Yirgacheffe, and Guatemala Antigua.`
+    },
+    {
+      title: 'Our Mission',
+      content: `Our mission is to be your happy place - a welcoming neighborhood café where you can enjoy exceptional coffee, delicious food, and genuine hospitality. We source the finest ingredients and craft every drink and dish with passion.`
+    }
+  ]
+};
 
 // Locations data (array format for compatibility)
 export const locations = [locationData];
