@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { ShoppingBag, Plus, Minus, Star, Trash2, ChevronDown, ChevronUp, Settings } from 'lucide-react';
+import { ShoppingBag, Plus, Minus, Star, Trash2, ChevronDown, ChevronUp, Settings, RotateCcw } from 'lucide-react';
 import { menuCategories, bestSellers, nutritionalDisclaimer, coffeeCustomizations, fruitTeaShakerFlavors } from '../data/mock';
 import { toast } from 'sonner';
 
@@ -15,8 +15,10 @@ const Menu = () => {
   const [expandedItemId, setExpandedItemId] = useState(null);
   const [itemCustomizations, setItemCustomizations] = useState({});
   const [selectedFruitTea, setSelectedFruitTea] = useState({});
+  const [blockNextClick, setBlockNextClick] = useState(false); // Block next click after collapsing
   const drinkSectionRefs = useRef({});
   const cartRef = useRef(null);
+  const expandedCardRef = useRef(null);
 
   // Get best selling items from references
   const bestSellingCoffee = bestSellers.map(ref => {
@@ -42,25 +44,53 @@ const Menu = () => {
     )
   ];
 
-  // Click outside to collapse cart
+  // Click outside to collapse expanded card - FIRST click only collapses, doesn't register other clicks
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Check if click is outside cart
+      if (expandedItemId && expandedCardRef.current && !expandedCardRef.current.contains(event.target)) {
+        // Collapse the card
+        setExpandedItemId(null);
+        // Block the next click from registering
+        setBlockNextClick(true);
+        // Prevent default and stop propagation
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    };
+
+    if (expandedItemId) {
+      // Use capture phase to intercept clicks before they reach other elements
+      document.addEventListener('click', handleClickOutside, true);
+      return () => document.removeEventListener('click', handleClickOutside, true);
+    }
+  }, [expandedItemId]);
+
+  // Reset blockNextClick after a short delay
+  useEffect(() => {
+    if (blockNextClick) {
+      const timer = setTimeout(() => {
+        setBlockNextClick(false);
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [blockNextClick]);
+
+  // Click outside to collapse cart
+  useEffect(() => {
+    const handleCartClickOutside = (event) => {
       if (cartRef.current && !cartRef.current.contains(event.target)) {
         setIsCartMinimized(true);
       }
     };
 
-    // Only add listener when cart has items and is NOT minimized
     if (Object.keys(cart).length > 0 && !isCartMinimized) {
-      // Use setTimeout to avoid immediate trigger on the same click that expanded the cart
       const timeoutId = setTimeout(() => {
-        document.addEventListener('click', handleClickOutside, true);
+        document.addEventListener('click', handleCartClickOutside, true);
       }, 100);
       
       return () => {
         clearTimeout(timeoutId);
-        document.removeEventListener('click', handleClickOutside, true);
+        document.removeEventListener('click', handleCartClickOutside, true);
       };
     }
   }, [cart, isCartMinimized]);
@@ -83,11 +113,34 @@ const Menu = () => {
 
   // Toggle customization - only one card at a time
   const toggleCustomization = (itemId) => {
+    if (blockNextClick) return; // Block if we just collapsed
+    
     if (expandedItemId === itemId) {
       setExpandedItemId(null);
     } else {
       setExpandedItemId(itemId);
     }
+  };
+
+  // Clear ALL customizations for a specific item
+  const clearItemCustomizations = (itemId) => {
+    setItemCustomizations(prev => {
+      const newCustomizations = { ...prev };
+      delete newCustomizations[itemId];
+      return newCustomizations;
+    });
+    setSelectedFruitTea(prev => {
+      const newFruitTea = { ...prev };
+      delete newFruitTea[itemId];
+      return newFruitTea;
+    });
+    // Reset size to default (0)
+    setSelectedSizes(prev => {
+      const newSizes = { ...prev };
+      delete newSizes[itemId];
+      return newSizes;
+    });
+    toast.success('Customizations cleared');
   };
 
   // Calculate total calories for an item with customizations
@@ -215,6 +268,15 @@ const Menu = () => {
     return addedPrice;
   };
 
+  // Check if item has any customizations
+  const hasCustomizations = (itemId) => {
+    const customizations = itemCustomizations[itemId] || {};
+    const fruitTea = selectedFruitTea[itemId];
+    const sizeChanged = selectedSizes[itemId] !== undefined && selectedSizes[itemId] !== 0;
+    
+    return Object.keys(customizations).length > 0 || fruitTea || sizeChanged;
+  };
+
   const updateItemCustomization = (itemId, type, value) => {
     setItemCustomizations(prev => ({
       ...prev,
@@ -244,6 +306,8 @@ const Menu = () => {
   };
 
   const addToCart = (item, sizeIndex) => {
+    if (blockNextClick) return; // Block if we just collapsed
+    
     const key = getCartKey(item.id, sizeIndex);
     const sizeInfo = item.sizes[sizeIndex];
     const customizations = itemCustomizations[item.id] || {};
@@ -263,11 +327,16 @@ const Menu = () => {
     }));
     toast.success(`${item.name} (${sizeInfo.size}) added to cart!`);
     
+    // Clear customizations after adding to cart
+    clearItemCustomizations(item.id);
+    
     // Collapse the card after adding to cart
     setExpandedItemId(null);
   };
 
   const removeFromCart = (itemId, sizeIndex) => {
+    if (blockNextClick) return;
+    
     const key = getCartKey(itemId, sizeIndex);
     setCart(prev => {
       const newCart = { ...prev };
@@ -275,21 +344,31 @@ const Menu = () => {
         newCart[key] = { ...newCart[key], quantity: newCart[key].quantity - 1 };
       } else {
         delete newCart[key];
+        // Reset the item's card when deleted from cart
+        clearItemCustomizations(itemId);
       }
       return newCart;
     });
   };
 
-  const deleteFromCart = (key) => {
+  const deleteFromCart = (key, itemId) => {
     setCart(prev => {
       const newCart = { ...prev };
       delete newCart[key];
       return newCart;
     });
+    // Reset the item's card when deleted from cart
+    if (itemId) {
+      clearItemCustomizations(itemId);
+    }
     toast.success('Item removed from cart');
   };
 
   const clearCart = () => {
+    // Reset all item cards for items in cart
+    Object.values(cart).forEach(entry => {
+      clearItemCustomizations(entry.item.id);
+    });
     setCart({});
     toast.success('Cart cleared');
   };
@@ -314,6 +393,8 @@ const Menu = () => {
   };
 
   const scrollToDrinkSection = (sectionId) => {
+    if (blockNextClick) return;
+    
     drinkSectionRefs.current[sectionId]?.scrollIntoView({ 
       behavior: 'smooth',
       block: 'start'
@@ -345,28 +426,52 @@ const Menu = () => {
 
     const isExpanded = expandedItemId === item.id;
     const currentCustomizations = itemCustomizations[item.id] || {};
+    const itemHasCustomizations = hasCustomizations(item.id);
 
     return (
       <div className="mt-4 border-t pt-4">
         <button
-          onClick={() => toggleCustomization(item.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleCustomization(item.id);
+          }}
           className="flex items-center justify-between w-full text-sm font-medium text-amber-600 hover:text-amber-700"
         >
           <span className="flex items-center">
             <Settings className="w-4 h-4 mr-2" />
             Customize Your Drink
+            {itemHasCustomizations && !isExpanded && (
+              <span className="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">Modified</span>
+            )}
           </span>
           {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
         </button>
 
         {isExpanded && (
-          <div className="mt-4 space-y-4 text-sm bg-white">
+          <div className="mt-4 space-y-4 text-sm bg-white max-h-80 overflow-y-auto pr-2">
+            {/* Clear Customizations Button */}
+            {itemHasCustomizations && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  clearItemCustomizations(item.id);
+                }}
+                className="flex items-center text-red-500 hover:text-red-600 text-sm font-medium mb-2"
+              >
+                <RotateCcw className="w-4 h-4 mr-1" />
+                Clear All Customizations
+              </button>
+            )}
+
             {/* Milk Options */}
             <div>
               <label className="block font-medium text-gray-700 mb-2">Milk Option</label>
               <select
                 value={currentCustomizations.milk || ''}
-                onChange={(e) => updateItemCustomization(item.id, 'milk', e.target.value)}
+                onChange={(e) => {
+                  e.stopPropagation();
+                  updateItemCustomization(item.id, 'milk', e.target.value);
+                }}
                 className="w-full p-2 border rounded-lg text-sm"
               >
                 <option value="">Default (2% Milk) - $0.00 / 0 cal</option>
@@ -387,7 +492,10 @@ const Menu = () => {
                     <input
                       type="checkbox"
                       checked={currentCustomizations[addon.id] || false}
-                      onChange={(e) => updateItemCustomization(item.id, addon.id, e.target.checked)}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        updateItemCustomization(item.id, addon.id, e.target.checked);
+                      }}
                       className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
                     />
                     <span className="flex-1">{addon.name}</span>
@@ -400,13 +508,16 @@ const Menu = () => {
             {/* Syrups (multi-select checkboxes) */}
             <div>
               <label className="block font-medium text-gray-700 mb-2">Syrups (Select Multiple)</label>
-              <div className="space-y-2 max-h-40 overflow-y-auto">
+              <div className="space-y-2">
                 {coffeeCustomizations.syrups.map(syrup => (
                   <label key={syrup.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
                     <input
                       type="checkbox"
                       checked={(currentCustomizations.syrups || []).includes(syrup.id)}
-                      onChange={() => toggleMultiSelect(item.id, 'syrups', syrup.id)}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        toggleMultiSelect(item.id, 'syrups', syrup.id);
+                      }}
                       className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
                     />
                     <span className="flex-1">{syrup.name}</span>
@@ -425,7 +536,10 @@ const Menu = () => {
                     <input
                       type="checkbox"
                       checked={(currentCustomizations.sauces || []).includes(sauce.id)}
-                      onChange={() => toggleMultiSelect(item.id, 'sauces', sauce.id)}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        toggleMultiSelect(item.id, 'sauces', sauce.id);
+                      }}
                       className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
                     />
                     <span className="flex-1">{sauce.name}</span>
@@ -444,7 +558,10 @@ const Menu = () => {
                     <input
                       type="checkbox"
                       checked={(currentCustomizations.shots || []).includes(shot.id)}
-                      onChange={() => toggleMultiSelect(item.id, 'shots', shot.id)}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        toggleMultiSelect(item.id, 'shots', shot.id);
+                      }}
                       className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
                     />
                     <span className="flex-1">{shot.name}</span>
@@ -463,7 +580,10 @@ const Menu = () => {
                     <input
                       type="checkbox"
                       checked={currentCustomizations[topping.id] || false}
-                      onChange={(e) => updateItemCustomization(item.id, topping.id, e.target.checked)}
+                      onChange={(e) => {
+                        e.stopPropagation();
+                        updateItemCustomization(item.id, topping.id, e.target.checked);
+                      }}
                       className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
                     />
                     <span className="flex-1">{topping.name}</span>
@@ -477,7 +597,7 @@ const Menu = () => {
 
             {/* Customization Summary */}
             {calculateCustomizationPrice(item.id) > 0 && (
-              <div className="pt-3 border-t bg-amber-50 -mx-4 px-4 py-2 mt-4">
+              <div className="pt-3 border-t bg-amber-50 -mx-2 px-2 py-2 mt-4 rounded">
                 <div className="flex justify-between text-sm font-medium">
                   <span>Customization Total:</span>
                   <span className="text-amber-600">+${calculateCustomizationPrice(item.id).toFixed(2)}</span>
@@ -500,7 +620,10 @@ const Menu = () => {
         </label>
         <select
           value={selectedFruitTea[item.id] || ''}
-          onChange={(e) => setSelectedFruitTea(prev => ({ ...prev, [item.id]: e.target.value }))}
+          onChange={(e) => {
+            e.stopPropagation();
+            setSelectedFruitTea(prev => ({ ...prev, [item.id]: e.target.value }));
+          }}
           className="w-full p-2 border rounded-lg text-sm"
         >
           <option value="">No Fruit Tea Shaker</option>
@@ -520,6 +643,10 @@ const Menu = () => {
     const totalCalories = calculateTotalCalories(item, item.id);
     const customizationPrice = calculateCustomizationPrice(item.id);
     const totalPrice = currentSize.price + customizationPrice;
+    const itemHasCustomizations = hasCustomizations(item.id);
+
+    // Only show price if item is in cart OR has customizations
+    const showPrice = cartQty > 0 || itemHasCustomizations;
 
     return (
       <div
@@ -527,6 +654,7 @@ const Menu = () => {
         className={`relative ${isExpanded ? 'z-50' : 'z-0'}`}
       >
         <Card
+          ref={isExpanded ? expandedCardRef : null}
           className={`group transition-all duration-300 overflow-visible border-0 bg-white flex flex-col ${
             isExpanded 
               ? 'shadow-2xl ring-2 ring-amber-400 absolute left-0 right-0 top-0' 
@@ -561,7 +689,10 @@ const Menu = () => {
                 {item.sizes.map((sizeOption, idx) => (
                   <button
                     key={idx}
-                    onClick={() => setSelectedSize(item.id, idx)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (!blockNextClick) setSelectedSize(item.id, idx);
+                    }}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-all flex-1 min-w-[70px] ${
                       currentSizeIndex === idx
                         ? 'bg-amber-600 text-white'
@@ -594,8 +725,8 @@ const Menu = () => {
             {/* Spacer to push button to bottom (only when not expanded) */}
             {!isExpanded && <div className="flex-grow"></div>}
 
-            {/* Price Display */}
-            {customizationPrice > 0 && (
+            {/* Price Display - Only show if in cart or has customizations */}
+            {showPrice && customizationPrice > 0 && (
               <div className="mt-3 flex justify-between items-center text-sm">
                 <span className="text-gray-600">Total Price:</span>
                 <span className="font-bold text-amber-600">${totalPrice.toFixed(2)}</span>
@@ -610,7 +741,10 @@ const Menu = () => {
                     <Button
                       size="sm"
                       variant="ghost"
-                      onClick={() => removeFromCart(item.id, currentSizeIndex)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        removeFromCart(item.id, currentSizeIndex);
+                      }}
                       className="h-8 w-8 p-0 hover:bg-amber-100"
                     >
                       <Minus className="h-4 w-4" />
@@ -621,7 +755,10 @@ const Menu = () => {
                     <Button
                       size="sm"
                       variant="ghost"
-                      onClick={() => addToCart(item, currentSizeIndex)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCart(item, currentSizeIndex);
+                      }}
                       className="h-8 w-8 p-0 hover:bg-amber-100"
                     >
                       <Plus className="h-4 w-4" />
@@ -634,10 +771,13 @@ const Menu = () => {
               ) : (
                 <Button
                   className="w-full bg-amber-600 hover:bg-amber-700 text-white"
-                  onClick={() => addToCart(item, currentSizeIndex)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addToCart(item, currentSizeIndex);
+                  }}
                 >
                   <ShoppingBag className="mr-2 h-4 w-4" />
-                  Add to Order {customizationPrice > 0 && `($${totalPrice.toFixed(2)})`}
+                  Add to Order {showPrice && customizationPrice > 0 && `($${totalPrice.toFixed(2)})`}
                 </Button>
               )}
             </div>
@@ -645,7 +785,7 @@ const Menu = () => {
         </Card>
         
         {/* Placeholder to maintain grid space when card is expanded */}
-        {isExpanded && <div className="h-[500px]"></div>}
+        {isExpanded && <div className="h-[600px]"></div>}
       </div>
     );
   };
@@ -663,8 +803,8 @@ const Menu = () => {
           </p>
         </div>
 
-        {/* Main Category Tabs - Fixed/Sticky */}
-        <Tabs value={selectedMainCategory} onValueChange={setSelectedMainCategory} className="mb-8">
+        {/* Main Category Tabs - Fixed/Sticky on ALL pages */}
+        <Tabs value={selectedMainCategory} onValueChange={(val) => { if (!blockNextClick) setSelectedMainCategory(val); }} className="mb-8">
           <div className="sticky top-0 z-40 bg-gradient-to-b from-amber-50/95 to-amber-50/80 backdrop-blur-sm py-4 -mx-4 px-4">
             <TabsList className="w-full bg-white border shadow-sm p-1 flex justify-center items-center gap-1 rounded-lg">
               <TabsTrigger
@@ -847,7 +987,7 @@ const Menu = () => {
                           ${((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity).toFixed(2)}
                         </span>
                         <button
-                          onClick={() => deleteFromCart(key)}
+                          onClick={() => deleteFromCart(key, entry.item.id)}
                           className="p-1 text-gray-400 hover:text-red-500 transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
