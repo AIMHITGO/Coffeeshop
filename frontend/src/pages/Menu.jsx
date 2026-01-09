@@ -744,7 +744,7 @@ const Menu = () => {
                       variant="ghost"
                       onClick={(e) => {
                         e.stopPropagation();
-                        addToCart(item, currentSizeIndex);
+                        addToCart(item, currentSizeIndex, cardKey);
                       }}
                       className="h-8 w-8 p-0 hover:bg-amber-100"
                     >
@@ -760,7 +760,7 @@ const Menu = () => {
                   className="w-full bg-amber-600 hover:bg-amber-700 text-white"
                   onClick={(e) => {
                     e.stopPropagation();
-                    addToCart(item, currentSizeIndex);
+                    addToCart(item, currentSizeIndex, cardKey);
                   }}
                 >
                   <ShoppingBag className="mr-2 h-4 w-4" />
