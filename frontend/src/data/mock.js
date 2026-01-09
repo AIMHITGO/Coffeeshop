@@ -249,9 +249,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Capuccino-3f36d8f2-1920w.png',
         category: 'Cappuccino',
         sizes: [
-          { size: 'Small', price: 4.25, calories: 0 },
-          { size: 'Medium', price: 4.95, calories: 0 },
-          { size: 'Large', price: 5.45, calories: 0 }
+          { size: 'Small', price: 4.65, calories: 120 },
+          { size: 'Medium', price: 5.10, calories: 140 },
+          { size: 'Large', price: 5.50, calories: 160 }
         ],
         customOptions: {
           milk: ['2% Milk', 'Whole Milk', 'Nonfat Milk', 'Oat Milk (+$0.82)', 'Almond Milk (+$0.82)', 'Half & Half (+$0.65)', 'Heavy Cream (+$0.08)'],
@@ -317,9 +317,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/COLD-Brew-1920w.png',
         category: 'Cold Brew',
         sizes: [
-          { size: 'Small', price: 4.95, calories: 0 },
-          { size: 'Medium', price: 5.25, calories: 0 },
-          { size: 'Large', price: 5.95, calories: 0 }
+          { size: 'Small', price: 3.75, calories: 0 },
+          { size: 'Medium', price: 3.95, calories: 0 },
+          { size: 'Large', price: 4.45, calories: 80 }
         ]
       },
       {
@@ -329,9 +329,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Cold Brew',
         sizes: [
-          { size: 'Small', price: 5.85, calories: 0 },
-          { size: 'Medium', price: 6.25, calories: 0 },
-          { size: 'Large', price: 6.95, calories: 0 }
+          { size: 'Small', price: 5.25, calories: 0 },
+          { size: 'Medium', price: 4.75, calories: 0 },
+          { size: 'Large', price: 5.50, calories: 26 }
         ]
       },
       {
@@ -361,9 +361,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 6.00, calories: 0 },
-          { size: 'Medium', price: 6.65, calories: 0 },
-          { size: 'Large', price: 6.95, calories: 0 }
+          { size: 'Small', price: 3.75, calories: 0 },
+          { size: 'Medium', price: 3.55, calories: 0 },
+          { size: 'Large', price: 4.25, calories: 0 }
         ]
       },
       {
@@ -373,9 +373,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 6.00, calories: 0 },
-          { size: 'Medium', price: 6.65, calories: 0 },
-          { size: 'Large', price: 6.95, calories: 0 }
+          { size: 'Small', price: 4.95, calories: 0 },
+          { size: 'Medium', price: 4.70, calories: 0 },
+          { size: 'Large', price: 5.00, calories: 0 }
         ]
       },
       {
@@ -397,7 +397,11 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice+Brown+sugar+Matcha+OAT+LATTE-1920w.png',
         category: 'Signature',
         sizes: [
-          { size: 'Small', price: 6.65, calories: 0 },
+          { size: 'Small', price: 6.65, calories: 190 },
+          { size: 'Medium', price: 6.95, calories: 260 },
+          { size: 'Large', price: 6.95, calories: 260 }
+        ]
+      }
           { size: 'Medium', price: 7.35, calories: 0 },
           { size: 'Large', price: 7.75, calories: 0 }
         ]
