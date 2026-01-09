@@ -534,9 +534,21 @@ metadata:
   test_sequence: 2
   run_ui: true
 
+  - task: "Three-Stage Floating Cart"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ THREE-STAGE FLOATING CART FULLY FUNCTIONAL: Regular Cart View (Default) - Shopping bag icon, 'Your Order' title with item count badge, trash icon (clear cart), expand/minimize buttons, item list, total, checkout button all present and working. Expanded Cart View - 'Proceed to Checkout' button, 'Order Total' text, drink image, drink name, customizations section with bullet points, shrink button, X delete button all functional. State Transitions - Click outside expanded → shrinks to regular, click outside regular → minimizes to header only, all button functionality working (minimize/expand/shrink). Item deletion from expanded view working correctly. All test cases passed successfully."
+
 test_plan:
   current_focus:
-    - "All v4 features tested and working"
+    - "Three-Stage Floating Cart testing completed successfully"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
