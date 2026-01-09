@@ -1123,10 +1123,17 @@ const Menu = () => {
                     const hasCustomizations = Object.keys(customizations).length > 0 || entry.fruitTea;
                     
                     return (
-                      <div key={key} className="bg-gray-50 rounded-xl p-4 relative">
+                      <div 
+                        key={key} 
+                        className="bg-gray-50 rounded-xl p-4 relative cursor-pointer hover:bg-gray-100 transition-colors"
+                        onClick={() => startEditingCartItem(key, entry)}
+                      >
                         {/* Delete Button */}
                         <button
-                          onClick={() => deleteFromCart(key, entry.item.id)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            deleteFromCart(key, entry.item.id);
+                          }}
                           className="absolute top-3 right-3 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
                         >
                           <X className="w-4 h-4" />
