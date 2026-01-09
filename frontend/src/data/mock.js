@@ -77,8 +77,8 @@ export const menuCategories = [
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 3.55, calories: 0 },
-          { size: 'Medium', price: 3.75, calories: 5 },
-          { size: 'Large', price: 4.00, calories: 10 }
+          { size: 'Medium', price: 3.75, calories: 0 },
+          { size: 'Large', price: 4.00, calories: 0 }
         ]
       },
       {
@@ -88,9 +88,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CAF-C3-89-AU-LAIT---FEATURED-DARK-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 3.55, calories: 40 },
+          { size: 'Small', price: 3.55, calories: 50 },
           { size: 'Medium', price: 4.00, calories: 70 },
-          { size: 'Large', price: 4.45, calories: 120 }
+          { size: 'Large', price: 4.45, calories: 80 }
         ]
       },
       {
@@ -101,8 +101,8 @@ export const menuCategories = [
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Single', price: 3.00, calories: 10 },
-          { size: 'Double', price: 4.65, calories: 10 },
-          { size: 'Triple', price: 6.30, calories: 10 }
+          { size: 'Double', price: 4.65, calories: 15 },
+          { size: 'Triple', price: 6.30, calories: 25 }
         ]
       },
       {
@@ -112,9 +112,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Americano-10cad5cd-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 3.75, calories: 10 },
-          { size: 'Medium', price: 4.75, calories: 15 },
-          { size: 'Large', price: 4.85, calories: 15 }
+          { size: 'Small', price: 3.75, calories: 15 },
+          { size: 'Medium', price: 4.75, calories: 25 },
+          { size: 'Large', price: 4.85, calories: 25 }
         ]
       },
       {
@@ -134,9 +134,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/long-black-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 3.70, calories: 10 },
-          { size: 'Medium', price: 4.00, calories: 10 },
-          { size: 'Large', price: 4.25, calories: 10 }
+          { size: 'Small', price: 3.70, calories: 15 },
+          { size: 'Medium', price: 4.00, calories: 25 },
+          { size: 'Large', price: 4.25, calories: 25 }
         ]
       },
       {
@@ -146,7 +146,7 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/drip-coffee-898d1d72-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: '6 oz', price: 5.50, calories: 20 }
+          { size: '6 oz', price: 5.50, calories: 0 }
         ]
       },
       {
@@ -156,9 +156,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/caffe-latte-990b710d-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 5.00, calories: 110 },
-          { size: 'Medium', price: 4.25, calories: 150 },
-          { size: 'Large', price: 5.50, calories: 200 }
+          { size: 'Small', price: 5.00, calories: 170 },
+          { size: 'Medium', price: 4.25, calories: 220 },
+          { size: 'Large', price: 5.50, calories: 240 }
         ]
       },
       {
@@ -168,9 +168,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Flat---white-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.00, calories: 110 },
-          { size: 'Medium', price: 5.60, calories: 150 },
-          { size: 'Large', price: 4.90, calories: 200 }
+          { size: 'Small', price: 6.00, calories: 120 },
+          { size: 'Medium', price: 5.60, calories: 140 },
+          { size: 'Large', price: 4.90, calories: 160 }
         ]
       },
       {
@@ -180,9 +180,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Vanilla-Latte-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 5.85, calories: 170 },
-          { size: 'Medium', price: 6.25, calories: 240 },
-          { size: 'Large', price: 6.65, calories: 310 }
+          { size: 'Small', price: 5.85, calories: 240 },
+          { size: 'Medium', price: 6.25, calories: 320 },
+          { size: 'Large', price: 6.65, calories: 370 }
         ]
       },
       {
@@ -192,9 +192,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Caramel-Machiato-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 4.25, calories: 200 },
-          { size: 'Medium', price: 4.95, calories: 280 },
-          { size: 'Large', price: 5.45, calories: 350 }
+          { size: 'Small', price: 4.25, calories: 300 },
+          { size: 'Medium', price: 4.95, calories: 350 },
+          { size: 'Large', price: 5.45, calories: 420 }
         ]
       },
       {
@@ -204,9 +204,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/cafe-mocha-8f4d3834-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.50, calories: 250 },
-          { size: 'Medium', price: 6.95, calories: 350 },
-          { size: 'Large', price: 7.55, calories: 420 }
+          { size: 'Small', price: 6.50, calories: 360 },
+          { size: 'Medium', price: 6.95, calories: 410 },
+          { size: 'Large', price: 7.55, calories: 480 }
         ]
       },
       {
@@ -216,9 +216,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/White-chocolate-Mocha-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 5.15, calories: 270 },
-          { size: 'Medium', price: 5.75, calories: 370 },
-          { size: 'Large', price: 6.25, calories: 440 }
+          { size: 'Small', price: 5.15, calories: 360 },
+          { size: 'Medium', price: 5.75, calories: 400 },
+          { size: 'Large', price: 6.25, calories: 480 }
         ]
       },
       {
@@ -228,9 +228,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Dark-chocolate-Mocha-1920w.png',
         category: 'Coffee & Espresso',
         sizes: [
-          { size: 'Small', price: 6.00, calories: 240 },
-          { size: 'Medium', price: 6.45, calories: 340 },
-          { size: 'Large', price: 7.05, calories: 410 }
+          { size: 'Small', price: 6.00, calories: 410 },
+          { size: 'Medium', price: 6.45, calories: 470 },
+          { size: 'Large', price: 7.05, calories: 570 }
         ]
       }
     ]
@@ -249,9 +249,9 @@ export const menuCategories = [
         image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Capuccino-3f36d8f2-1920w.png',
         category: 'Cappuccino',
         sizes: [
-          { size: 'Small', price: 4.65, calories: 70 },
-          { size: 'Medium', price: 5.10, calories: 110 },
-          { size: 'Large', price: 5.50, calories: 140 }
+          { size: 'Small', price: 4.65, calories: 120 },
+          { size: 'Medium', price: 5.10, calories: 140 },
+          { size: 'Large', price: 5.50, calories: 160 }
         ],
         customOptions: {
           milk: ['2% Milk', 'Whole Milk', 'Nonfat Milk', 'Oat Milk (+$0.82)', 'Almond Milk (+$0.82)', 'Half & Half (+$0.65)', 'Heavy Cream (+$0.08)'],
@@ -291,8 +291,8 @@ export const menuCategories = [
         category: 'Custom Drip',
         sizes: [
           { size: 'Small', price: 3.00, calories: 0 },
-          { size: 'Medium', price: 3.45, calories: 5 },
-          { size: 'Large', price: 3.85, calories: 10 }
+          { size: 'Medium', price: 3.45, calories: 0 },
+          { size: 'Large', price: 3.85, calories: 0 }
         ],
         customOptions: {
           roast: ['Featured Dark Roast', 'House Espresso Blend'],
