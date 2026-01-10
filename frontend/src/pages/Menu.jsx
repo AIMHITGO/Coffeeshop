@@ -162,6 +162,11 @@ const Menu = () => {
       delete newSizes[itemId];
       return newSizes;
     });
+    setItemQuantities(prev => {
+      const newQuantities = { ...prev };
+      delete newQuantities[itemId];
+      return newQuantities;
+    });
     toast.success('Customizations cleared');
   };
 
