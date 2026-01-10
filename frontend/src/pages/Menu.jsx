@@ -927,8 +927,42 @@ const Menu = () => {
               </div>
             )}
 
-            {/* Add to Cart / Update Order */}
-            <div className="mt-4 flex-shrink-0">
+            {/* Quantity Selector (only when not editing) */}
+            {!editingCartKey && (
+              <div className="mt-4 flex items-center justify-center space-x-4 bg-amber-50 rounded-lg py-3">
+                <span className="text-sm font-medium text-gray-700">Quantity:</span>
+                <div className="flex items-center space-x-3">
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      decrementItemQuantity(item.id);
+                    }}
+                    className="h-8 w-8 p-0 hover:bg-amber-100"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                  <span className="font-bold text-gray-900 min-w-[30px] text-center text-lg">
+                    {getItemQuantity(item.id)}
+                  </span>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      incrementItemQuantity(item.id);
+                    }}
+                    className="h-8 w-8 p-0 hover:bg-amber-100"
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {/* Add to Cart / Update Order / Cancel */}
+            <div className="mt-4 flex-shrink-0 space-y-2">
               <Button
                 className="w-full bg-amber-600 hover:bg-amber-700 text-white"
                 onClick={(e) => {
@@ -943,6 +977,21 @@ const Menu = () => {
                 <ShoppingBag className="mr-2 h-4 w-4" />
                 {editingCartKey ? 'Update Order' : 'Add to Order'} {showPrice && customizationPrice > 0 && `($${totalPrice.toFixed(2)})`}
               </Button>
+              
+              {/* Cancel Button (only when editing) */}
+              {editingCartKey && (
+                <Button
+                  variant="outline"
+                  className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    cancelEditingCartItem(item.id);
+                  }}
+                >
+                  <X className="mr-2 h-4 w-4" />
+                  Cancel Changes
+                </Button>
+              )}
             </div>
           </CardContent>
         </Card>
