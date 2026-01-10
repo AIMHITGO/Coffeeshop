@@ -1136,9 +1136,12 @@ const Menu = () => {
             </div>
           </TabsContent>
         </Tabs>
+      </div>
+    </div>
+  );
+};
 
-        {/* Floating Cart - Three stages: minimized, regular, expanded */}
-        {getTotalItems() > 0 && (
+export default Menu;
           <div 
             ref={cartRef}
             className={`fixed bg-white rounded-2xl shadow-2xl border-2 border-amber-200 z-[100] transition-all duration-300 ${
