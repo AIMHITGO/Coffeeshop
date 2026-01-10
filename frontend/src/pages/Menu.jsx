@@ -507,30 +507,27 @@ const Menu = () => {
       return;
     }
     
-    // Decrease the original quantity by 1
+    // Create a new cart object
     const newCart = { ...cart };
+    
+    // Decrease the original quantity by 1
     newCart[cartKey] = {
       ...newCart[cartKey],
       quantity: newCart[cartKey].quantity - 1
     };
     
-    // Create a new cart entry with quantity 1
+    // Create a new cart entry with quantity 1 using a unique key
     const { item, sizeIndex, customizations, fruitTea, customizationPrice } = entry;
-    const newKey = getCartItemKey(item.id, sizeIndex, customizations, fruitTea);
     
-    // Find a unique key (in case the same key exists)
-    let uniqueKey = newKey;
-    let counter = 1;
-    while (newCart[uniqueKey] && uniqueKey !== cartKey) {
-      uniqueKey = `${newKey}-split-${counter}`;
-      counter++;
-    }
+    // Generate a unique key by adding a timestamp suffix
+    const baseKey = getCartItemKey(item.id, sizeIndex, customizations, fruitTea);
+    const uniqueKey = `${baseKey}-split-${Date.now()}`;
     
     newCart[uniqueKey] = {
       item,
       sizeIndex,
       quantity: 1,
-      customizations,
+      customizations: { ...customizations }, // Clone customizations
       fruitTea,
       customizationPrice
     };
