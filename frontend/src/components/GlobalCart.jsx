@@ -182,7 +182,10 @@ const GlobalCart = () => {
                 key={key} 
                 className="border border-gray-200 rounded-lg p-3 hover:bg-amber-50 transition-colors"
               >
-                <div className="flex items-center justify-between text-sm group">
+                <div 
+                  className="flex items-center justify-between text-sm group cursor-pointer"
+                  onClick={() => startEditingCartItem(key)}
+                >
                   <div className="flex-1">
                     <span className="text-gray-700 font-medium">
                       {entry.quantity}x {entry.item.name}
@@ -207,6 +210,20 @@ const GlobalCart = () => {
                     </button>
                   </div>
                 </div>
+                
+                {/* Modify One button when quantity > 1 */}
+                {entry.quantity > 1 && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      splitCartItemForEditing(key, entry);
+                    }}
+                    className="mt-2 w-full text-xs bg-amber-100 hover:bg-amber-200 text-amber-700 py-1.5 rounded transition-colors flex items-center justify-center"
+                  >
+                    <Settings className="w-3 h-3 mr-1" />
+                    Modify One
+                  </button>
+                )}
               </div>
             ))}
           </div>
