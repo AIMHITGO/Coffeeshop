@@ -549,6 +549,31 @@ const Menu = () => {
     return cart[key]?.quantity || 0;
   };
 
+  // Get or set item quantity for building
+  const getItemQuantity = (itemId) => {
+    return itemQuantities[itemId] || 1;
+  };
+
+  const setItemQuantity = (itemId, quantity) => {
+    if (quantity < 1) quantity = 1;
+    setItemQuantities(prev => ({
+      ...prev,
+      [itemId]: quantity
+    }));
+  };
+
+  const incrementItemQuantity = (itemId) => {
+    const current = getItemQuantity(itemId);
+    setItemQuantity(itemId, current + 1);
+  };
+
+  const decrementItemQuantity = (itemId) => {
+    const current = getItemQuantity(itemId);
+    if (current > 1) {
+      setItemQuantity(itemId, current - 1);
+    }
+  };
+
   const getTotalItems = () => {
     return Object.values(cart).reduce((sum, entry) => sum + entry.quantity, 0);
   };
