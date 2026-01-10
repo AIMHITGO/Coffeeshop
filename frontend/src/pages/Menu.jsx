@@ -505,48 +505,6 @@ const Menu = () => {
     toast.info('Changes cancelled');
   };
 
-  // Split one item from a cart entry for individual modification
-  const splitCartItemForEditing = (cartKey, entry) => {
-    if (entry.quantity <= 1) {
-      // If only 1 item, just edit it normally
-      startEditingCartItem(cartKey, entry);
-      return;
-    }
-    
-    // Create a new cart object
-    const newCart = { ...cart };
-    
-    // Decrease the original quantity by 1
-    newCart[cartKey] = {
-      ...newCart[cartKey],
-      quantity: newCart[cartKey].quantity - 1
-    };
-    
-    // Create a new cart entry with quantity 1 using a unique key
-    const { item, sizeIndex, customizations, fruitTea, customizationPrice } = entry;
-    
-    // Generate a unique key by adding a timestamp suffix
-    const baseKey = getCartItemKey(item.id, sizeIndex, customizations, fruitTea);
-    const uniqueKey = `${baseKey}-split-${Date.now()}`;
-    
-    newCart[uniqueKey] = {
-      item,
-      sizeIndex,
-      quantity: 1,
-      customizations: { ...customizations }, // Clone customizations
-      fruitTea,
-      customizationPrice
-    };
-    
-    setCart(newCart);
-    
-    // Start editing the new single item
-    toast.info('Split 1 item for editing');
-    setTimeout(() => {
-      startEditingCartItem(uniqueKey, newCart[uniqueKey]);
-    }, 100);
-  };
-
   const getCartQuantity = (itemId, sizeIndex) => {
     const key = getCartItemKey(itemId, sizeIndex);
     return cart[key]?.quantity || 0;
