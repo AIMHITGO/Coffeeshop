@@ -364,27 +364,6 @@ const Menu = () => {
     });
   };
 
-  const deleteFromCart = (key, itemId) => {
-    setCart(prev => {
-      const newCart = { ...prev };
-      delete newCart[key];
-      return newCart;
-    });
-    if (itemId) {
-      clearItemCustomizations(itemId);
-    }
-    toast.success('Item removed from cart');
-  };
-
-  const clearCart = () => {
-    Object.values(cart).forEach(entry => {
-      clearItemCustomizations(entry.item.id);
-    });
-    setCart({});
-    setEditingCartKey(null);
-    toast.success('Cart cleared');
-  };
-
   // Start editing a cart item
   const startEditingCartItem = (cartKey, entry) => {
     const { item, sizeIndex, customizations, fruitTea } = entry;
