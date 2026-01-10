@@ -327,19 +327,20 @@ const Menu = () => {
     const key = getCartItemKey(item.id, sizeIndex, customizations, fruitTea);
     const sizeInfo = item.sizes[sizeIndex];
     const customizationPrice = calculateCustomizationPrice(item.id);
+    const quantityToAdd = itemQuantities[item.id] || 1;
     
     setCart(prev => ({
       ...prev,
       [key]: {
         item,
         sizeIndex,
-        quantity: (prev[key]?.quantity || 0) + 1,
+        quantity: (prev[key]?.quantity || 0) + quantityToAdd,
         customizations,
         fruitTea,
         customizationPrice
       }
     }));
-    toast.success(`${item.name} (${sizeInfo.size}) added to cart!`);
+    toast.success(`${quantityToAdd}x ${item.name} (${sizeInfo.size}) added to cart!`);
     
     // Clear customizations after adding to cart
     clearItemCustomizations(item.id);
