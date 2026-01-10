@@ -5,22 +5,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs'
 import { ShoppingBag, Plus, Minus, Star, Trash2, ChevronDown, ChevronUp, Settings, RotateCcw, Maximize2, Minimize2, X } from 'lucide-react';
 import { menuCategories, bestSellers, nutritionalDisclaimer, coffeeCustomizations, fruitTeaShakerFlavors } from '../data/mock';
 import { toast } from 'sonner';
+import { useCart } from '../contexts/CartContext';
 
 const Menu = () => {
-  const [cart, setCart] = useState({});
+  const { cart, setCart, editingCartKey, setEditingCartKey } = useCart();
   const [selectedSizes, setSelectedSizes] = useState({});
   const [selectedMainCategory, setSelectedMainCategory] = useState('featured');
   const [activeDrinkSection, setActiveDrinkSection] = useState('best-sellers');
-  // Cart states: 'minimized' | 'regular' | 'expanded'
-  const [cartState, setCartState] = useState('regular');
   const [expandedCardKey, setExpandedCardKey] = useState(null);
   const [itemCustomizations, setItemCustomizations] = useState({});
   const [selectedFruitTea, setSelectedFruitTea] = useState({});
   const [blockNextClick, setBlockNextClick] = useState(false);
-  const [editingCartKey, setEditingCartKey] = useState(null); // Track which cart item is being edited
   const [itemQuantities, setItemQuantities] = useState({}); // Track quantity for each item being built
   const drinkSectionRefs = useRef({});
-  const cartRef = useRef(null);
   const expandedCardRef = useRef(null);
 
   // Get best selling items from references
