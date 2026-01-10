@@ -10,8 +10,11 @@ const GlobalCart = () => {
   const navigate = useNavigate();
   const { 
     cart, 
+    setCart,
     cartState, 
     setCartState, 
+    editingCartKey,
+    setEditingCartKey,
     removeFromCart, 
     clearCart, 
     getCartItemCount, 
@@ -56,6 +59,60 @@ const GlobalCart = () => {
       navigate('/menu');
     }
     setCartState('expanded');
+  };
+
+  // Start editing a cart item - navigate to menu and trigger edit
+  const startEditingCartItem = (cartKey) => {
+    setEditingCartKey(cartKey);
+    
+    // Navigate to menu if not already there
+    if (!isMenuPage) {
+      navigate('/menu', { state: { editCartKey: cartKey } });
+      toast.info('Opening item for editing...');
+    } else {
+      // If already on menu, let Menu component handle it via editingCartKey
+      toast.info('Editing item - make your changes and click "Update Order"');
+    }
+  };
+
+  // Split one item from a cart entry for individual modification
+  const splitCartItemForEditing = (cartKey, entry) => {
+    if (entry.quantity <= 1) {
+      // If only 1 item, just edit it normally
+      startEditingCartItem(cartKey);
+      return;
+    }
+    
+    // Create a new cart object
+    const newCart = { ...cart };
+    
+    // Decrease the original quantity by 1
+    newCart[cartKey] = {
+      ...newCart[cartKey],
+      quantity: newCart[cartKey].quantity - 1
+    };
+    
+    // Generate unique key with timestamp
+    const { item, sizeIndex, customizations, fruitTea, customizationPrice } = entry;
+    const baseKey = cartKey.split('-split-')[0]; // Get base key without any split suffix
+    const uniqueKey = `${baseKey}-split-${Date.now()}`;
+    
+    newCart[uniqueKey] = {
+      item,
+      sizeIndex,
+      quantity: 1,
+      customizations: { ...customizations }, // Clone customizations
+      fruitTea,
+      customizationPrice
+    };
+    
+    setCart(newCart);
+    
+    // Start editing the new single item
+    toast.info('Split 1 item for editing');
+    setTimeout(() => {
+      startEditingCartItem(uniqueKey);
+    }, 100);
   };
 
   // Don't render if cart is empty
