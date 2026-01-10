@@ -1225,32 +1225,50 @@ const Menu = () => {
                   {Object.entries(cart).map(([key, entry]) => (
                     <div 
                       key={key} 
-                      className="flex items-center justify-between text-sm group cursor-pointer hover:bg-amber-50 rounded-lg p-2 -mx-2 transition-colors"
-                      onClick={() => startEditingCartItem(key, entry)}
+                      className="border border-gray-200 rounded-lg p-3 hover:bg-amber-50 transition-colors"
                     >
-                      <div className="flex-1">
-                        <span className="text-gray-700">
-                          {entry.quantity}x {entry.item.name}
-                        </span>
-                        <span className="text-gray-500 text-xs block">
-                          {entry.item.sizes[entry.sizeIndex].size}
-                          {entry.customizationPrice > 0 && ` (+$${entry.customizationPrice.toFixed(2)})`}
-                        </span>
+                      <div className="flex items-center justify-between text-sm group">
+                        <div 
+                          className="flex-1 cursor-pointer"
+                          onClick={() => startEditingCartItem(key, entry)}
+                        >
+                          <span className="text-gray-700 font-medium">
+                            {entry.quantity}x {entry.item.name}
+                          </span>
+                          <span className="text-gray-500 text-xs block">
+                            {entry.item.sizes[entry.sizeIndex].size}
+                            {entry.customizationPrice > 0 && ` (+$${entry.customizationPrice.toFixed(2)})`}
+                          </span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-gray-900">
+                            ${((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity).toFixed(2)}
+                          </span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              deleteFromCart(key, entry.item.id);
+                            }}
+                            className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-semibold text-gray-900">
-                          ${((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity).toFixed(2)}
-                        </span>
+                      
+                      {/* Modify One button when quantity > 1 */}
+                      {entry.quantity > 1 && (
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            deleteFromCart(key, entry.item.id);
+                            splitCartItemForEditing(key, entry);
                           }}
-                          className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                          className="mt-2 w-full text-xs bg-amber-100 hover:bg-amber-200 text-amber-700 py-1.5 rounded transition-colors flex items-center justify-center"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Settings className="w-3 h-3 mr-1" />
+                          Modify One
                         </button>
-                      </div>
+                      )}
                     </div>
                   ))}
                 </div>
