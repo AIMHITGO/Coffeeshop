@@ -1423,6 +1423,20 @@ const Menu = () => {
                             {!hasCustomizations && (
                               <p className="mt-2 text-sm text-gray-400 italic">No customizations</p>
                             )}
+                            
+                            {/* Modify One button when quantity > 1 */}
+                            {entry.quantity > 1 && (
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  splitCartItemForEditing(key, entry);
+                                }}
+                                className="mt-3 w-full bg-amber-100 hover:bg-amber-200 text-amber-700 py-2 rounded-lg transition-colors flex items-center justify-center font-medium text-sm"
+                              >
+                                <Settings className="w-4 h-4 mr-2" />
+                                Modify One Item
+                              </button>
+                            )}
                           </div>
                         </div>
                       </div>
