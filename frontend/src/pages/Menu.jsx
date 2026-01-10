@@ -20,6 +20,61 @@ const Menu = () => {
   const drinkSectionRefs = useRef({});
   const expandedCardRef = useRef(null);
 
+  // Handle cart item editing when navigating to menu
+  useEffect(() => {
+    if (editingCartKey && cart[editingCartKey]) {
+      const entry = cart[editingCartKey];
+      const { item, sizeIndex, customizations, fruitTea } = entry;
+      
+      // Load the item's customizations into the form
+      setItemCustomizations(prev => ({
+        ...prev,
+        [item.id]: customizations
+      }));
+      
+      // Set the selected size
+      setSelectedSizes(prev => ({
+        ...prev,
+        [item.id]: sizeIndex
+      }));
+      
+      // Set fruit tea selection if applicable
+      if (fruitTea) {
+        setSelectedFruitTea(prev => ({
+          ...prev,
+          [item.id]: fruitTea
+        }));
+      }
+      
+      // Find the category ID for this item
+      let categoryId = 'default';
+      const category = coffeeMenuCategories.find(cat => 
+        cat.items.some(i => i.id === item.id)
+      );
+      if (category) {
+        categoryId = category.id;
+      }
+      
+      // Switch to coffee menu if needed
+      if (selectedMainCategory !== 'coffee') {
+        setSelectedMainCategory('coffee');
+      }
+      
+      // Expand the corresponding card
+      const cardKey = getCardKey(categoryId, item.id);
+      
+      setTimeout(() => {
+        setExpandedCardKey(cardKey);
+        
+        // Scroll to the item
+        const element = document.getElementById(`item-${item.id}`);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 300);
+    }
+  }, [editingCartKey]); // Only run when editingCartKey changes
+
   // Get best selling items from references
   const bestSellingCoffee = bestSellers.map(ref => {
     const category = menuCategories.find(cat => cat.id === ref.categoryId);
