@@ -74,31 +74,6 @@ const Menu = () => {
     }
   }, [blockNextClick]);
 
-  // Click outside to handle cart state transitions
-  // Expanded -> Regular -> Minimized
-  useEffect(() => {
-    const handleCartClickOutside = (event) => {
-      if (cartRef.current && !cartRef.current.contains(event.target)) {
-        if (cartState === 'expanded') {
-          setCartState('regular'); // Shrink from expanded to regular
-        } else if (cartState === 'regular') {
-          setCartState('minimized'); // Minimize from regular
-        }
-      }
-    };
-
-    if (Object.keys(cart).length > 0 && cartState !== 'minimized') {
-      const timeoutId = setTimeout(() => {
-        document.addEventListener('click', handleCartClickOutside, true);
-      }, 100);
-      
-      return () => {
-        clearTimeout(timeoutId);
-        document.removeEventListener('click', handleCartClickOutside, true);
-      };
-    }
-  }, [cart, cartState]);
-
   const getSelectedSize = (itemId) => {
     if (selectedSizes[itemId] !== undefined) {
       return selectedSizes[itemId];
