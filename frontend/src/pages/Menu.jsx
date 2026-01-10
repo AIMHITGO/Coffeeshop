@@ -547,20 +547,6 @@ const Menu = () => {
     }
   };
 
-  const getTotalItems = () => {
-    return Object.values(cart).reduce((sum, entry) => sum + entry.quantity, 0);
-  };
-
-  const getTotalPrice = () => {
-    return Object.values(cart)
-      .reduce((sum, entry) => {
-        const basePrice = entry.item.sizes[entry.sizeIndex].price;
-        const customPrice = entry.customizationPrice || 0;
-        return sum + ((basePrice + customPrice) * entry.quantity);
-      }, 0)
-      .toFixed(2);
-  };
-
   const scrollToDrinkSection = (sectionId) => {
     if (blockNextClick) return;
     
