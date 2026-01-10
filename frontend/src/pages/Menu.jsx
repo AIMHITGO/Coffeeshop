@@ -485,6 +485,65 @@ const Menu = () => {
     }
   };
 
+  // Cancel editing a cart item
+  const cancelEditingCartItem = (itemId) => {
+    // Clear customizations
+    clearItemCustomizations(itemId);
+    
+    // Clear editing state
+    setEditingCartKey(null);
+    
+    // Collapse the card
+    setExpandedCardKey(null);
+    
+    toast.info('Changes cancelled');
+  };
+
+  // Split one item from a cart entry for individual modification
+  const splitCartItemForEditing = (cartKey, entry) => {
+    if (entry.quantity <= 1) {
+      // If only 1 item, just edit it normally
+      startEditingCartItem(cartKey, entry);
+      return;
+    }
+    
+    // Decrease the original quantity by 1
+    const newCart = { ...cart };
+    newCart[cartKey] = {
+      ...newCart[cartKey],
+      quantity: newCart[cartKey].quantity - 1
+    };
+    
+    // Create a new cart entry with quantity 1
+    const { item, sizeIndex, customizations, fruitTea, customizationPrice } = entry;
+    const newKey = getCartItemKey(item.id, sizeIndex, customizations, fruitTea);
+    
+    // Find a unique key (in case the same key exists)
+    let uniqueKey = newKey;
+    let counter = 1;
+    while (newCart[uniqueKey] && uniqueKey !== cartKey) {
+      uniqueKey = `${newKey}-split-${counter}`;
+      counter++;
+    }
+    
+    newCart[uniqueKey] = {
+      item,
+      sizeIndex,
+      quantity: 1,
+      customizations,
+      fruitTea,
+      customizationPrice
+    };
+    
+    setCart(newCart);
+    
+    // Start editing the new single item
+    toast.info('Split 1 item for editing');
+    setTimeout(() => {
+      startEditingCartItem(uniqueKey, newCart[uniqueKey]);
+    }, 100);
+  };
+
   const getCartQuantity = (itemId, sizeIndex) => {
     const key = getCartItemKey(itemId, sizeIndex);
     return cart[key]?.quantity || 0;
