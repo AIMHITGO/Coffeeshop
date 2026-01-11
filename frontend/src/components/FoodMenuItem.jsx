@@ -227,49 +227,48 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
         <div className="flex items-center gap-4">
           <span className="text-xl font-bold text-amber-600">${item.price.toFixed(2)}</span>
 
-          {/* Quantity Controls */}
-          {(isCustomizing || item.hasCustomization) && (
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="p-1 rounded-full hover:bg-gray-100"
-              >
-                <Minus className="h-4 w-4" />
-              </button>
-              <span className="w-8 text-center font-semibold">{quantity}</span>
-              <button
-                onClick={() => setQuantity(quantity + 1)}
-                className="p-1 rounded-full hover:bg-gray-100"
-              >
-                <Plus className="h-4 w-4" />
-              </button>
-            </div>
-          )}
-
-          {/* Add Button */}
-          {!isCustomizing && !item.hasCustomization && (
-            <Button
-              size="sm"
-              onClick={() => {
-                if (item.hasCustomization) {
-                  setIsCustomizing(true);
-                } else {
-                  handleAddToCart();
-                }
+          {/* Quantity Controls - Always Visible */}
+          <div className="flex items-center gap-2 border border-gray-300 rounded-lg px-2 py-1">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setQuantity(Math.max(1, quantity - 1));
               }}
-              className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2"
+              className="p-1 rounded-full hover:bg-gray-100"
             >
-              Add
-            </Button>
-          )}
+              <Minus className="h-4 w-4" />
+            </button>
+            <span className="w-8 text-center font-semibold">{quantity}</span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setQuantity(quantity + 1);
+              }}
+              className="p-1 rounded-full hover:bg-gray-100"
+            >
+              <Plus className="h-4 w-4" />
+            </button>
+          </div>
 
+          {/* Customize or Add Button */}
           {!isCustomizing && item.hasCustomization && (
             <Button
               size="sm"
               onClick={() => setIsCustomizing(true)}
               className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2"
             >
+              <Settings className="h-4 w-4 mr-2" />
               Customize
+            </Button>
+          )}
+
+          {!isCustomizing && !item.hasCustomization && (
+            <Button
+              size="sm"
+              onClick={handleAddToCart}
+              className="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2"
+            >
+              Add to Order
             </Button>
           )}
         </div>
