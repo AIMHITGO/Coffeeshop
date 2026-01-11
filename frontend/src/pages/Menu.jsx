@@ -1084,24 +1084,6 @@ const Menu = () => {
               </div>
             </div>
           </TabsContent>
-
-          {/* BREAKFAST MENU */}
-          <TabsContent value="breakfast">
-            <div className="text-center py-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Breakfast Menu</h2>
-              <p className="text-gray-600 mb-4">Our delicious breakfast options are coming soon!</p>
-              <p className="text-gray-500">Check back later for our full breakfast selection including sandwiches and Latino favorites.</p>
-            </div>
-          </TabsContent>
-
-          {/* FULL DINNER MENU */}
-          <TabsContent value="dinner">
-            <div className="text-center py-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Full Dinner Menu</h2>
-              <p className="text-gray-600 mb-4">Our dinner menu is coming soon!</p>
-              <p className="text-gray-500">Check back later for our full dinner selection including sandwiches, entrees, and desserts.</p>
-            </div>
-          </TabsContent>
         </Tabs>
       </div>
     </div>
