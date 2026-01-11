@@ -979,18 +979,6 @@ const Menu = () => {
               >
                 Coffee & Drinks
               </TabsTrigger>
-              <TabsTrigger
-                value="breakfast"
-                className="flex-1 max-w-[200px] px-4 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-sm font-semibold rounded-md"
-              >
-                Breakfast
-              </TabsTrigger>
-              <TabsTrigger
-                value="dinner"
-                className="flex-1 max-w-[200px] px-4 py-3 data-[state=active]:bg-amber-600 data-[state=active]:text-white text-sm font-semibold rounded-md"
-              >
-                Dinner
-              </TabsTrigger>
             </TabsList>
           </div>
 
@@ -1018,26 +1006,50 @@ const Menu = () => {
             <div className="flex gap-8">
               {/* Side Navigation */}
               <div className="hidden lg:block w-64 flex-shrink-0">
-                <div className="sticky top-24 bg-white rounded-lg shadow-lg p-4">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Drink Categories</h3>
-                  <nav className="space-y-2">
-                    {coffeeMenuCategories.map((category) => (
+                <div className="sticky top-24 space-y-4">
+                  {/* Quick Links to Food Menus */}
+                  <div className="bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg shadow-lg p-4 text-white">
+                    <h3 className="text-lg font-bold mb-3">Explore Our Food Menu</h3>
+                    <div className="space-y-2">
                       <button
-                        key={category.id}
-                        onClick={() => scrollToDrinkSection(category.id)}
-                        className={`w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center ${
-                          activeDrinkSection === category.id
-                            ? 'bg-amber-600 text-white'
-                            : 'text-gray-700 hover:bg-amber-50'
-                        }`}
+                        onClick={() => navigate('/breakfast')}
+                        className="w-full flex items-center gap-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-4 py-3 transition-all"
                       >
-                        {category.id === 'best-sellers' && (
-                          <Star className={`w-4 h-4 mr-2 ${activeDrinkSection === category.id ? 'text-white' : 'text-amber-500'}`} />
-                        )}
-                        {category.name}
+                        <ChefHat className="w-5 h-5" />
+                        <span className="font-semibold">Breakfast Menu</span>
                       </button>
-                    ))}
-                  </nav>
+                      <button
+                        onClick={() => navigate('/dinner')}
+                        className="w-full flex items-center gap-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-4 py-3 transition-all"
+                      >
+                        <Utensils className="w-5 h-5" />
+                        <span className="font-semibold">Dinner Menu</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Drink Categories */}
+                  <div className="bg-white rounded-lg shadow-lg p-4">
+                    <h3 className="text-lg font-bold text-gray-900 mb-4">Drink Categories</h3>
+                    <nav className="space-y-2">
+                      {coffeeMenuCategories.map((category) => (
+                        <button
+                          key={category.id}
+                          onClick={() => scrollToDrinkSection(category.id)}
+                          className={`w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center ${
+                            activeDrinkSection === category.id
+                              ? 'bg-amber-600 text-white'
+                              : 'text-gray-700 hover:bg-amber-50'
+                          }`}
+                        >
+                          {category.id === 'best-sellers' && (
+                            <Star className={`w-4 h-4 mr-2 ${activeDrinkSection === category.id ? 'text-white' : 'text-amber-500'}`} />
+                          )}
+                          {category.name}
+                        </button>
+                      ))}
+                    </nav>
+                  </div>
                 </div>
               </div>
 
