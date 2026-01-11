@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { dinnerCategories, dinnerCustomizations, dinnerHeroImage } from '../data/mock';
@@ -9,10 +9,45 @@ const Dinner = () => {
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('happy-beginnings');
   const { editingCartKey } = useCart();
+  const categorySectionRefs = useRef({});
+
+  // Scroll to category section
+  const scrollToCategory = (categoryId) => {
+    const element = categorySectionRefs.current[categoryId];
+    if (element) {
+      const offset = 100;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Detect active category on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 150;
+      
+      for (const category of dinnerCategories) {
+        const element = categorySectionRefs.current[category.id];
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveCategory(category.id);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (editingCartKey) {
-      // Find the category that contains the item being edited
       const itemCategory = dinnerCategories.find(cat => 
         cat.items.some(item => editingCartKey.includes(item.id))
       );
@@ -20,7 +55,6 @@ const Dinner = () => {
       if (itemCategory) {
         setActiveCategory(itemCategory.id);
         
-        // Scroll to the item
         setTimeout(() => {
           const element = document.getElementById(`dinner-${editingCartKey.split('-')[0]}`);
           if (element) {
@@ -35,7 +69,7 @@ const Dinner = () => {
     <div className="min-h-screen bg-gradient-to-b from-orange-50 via-white to-amber-50">
       {/* Hero Section with Background Image */}
       <div 
-        className="relative h-80 bg-cover bg-center"
+        className="relative h-96 bg-cover bg-center"
         style={{ 
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${dinnerHeroImage})`,
         }}
@@ -49,73 +83,102 @@ const Dinner = () => {
         </div>
       </div>
 
-      {/* Category Navigation */}
-      <div className="sticky top-20 bg-white/95 backdrop-blur-md shadow-md z-40 py-4">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex overflow-x-auto space-x-2 pb-2 scrollbar-hide">
+      {/* Main Content with Sidebar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex gap-8">
+          {/* Side Navigation */}
+          <div className="hidden lg:block w-64 flex-shrink-0">
+            <div className="sticky top-24 space-y-4">
+              {/* Dinner Categories */}
+              <div className="bg-white rounded-lg shadow-lg p-4">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Dinner Categories</h3>
+                <nav className="space-y-2">
+                  {dinnerCategories.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => scrollToCategory(category.id)}
+                      className={`w-full text-left px-4 py-2 rounded-lg transition-colors text-sm ${
+                        activeCategory === category.id
+                          ? 'bg-orange-600 text-white'
+                          : 'text-gray-700 hover:bg-orange-50'
+                      }`}
+                    >
+                      {category.name}
+                    </button>
+                  ))}
+                  
+                  {/* Divider */}
+                  <div className="border-t border-gray-200 my-3"></div>
+                  
+                  {/* Other Menu Links */}
+                  <button
+                    onClick={() => navigate('/menu')}
+                    className="w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center text-gray-700 hover:bg-orange-50"
+                  >
+                    <Coffee className="w-4 h-4 mr-2 text-orange-500" />
+                    Coffee Menu
+                  </button>
+                  <button
+                    onClick={() => navigate('/breakfast')}
+                    className="w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center text-gray-700 hover:bg-orange-50"
+                  >
+                    <ChefHat className="w-4 h-4 mr-2 text-orange-500" />
+                    Breakfast Menu
+                  </button>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+          {/* Menu Items */}
+          <div className="flex-1">
+            {/* Quick Navigation for Mobile */}
+            <div className="lg:hidden mb-8 bg-white rounded-lg shadow-md p-4 border border-gray-200">
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => navigate('/menu')}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-orange-50 transition-colors text-left"
+                >
+                  <Coffee className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                  <span className="font-medium text-gray-700">Coffee Menu</span>
+                </button>
+                <button
+                  onClick={() => navigate('/breakfast')}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-orange-50 transition-colors text-left"
+                >
+                  <ChefHat className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                  <span className="font-medium text-gray-700">Breakfast Menu</span>
+                </button>
+              </div>
+            </div>
+
             {dinnerCategories.map((category) => (
-              <button
+              <div
                 key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                className={`px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
-                  activeCategory === category.id
-                    ? 'bg-orange-600 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-orange-100'
-                }`}
+                ref={el => categorySectionRefs.current[category.id] = el}
+                className="mb-16 scroll-mt-24"
               >
-                {category.name}
-              </button>
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
+                  {category.description && (
+                    <p className="text-gray-600">{category.description}</p>
+                  )}
+                </div>
+
+                <div className="space-y-4">
+                  {category.items.map((item) => (
+                    <FoodMenuItem
+                      key={item.id}
+                      item={item}
+                      customizations={dinnerCustomizations}
+                      menuType="dinner"
+                    />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Menu Items */}
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        {/* Quick Navigation to Other Menus */}
-        <div className="mb-8 bg-white rounded-lg shadow-md p-4 border border-gray-200">
-          <div className="flex flex-col sm:flex-row gap-3">
-            <button
-              onClick={() => navigate('/menu')}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 transition-colors text-left"
-            >
-              <Coffee className="w-5 h-5 text-amber-500 flex-shrink-0" />
-              <span className="font-medium text-gray-700">Coffee Menu</span>
-            </button>
-            <button
-              onClick={() => navigate('/breakfast')}
-              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 transition-colors text-left"
-            >
-              <ChefHat className="w-5 h-5 text-amber-500 flex-shrink-0" />
-              <span className="font-medium text-gray-700">Breakfast Menu</span>
-            </button>
-          </div>
-        </div>
-
-        {dinnerCategories.map((category) => (
-          <div
-            key={category.id}
-            className={`mb-16 ${activeCategory !== category.id ? 'hidden' : ''}`}
-          >
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
-              {category.description && (
-                <p className="text-gray-600">{category.description}</p>
-              )}
-            </div>
-
-            <div className="space-y-4">
-              {category.items.map((item) => (
-                <FoodMenuItem
-                  key={item.id}
-                  item={item}
-                  customizations={dinnerCustomizations}
-                  menuType="dinner"
-                />
-              ))}
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   );
