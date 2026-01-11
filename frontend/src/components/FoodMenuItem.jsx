@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useCart } from '../contexts/CartContext';
-import { Plus, Minus, Check, X } from 'lucide-react';
+import { Plus, Minus, Check, X, Settings } from 'lucide-react';
 import { Button } from './ui/button';
 import { toast } from 'sonner';
 
