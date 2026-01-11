@@ -984,6 +984,26 @@ const Menu = () => {
 
           {/* FEATURED / BEST SELLERS - Use 'featured' as categoryId */}
           <TabsContent value="featured">
+            {/* Quick Navigation to Other Menus */}
+            <div className="mb-8 bg-white rounded-lg shadow-md p-4 border border-gray-200">
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  onClick={() => navigate('/breakfast')}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 transition-colors text-left"
+                >
+                  <ChefHat className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                  <span className="font-medium text-gray-700">Breakfast Menu</span>
+                </button>
+                <button
+                  onClick={() => navigate('/dinner')}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 transition-colors text-left"
+                >
+                  <Utensils className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                  <span className="font-medium text-gray-700">Dinner Menu</span>
+                </button>
+              </div>
+            </div>
+
             <div className="mb-8 text-center">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">
                 <Star className="inline-block w-8 h-8 text-amber-500 mb-1 mr-2" />
@@ -1053,6 +1073,26 @@ const Menu = () => {
 
               {/* Scrollable Drinks List */}
               <div className="flex-1">
+                {/* Quick Navigation to Other Menus - Mobile Only */}
+                <div className="lg:hidden mb-8 bg-white rounded-lg shadow-md p-4 border border-gray-200">
+                  <div className="flex flex-col gap-3">
+                    <button
+                      onClick={() => navigate('/breakfast')}
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 transition-colors text-left"
+                    >
+                      <ChefHat className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                      <span className="font-medium text-gray-700">Breakfast Menu</span>
+                    </button>
+                    <button
+                      onClick={() => navigate('/dinner')}
+                      className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 transition-colors text-left"
+                    >
+                      <Utensils className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                      <span className="font-medium text-gray-700">Dinner Menu</span>
+                    </button>
+                  </div>
+                </div>
+
                 {coffeeMenuCategories.map((category) => (
                   <div
                     key={category.id}
