@@ -1007,27 +1007,6 @@ const Menu = () => {
               {/* Side Navigation */}
               <div className="hidden lg:block w-64 flex-shrink-0">
                 <div className="sticky top-24 space-y-4">
-                  {/* Quick Links to Food Menus */}
-                  <div className="bg-gradient-to-br from-amber-500 to-orange-500 rounded-lg shadow-lg p-4 text-white">
-                    <h3 className="text-lg font-bold mb-3">Explore Our Food Menu</h3>
-                    <div className="space-y-2">
-                      <button
-                        onClick={() => navigate('/breakfast')}
-                        className="w-full flex items-center gap-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-4 py-3 transition-all"
-                      >
-                        <ChefHat className="w-5 h-5" />
-                        <span className="font-semibold">Breakfast Menu</span>
-                      </button>
-                      <button
-                        onClick={() => navigate('/dinner')}
-                        className="w-full flex items-center gap-3 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg px-4 py-3 transition-all"
-                      >
-                        <Utensils className="w-5 h-5" />
-                        <span className="font-semibold">Dinner Menu</span>
-                      </button>
-                    </div>
-                  </div>
-
                   {/* Drink Categories */}
                   <div className="bg-white rounded-lg shadow-lg p-4">
                     <h3 className="text-lg font-bold text-gray-900 mb-4">Drink Categories</h3>
@@ -1048,6 +1027,25 @@ const Menu = () => {
                           {category.name}
                         </button>
                       ))}
+                      
+                      {/* Divider */}
+                      <div className="border-t border-gray-200 my-3"></div>
+                      
+                      {/* Food Menu Links */}
+                      <button
+                        onClick={() => navigate('/breakfast')}
+                        className="w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center text-gray-700 hover:bg-amber-50"
+                      >
+                        <ChefHat className="w-4 h-4 mr-2 text-amber-500" />
+                        Breakfast Menu
+                      </button>
+                      <button
+                        onClick={() => navigate('/dinner')}
+                        className="w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center text-gray-700 hover:bg-amber-50"
+                      >
+                        <Utensils className="w-4 h-4 mr-2 text-amber-500" />
+                        Dinner Menu
+                      </button>
                     </nav>
                   </div>
                 </div>
