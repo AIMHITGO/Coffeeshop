@@ -55,23 +55,59 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
 
   const handleAddToCart = () => {
     if (isEditing) {
-      updateCartItem(editingCartKey, quantity, selectedCustomizations);
+      // For editing existing cart items
+      const entry = {
+        item: {
+          ...item,
+          sizes: [{ size: 'Standard', price: item.price, calories: 0 }]
+        },
+        sizeIndex: 0,
+        quantity,
+        customizations: selectedCustomizations,
+        customizationPrice: Object.values(selectedCustomizations).reduce((sum, custom) => {
+          if (Array.isArray(custom)) {
+            return sum + custom.reduce((s, c) => s + (c.price || 0), 0);
+          }
+          return sum + (custom.price || 0);
+        }, 0),
+        menuType
+      };
+      updateCartItem(editingCartKey, entry);
       toast.success('Item updated in cart!');
       setIsCustomizing(false);
       setQuantity(1);
       setSelectedCustomizations({});
     } else {
-      const cartItem = {
-        id: item.id,
-        name: item.name,
-        description: item.description,
-        price: item.price,
+      // Generate unique cart key
+      const customizationString = Object.entries(selectedCustomizations)
+        .map(([key, value]) => {
+          if (Array.isArray(value)) {
+            return `${key}:${value.map(v => v.value).join(',')}`;
+          }
+          return `${key}:${value.value}`;
+        })
+        .join('|');
+      const cartKey = `${item.id}-${Date.now()}-${customizationString}`;
+      
+      // Create cart entry matching the CartContext format
+      const entry = {
+        item: {
+          ...item,
+          sizes: [{ size: 'Standard', price: item.price, calories: 0 }]
+        },
+        sizeIndex: 0,
         quantity,
         customizations: selectedCustomizations,
-        totalPrice: calculateTotalPrice(),
+        customizationPrice: Object.values(selectedCustomizations).reduce((sum, custom) => {
+          if (Array.isArray(custom)) {
+            return sum + custom.reduce((s, c) => s + (c.price || 0), 0);
+          }
+          return sum + (custom.price || 0);
+        }, 0),
         menuType
       };
-      addToCart(cartItem);
+      
+      addToCart(cartKey, entry);
       toast.success(`${item.name} added to cart!`);
       setIsCustomizing(false);
       setQuantity(1);
