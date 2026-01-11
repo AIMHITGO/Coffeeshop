@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { breakfastCategories, breakfastCustomizations, breakfastHeroImage } from '../data/mock';
 import FoodMenuItem from '../components/FoodMenuItem';
-import { ChefHat } from 'lucide-react';
+import { ChefHat, Utensils, Coffee } from 'lucide-react';
 
 const Breakfast = () => {
+  const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState('breakfast-sandwiches');
   const { editingCartKey } = useCart();
 
@@ -70,6 +72,26 @@ const Breakfast = () => {
 
       {/* Menu Items */}
       <div className="max-w-6xl mx-auto px-4 py-12">
+        {/* Quick Navigation to Other Menus */}
+        <div className="mb-8 bg-white rounded-lg shadow-md p-4 border border-gray-200">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              onClick={() => navigate('/menu')}
+              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 transition-colors text-left"
+            >
+              <Coffee className="w-5 h-5 text-amber-500 flex-shrink-0" />
+              <span className="font-medium text-gray-700">Coffee Menu</span>
+            </button>
+            <button
+              onClick={() => navigate('/dinner')}
+              className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 transition-colors text-left"
+            >
+              <Utensils className="w-5 h-5 text-amber-500 flex-shrink-0" />
+              <span className="font-medium text-gray-700">Dinner Menu</span>
+            </button>
+          </div>
+        </div>
+
         {breakfastCategories.map((category) => (
           <div
             key={category.id}
