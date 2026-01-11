@@ -67,25 +67,35 @@ const Header = () => {
           <nav className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
               <div key={link.path} className="relative group">
-                <button
-                  onClick={() => link.submenu ? null : handleNavClick(link.path)}
-                  className="px-4 py-2 text-gray-700 hover:text-amber-700 font-medium transition-colors relative"
-                >
-                  {link.name}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 group-hover:w-full transition-all duration-300"></span>
-                </button>
-                {link.submenu && (
-                  <div className="absolute left-0 mt-1 hidden group-hover:block bg-white shadow-lg rounded-lg py-2 min-w-[180px] z-50">
-                    {link.submenu.map((sublink) => (
-                      <button
-                        key={sublink.path}
-                        onClick={() => handleNavClick(sublink.path)}
-                        className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition-colors"
-                      >
-                        {sublink.name}
-                      </button>
-                    ))}
-                  </div>
+                {link.submenu ? (
+                  <>
+                    <button
+                      onClick={() => handleNavClick(link.path)}
+                      className="px-4 py-2 text-gray-700 hover:text-amber-700 font-medium transition-colors relative"
+                    >
+                      {link.name}
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 group-hover:w-full transition-all duration-300"></span>
+                    </button>
+                    <div className="absolute left-0 mt-1 hidden group-hover:block bg-white shadow-lg rounded-lg py-2 min-w-[180px] z-50">
+                      {link.submenu.map((sublink) => (
+                        <button
+                          key={sublink.path}
+                          onClick={() => handleNavClick(sublink.path)}
+                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition-colors"
+                        >
+                          {sublink.name}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => handleNavClick(link.path)}
+                    className="px-4 py-2 text-gray-700 hover:text-amber-700 font-medium transition-colors relative"
+                  >
+                    {link.name}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 group-hover:w-full transition-all duration-300"></span>
+                  </button>
                 )}
               </div>
             ))}
