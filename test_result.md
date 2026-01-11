@@ -681,6 +681,18 @@ metadata:
         agent: "testing"
         comment: "✅ USER REQUEST VERIFIED: EGG & CHEESE customization panel has gradient orange background (amber-50 to orange-50), 'Customize Your Order' header with settings icon, 'Select your preferred options below' subtitle, bread selection options (White Bread, Whole-Grain, Plain Bagel), cheese selection options (Yellow, White, Provolone, Swiss), Add Extras section, quantity controls with border and bold number, and 'Add to Order' button with gradient styling. Price summary shows base price calculation. All styling and functionality requirements met."
 
+  - task: "Navigation Buttons on All Menu Pages"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Breakfast.jsx, /app/frontend/src/pages/Dinner.jsx, /app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ ALL 4 NAVIGATION BUTTON TESTS PASSED: TEST 1 - Breakfast page has white navigation box with 'Coffee Menu' (coffee icon) and 'Dinner Menu' (utensils icon) buttons, both navigate correctly. TEST 2 - Dinner page has white navigation box with 'Coffee Menu' (coffee icon) and 'Breakfast Menu' (chef hat icon) buttons, both navigate correctly. TEST 3 - Menu page Best Sellers tab shows navigation buttons for Breakfast/Dinner menus (working), Coffee & Drinks tab shows sidebar navigation on desktop with Breakfast/Dinner menu buttons in sidebar under drink categories (both tested and working). TEST 4 - Header Menu button navigates to /menu URL, scrolls to top, and lands on Best Sellers tab as expected. All navigation functionality implemented correctly per review request."
+
 test_plan:
   current_focus:
     - "Individual Card Expansion v2"
