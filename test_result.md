@@ -644,8 +644,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Three-Stage Floating Cart testing completed successfully"
-  stuck_tasks: []
+    - "Breakfast & Dinner Cart Functionality"
+  stuck_tasks:
+    - "Breakfast & Dinner Cart Functionality"
   test_all: false
   test_priority: "high_first"
 
