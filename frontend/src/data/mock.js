@@ -727,11 +727,15 @@ export const loyaltyTiers = [
   }
 ];
 
+// Coffee Menu Hero Image
+export const coffeeHeroImage = 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/coffeee-1920w.png';
+
+
 // =======================
 // BREAKFAST MENU DATA
 // =======================
 
-export const breakfastHeroImage = 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-903742886-1920w.jpg';
+export const breakfastHeroImage = 'https://images.unsplash.com/photo-1538220856186-0be0e085984d?q=80&w=1920';
 
 export const breakfastCustomizations = {
   proteins: {
@@ -892,7 +896,7 @@ export const breakfastCategories = [
 // DINNER MENU DATA
 // =======================
 
-export const dinnerHeroImage = 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-1243197436-1920w.JPG';
+export const dinnerHeroImage = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1920';
 
 export const dinnerCustomizations = {
   saladProtein: [
