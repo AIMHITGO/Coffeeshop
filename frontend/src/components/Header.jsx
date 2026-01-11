@@ -59,7 +59,7 @@ const Header = () => {
             <img 
               src="https://customer-assets.emergentagent.com/job_local-sip/artifacts/l6mm4os6_Happy-Logo-1920w.webp" 
               alt="Happy Place Coffee & Eats"
-              className="h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+              className="h-20 w-auto transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
