@@ -9,6 +9,8 @@ import BackToTopButton from './components/BackToTopButton';
 import GlobalCart from './components/GlobalCart';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
+import Breakfast from './pages/Breakfast';
+import Dinner from './pages/Dinner';
 import Rewards from './pages/Rewards';
 import Blog from './pages/Blog';
 import About from './pages/About';
@@ -23,6 +25,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/menu" element={<Menu />} />
+            <Route path="/breakfast" element={<Breakfast />} />
+            <Route path="/dinner" element={<Dinner />} />
             <Route path="/rewards" element={<Rewards />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />

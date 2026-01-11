@@ -18,7 +18,11 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Menu', path: '/menu' },
+    { name: 'Menu', path: '/menu', submenu: [
+      { name: 'Coffee & Drinks', path: '/menu' },
+      { name: 'Breakfast', path: '/breakfast' },
+      { name: 'Dinner', path: '/dinner' }
+    ]},
     { name: 'Rewards', path: '/rewards' },
     { name: 'Blog', path: '/blog' },
     { name: 'About', path: '/about' },
