@@ -15,14 +15,18 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
 
   useEffect(() => {
     if (isEditing && itemRef.current) {
-      const existingItem = cart.find(cartItem => cartItem.cartKey === editingCartKey);
+      const existingItem = Object.values(cart).find(cartItem => {
+        const key = Object.keys(cart).find(k => k.startsWith(item.id));
+        return key === editingCartKey;
+      });
+      
       if (existingItem) {
         setQuantity(existingItem.quantity);
         setSelectedCustomizations(existingItem.customizations || {});
         setIsCustomizing(true);
       }
     }
-  }, [isEditing, editingCartKey, cart]);
+  }, [isEditing, editingCartKey, cart, item.id]);
 
   // Close customization panel when clicking outside
   useEffect(() => {
