@@ -690,6 +690,7 @@ test_plan:
     - "Click Outside to Collapse Cart v3"
   test_all: false
   test_priority: "high_first"
+  user_requested_changes_completed: true
 
 agent_communication:
   - agent: "testing"
