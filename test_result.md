@@ -647,9 +647,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Breakfast & Dinner Cart Functionality"
+    - "Individual Card Expansion v2"
+    - "Click Outside to Collapse Cart v3"
   stuck_tasks:
-    - "Breakfast & Dinner Cart Functionality"
+    - "Individual Card Expansion v2"
+    - "Click Outside to Collapse Cart v3"
   test_all: false
   test_priority: "high_first"
 
@@ -667,4 +669,4 @@ agent_communication:
   - agent: "testing"
     message: "🎉 THREE-STAGE FLOATING CART TESTING COMPLETE - ALL FUNCTIONALITY WORKING PERFECTLY! ✅ REGULAR CART VIEW (Default): Shopping bag icon in header, 'Your Order' title with item count badge '1', trash icon (clear cart), expand button (maximize icon), minimize button (chevron down), item list showing '1x Latte Small', total '$5.80', checkout button - ALL ELEMENTS PRESENT AND FUNCTIONAL. ✅ EXPANDED CART VIEW: Successfully expands to detailed view with 'Proceed to Checkout' button, 'Order Total' text, drink image, drink name (h4), shrink button (minimize2 icon), X button for item deletion - ALL ELEMENTS WORKING. ✅ THREE-STAGE TRANSITIONS: Click outside expanded cart → shrinks to regular (shows 'Checkout' not 'Proceed to Checkout'), click outside regular cart → minimizes to header only, click minimized header → expands to regular, expand button → detailed view, shrink button → regular view, minimize button → minimized state. ✅ ITEM DELETION: X button in expanded view successfully removes items. The three-stage floating cart (minimized → regular → expanded) is fully functional with proper state transitions and all UI elements working as specified."
   - agent: "testing"
-    message: "❌ CRITICAL BREAKFAST & DINNER MENU TESTING RESULTS: Found major cart functionality bug preventing all add-to-cart operations. JavaScript runtime errors: 'Cannot read properties of undefined (reading 'quantity')' in CartContext. Root cause: FoodMenuItem.jsx calls addToCart(cartItem) with one parameter, but CartContext.addToCart expects (key, entry) with two parameters. This mismatch breaks all cart functionality on breakfast/dinner pages. ✅ UI/Navigation working: Header dropdown shows 3 menu options (Coffee & Drinks, Breakfast, Dinner), hero images display correctly, category tabs work, customization panels open properly, BUILD YOUR OWN multi-select works, responsive design functional. ✅ Price validation: Breakfast prices $2.50-$20.00 range, Dinner prices $2.25-$31.99 range as expected. ❌ Cart persistence, cross-page navigation, and cart editing all fail due to the addToCart parameter mismatch bug."
+    message: "🎉 BREAKFAST & DINNER CART FUNCTIONALITY FULLY RESTORED! ✅ CRITICAL BUG FIXED: The addToCart parameter mismatch has been resolved. FoodMenuItem.jsx now correctly calls addToCart(cartKey, entry) with two parameters matching CartContext expectations. ✅ ALL CRITICAL TESTS PASSED: Basic add to cart (OUR HAPPY PLACE $11.95 ✓), customization flow (EGG & CHEESE with bread/cheese selections ✓), BUILD YOUR OWN feature (multi-select vegetables, cheese, meats with premium Steak upcharge $13.99 + $3.99 = $17.98 ✓), cross-page cart persistence (breakfast items persist on dinner/about pages ✓), mixed breakfast+dinner items in cart (CALAMARI added successfully ✓), cart editing from non-menu pages (clicking cart items navigates back to source page ✓), quantity controls and price calculations (working correctly ✓), cart deletion and clear functionality (working ✓). The cart now works seamlessly across all pages with proper persistence, customization handling, and price calculations. All scenarios from the review request have been successfully verified."
