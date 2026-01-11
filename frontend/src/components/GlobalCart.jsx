@@ -22,7 +22,7 @@ const GlobalCart = () => {
   } = useCart();
   
   const cartRef = useRef(null);
-  const isMenuPage = location.pathname === '/menu';
+  const isMenuPage = location.pathname === '/menu' || location.pathname === '/breakfast' || location.pathname === '/dinner';
 
   // Auto-minimize cart when navigating away from menu
   useEffect(() => {
@@ -61,16 +61,28 @@ const GlobalCart = () => {
     setCartState('expanded');
   };
 
-  // Start editing a cart item - navigate to menu and trigger edit
+  // Start editing a cart item - navigate to correct menu page and trigger edit
   const startEditingCartItem = (cartKey) => {
     setEditingCartKey(cartKey);
     
-    // Navigate to menu if not already there
-    if (!isMenuPage) {
-      navigate('/menu', { state: { editCartKey: cartKey } });
+    // Determine which menu page to navigate to based on menuType
+    const entry = cart[cartKey];
+    let targetPath = '/menu'; // default to coffee menu
+    
+    if (entry && entry.menuType) {
+      if (entry.menuType === 'breakfast') {
+        targetPath = '/breakfast';
+      } else if (entry.menuType === 'dinner') {
+        targetPath = '/dinner';
+      }
+    }
+    
+    // Navigate to appropriate menu page if not already there
+    if (location.pathname !== targetPath) {
+      navigate(targetPath, { state: { editCartKey: cartKey } });
       toast.info('Opening item for editing...');
     } else {
-      // If already on menu, let Menu component handle it via editingCartKey
+      // If already on correct menu page, let the component handle it via editingCartKey
       toast.info('Editing item - make your changes and click "Update Order"');
     }
   };
