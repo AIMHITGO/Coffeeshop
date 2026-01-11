@@ -276,8 +276,14 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
 
       {/* Customization Panel */}
       {isCustomizing && item.hasCustomization && (
-        <div className="border-t border-gray-200 p-4 bg-gray-50">
-          <h3 className="text-lg font-semibold mb-4">Customize Your Order</h3>
+        <div className="border-t-2 border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50 p-6">
+          <div className="mb-6">
+            <h3 className="text-xl font-bold text-gray-900 flex items-center gap-2">
+              <Settings className="h-5 w-5 text-amber-600" />
+              Customize Your Order
+            </h3>
+            <p className="text-sm text-gray-600 mt-1">Select your preferred options below</p>
+          </div>
 
           {item.customizationTypes?.includes('bread') && renderCustomizationSection('bread', customizations.bread, 'Choose Your Bread')}
           {item.customizationTypes?.includes('cheese') && renderCustomizationSection('cheese', customizations.cheese, 'Choose Your Cheese')}
@@ -285,9 +291,9 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
           {item.customizationTypes?.includes('baleadas-proteins') && renderCustomizationSection('baleadas-proteins', customizations.proteins.baleadas, 'Add Protein')}
           {item.customizationTypes?.includes('build-your-own') && (
             <>
-              {renderMultiSelectCustomization('veggies', customizations.buildYourOwn.veggies, 'Choose Vegetables')}
-              {renderMultiSelectCustomization('byo-cheese', customizations.buildYourOwn.cheese, 'Choose Cheese')}
-              {renderMultiSelectCustomization('meats', customizations.buildYourOwn.meats, 'Choose Meats')}
+              {renderMultiSelectCustomization('veggies', customizations.buildYourOwn.veggies, 'Choose Vegetables (Select Multiple)')}
+              {renderMultiSelectCustomization('byo-cheese', customizations.buildYourOwn.cheese, 'Choose Cheese (Select Multiple)')}
+              {renderMultiSelectCustomization('meats', customizations.buildYourOwn.meats, 'Choose Meats (Select Multiple)')}
               {renderMultiSelectCustomization('premiumMeats', customizations.buildYourOwn.premiumMeats, 'Premium Meats (Upcharge)')}
             </>
           )}
@@ -295,17 +301,44 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
           {item.customizationTypes?.includes('salad-protein') && renderCustomizationSection('salad-protein', customizations.saladProtein, 'Add Protein')}
           {item.customizationTypes?.includes('salad-dressing') && renderCustomizationSection('salad-dressing', customizations.saladDressing, 'Choose Dressing')}
 
-          <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
+          {/* Price Summary */}
+          {Object.keys(selectedCustomizations).length > 0 && (
+            <div className="mt-6 p-4 bg-white rounded-lg border-2 border-amber-300">
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Base Price:</span>
+                  <span className="font-semibold">${item.price.toFixed(2)}</span>
+                </div>
+                {Object.values(selectedCustomizations).some(custom => 
+                  (Array.isArray(custom) && custom.some(c => c.price > 0)) || 
+                  (!Array.isArray(custom) && custom.price > 0)
+                ) && (
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-600">Customizations:</span>
+                    <span className="font-semibold text-amber-600">
+                      +${(calculateTotalPrice() - item.price).toFixed(2)}
+                    </span>
+                  </div>
+                )}
+                <div className="border-t border-gray-200 pt-2 flex justify-between">
+                  <span className="font-bold">Total per Item:</span>
+                  <span className="font-bold text-amber-600">${calculateTotalPrice().toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="flex items-center justify-between mt-6 pt-6 border-t-2 border-gray-200">
             <div className="flex items-center gap-3">
-              <span className="text-sm text-gray-600">Quantity:</span>
-              <div className="flex items-center gap-2">
+              <span className="text-sm font-semibold text-gray-700">Quantity:</span>
+              <div className="flex items-center gap-2 border-2 border-gray-300 rounded-lg px-2 py-1">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                   className="p-1 rounded-full hover:bg-gray-200"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
-                <span className="w-8 text-center font-semibold">{quantity}</span>
+                <span className="w-8 text-center font-bold">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
                   className="p-1 rounded-full hover:bg-gray-200"
@@ -323,12 +356,12 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
                   className="border-gray-300 text-gray-700 hover:bg-gray-100"
                 >
                   <X className="h-4 w-4 mr-2" />
-                  Cancel
+                  Cancel Changes
                 </Button>
               )}
               <Button
                 onClick={handleAddToCart}
-                className="bg-amber-600 hover:bg-amber-700 text-white"
+                className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white shadow-lg"
               >
                 <Check className="h-4 w-4 mr-2" />
                 {isEditing ? 'Update Order' : 'Add to Order'} - ${(calculateTotalPrice() * quantity).toFixed(2)}
