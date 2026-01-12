@@ -72,6 +72,8 @@ const Dinner = () => {
         className="relative h-96 bg-cover bg-center"
         style={{ 
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${dinnerHeroImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 40%'
         }}
       >
         <div className="absolute inset-0 flex items-center justify-center">

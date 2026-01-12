@@ -72,6 +72,8 @@ const Breakfast = () => {
         className="relative h-96 bg-cover bg-center"
         style={{ 
           backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${breakfastHeroImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center 30%'
         }}
       >
         <div className="absolute inset-0 flex items-center justify-center">
