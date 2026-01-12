@@ -266,9 +266,11 @@ const GlobalCart = () => {
 
       {/* Expanded Cart View */}
       {cartState === 'expanded' && (
-        <div className="p-4 max-h-[60vh] overflow-y-auto">
-          <div className="space-y-4 mb-4">
-            {Object.entries(cart).map(([key, entry]) => {
+        <div className="flex flex-col h-full">
+          {/* Scrollable Cart Items Section */}
+          <div className="flex-1 overflow-y-auto p-4 max-h-[calc(60vh-140px)]">
+            <div className="space-y-4">
+              {Object.entries(cart).map(([key, entry]) => {
               const customizations = entry.customizations || {};
               const hasCustomizations = Object.keys(customizations).length > 0 || entry.fruitTea;
               
