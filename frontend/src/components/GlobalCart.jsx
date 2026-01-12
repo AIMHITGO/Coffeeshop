@@ -350,6 +350,14 @@ const GlobalCart = () => {
                               })}
                             </div>
                           )}
+                          
+                          {/* Display Special Instructions */}
+                          {entry.specialInstructions && entry.specialInstructions.trim() && (
+                            <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs">
+                              <span className="font-semibold text-blue-900">Note: </span>
+                              <span className="text-blue-800">{entry.specialInstructions}</span>
+                            </div>
+                          )}
                         </div>
                         <div className="text-right">
                           <p className="font-bold text-gray-900">
