@@ -320,6 +320,36 @@ const GlobalCart = () => {
                         <div>
                           <h4 className="font-bold text-gray-900 text-lg">{entry.item.name}</h4>
                           <p className="text-amber-600 font-medium">{entry.item.sizes[entry.sizeIndex].size}</p>
+                          
+                          {/* Display Customizations */}
+                          {entry.customizations && Object.keys(entry.customizations).length > 0 && (
+                            <div className="mt-2 text-xs text-gray-600 space-y-1">
+                              {Object.entries(entry.customizations).map(([key, value]) => {
+                                if (Array.isArray(value) && value.length > 0) {
+                                  // Multi-select customizations
+                                  return (
+                                    <div key={key} className="flex flex-wrap gap-1">
+                                      {value.map((item, idx) => (
+                                        <span key={idx} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded text-xs">
+                                          {item.name}
+                                          {item.price > 0 && ` +$${item.price.toFixed(2)}`}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  );
+                                } else if (value && value.value) {
+                                  // Single-select customizations
+                                  return (
+                                    <span key={key} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded inline-block mr-1 mb-1 text-xs">
+                                      {value.value}
+                                      {value.price > 0 && ` +$${value.price.toFixed(2)}`}
+                                    </span>
+                                  );
+                                }
+                                return null;
+                              })}
+                            </div>
+                          )}
                         </div>
                         <div className="text-right">
                           <p className="font-bold text-gray-900">
