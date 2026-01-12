@@ -52,7 +52,15 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
   const calculateTotalPrice = () => {
     let total = item.price;
     Object.values(selectedCustomizations).forEach(custom => {
-      total += custom.price || 0;
+      if (Array.isArray(custom)) {
+        // Multi-select customizations
+        custom.forEach(c => {
+          total += c.price || 0;
+        });
+      } else {
+        // Single-select customizations
+        total += custom.price || 0;
+      }
     });
     return total;
   };
