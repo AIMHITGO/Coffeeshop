@@ -735,7 +735,7 @@ export const coffeeHeroImage = 'https://lirp.cdn-website.com/ee24b866/dms3rep/mu
 // BREAKFAST MENU DATA
 // =======================
 
-export const breakfastHeroImage = 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-1367390655-1920w.jpg';
+export const breakfastHeroImage = 'https://images.unsplash.com/photo-1554520735-0a6b8b6ce8b7?q=80&w=1920';
 
 export const breakfastCustomizations = {
   proteins: {
@@ -896,7 +896,7 @@ export const breakfastCategories = [
 // DINNER MENU DATA
 // =======================
 
-export const dinnerHeroImage = 'https://images.unsplash.com/photo-1610440042657-612c34d95e9f?q=80&w=1920&fit=crop';
+export const dinnerHeroImage = 'https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg?auto=compress&cs=tinysrgb&w=1920';
 
 export const dinnerCustomizations = {
   saladProtein: [
