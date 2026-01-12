@@ -753,6 +753,54 @@ metadata:
         agent: "testing"
         comment: "✅ ADDITIONAL TEST PASSED: BUILD YOUR OWN SCRAMBLE, OMELET, OR BURRITO multiple customizations working correctly. Base price $13.99, multi-select vegetables (Spinach, Mushrooms, Tomatoes - all free), multi-select cheese (Cheddar - free), premium meat selection (Steak +$3.99), total calculation correct: $13.99 + $3.99 = $17.98, quantity multiplication working (×2 = $35.96), Add to Order button shows correct total for quantity. All customization types (vegetables, cheese, regular meats, premium meats) function properly with correct price calculations."
 
+  - task: "Scroll to Top on Navigation Fix"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Breakfast.jsx, /app/frontend/src/pages/Dinner.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "🎉 FIX 2 PASSED: Scroll to top functionality working correctly. Verified scroll position resets to 0px when navigating from dinner page (scrolled to 2000px) to breakfast page via sidebar navigation. Page loads at top as expected. useEffect with window.scrollTo({ top: 0, behavior: 'smooth' }) working properly on component mount."
+
+  - task: "Dinner Hero Banner Zoom Fix"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Dinner.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "🎉 FIX 3 PASSED: Dinner hero banner correctly positioned at 'center 40%' showing more of the burger image. Background style verified: 'background-position: center 40%'. Hero banner now shows burger patty, lettuce, and fries as intended instead of just top of bun."
+
+  - task: "Breakfast Hero Banner Fix"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Breakfast.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "🎉 FIX 4 PASSED: Breakfast hero banner correctly positioned at 'center 30%' showing coffee and pastries. Background style verified: 'background-position: center 30%'. Image displays warm and inviting coffee and pastries as intended."
+
+  - task: "Customizations Showing in Expanded Cart Fix"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/components/GlobalCart.jsx, /app/frontend/src/components/FoodMenuItem.jsx"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ FIX 1 ISSUE IDENTIFIED: While customization panels open correctly and selections can be made (Whole-Grain bread, Swiss cheese, Extra Eggs +$2.99), the customizations are not displaying as badges in the expanded cart view. Cart shows 'No customizations' despite selections being made. This appears to be a data persistence issue between the customization selection and cart display logic in FoodMenuItem.jsx when saving to cart. The customization functionality works but the display in expanded cart needs investigation. The badges should appear as small chips showing 'whole-grain', 'swiss', 'extra-eggs +$2.99' but are not rendering."
+
 test_plan:
   current_focus:
     - "Individual Card Expansion v2"
