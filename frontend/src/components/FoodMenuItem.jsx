@@ -8,6 +8,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
   const [quantity, setQuantity] = useState(1);
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [selectedCustomizations, setSelectedCustomizations] = useState({});
+  const [specialInstructions, setSpecialInstructions] = useState('');
   const { addToCart, editingCartKey, setEditingCartKey, updateCartItem, cart } = useCart();
   const itemRef = useRef(null);
   
