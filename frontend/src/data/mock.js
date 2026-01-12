@@ -735,7 +735,7 @@ export const coffeeHeroImage = 'https://lirp.cdn-website.com/ee24b866/dms3rep/mu
 // BREAKFAST MENU DATA
 // =======================
 
-export const breakfastHeroImage = 'https://images.unsplash.com/photo-1554520735-0a6b8b6ce8b7?q=80&w=1920';
+export const breakfastHeroImage = 'https://customer-assets.emergentagent.com/job_happyeats/artifacts/59ah1pxf_hero_breakfast_2400x800.jpg';
 
 export const breakfastCustomizations = {
   proteins: {
@@ -896,7 +896,7 @@ export const breakfastCategories = [
 // DINNER MENU DATA
 // =======================
 
-export const dinnerHeroImage = 'https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg?auto=compress&cs=tinysrgb&w=1920';
+export const dinnerHeroImage = 'https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?q=80&w=1920';
 
 export const dinnerCustomizations = {
   saladProtein: [
