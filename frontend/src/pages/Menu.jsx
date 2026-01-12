@@ -28,7 +28,7 @@ const Menu = () => {
   useEffect(() => {
     if (editingCartKey && cart[editingCartKey]) {
       const entry = cart[editingCartKey];
-      const { item, sizeIndex, customizations, fruitTea } = entry;
+      const { item, sizeIndex, customizations, fruitTea, specialInstructions: savedInstructions } = entry;
       
       // Load the item's customizations into the form
       setItemCustomizations(prev => ({
@@ -41,6 +41,14 @@ const Menu = () => {
         ...prev,
         [item.id]: sizeIndex
       }));
+      
+      // Load special instructions if present
+      if (savedInstructions) {
+        setSpecialInstructions(prev => ({
+          ...prev,
+          [item.id]: savedInstructions
+        }));
+      }
       
       // Set fruit tea selection if applicable
       if (fruitTea) {
