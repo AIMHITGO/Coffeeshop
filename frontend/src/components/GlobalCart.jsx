@@ -377,16 +377,7 @@ const GlobalCart = () => {
                         </div>
                       </div>
                       
-                      {hasCustomizations && (
-                        <div className="mt-2 text-sm text-gray-600">
-                          <p className="font-medium">Customizations</p>
-                          {entry.customizationPrice > 0 && (
-                            <p className="text-amber-600">+${entry.customizationPrice.toFixed(2)}</p>
-                          )}
-                        </div>
-                      )}
-                      
-                      {!hasCustomizations && (
+                      {!hasCustomizations && !entry.specialInstructions && (
                         <p className="mt-2 text-sm text-gray-400 italic">No customizations</p>
                       )}
                       
