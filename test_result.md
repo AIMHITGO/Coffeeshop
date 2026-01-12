@@ -793,13 +793,16 @@ metadata:
     implemented: true
     working: false
     file: "/app/frontend/src/components/GlobalCart.jsx, /app/frontend/src/components/FoodMenuItem.jsx"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
     needs_retesting: false
     status_history:
       - working: false
         agent: "testing"
         comment: "❌ FIX 1 ISSUE IDENTIFIED: While customization panels open correctly and selections can be made (Whole-Grain bread, Swiss cheese, Extra Eggs +$2.99), the customizations are not displaying as badges in the expanded cart view. Cart shows 'No customizations' despite selections being made. This appears to be a data persistence issue between the customization selection and cart display logic in FoodMenuItem.jsx when saving to cart. The customization functionality works but the display in expanded cart needs investigation. The badges should appear as small chips showing 'whole-grain', 'swiss', 'extra-eggs +$2.99' but are not rendering."
+      - working: false
+        agent: "testing"
+        comment: "❌ BUG CONFIRMED THROUGH COMPREHENSIVE TESTING: Tested EGG & CHEESE customization flow - successfully selected White Bread, Yellow cheese, and added special instructions 'Extra crispy please'. Item was added to cart and cart expanded successfully. However, expanded cart shows 'No customizations' text despite selections being made. Customizations (White Bread, Yellow) are not visible as amber-colored tags, and special instructions are not displayed in blue box with 'Note:' label. This confirms the data persistence issue between FoodMenuItem.jsx customization selection and GlobalCart.jsx display logic. The customization data is not being properly passed to or displayed in the expanded cart view."
 
 test_plan:
   current_focus:
