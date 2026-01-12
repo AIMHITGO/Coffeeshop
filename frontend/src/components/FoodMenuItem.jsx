@@ -287,14 +287,14 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
 
           {item.customizationTypes?.includes('bread') && renderCustomizationSection('bread', customizations.bread, 'Choose Your Bread')}
           {item.customizationTypes?.includes('cheese') && renderCustomizationSection('cheese', customizations.cheese, 'Choose Your Cheese')}
-          {item.customizationTypes?.includes('extras') && renderMultiSelectCustomization('extras', customizations.extras.sandwich, 'Add Extras')}
-          {item.customizationTypes?.includes('baleadas-proteins') && renderCustomizationSection('baleadas-proteins', customizations.proteins.baleadas, 'Add Protein')}
+          {item.customizationTypes?.includes('extras') && renderMultiSelectCustomization('extras', customizations.extras?.sandwich, 'Add Extras')}
+          {item.customizationTypes?.includes('baleadas-proteins') && renderCustomizationSection('baleadas-proteins', customizations.proteins?.baleadas, 'Add Protein')}
           {item.customizationTypes?.includes('build-your-own') && (
             <>
-              {renderMultiSelectCustomization('veggies', customizations.buildYourOwn.veggies, 'Choose Vegetables (Select Multiple)')}
-              {renderMultiSelectCustomization('byo-cheese', customizations.buildYourOwn.cheese, 'Choose Cheese (Select Multiple)')}
-              {renderMultiSelectCustomization('meats', customizations.buildYourOwn.meats, 'Choose Meats (Select Multiple)')}
-              {renderMultiSelectCustomization('premiumMeats', customizations.buildYourOwn.premiumMeats, 'Premium Meats (Upcharge)')}
+              {renderMultiSelectCustomization('veggies', customizations.buildYourOwn?.veggies, 'Choose Vegetables (Select Multiple)')}
+              {renderMultiSelectCustomization('byo-cheese', customizations.buildYourOwn?.cheese, 'Choose Cheese (Select Multiple)')}
+              {renderMultiSelectCustomization('meats', customizations.buildYourOwn?.meats, 'Choose Meats (Select Multiple)')}
+              {renderMultiSelectCustomization('premiumMeats', customizations.buildYourOwn?.premiumMeats, 'Premium Meats (Upcharge)')}
             </>
           )}
           {item.customizationTypes?.includes('sandwich-bread') && renderCustomizationSection('sandwich-bread', customizations.sandwichBread, 'Choose Your Bread')}
