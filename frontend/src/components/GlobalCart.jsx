@@ -105,7 +105,7 @@ const GlobalCart = () => {
     };
     
     // Generate unique key with timestamp
-    const { item, sizeIndex, customizations, fruitTea, customizationPrice } = entry;
+    const { item, sizeIndex, customizations, fruitTea, customizationPrice, menuType } = entry;
     const baseKey = cartKey.split('-split-')[0]; // Get base key without any split suffix
     const uniqueKey = `${baseKey}-split-${Date.now()}`;
     
@@ -115,15 +115,28 @@ const GlobalCart = () => {
       quantity: 1,
       customizations: { ...customizations }, // Clone customizations
       fruitTea,
-      customizationPrice
+      customizationPrice,
+      menuType // Preserve menuType
     };
     
     setCart(newCart);
     
+    // Determine which menu page to navigate to
+    let targetPath = '/menu'; // default to coffee menu
+    if (menuType === 'breakfast') {
+      targetPath = '/breakfast';
+    } else if (menuType === 'dinner') {
+      targetPath = '/dinner';
+    }
+    
     // Start editing the new single item
     toast.info('Split 1 item for editing');
     setTimeout(() => {
-      startEditingCartItem(uniqueKey);
+      // Set editing key and navigate
+      setEditingCartKey(uniqueKey);
+      if (location.pathname !== targetPath) {
+        navigate(targetPath);
+      }
     }, 100);
   };
 
