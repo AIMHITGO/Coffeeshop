@@ -927,6 +927,31 @@ const Menu = () => {
               </div>
             )}
 
+            {/* Special Instructions */}
+            <div className="mt-4">
+              <h4 className="text-sm font-semibold text-gray-700 mb-2">Special Instructions (Optional)</h4>
+              <textarea
+                value={specialInstructions[item.id] || ''}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value.length <= 150) {
+                    setSpecialInstructions(prev => ({
+                      ...prev,
+                      [item.id]: value
+                    }));
+                  }
+                }}
+                onClick={(e) => e.stopPropagation()}
+                placeholder="Any special requests? (e.g., extra hot, less ice)"
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none resize-none text-sm"
+                rows="3"
+                maxLength={150}
+              />
+              <div className="text-right text-xs text-gray-500 mt-1">
+                {(specialInstructions[item.id] || '').length}/150 characters
+              </div>
+            </div>
+
             {/* Add to Cart / Update Order / Cancel */}
             <div className="mt-4 flex-shrink-0 space-y-2">
               <Button
