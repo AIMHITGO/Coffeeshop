@@ -288,7 +288,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
           {item.customizationTypes?.includes('bread') && renderCustomizationSection('bread', customizations.bread, 'Choose Your Bread')}
           {item.customizationTypes?.includes('cheese') && renderCustomizationSection('cheese', customizations.cheese, 'Choose Your Cheese')}
           {item.customizationTypes?.includes('extras') && renderMultiSelectCustomization('extras', customizations.extras?.sandwich, 'Add Extras')}
-          {item.customizationTypes?.includes('baleadas-proteins') && renderCustomizationSection('baleadas-proteins', customizations.proteins?.baleadas, 'Add Protein')}
+          {item.customizationTypes?.includes('baleadas-proteins') && renderCustomizationSection('baleadas-proteins', customizations.proteins?.baleadas || customizations.baleadasProteins, 'Add Protein')}
           {item.customizationTypes?.includes('build-your-own') && (
             <>
               {renderMultiSelectCustomization('veggies', customizations.buildYourOwn?.veggies, 'Choose Vegetables (Select Multiple)')}
