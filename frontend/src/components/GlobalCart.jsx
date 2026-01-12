@@ -348,8 +348,10 @@ const GlobalCart = () => {
               );
             })}
           </div>
+          </div>
           
-          <div className="border-t pt-4">
+          {/* Sticky Footer with Order Total and Checkout */}
+          <div className="sticky bottom-0 bg-white border-t pt-4 px-4 pb-4">
             <div className="flex justify-between items-center mb-4">
               <span className="text-xl font-bold text-gray-900">Order Total</span>
               <span className="text-3xl font-bold text-amber-600">${totalPrice}</span>
