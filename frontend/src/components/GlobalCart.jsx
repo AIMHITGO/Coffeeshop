@@ -285,7 +285,17 @@ const GlobalCart = () => {
             <div className="space-y-4">
               {Object.entries(cart).map(([key, entry]) => {
               const customizations = entry.customizations || {};
-              const hasCustomizations = Object.keys(customizations).length > 0 || entry.fruitTea;
+              
+              // Properly validate hasCustomizations to match rendering logic
+              const hasCustomizations = Object.entries(customizations).some(([key, value]) => {
+                if (Array.isArray(value) && value.length > 0) {
+                  return true;
+                }
+                if (value && value.name) {
+                  return true;
+                }
+                return false;
+              }) || entry.fruitTea;
               
               return (
                 <div 
