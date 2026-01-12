@@ -322,18 +322,9 @@ const GlobalCart = () => {
                           <p className="text-amber-600 font-medium">{entry.item.sizes[entry.sizeIndex].size}</p>
                           
                           {/* Display Customizations */}
-                          {(() => {
-                            console.log('=== CART ITEM DEBUG ===');
-                            console.log('Item:', entry.item.name);
-                            console.log('Customizations:', entry.customizations);
-                            console.log('Customizations keys:', entry.customizations ? Object.keys(entry.customizations) : 'none');
-                            return null;
-                          })()}
-                          
                           {entry.customizations && Object.keys(entry.customizations).length > 0 && (
                             <div className="mt-2 text-xs text-gray-600 space-y-1">
                               {Object.entries(entry.customizations).map(([key, value]) => {
-                                console.log(`Processing customization: ${key}`, value);
                                 if (Array.isArray(value) && value.length > 0) {
                                   // Multi-select customizations
                                   return (
@@ -346,11 +337,11 @@ const GlobalCart = () => {
                                       ))}
                                     </div>
                                   );
-                                } else if (value && value.value) {
+                                } else if (value && value.name) {
                                   // Single-select customizations
                                   return (
                                     <span key={key} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded inline-block mr-1 mb-1 text-xs">
-                                      {value.value}
+                                      {value.name}
                                       {value.price > 0 && ` +$${value.price.toFixed(2)}`}
                                     </span>
                                   );

@@ -41,10 +41,10 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isCustomizing, isEditing]);
 
-  const handleCustomizationChange = (type, value, price = 0) => {
+  const handleCustomizationChange = (type, value, name, price = 0) => {
     setSelectedCustomizations(prev => ({
       ...prev,
-      [type]: { value, price }
+      [type]: { value, name, price }
     }));
   };
 
@@ -159,7 +159,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
             return (
               <button
                 key={option.id}
-                onClick={() => handleCustomizationChange(type, option.id, option.price)}
+                onClick={() => handleCustomizationChange(type, option.id, option.name, option.price)}
                 className={`px-3 py-2 rounded-lg text-sm border-2 transition-all ${
                   isSelected
                     ? 'border-amber-600 bg-amber-50 text-amber-900'
