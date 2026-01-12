@@ -15,10 +15,6 @@ const Menu = () => {
   const [selectedMainCategory, setSelectedMainCategory] = useState('coffee');
   const [activeDrinkSection, setActiveDrinkSection] = useState('best-sellers');
 
-  // Scroll to top when component mounts
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
   const [expandedCardKey, setExpandedCardKey] = useState(null);
   const [itemCustomizations, setItemCustomizations] = useState({});
   const [selectedFruitTea, setSelectedFruitTea] = useState({});

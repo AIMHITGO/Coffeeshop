@@ -11,11 +11,6 @@ const Dinner = () => {
   const { editingCartKey } = useCart();
   const categorySectionRefs = useRef({});
 
-  // Scroll to top when component mounts
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
-
   // Scroll to category section
   const scrollToCategory = (categoryId) => {
     const element = categorySectionRefs.current[categoryId];
