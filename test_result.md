@@ -764,6 +764,9 @@ metadata:
       - working: true
         agent: "testing"
         comment: "🎉 FIX 2 PASSED: Scroll to top functionality working correctly. Verified scroll position resets to 0px when navigating from dinner page (scrolled to 2000px) to breakfast page via sidebar navigation. Page loads at top as expected. useEffect with window.scrollTo({ top: 0, behavior: 'smooth' }) working properly on component mount."
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE TESTING PASSED: Tested scroll to top functionality on navigation between breakfast and dinner pages. Scrolled to bottom (4835px), clicked Dinner Menu navigation, page successfully scrolled to top (< 100px) with hero banner visible. This confirms the scroll to top fix is working correctly across all menu page navigations."
 
   - task: "Dinner Hero Banner Zoom Fix"
     implemented: true
