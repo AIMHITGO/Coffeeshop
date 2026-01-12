@@ -693,6 +693,18 @@ metadata:
         agent: "testing"
         comment: "✅ ALL 4 NAVIGATION BUTTON TESTS PASSED: TEST 1 - Breakfast page has white navigation box with 'Coffee Menu' (coffee icon) and 'Dinner Menu' (utensils icon) buttons, both navigate correctly. TEST 2 - Dinner page has white navigation box with 'Coffee Menu' (coffee icon) and 'Breakfast Menu' (chef hat icon) buttons, both navigate correctly. TEST 3 - Menu page Best Sellers tab shows navigation buttons for Breakfast/Dinner menus (working), Coffee & Drinks tab shows sidebar navigation on desktop with Breakfast/Dinner menu buttons in sidebar under drink categories (both tested and working). TEST 4 - Header Menu button navigates to /menu URL, scrolls to top, and lands on Best Sellers tab as expected. All navigation functionality implemented correctly per review request."
 
+  - task: "BALEADAS CATRACHAS Functionality (Breakfast & Dinner)"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/FoodMenuItem.jsx, /app/frontend/src/data/mock.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE BALEADAS CATRACHAS TESTING COMPLETE - ALL CRITICAL FEATURES WORKING! Breakfast BALEADAS: Found in Latino Breakfast section ($10.00), customization panel opens with 4 protein options (Avocado +$1.50, Chicken +$3.00, Beef +$4.00, Mexican Chorizo +$3.49), add to cart works with correct calculations, cart editing navigates back to /breakfast with pre-selected options, updates work correctly. Dinner BALEADAS: Found in Pupusas & Tacos section ($10.00), same customization options, full flow tested with Mexican Chorizo selection ($13.49 total), cart editing works with navigation to /dinner page. CRITICAL FEATURE VERIFIED: Customization panels CLOSE and RESET after 'Update Order' on both breakfast and dinner menus - this was the key requirement. Price calculations correct: breakfast (10.00 + 4.00) × 3 = $42.00, dinner (10.00 + 1.50) × 2 = $23.00. Multiple BALEADAS items can be added independently with separate customizations. All 6 test scenarios from review request passed successfully."
+
 test_plan:
   current_focus:
     - "Individual Card Expansion v2"
