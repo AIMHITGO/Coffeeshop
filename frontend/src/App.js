@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import BackToTopButton from './components/BackToTopButton';
 import GlobalCart from './components/GlobalCart';
+import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Breakfast from './pages/Breakfast';
@@ -21,6 +22,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <CartProvider>
+          <ScrollToTop />
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
