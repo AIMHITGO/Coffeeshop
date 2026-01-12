@@ -23,6 +23,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
         console.log('Loading existing item for editing:', existingItem);
         setQuantity(existingItem.quantity);
         setSelectedCustomizations(existingItem.customizations || {});
+        setSpecialInstructions(existingItem.specialInstructions || '');
         setIsCustomizing(true);
       }
     }
@@ -34,6 +35,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
       if (itemRef.current && !itemRef.current.contains(event.target) && isCustomizing && !isEditing) {
         setIsCustomizing(false);
         setSelectedCustomizations({});
+        setSpecialInstructions('');
         setQuantity(1);
       }
     };
