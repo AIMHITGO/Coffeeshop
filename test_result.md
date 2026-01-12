@@ -803,11 +803,11 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Individual Card Expansion v2"
-    - "Click Outside to Collapse Cart v3"
+    - "Customizations Showing in Expanded Cart Fix"
   stuck_tasks:
     - "Individual Card Expansion v2"
     - "Click Outside to Collapse Cart v3"
+    - "Customizations Showing in Expanded Cart Fix"
   test_all: false
   test_priority: "high_first"
   user_requested_changes_completed: true
