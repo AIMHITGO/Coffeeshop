@@ -363,6 +363,7 @@ const Menu = () => {
     
     const customizations = itemCustomizations[item.id] || {};
     const fruitTea = selectedFruitTea[item.id] || null;
+    const instructions = specialInstructions[item.id]?.trim() || '';
     const key = getCartItemKey(item.id, sizeIndex, customizations, fruitTea);
     const sizeInfo = item.sizes[sizeIndex];
     const customizationPrice = calculateCustomizationPrice(item.id);
@@ -376,6 +377,7 @@ const Menu = () => {
         quantity: (prev[key]?.quantity || 0) + quantityToAdd,
         customizations,
         fruitTea,
+        specialInstructions: instructions,
         customizationPrice
       }
     }));
