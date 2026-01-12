@@ -71,6 +71,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
     console.log('=== ADDING TO CART ===');
     console.log('Item:', item.name);
     console.log('Selected Customizations:', selectedCustomizations);
+    console.log('Special Instructions:', specialInstructions);
     console.log('Quantity:', quantity);
     
     if (isEditing) {
@@ -83,6 +84,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
         sizeIndex: 0,
         quantity,
         customizations: selectedCustomizations,
+        specialInstructions: specialInstructions.trim(),
         customizationPrice: Object.values(selectedCustomizations).reduce((sum, custom) => {
           if (Array.isArray(custom)) {
             return sum + custom.reduce((s, c) => s + (c.price || 0), 0);
@@ -100,6 +102,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
       setIsCustomizing(false);
       setQuantity(1);
       setSelectedCustomizations({});
+      setSpecialInstructions('');
       
       toast.success('Item updated in cart!');
     } else {
@@ -123,6 +126,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
         sizeIndex: 0,
         quantity,
         customizations: selectedCustomizations,
+        specialInstructions: specialInstructions.trim(),
         customizationPrice: Object.values(selectedCustomizations).reduce((sum, custom) => {
           if (Array.isArray(custom)) {
             return sum + custom.reduce((s, c) => s + (c.price || 0), 0);
@@ -140,6 +144,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
       setIsCustomizing(false);
       setQuantity(1);
       setSelectedCustomizations({});
+      setSpecialInstructions('');
     }
   };
 
@@ -148,6 +153,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
     setIsCustomizing(false);
     setQuantity(1);
     setSelectedCustomizations({});
+    setSpecialInstructions('');
   };
 
   const renderCustomizationSection = (type, options, label) => {
