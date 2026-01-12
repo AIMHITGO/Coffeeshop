@@ -289,13 +289,16 @@ const GlobalCart = () => {
                   </button>
                   
                   <div className="flex gap-4">
-                    <div className="w-20 h-20 flex-shrink-0 bg-white rounded-lg overflow-hidden">
-                      <img 
-                        src={entry.item.image} 
-                        alt={entry.item.name}
-                        className="w-full h-full object-contain p-1"
-                      />
-                    </div>
+                    {/* Only show image for coffee/drink items, not food items */}
+                    {!entry.menuType || entry.menuType === 'coffee' ? (
+                      <div className="w-20 h-20 flex-shrink-0 bg-white rounded-lg overflow-hidden">
+                        <img 
+                          src={entry.item.image} 
+                          alt={entry.item.name}
+                          className="w-full h-full object-contain p-1"
+                        />
+                      </div>
+                    ) : null}
                     
                     <div className="flex-1 pr-6">
                       <div className="flex items-start justify-between">
