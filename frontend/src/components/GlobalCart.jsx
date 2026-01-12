@@ -322,9 +322,18 @@ const GlobalCart = () => {
                           <p className="text-amber-600 font-medium">{entry.item.sizes[entry.sizeIndex].size}</p>
                           
                           {/* Display Customizations */}
+                          {(() => {
+                            console.log('=== CART ITEM DEBUG ===');
+                            console.log('Item:', entry.item.name);
+                            console.log('Customizations:', entry.customizations);
+                            console.log('Customizations keys:', entry.customizations ? Object.keys(entry.customizations) : 'none');
+                            return null;
+                          })()}
+                          
                           {entry.customizations && Object.keys(entry.customizations).length > 0 && (
                             <div className="mt-2 text-xs text-gray-600 space-y-1">
                               {Object.entries(entry.customizations).map(([key, value]) => {
+                                console.log(`Processing customization: ${key}`, value);
                                 if (Array.isArray(value) && value.length > 0) {
                                   // Multi-select customizations
                                   return (
