@@ -201,6 +201,11 @@ const Menu = () => {
       delete newSizes[itemId];
       return newSizes;
     });
+    setSpecialInstructions(prev => {
+      const newInstructions = { ...prev };
+      delete newInstructions[itemId];
+      return newInstructions;
+    });
     setItemQuantities(prev => {
       const newQuantities = { ...prev };
       delete newQuantities[itemId];
