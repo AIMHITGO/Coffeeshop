@@ -528,6 +528,30 @@ frontend:
         agent: "testing"
         comment: "✅ Nutritional Information section has enlarged text styling. Heading uses text-lg class and body text uses text-base class, making it properly visible and readable at normal view."
 
+  - task: "Special Instructions for Drinks (Phase 2)"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/Menu.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ PHASE 2 FEATURE IMPLEMENTED: Special Instructions textarea is present for drinks in the menu page. Found 'Special Instructions (Optional)' section with proper textarea field, character limit (150), and placeholder text. Users can add special instructions like 'Extra hot, no foam' for drink customizations. Feature is properly integrated into the drink customization flow."
+
+  - task: "Edit Item with Special Instructions"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/Menu.jsx, /app/frontend/src/components/GlobalCart.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "⚠️ TESTING INCOMPLETE: Could not complete full testing of edit item functionality due to issues with Latte customization button detection in Playwright script. However, special instructions feature is confirmed present for drinks. Manual verification needed for complete edit flow testing including pre-filling of instructions and update functionality."
+
 metadata:
   created_by: "testing_agent"
   version: "1.2"
