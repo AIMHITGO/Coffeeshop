@@ -18,6 +18,7 @@ const Menu = () => {
   const [expandedCardKey, setExpandedCardKey] = useState(null);
   const [itemCustomizations, setItemCustomizations] = useState({});
   const [selectedFruitTea, setSelectedFruitTea] = useState({});
+  const [specialInstructions, setSpecialInstructions] = useState({});
   const [blockNextClick, setBlockNextClick] = useState(false);
   const [itemQuantities, setItemQuantities] = useState({}); // Track quantity for each item being built
   const drinkSectionRefs = useRef({});
