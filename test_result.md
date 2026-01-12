@@ -841,6 +841,7 @@ test_plan:
   test_all: false
   test_priority: "high_first"
   user_requested_changes_completed: true
+  review_request_testing_completed: true
 
 agent_communication:
   - agent: "testing"
