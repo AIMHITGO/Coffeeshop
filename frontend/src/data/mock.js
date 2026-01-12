@@ -896,7 +896,7 @@ export const breakfastCategories = [
 // DINNER MENU DATA
 // =======================
 
-export const dinnerHeroImage = 'https://images.unsplash.com/photo-1610440042657-612c34d95e9f?q=80&w=1920';
+export const dinnerHeroImage = 'https://images.unsplash.com/photo-1610440042657-612c34d95e9f?q=80&w=1920&fit=crop';
 
 export const dinnerCustomizations = {
   saladProtein: [
