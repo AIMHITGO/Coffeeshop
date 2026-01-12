@@ -65,6 +65,11 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
   };
 
   const handleAddToCart = () => {
+    console.log('=== ADDING TO CART ===');
+    console.log('Item:', item.name);
+    console.log('Selected Customizations:', selectedCustomizations);
+    console.log('Quantity:', quantity);
+    
     if (isEditing) {
       // For editing existing cart items
       const entry = {
@@ -83,6 +88,8 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
         }, 0),
         menuType
       };
+      
+      console.log('Updating cart entry:', entry);
       updateCartItem(editingCartKey, entry);
       
       // Cancel editing mode and reset state
@@ -121,6 +128,9 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
         }, 0),
         menuType
       };
+      
+      console.log('Adding new cart entry with key:', cartKey);
+      console.log('Entry data:', entry);
       
       addToCart(cartKey, entry);
       toast.success(`${item.name} added to cart!`);
