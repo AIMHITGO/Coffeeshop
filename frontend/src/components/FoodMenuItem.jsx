@@ -8,7 +8,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
   const [quantity, setQuantity] = useState(1);
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [selectedCustomizations, setSelectedCustomizations] = useState({});
-  const { addToCart, editingCartKey, updateCartItem, cancelEditing, cart } = useCart();
+  const { addToCart, editingCartKey, setEditingCartKey, updateCartItem, cart } = useCart();
   const itemRef = useRef(null);
   
   const isEditing = editingCartKey && editingCartKey.startsWith(item.id);
@@ -79,7 +79,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
       updateCartItem(editingCartKey, entry);
       
       // Cancel editing mode and reset state
-      cancelEditing();
+      setEditingCartKey(null);
       setIsCustomizing(false);
       setQuantity(1);
       setSelectedCustomizations({});
@@ -124,7 +124,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
   };
 
   const handleCancelEdit = () => {
-    cancelEditing();
+    setEditingCartKey(null);
     setIsCustomizing(false);
     setQuantity(1);
     setSelectedCustomizations({});
