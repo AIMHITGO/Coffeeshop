@@ -331,6 +331,27 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
           {item.customizationTypes?.includes('salad-protein') && renderCustomizationSection('salad-protein', customizations.saladProtein, 'Add Protein')}
           {item.customizationTypes?.includes('salad-dressing') && renderCustomizationSection('salad-dressing', customizations.saladDressing, 'Choose Dressing')}
 
+          {/* Special Instructions */}
+          <div className="mt-6">
+            <h4 className="text-sm font-semibold text-gray-700 mb-2">Special Instructions (Optional)</h4>
+            <textarea
+              value={specialInstructions}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (value.length <= 150) {
+                  setSpecialInstructions(value);
+                }
+              }}
+              placeholder="Any special requests? (e.g., no onions, extra sauce)"
+              className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none resize-none text-sm"
+              rows="3"
+              maxLength={150}
+            />
+            <div className="text-right text-xs text-gray-500 mt-1">
+              {specialInstructions.length}/150 characters
+            </div>
+          </div>
+
           {/* Price Summary */}
           {Object.keys(selectedCustomizations).length > 0 && (
             <div className="mt-6 p-4 bg-white rounded-lg border-2 border-amber-300">
