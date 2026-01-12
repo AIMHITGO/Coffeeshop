@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { ShoppingBag, Plus, Minus, Star, Trash2, ChevronDown, ChevronUp, Settings, RotateCcw, Maximize2, Minimize2, X, ChefHat, Utensils } from 'lucide-react';
+import { ShoppingBag, Plus, Minus, Star, Trash2, ChevronDown, ChevronUp, Settings, RotateCcw, Maximize2, Minimize2, X, ChefHat, Utensils, Coffee } from 'lucide-react';
 import { menuCategories, bestSellers, nutritionalDisclaimer, coffeeCustomizations, fruitTeaShakerFlavors, coffeeHeroImage } from '../data/mock';
 import { toast } from 'sonner';
 import { useCart } from '../contexts/CartContext';
@@ -961,7 +961,7 @@ const Menu = () => {
       >
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center text-white">
-            <ShoppingBag className="h-16 w-16 mx-auto mb-4" />
+            <Coffee className="h-16 w-16 mx-auto mb-4" />
             <h1 className="text-5xl sm:text-6xl font-bold mb-4">Coffee & Drinks</h1>
             <p className="text-xl sm:text-2xl">Discover Our Unique Latin-American & New-American Cuisine</p>
           </div>
