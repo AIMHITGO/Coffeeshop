@@ -78,6 +78,8 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
       };
       updateCartItem(editingCartKey, entry);
       toast.success('Item updated in cart!');
+      
+      // Reset state after update
       setIsCustomizing(false);
       setQuantity(1);
       setSelectedCustomizations({});
