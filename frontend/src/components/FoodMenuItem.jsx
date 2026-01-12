@@ -77,12 +77,14 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
         menuType
       };
       updateCartItem(editingCartKey, entry);
-      toast.success('Item updated in cart!');
       
-      // Reset state after update
+      // Cancel editing mode and reset state
+      cancelEditing();
       setIsCustomizing(false);
       setQuantity(1);
       setSelectedCustomizations({});
+      
+      toast.success('Item updated in cart!');
     } else {
       // Generate unique cart key
       const customizationString = Object.entries(selectedCustomizations)
