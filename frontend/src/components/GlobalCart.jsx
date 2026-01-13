@@ -4,6 +4,7 @@ import { useCart } from '../contexts/CartContext';
 import { Button } from './ui/button';
 import { ShoppingBag, Trash2, X, ChevronDown, ChevronUp, Maximize2, Minimize2, Settings } from 'lucide-react';
 import { toast } from 'sonner';
+import { coffeeCustomizations } from '../data/mock';
 
 const GlobalCart = () => {
   const location = useLocation();
@@ -286,12 +287,29 @@ const GlobalCart = () => {
               {Object.entries(cart).map(([key, entry]) => {
               const customizations = entry.customizations || {};
               
-              // Properly validate hasCustomizations to match rendering logic
+              // Helper function to get customization name and price from ID
+              const getCustomizationDetails = (customizationId) => {
+                // Search through all coffee customization categories
+                for (const category of ['milk', 'addOns', 'syrups', 'sauces', 'shots', 'toppings']) {
+                  if (coffeeCustomizations[category]) {
+                    const found = coffeeCustomizations[category].find(item => item.id === customizationId);
+                    if (found) return { name: found.name, price: found.price || 0 };
+                  }
+                }
+                return null;
+              };
+              
+              // Properly validate hasCustomizations - handle both drink (boolean) and food (object) formats
               const hasCustomizations = Object.entries(customizations).some(([key, value]) => {
+                // Food items: array with objects or object with name
                 if (Array.isArray(value) && value.length > 0) {
                   return true;
                 }
                 if (value && value.name) {
+                  return true;
+                }
+                // Drink items: boolean true values
+                if (value === true) {
                   return true;
                 }
                 return false;
@@ -335,8 +353,8 @@ const GlobalCart = () => {
                           {entry.customizations && Object.keys(entry.customizations).length > 0 && (
                             <div className="mt-2 text-xs text-gray-600 space-y-1">
                               {Object.entries(entry.customizations).map(([key, value]) => {
+                                // Food items: Multi-select (array of objects)
                                 if (Array.isArray(value) && value.length > 0) {
-                                  // Multi-select customizations
                                   return (
                                     <div key={key} className="flex flex-wrap gap-1">
                                       {value.map((item, idx) => (
@@ -347,14 +365,27 @@ const GlobalCart = () => {
                                       ))}
                                     </div>
                                   );
-                                } else if (value && value.name) {
-                                  // Single-select customizations
+                                }
+                                // Food items: Single-select (object with name)
+                                else if (value && value.name) {
                                   return (
                                     <span key={key} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded inline-block mr-1 mb-1 text-xs">
                                       {value.name}
                                       {value.price > 0 && ` +$${value.price.toFixed(2)}`}
                                     </span>
                                   );
+                                }
+                                // Drink items: Boolean flag (need to look up name)
+                                else if (value === true) {
+                                  const details = getCustomizationDetails(key);
+                                  if (details) {
+                                    return (
+                                      <span key={key} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded inline-block mr-1 mb-1 text-xs">
+                                        {details.name}
+                                        {details.price > 0 && ` +$${details.price.toFixed(2)}`}
+                                      </span>
+                                    );
+                                  }
                                 }
                                 return null;
                               })}
