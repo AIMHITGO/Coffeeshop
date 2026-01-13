@@ -299,13 +299,14 @@ const GlobalCart = () => {
                 return null;
               };
               
-              // Properly validate hasCustomizations - handle both drink (boolean) and food (object) formats
+              // Properly validate hasCustomizations - handle all formats (drink arrays, booleans, food objects)
               const hasCustomizations = Object.entries(customizations).some(([key, value]) => {
-                // Food items: array with objects or object with name
+                // Arrays: either food items with objects or drink items with string IDs
                 if (Array.isArray(value) && value.length > 0) {
                   return true;
                 }
-                if (value && value.name) {
+                // Food items: object with name property
+                if (value && typeof value === 'object' && value.name) {
                   return true;
                 }
                 // Drink items: boolean true values
@@ -353,8 +354,8 @@ const GlobalCart = () => {
                           {entry.customizations && Object.keys(entry.customizations).length > 0 && (
                             <div className="mt-2 text-xs text-gray-600 space-y-1">
                               {Object.entries(entry.customizations).map(([key, value]) => {
-                                // Food items: Multi-select (array of objects)
-                                if (Array.isArray(value) && value.length > 0) {
+                                // Food items: Multi-select (array of objects with name property)
+                                if (Array.isArray(value) && value.length > 0 && value[0]?.name) {
                                   return (
                                     <div key={key} className="flex flex-wrap gap-1">
                                       {value.map((item, idx) => (
@@ -366,8 +367,27 @@ const GlobalCart = () => {
                                     </div>
                                   );
                                 }
+                                // Drink items: Array of IDs (syrups, sauces, shots, etc.)
+                                else if (Array.isArray(value) && value.length > 0 && typeof value[0] === 'string') {
+                                  return (
+                                    <div key={key} className="flex flex-wrap gap-1">
+                                      {value.map((id, idx) => {
+                                        const details = getCustomizationDetails(id);
+                                        if (details) {
+                                          return (
+                                            <span key={idx} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded text-xs">
+                                              {details.name}
+                                              {details.price > 0 && ` +$${details.price.toFixed(2)}`}
+                                            </span>
+                                          );
+                                        }
+                                        return null;
+                                      })}
+                                    </div>
+                                  );
+                                }
                                 // Food items: Single-select (object with name)
-                                else if (value && value.name) {
+                                else if (value && typeof value === 'object' && value.name) {
                                   return (
                                     <span key={key} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded inline-block mr-1 mb-1 text-xs">
                                       {value.name}
