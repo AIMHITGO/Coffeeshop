@@ -332,7 +332,7 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
           {item.customizationTypes?.includes('salad-dressing') && renderCustomizationSection('salad-dressing', customizations.saladDressing, 'Choose Dressing')}
 
           {/* Special Instructions */}
-          <div className="mt-6">
+          <div className="mt-6 relative">
             <textarea
               value={specialInstructions}
               onChange={(e) => {
@@ -346,9 +346,18 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
               rows="2"
               maxLength={150}
             />
-            <div className="text-right text-xs text-gray-500 mt-1">
-              {specialInstructions.length}/150 characters
-            </div>
+            {/* Character counter - only shows when >= 130 chars */}
+            {specialInstructions.length >= 130 && (
+              <div 
+                className={`absolute bottom-2 right-2 px-2 py-1 rounded text-white text-[11px] font-semibold pointer-events-none shadow-sm ${
+                  specialInstructions.length === 150 
+                    ? 'bg-red-600/95' 
+                    : 'bg-amber-500/95'
+                }`}
+              >
+                {specialInstructions.length}/150
+              </div>
+            )}
           </div>
 
           {/* Price Summary */}

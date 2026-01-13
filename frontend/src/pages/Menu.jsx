@@ -917,7 +917,7 @@ const Menu = () => {
             )}
 
             {/* Special Instructions */}
-            <div className="mt-2">
+            <div className="mt-2 relative">
               <textarea
                 value={specialInstructions[item.id] || ''}
                 onChange={(e) => {
@@ -935,9 +935,18 @@ const Menu = () => {
                 rows="2"
                 maxLength={150}
               />
-              <div className="text-right text-xs text-gray-500 mt-1">
-                {(specialInstructions[item.id] || '').length}/150 characters
-              </div>
+              {/* Character counter - only shows when >= 130 chars */}
+              {(specialInstructions[item.id] || '').length >= 130 && (
+                <div 
+                  className={`absolute bottom-2 right-2 px-2 py-1 rounded text-white text-[11px] font-semibold pointer-events-none shadow-sm ${
+                    (specialInstructions[item.id] || '').length === 150 
+                      ? 'bg-red-600/95' 
+                      : 'bg-amber-500/95'
+                  }`}
+                >
+                  {(specialInstructions[item.id] || '').length}/150
+                </div>
+              )}
             </div>
 
             {/* Add to Cart / Update Order / Cancel */}
