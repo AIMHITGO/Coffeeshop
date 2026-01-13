@@ -961,7 +961,7 @@ const Menu = () => {
               {editingCartKey && (
                 <Button
                   variant="outline"
-                  className="w-full border-gray-300 text-gray-700 hover:bg-gray-50"
+                  className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 text-sm py-2"
                   onClick={(e) => {
                     e.stopPropagation();
                     cancelEditingCartItem(item.id);
