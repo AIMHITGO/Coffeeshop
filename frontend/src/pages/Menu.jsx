@@ -817,14 +817,14 @@ const Menu = () => {
       >
         <Card
           ref={isExpanded ? expandedCardRef : null}
-          className={`group transition-all duration-300 overflow-visible border-0 bg-white flex flex-col ${
+          className={`group transition-all duration-300 overflow-hidden border-0 bg-white flex flex-col ${
             isExpanded 
               ? 'shadow-2xl ring-2 ring-amber-400 absolute left-0 right-0 top-0' 
               : 'hover:shadow-xl h-full'
           }`}
           style={isExpanded ? { minHeight: 'auto' } : {}}
         >
-          <div className="relative h-48 overflow-hidden bg-white flex-shrink-0">
+          <div className="relative h-36 overflow-hidden flex-shrink-0">
             {item.isBestSeller && (
               <div className="absolute top-2 left-2 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center z-10">
                 <Star className="w-3 h-3 mr-1" fill="white" />
@@ -834,19 +834,22 @@ const Menu = () => {
             <img
               src={item.image}
               alt={item.name}
-              className="w-full h-full object-contain p-2"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+            {/* Calorie Counter - Overlaid on image */}
+            <div className="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2 py-1 rounded-md">
+              {totalCalories} cal
+            </div>
           </div>
 
-          <CardContent className="p-6 flex flex-col flex-grow">
-            <div className="mb-3 flex-shrink-0">
-              <h3 className="text-xl font-bold text-gray-900 line-clamp-1">{item.name}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed mt-1 line-clamp-2 min-h-[40px]">{item.description}</p>
+          <CardContent className="p-4 flex flex-col flex-grow">
+            <div className="mb-2 flex-shrink-0">
+              <h3 className="text-lg font-bold text-gray-900 line-clamp-1">{item.name}</h3>
+              <p className="text-gray-600 text-xs leading-relaxed mt-1 line-clamp-2 min-h-[32px]">{item.description}</p>
             </div>
 
             {/* Size Selector */}
-            <div className="mb-3 flex-shrink-0">
+            <div className="mb-2 flex-shrink-0">
               <div className="flex flex-wrap gap-2">
                 {item.sizes.map((sizeOption, idx) => (
                   <button
@@ -855,7 +858,7 @@ const Menu = () => {
                       e.stopPropagation();
                       if (!blockNextClick) setSelectedSize(item.id, idx);
                     }}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium transition-all flex-1 min-w-[70px] ${
+                    className={`px-2 py-1.5 rounded-lg text-sm font-medium transition-all flex-1 min-w-[70px] ${
                       currentSizeIndex === idx
                         ? 'bg-amber-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-amber-50'
@@ -870,14 +873,6 @@ const Menu = () => {
               </div>
             </div>
 
-            {/* Dynamic Calorie Counter */}
-            <div className="flex items-center justify-between mb-3 flex-shrink-0 bg-gray-50 rounded-lg px-3 py-2">
-              <span className="text-sm text-gray-600">Calories:</span>
-              <span className={`text-sm font-semibold ${totalCalories > 0 ? 'text-amber-600' : 'text-gray-500'}`}>
-                {totalCalories} cal
-              </span>
-            </div>
-
             {/* Fruit Tea Shaker Option */}
             {renderFruitTeaShakerOption(item)}
 
@@ -887,49 +882,42 @@ const Menu = () => {
             {!isExpanded && <div className="flex-grow"></div>}
 
             {showPrice && customizationPrice > 0 && (
-              <div className="mt-3 flex justify-between items-center text-sm">
-                <span className="text-gray-600">Total Price:</span>
+              <div className="mt-2 flex justify-between items-center text-xs">
+                <span className="text-gray-600">Total:</span>
                 <span className="font-bold text-amber-600">${totalPrice.toFixed(2)}</span>
               </div>
             )}
 
-            {/* Quantity Selector (only when not editing) */}
+            {/* Quantity Selector (only when not editing) - Compact Style */}
             {!editingCartKey && (
-              <div className="mt-4 flex items-center justify-center space-x-4 bg-amber-50 rounded-lg py-3">
-                <span className="text-sm font-medium text-gray-700">Quantity:</span>
-                <div className="flex items-center space-x-3">
-                  <Button
-                    size="sm"
-                    variant="ghost"
+              <div className="mt-2 flex items-center justify-between">
+                <span className="text-xs font-medium text-gray-700">Quantity:</span>
+                <div className="flex items-center gap-2 border border-gray-300 rounded-lg px-2 py-1">
+                  <button
                     onClick={(e) => {
                       e.stopPropagation();
                       decrementItemQuantity(item.id);
                     }}
-                    className="h-8 w-8 p-0 hover:bg-amber-100"
+                    className="p-1 rounded-full hover:bg-gray-100"
                   >
-                    <Minus className="h-4 w-4" />
-                  </Button>
-                  <span className="font-bold text-gray-900 min-w-[30px] text-center text-lg">
-                    {getItemQuantity(item.id)}
-                  </span>
-                  <Button
-                    size="sm"
-                    variant="ghost"
+                    <Minus className="h-3 w-3" />
+                  </button>
+                  <span className="w-6 text-center font-semibold text-sm">{getItemQuantity(item.id)}</span>
+                  <button
                     onClick={(e) => {
                       e.stopPropagation();
                       incrementItemQuantity(item.id);
                     }}
-                    className="h-8 w-8 p-0 hover:bg-amber-100"
+                    className="p-1 rounded-full hover:bg-gray-100"
                   >
-                    <Plus className="h-4 w-4" />
-                  </Button>
+                    <Plus className="h-3 w-3" />
+                  </button>
                 </div>
               </div>
             )}
 
             {/* Special Instructions */}
-            <div className="mt-4">
-              <h4 className="text-sm font-semibold text-gray-700 mb-2">Special Instructions (Optional)</h4>
+            <div className="mt-2">
               <textarea
                 value={specialInstructions[item.id] || ''}
                 onChange={(e) => {
@@ -942,9 +930,9 @@ const Menu = () => {
                   }
                 }}
                 onClick={(e) => e.stopPropagation()}
-                placeholder="Any special requests? (e.g., extra hot, less ice)"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none resize-none text-sm"
-                rows="3"
+                placeholder="Any special requests? (e.g., no dairy, less ice)"
+                className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none resize-none text-sm"
+                rows="2"
                 maxLength={150}
               />
               <div className="text-right text-xs text-gray-500 mt-1">
@@ -953,9 +941,9 @@ const Menu = () => {
             </div>
 
             {/* Add to Cart / Update Order / Cancel */}
-            <div className="mt-4 flex-shrink-0 space-y-2">
+            <div className="mt-3 flex-shrink-0 space-y-2">
               <Button
-                className="w-full bg-amber-600 hover:bg-amber-700 text-white"
+                className="w-full bg-amber-600 hover:bg-amber-700 text-white text-sm py-2"
                 onClick={(e) => {
                   e.stopPropagation();
                   if (editingCartKey) {
@@ -966,7 +954,7 @@ const Menu = () => {
                 }}
               >
                 <ShoppingBag className="mr-2 h-4 w-4" />
-                {editingCartKey ? 'Update Order' : 'Add to Order'} {showPrice && customizationPrice > 0 && `($${totalPrice.toFixed(2)})`}
+                {editingCartKey ? 'Update Order' : 'Add to Order'}
               </Button>
               
               {/* Cancel Button (only when editing) */}
