@@ -333,7 +333,6 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
 
           {/* Special Instructions */}
           <div className="mt-6">
-            <h4 className="text-sm font-semibold text-gray-700 mb-2">Special Instructions (Optional)</h4>
             <textarea
               value={specialInstructions}
               onChange={(e) => {
@@ -342,9 +341,9 @@ const FoodMenuItem = ({ item, customizations, menuType }) => {
                   setSpecialInstructions(value);
                 }
               }}
-              placeholder="Any special requests? (e.g., no onions, extra sauce)"
-              className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none resize-none text-sm"
-              rows="3"
+              placeholder="Any special requests? (e.g., no dairy, less ice)"
+              className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none resize-none text-sm"
+              rows="2"
               maxLength={150}
             />
             <div className="text-right text-xs text-gray-500 mt-1">
