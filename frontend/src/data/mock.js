@@ -314,7 +314,7 @@ export const menuCategories = [
         id: 'cold-brew',
         name: 'Cold Brew',
         description: 'Smooth, slow-steeped cold brew coffee',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/COLD-Brew-1920w.png',
+        image: 'https://images.unsplash.com/photo-1549652127-2e5e59e86a7a?w=800&q=80',
         category: 'Cold Brew',
         sizes: [
           { size: 'Small', price: 3.75, calories: 0 },
@@ -326,7 +326,7 @@ export const menuCategories = [
         id: 'cold-brew-oat-latte',
         name: 'Cold Brew Oat Latte',
         description: 'Cold brew with creamy oat milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/COLD-BREW-OAT-LATTE-1920w.png',
+        image: 'https://images.unsplash.com/photo-1620360289100-030b032e5a27?w=800&q=80',
         category: 'Cold Brew',
         sizes: [
           { size: 'Small', price: 5.25, calories: 150 },
