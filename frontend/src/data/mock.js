@@ -189,7 +189,7 @@ export const menuCategories = [
         id: 'caramel-macchiato',
         name: 'Caramel Macchiato',
         description: 'Espresso with vanilla, milk, and caramel drizzle',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Caramel-Machiato-1920w.png',
+        image: 'https://images.unsplash.com/photo-1638543284847-3a6bed3e1689?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 4.25, calories: 300 },
@@ -201,7 +201,7 @@ export const menuCategories = [
         id: 'mocha',
         name: 'Mocha',
         description: 'Espresso with rich chocolate and steamed milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/cafe-mocha-8f4d3834-1920w.png',
+        image: 'https://images.unsplash.com/photo-1618576230663-9714aecfb99a?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 6.50, calories: 360 },
@@ -213,7 +213,7 @@ export const menuCategories = [
         id: 'white-chocolate-mocha',
         name: 'White Chocolate Mocha',
         description: 'Espresso with sweet white chocolate',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/White-chocolate-Mocha-1920w.png',
+        image: 'https://images.unsplash.com/photo-1596078841242-12f73dc697c6?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 5.15, calories: 360 },
@@ -246,7 +246,7 @@ export const menuCategories = [
         id: 'cappuccino',
         name: 'Cappuccino',
         description: 'The essence of handcrafting - our rich espresso artfully balanced with freshly micro-foamed milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Capuccino-3f36d8f2-1920w.png',
+        image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?w=800&q=80',
         category: 'Cappuccino',
         sizes: [
           { size: 'Small', price: 4.65, calories: 120 },
