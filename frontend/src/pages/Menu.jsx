@@ -882,9 +882,9 @@ const Menu = () => {
             {!isExpanded && <div className="flex-grow"></div>}
 
             {showPrice && customizationPrice > 0 && (
-              <div className="mt-2 flex justify-between items-center text-xs">
-                <span className="text-gray-600">Total:</span>
-                <span className="font-bold text-amber-600">${totalPrice.toFixed(2)}</span>
+              <div className="sticky bottom-[60px] mt-2 flex justify-between items-center text-xs bg-gradient-to-b from-white/95 to-white py-3 px-4 -mx-4 border-t-2 border-amber-500 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-10">
+                <span className="text-gray-700 font-semibold">Total:</span>
+                <span className="font-bold text-amber-600 text-base">${totalPrice.toFixed(2)}</span>
               </div>
             )}
 

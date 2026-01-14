@@ -97,7 +97,7 @@ export const menuCategories = [
         id: 'espresso',
         name: 'Espresso',
         description: 'Rich, concentrated shot of premium espresso',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Espresso-0e3f8f36-1920w.png',
+        image: 'https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Single', price: 3.00, calories: 10 },
@@ -109,7 +109,7 @@ export const menuCategories = [
         id: 'americano',
         name: 'Americano',
         description: 'Double espresso with hot water',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Americano-10cad5cd-1920w.png',
+        image: 'https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 3.75, calories: 15 },
@@ -165,7 +165,7 @@ export const menuCategories = [
         id: 'flat-white',
         name: 'Flat White',
         description: 'Double espresso with silky microfoam',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Flat---white-1920w.png',
+        image: 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 6.00, calories: 120 },
