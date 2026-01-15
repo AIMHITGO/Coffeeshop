@@ -394,7 +394,7 @@ export const menuCategories = [
         id: 'iced-matcha-jelly',
         name: 'Iced Matcha with Brown Sugar Jelly',
         description: 'Premium matcha with brown sugar jelly',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice+Brown+sugar+Matcha+OAT+LATTE-1920w.png',
+        image: 'https://images.unsplash.com/photo-1592663527359-cf6642f54cff?w=800&q=80',
         category: 'Signature',
         sizes: [
           { size: 'Small', price: 6.65, calories: 230 },
