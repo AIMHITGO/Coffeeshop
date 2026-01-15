@@ -97,7 +97,7 @@ export const menuCategories = [
         id: 'espresso',
         name: 'Espresso',
         description: 'Rich, concentrated shot of premium espresso',
-        image: 'https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1508088405209-fbd63b6a4f50?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Single', price: 3.00, calories: 10 },
@@ -109,7 +109,7 @@ export const menuCategories = [
         id: 'americano',
         name: 'Americano',
         description: 'Double espresso with hot water',
-        image: 'https://images.unsplash.com/photo-1579992357154-faf4bde95b3d?w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1576767540979-8d0de64942f7?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 3.75, calories: 15 },
@@ -189,7 +189,7 @@ export const menuCategories = [
         id: 'caramel-macchiato',
         name: 'Caramel Macchiato',
         description: 'Espresso with vanilla, milk, and caramel drizzle',
-        image: 'https://images.unsplash.com/photo-1638543284847-3a6bed3e1689?w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 4.25, calories: 300 },
@@ -201,7 +201,7 @@ export const menuCategories = [
         id: 'mocha',
         name: 'Mocha',
         description: 'Espresso with rich chocolate and steamed milk',
-        image: 'https://images.unsplash.com/photo-1618576230663-9714aecfb99a?w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1608902905656-fc745a1bb551?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 6.50, calories: 360 },
@@ -213,7 +213,7 @@ export const menuCategories = [
         id: 'white-chocolate-mocha',
         name: 'White Chocolate Mocha',
         description: 'Espresso with sweet white chocolate',
-        image: 'https://images.unsplash.com/photo-1596078841242-12f73dc697c6?w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1593443320739-77f74939d0da?w=800&q=80',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 5.15, calories: 360 },
@@ -246,7 +246,7 @@ export const menuCategories = [
         id: 'cappuccino',
         name: 'Cappuccino',
         description: 'The essence of handcrafting - our rich espresso artfully balanced with freshly micro-foamed milk',
-        image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&q=80',
         category: 'Cappuccino',
         sizes: [
           { size: 'Small', price: 4.65, calories: 120 },
@@ -314,7 +314,7 @@ export const menuCategories = [
         id: 'cold-brew',
         name: 'Cold Brew',
         description: 'Smooth, slow-steeped cold brew coffee',
-        image: 'https://images.unsplash.com/photo-1549652127-2e5e59e86a7a?w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=800&q=80',
         category: 'Cold Brew',
         sizes: [
           { size: 'Small', price: 3.75, calories: 0 },
@@ -326,7 +326,7 @@ export const menuCategories = [
         id: 'cold-brew-oat-latte',
         name: 'Cold Brew Oat Latte',
         description: 'Cold brew with creamy oat milk',
-        image: 'https://images.unsplash.com/photo-1620360289100-030b032e5a27?w=800&q=80',
+        image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80',
         category: 'Cold Brew',
         sizes: [
           { size: 'Small', price: 5.25, calories: 150 },
