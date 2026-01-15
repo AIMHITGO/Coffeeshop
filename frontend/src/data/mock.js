@@ -338,7 +338,7 @@ export const menuCategories = [
         id: 'horchata-espresso',
         name: 'Horchata & Espresso',
         description: 'Creamy horchata with bold espresso',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata---Espresso-1920w.png',
+        image: 'https://images.unsplash.com/photo-1592663527359-cf6642f54cff?w=800&q=80',
         category: 'Signature',
         sizes: [
           { size: 'Medium Only', price: 7.65, calories: 0 }
@@ -348,7 +348,7 @@ export const menuCategories = [
         id: 'horchata-cold-brew-latte',
         name: 'Horchata Cold Brew Oat Latte',
         description: 'Latin-inspired cold brew with horchata and oat milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
+        image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80',
         category: 'Signature',
         sizes: [
           { size: 'Medium', price: 7.40, calories: 150 }
@@ -358,7 +358,7 @@ export const menuCategories = [
         id: 'cloud-original',
         name: 'Cloud - Original',
         description: 'Cold brew with condensed milk, chicory syrup, and half & half',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
+        image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=800&q=80',
         category: 'Signature',
         sizes: [
           { size: 'Small', price: 3.75, calories: 160 },
@@ -370,7 +370,7 @@ export const menuCategories = [
         id: 'cloud-coconut',
         name: 'Cloud - Coconut',
         description: 'Cold brew with coconut flavor, condensed milk, chicory syrup',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
+        image: 'https://images.unsplash.com/photo-1592663527359-cf6642f54cff?w=800&q=80',
         category: 'Signature',
         sizes: [
           { size: 'Small', price: 4.95, calories: 160 },
@@ -382,7 +382,7 @@ export const menuCategories = [
         id: 'brown-sugar-almond-latte',
         name: 'Brown Sugar Almond Latte with Jelly',
         description: 'Cold brew with brown sugar jelly and almond milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Horchata-COLD-BREW-OAT-LATTE-1920w.png',
+        image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80',
         category: 'Signature',
         sizes: [
           { size: 'Small', price: 6.50, calories: 230 },
