@@ -18,7 +18,11 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Menu', path: '/menu' },
+    { name: 'Menu', path: '/menu', submenu: [
+      { name: 'Coffee & Drinks', path: '/menu' },
+      { name: 'Breakfast', path: '/breakfast' },
+      { name: 'Dinner', path: '/dinner' }
+    ]},
     { name: 'Rewards', path: '/rewards' },
     { name: 'Blog', path: '/blog' },
     { name: 'About', path: '/about' },
@@ -43,25 +47,57 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
+          <Link 
+            to="/" 
+            className="flex items-center space-x-3 group"
+            onClick={() => {
+              if (location.pathname === '/') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
             <img 
               src="https://customer-assets.emergentagent.com/job_local-sip/artifacts/l6mm4os6_Happy-Logo-1920w.webp" 
               alt="Happy Place Coffee & Eats"
-              className="h-14 w-auto transition-transform duration-300 group-hover:scale-105"
+              className="h-20 w-auto transition-transform duration-300 group-hover:scale-105"
             />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <button
-                key={link.path}
-                onClick={() => handleNavClick(link.path)}
-                className="px-4 py-2 text-gray-700 hover:text-amber-700 font-medium transition-colors relative group"
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 group-hover:w-full transition-all duration-300"></span>
-              </button>
+              <div key={link.path} className="relative group">
+                {link.submenu ? (
+                  <>
+                    <button
+                      onClick={() => handleNavClick(link.path)}
+                      className="px-4 py-2 text-gray-700 hover:text-amber-700 font-medium transition-colors relative"
+                    >
+                      {link.name}
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 group-hover:w-full transition-all duration-300"></span>
+                    </button>
+                    <div className="absolute left-0 mt-1 hidden group-hover:block bg-white shadow-lg rounded-lg py-2 min-w-[180px] z-50">
+                      {link.submenu.map((sublink) => (
+                        <button
+                          key={sublink.path}
+                          onClick={() => handleNavClick(sublink.path)}
+                          className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-amber-50 hover:text-amber-700 transition-colors"
+                        >
+                          {sublink.name}
+                        </button>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => handleNavClick(link.path)}
+                    className="px-4 py-2 text-gray-700 hover:text-amber-700 font-medium transition-colors relative"
+                  >
+                    {link.name}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-600 group-hover:w-full transition-all duration-300"></span>
+                  </button>
+                )}
+              </div>
             ))}
           </nav>
 
@@ -115,16 +151,35 @@ const Header = () => {
         <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl">
           <div className="px-4 py-6 space-y-3">
             {navLinks.map((link) => (
-              <button
-                key={link.path}
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  handleNavClick(link.path);
-                }}
-                className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-amber-50 hover:text-amber-700 rounded-lg font-medium transition-colors"
-              >
-                {link.name}
-              </button>
+              <div key={link.path}>
+                <button
+                  onClick={() => {
+                    if (!link.submenu) {
+                      setIsMobileMenuOpen(false);
+                      handleNavClick(link.path);
+                    }
+                  }}
+                  className="block w-full text-left px-4 py-3 text-gray-700 hover:bg-amber-50 hover:text-amber-700 rounded-lg font-medium transition-colors"
+                >
+                  {link.name}
+                </button>
+                {link.submenu && (
+                  <div className="ml-4 mt-2 space-y-2">
+                    {link.submenu.map((sublink) => (
+                      <button
+                        key={sublink.path}
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          handleNavClick(sublink.path);
+                        }}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-600 hover:bg-amber-50 hover:text-amber-700 rounded-lg transition-colors"
+                      >
+                        {sublink.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
             <Button
               className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white shadow-lg"

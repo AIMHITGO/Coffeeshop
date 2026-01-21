@@ -726,3 +726,282 @@ export const loyaltyTiers = [
     color: 'red'
   }
 ];
+
+// Coffee Menu Hero Image
+export const coffeeHeroImage = 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/coffeee-1920w.png';
+
+
+// =======================
+// BREAKFAST MENU DATA
+// =======================
+
+export const breakfastHeroImage = 'https://customer-assets.emergentagent.com/job_happyeats/artifacts/59ah1pxf_hero_breakfast_2400x800.jpg';
+
+export const breakfastCustomizations = {
+  proteins: {
+    baleadas: [
+      { id: 'avocado', name: 'Avocado', price: 1.50 },
+      { id: 'chicken', name: 'Chicken', price: 3.00 },
+      { id: 'beef', name: 'Beef', price: 4.00 },
+      { id: 'mexican-chorizo', name: 'Mexican Chorizo', price: 3.49 }
+    ]
+  },
+  bread: [
+    { id: 'white', name: 'White Bread', price: 0 },
+    { id: 'whole-grain', name: 'Whole-Grain', price: 0 },
+    { id: 'plain-bagel', name: 'Plain Bagel', price: 0 },
+    { id: 'everything-bagel', name: 'Everything Bagel', price: 0 },
+    { id: 'croissant', name: 'Croissant', price: 0 }
+  ],
+  extras: {
+    sandwich: [
+      { id: 'extra-eggs', name: 'Extra Eggs', price: 2.99 },
+      { id: 'extra-sausage', name: 'Extra Sausage', price: 3.99 }
+    ]
+  },
+  cheese: [
+    { id: 'yellow', name: 'Yellow', price: 0 },
+    { id: 'white', name: 'White', price: 0 },
+    { id: 'provolone', name: 'Provolone', price: 0 },
+    { id: 'swiss', name: 'Swiss', price: 0 },
+    { id: 'pepper-jack', name: 'Pepper Jack', price: 0 }
+  ],
+  buildYourOwn: {
+    veggies: [
+      { id: 'spinach', name: 'Spinach', price: 0 },
+      { id: 'scallions', name: 'Scallions', price: 0 },
+      { id: 'red-peppers', name: 'Red Peppers', price: 0 },
+      { id: 'green-peppers', name: 'Green Peppers', price: 0 },
+      { id: 'mushrooms', name: 'Mushrooms', price: 0 },
+      { id: 'tomatoes', name: 'Tomatoes', price: 0 },
+      { id: 'broccoli', name: 'Broccoli', price: 0 },
+      { id: 'jalapenos', name: 'Jalapeños', price: 0 },
+      { id: 'kalamata-olives', name: 'Kalamata Olives', price: 0 },
+      { id: 'potatoes', name: 'Potatoes', price: 0 },
+      { id: 'capers', name: 'Capers', price: 0 }
+    ],
+    cheese: [
+      { id: 'american', name: 'American', price: 0 },
+      { id: 'cheddar', name: 'Cheddar', price: 0 },
+      { id: 'swiss', name: 'Swiss', price: 0 },
+      { id: 'pepper-jack', name: 'Pepper Jack', price: 0 },
+      { id: 'feta', name: 'Feta', price: 0 },
+      { id: 'cream-cheese', name: 'Cream Cheese', price: 0 }
+    ],
+    meats: [
+      { id: 'bacon', name: 'Bacon', price: 0 },
+      { id: 'canadian-bacon', name: 'Canadian Bacon', price: 0 },
+      { id: 'sausage', name: 'Sausage', price: 0 },
+      { id: 'turkey-sausage', name: 'Turkey Sausage', price: 0 },
+      { id: 'chicken', name: 'Chicken', price: 0 },
+      { id: 'chorizo', name: 'Chorizo', price: 0 }
+    ],
+    premiumMeats: [
+      { id: 'steak', name: 'Steak', price: 3.99 },
+      { id: 'lox', name: 'Lox', price: 3.99 }
+    ]
+  }
+};
+
+export const breakfastCategories = [
+  {
+    id: 'breakfast-sandwiches',
+    name: 'Happy Breakfast Sandwiches',
+    items: [
+      { id: 'our-happy-place', name: 'OUR HAPPY PLACE', description: 'Scrambled eggs, spinach, tomato, Swiss, mushroom on a butter croissant', price: 11.95, hasCustomization: false },
+      { id: 'egg-cheese', name: 'EGG & CHEESE', description: 'Egg and cheese on your choice of bread', price: 10.99, hasCustomization: true, customizationTypes: ['bread', 'cheese', 'extras'] },
+      { id: 'ham-egg-cheese', name: 'HAM, EGG & CHEESE', description: 'Ham, egg, and cheese on your choice of bread', price: 11.95, hasCustomization: true, customizationTypes: ['bread', 'cheese', 'extras'] },
+      { id: 'bacon-egg-cheese', name: 'BACON, EGG & CHEESE', description: 'Bacon, egg, and cheese on your choice of bread', price: 12.49, hasCustomization: true, customizationTypes: ['bread', 'cheese', 'extras'] },
+      { id: 'sausage-egg-cheese', name: 'SAUSAGE, EGG & CHEESE', description: 'Sausage, egg, and cheese on your choice of bread', price: 12.99, hasCustomization: true, customizationTypes: ['bread', 'cheese', 'extras'] }
+    ]
+  },
+  {
+    id: 'latino-breakfast',
+    name: 'Latino Breakfast',
+    items: [
+      { id: 'baleadas', name: 'BALEADAS CATRACHAS (regular)', description: 'Scrambled eggs, pinto refried beans, spanish sour cream, fresh cheese on a flour tortilla', price: 10.00, hasCustomization: true, customizationTypes: ['baleadas-proteins'] },
+      { id: 'barrios', name: 'BARRIOS BREAKFAST', description: '2 eggs scrambled or sunny side up, served with mexican sausage, fried beans, fried plantains, sour cream, corn or flour tortilla', price: 14.49, hasCustomization: false },
+      { id: 'huevos-rancheros', name: 'HUEVOS RANCHEROS', description: '2 fried eggs served on lightly fried corn tortillas topped with salsa ranchera. Served with avocado, pinto refried beans, spanish fresh cheese, spanish sour cream', price: 13.95, hasCustomization: false },
+      { id: 'chicken-quesadilla', name: 'CHICKEN QUESADILLA', description: 'Blended cheese, latino sour cream, guacamole', price: 14.00, hasCustomization: false }
+    ]
+  },
+  {
+    id: 'happy-eggs',
+    name: 'Happy Eggs',
+    items: [
+      { id: 'eggs-platter', name: '2 HAPPY EGGS PLATTER', description: 'Eggs your way served with choice of bacon or sausage. Served with fries and choice of bread', price: 12.49, hasCustomization: false },
+      { id: 'happy-scramble', name: 'HAPPY SCRAMBLE', description: 'Mushrooms, broccoli, scallions, bacon, mexico chorizo, mexican style shredded cheese', price: 15.99, hasCustomization: false },
+      { id: 'south-border-scramble', name: 'SOUTH OF THE BORDER SCRAMBLE', description: 'Mexican chorizo, tomatoes, onions, green peppers, potatoes, salsa, sour cream, & pepper jack cheese', price: 14.99, hasCustomization: false },
+      { id: 'florentine-omelet', name: 'FLORENTINE OMELET', description: 'Scallions, spinach, bacon, & Parmesan cheese', price: 13.95, hasCustomization: false },
+      { id: 'veggie-omelet', name: 'VEGGIE OMELET', description: 'Mushrooms, spinach, tomatoes, green peppers, red peppers, onions, & broccoli', price: 14.99, hasCustomization: false },
+      { id: 'build-your-own', name: 'BUILD YOUR OWN SCRAMBLE, OMELET, OR BURRITO', description: 'Choose your veggies, cheese, and meats to create your perfect dish', price: 13.99, hasCustomization: true, customizationTypes: ['build-your-own'] }
+    ]
+  },
+  {
+    id: 'happily-original',
+    name: 'Happily Original',
+    items: [
+      { id: 'happily-original', name: 'HAPPILY ORIGINAL', description: 'Oatmeal with brown sugar, peanut butter or raisins. Add blueberries, pecan, honey or banana', price: 2.50, hasCustomization: false },
+      { id: 'granola-bowl', name: 'SUNRISE GRANOLA BOWL', description: 'Non-fat vanilla Greek yogurt with fresh, seasonal fruit and granola', price: 11.99, hasCustomization: false },
+      { id: 'fruit-bowl', name: 'FRUIT BOWL', description: 'Mixed Fruit with plain yogurt', price: 10.95, hasCustomization: false }
+    ]
+  },
+  {
+    id: 'from-griddle',
+    name: 'From the Griddle',
+    items: [
+      { id: 'pancakes-short', name: 'PANCAKES (short)', description: '2 pancakes', price: 10.00, hasCustomization: false },
+      { id: 'pancakes-full', name: 'PANCAKES (full)', description: '3 pancakes', price: 13.95, hasCustomization: false },
+      { id: 'french-toast', name: 'TRADITIONAL FRENCH TOAST', description: 'Topped with powdered sugar and served with syrup and butter', price: 12.49, hasCustomization: false },
+      { id: 'bananas-foster', name: 'BANANAS FOSTER FRENCH TOAST', description: 'Fresh bananas pan-fried in syrup. Topped with powdered sugar', price: 13.99, hasCustomization: false },
+      { id: 'waffles-one', name: 'WAFFLES (one)', description: '1 waffle. Strawberry, blueberry, syrup and butter', price: 12.00, hasCustomization: false },
+      { id: 'waffles-two', name: 'WAFFLES (two)', description: '2 waffles. Strawberry, blueberry, syrup and butter', price: 20.00, hasCustomization: false }
+    ]
+  },
+  {
+    id: 'hp-special',
+    name: 'HP Special',
+    items: [
+      { id: 'joelles-special', name: "Joelle's Special", description: 'All atop toasted English muffin and served with potatoes Hollandaise. Add fried green tomatoes and served with our secret Sweet Potato Hash', price: 14.49, hasCustomization: false },
+      { id: 'classic-benedict', name: 'The Classic Benedict', description: 'All atop toasted English muffin and served with potatoes Hollandaise. Pork ham', price: 15.99, hasCustomization: false }
+    ]
+  },
+  {
+    id: 'super-sides',
+    name: 'Super Sides',
+    items: [
+      { id: 'toast', name: 'TOAST', description: 'Two slices, choose white, wheat, sourdough, or rye bread. Comes buttered with your choice of jam', price: 3.09, hasCustomization: false },
+      { id: 'bacon-strips', name: 'BACON STRIPS', description: '(3) strips - specify your level of crispiness when ordering', price: 3.99, hasCustomization: false },
+      { id: 'bagel-cream-cheese', name: 'BAGEL AND CREAM CHEESE', description: 'Plain, salt, cheese, or everything bagel with plain cream cheese', price: 4.13, hasCustomization: false },
+      { id: 'eggs', name: 'EGGS', description: '(2) eggs - scrambled, poached, over easy, or sunny side up', price: 3.49, hasCustomization: false },
+      { id: 'pork-sausage', name: 'PORK SAUSAGE', description: '', price: 3.20, hasCustomization: false },
+      { id: 'pancake', name: 'PANCAKE', description: 'One 8 inch pancake served with butter & syrup', price: 4.99, hasCustomization: false },
+      { id: 'seasonal-fruit', name: 'SEASONAL FRUIT', description: '', price: 4.49, hasCustomization: false },
+      { id: 'yogurt', name: 'YOGURT', description: '', price: 3.49, hasCustomization: false },
+      { id: 'granola-fruit-yogurt', name: 'GRANOLA, FRUIT AND YOGURT', description: '', price: 4.99, hasCustomization: false }
+    ]
+  },
+  {
+    id: 'breakfast-drinks',
+    name: 'Drinks',
+    items: [
+      { id: 'fountain-soda', name: 'FOUNTAIN SODA', description: 'Coca Cola products', price: 3.75, hasCustomization: false },
+      { id: 'iced-tea', name: 'ICED TEA', description: 'Sweet, unsweet, green tea', price: 4.00, hasCustomization: false },
+      { id: 'lemonade', name: 'LEMONADE', description: 'Classic lemon or pink', price: 3.99, hasCustomization: false }
+    ]
+  }
+];
+
+// =======================
+// DINNER MENU DATA
+// =======================
+
+export const dinnerHeroImage = 'https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?q=80&w=1920';
+
+export const dinnerCustomizations = {
+  saladProtein: [
+    { id: 'salmon', name: 'Salmon', price: 5.00 },
+    { id: 'beef', name: 'Beef', price: 4.00 },
+    { id: 'chicken', name: 'Chicken', price: 3.00 }
+  ],
+  saladDressing: [
+    { id: 'ranch', name: 'Ranch', price: 0 },
+    { id: 'chipotle', name: 'Chipotle', price: 0 },
+    { id: 'caesar', name: 'Caesar', price: 0 },
+    { id: 'balsamic', name: 'Balsamic Vinaigrette', price: 0 }
+  ],
+  sandwichBread: [
+    { id: 'sourdough', name: 'Sourdough', price: 0 },
+    { id: 'italian', name: 'Italian Bread', price: 0 }
+  ],
+  baleadasProteins: [
+    { id: 'avocado', name: 'Avocado', price: 1.50 },
+    { id: 'chicken', name: 'Chicken', price: 3.00 },
+    { id: 'beef', name: 'Beef', price: 4.00 },
+    { id: 'mexican-chorizo', name: 'Mexican Chorizo', price: 3.49 }
+  ]
+};
+
+export const dinnerCategories = [
+  {
+    id: 'happy-beginnings',
+    name: 'Happy Beginnings',
+    items: [
+      { id: 'calamari', name: 'CALAMARI', description: 'Flash fried and served with pesto mayonnaise', price: 14.99, hasCustomization: false },
+      { id: 'caprese-soup', name: 'CAPRESE SOUP', description: 'Tomato, Cream with Melted Mozzarella, Shredded Cheese, Olive Oil', price: 10.99, hasCustomization: false }
+    ]
+  },
+  {
+    id: 'hand-held-happiness',
+    name: 'Hand Held Happiness',
+    description: 'All sandwiches are served with sourdough or italian bread, and fries, lettuce, tomatoes, onions and pickles',
+    items: [
+      { id: 'hpc-hamburger', name: 'JUICY HPC HAMBURGER', description: 'Fresh Ground Beef Stuffed with Cheddar Cheese, Mozzarella, Candied Onions and Bacon', price: 15.95, hasCustomization: true, customizationTypes: ['sandwich-bread'] },
+      { id: 'turkey-hpc', name: 'TURKEY THE HPC WAY', description: 'Slices Of Fresh Roasted Turkey, Cranberry, and Creole Mayonnaise', price: 14.99, hasCustomization: true, customizationTypes: ['sandwich-bread'] },
+      { id: 'roast-beef-panini', name: 'ROAST BEEF PANINI', description: 'Roast beef, Swiss cheese, house-roasted onions, Smoked Tomato, and Pesto Mayonnaise on sourdough bread', price: 15.49, hasCustomization: true, customizationTypes: ['sandwich-bread'] },
+      { id: 'casino-royale', name: 'HAPPY CASINO ROYALE', description: 'Smoked Ham, Provolone, and Fried Egg grilled on Sourdough', price: 14.49, hasCustomization: true, customizationTypes: ['sandwich-bread'] },
+      { id: 'grilled-chicken', name: '"CLASSIC" GRILLED CHICKEN', description: 'Fresh Chicken, Pepper Jack, Pesto Mayonnaise, house roasted onions and smoked tomatoes on italian/sourdough bread', price: 14.95, hasCustomization: true, customizationTypes: ['sandwich-bread'] },
+      { id: 'happy-veggie', name: 'HAPPY VEGGIE', description: 'Mushrooms, zucchini and spinach with pesto mayonnaise and Fresh Mozzarella on a sourdough bread', price: 12.95, hasCustomization: true, customizationTypes: ['sandwich-bread'] },
+      { id: 'barrios-burger', name: 'BARRIOS BURGER', description: 'Fresh ground beef, stuffed with yellow cheese, red onions, tomatoes, lettuce and bacon', price: 16.99, hasCustomization: true, customizationTypes: ['sandwich-bread'] }
+    ]
+  },
+  {
+    id: 'greens',
+    name: 'Greens',
+    items: [
+      { id: 'chipotle', name: 'CHIPOTLE', description: 'Roasted Corn, Tomatoes, Black Beans, Avocado, Blended Cheese, Crispy Tortilla Strips, and Grilled Chicken Breast with Chipotle dressing', price: 16.55, hasCustomization: true, customizationTypes: ['salad-protein', 'salad-dressing'] },
+      { id: 'cobb', name: 'COBB', description: 'Romaine Lettuce, Tomatoes, Bacon, Grilled Chicken, Hard Boiled Egg, Avocado, Honey Mustard Dressing', price: 15.55, hasCustomization: true, customizationTypes: ['salad-protein', 'salad-dressing'] },
+      { id: 'chicken-caesar', name: 'GRILLED CHICKEN CAESAR', description: 'Romaine Lettuce, Grilled Chicken, Parmesan Cheese, Caesar Dressing, and Roasted Garlic Croutons', price: 14.49, hasCustomization: true, customizationTypes: ['salad-protein', 'salad-dressing'] }
+    ]
+  },
+  {
+    id: 'happily-more',
+    name: 'Happily More',
+    items: [
+      { id: 'lomo-saltado', name: 'LOMO SALTADO', description: 'Traditional Peruvian dish, of marinated stir-fried steak, onions, tomatoes, pepper, and french fries, served with rice', price: 23.95, hasCustomization: false },
+      { id: 'wynes-special', name: 'WYNE\'S "ALWAYS SPECIAL"', description: 'Our take on the famous chicken pot pie, served with a side of tarragon roasted carrots', price: 15.95, hasCustomization: false },
+      { id: 'mix-fajitas', name: 'MIX FAJITAS', description: 'Classic mix grill of gulf shrimp, vegetables, carne asada, chicken green salad served with yellow rice, refried beans, two corn or flour tortillas on salsa latina', price: 31.99, hasCustomization: false },
+      { id: 'chicken-grill', name: 'CHICKEN GRILL', description: 'Grilled Chicken Breast and Vegetables served with Tortillas, Yellow Rice, and Salsa Latina and Refried Beans', price: 20.00, hasCustomization: false },
+      { id: 'chicken-fajitas', name: 'CHICKEN FAJITAS', description: 'Chicken breast strips, vegetables, green salad, yellow rice, refried beans, two corn or flour tortillas on home made salsa latina', price: 23.00, hasCustomization: false },
+      { id: 'steak-fajitas', name: 'STEAK FAJITAS', description: 'Steak Fajitas, vegetables, green salad, yellow rice, refried beans, two corn or flour tortillas on home made salsa latina', price: 25.00, hasCustomization: false },
+      { id: 'carne-asada', name: 'CARNE ASADA A LA PLANCHA', description: '8 oz. steak fajita on the griddle, green salad, yellow rice, refried beans, two corn or flour tortillas on a home made salsa latina', price: 25.00, hasCustomization: false }
+    ]
+  },
+  {
+    id: 'pupusas-tacos',
+    name: 'Pupusas & Tacos',
+    items: [
+      { id: 'pupusas', name: 'PUPUSAS', description: '', price: 4.00, hasCustomization: false },
+      { id: 'pupusas-revueltas', name: 'PUPUSAS REVUELTAS', description: 'Chicken and cheese', price: 4.00, hasCustomization: false },
+      { id: 'pupusas-frijol', name: 'PUPUSAS DE FRIJOL CON QUESO', description: 'Beans and cheese', price: 3.50, hasCustomization: false },
+      { id: 'pupusas-queso', name: 'PUPUSAS DE QUESO', description: 'Cheese', price: 3.50, hasCustomization: false },
+      { id: 'loroco', name: 'LOROCO', description: '', price: 3.75, hasCustomization: false },
+      { id: 'baleadas-dinner', name: 'BALEADAS CATRACHAS (regular)', description: 'Scrambled eggs, pinto refried beans, spanish sour cream, fresh cheese on a flour tortilla', price: 10.00, hasCustomization: true, customizationTypes: ['baleadas-proteins'] },
+      { id: 'chicken-tacos', name: 'CHICKEN TACOS', description: '', price: 13.00, hasCustomization: false },
+      { id: 'beef-tacos', name: 'BEEF TACOS', description: '', price: 16.00, hasCustomization: false },
+      { id: 'chorizo', name: 'CHORIZO', description: '', price: 14.00, hasCustomization: false }
+    ]
+  },
+  {
+    id: 'dinner-sides',
+    name: 'Sides',
+    items: [
+      { id: 'fries', name: 'FRIES', description: '', price: 4.50, hasCustomization: false },
+      { id: 'fried-plantain', name: 'FRIED PLANTAIN', description: '', price: 5.99, hasCustomization: false },
+      { id: 'corn-tortillas', name: '2 CORN TORTILLAS', description: '', price: 2.25, hasCustomization: false },
+      { id: 'onion-rings', name: 'ONION RINGS', description: '', price: 8.00, hasCustomization: false },
+      { id: 'bacon-avocado-toast', name: 'BACON AVOCADO TOAST', description: '', price: 9.99, hasCustomization: false },
+      { id: 'avocado-toast', name: 'AVOCADO TOAST', description: '', price: 8.25, hasCustomization: false }
+    ]
+  },
+  {
+    id: 'desserts',
+    name: 'Now You\'re Really Happy Desserts',
+    items: [
+      { id: 'cheesecake', name: 'CLASSIC \'AMERICAN\' CHEESECAKE', description: 'With mixed berry coulis', price: 7.95, hasCustomization: false },
+      { id: 'torta-chocolate', name: 'TORTA DE CHOCOLATE', description: '', price: 8.00, hasCustomization: false },
+      { id: 'mango-cake', name: 'MANGO CAKE', description: '', price: 8.00, hasCustomization: false },
+      { id: 'choco-flan', name: 'CHOCO FLAN', description: '', price: 7.25, hasCustomization: false }
+    ]
+  }
+];

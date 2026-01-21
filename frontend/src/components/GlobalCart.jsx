@@ -4,6 +4,7 @@ import { useCart } from '../contexts/CartContext';
 import { Button } from './ui/button';
 import { ShoppingBag, Trash2, X, ChevronDown, ChevronUp, Maximize2, Minimize2, Settings } from 'lucide-react';
 import { toast } from 'sonner';
+import { coffeeCustomizations } from '../data/mock';
 
 const GlobalCart = () => {
   const location = useLocation();
@@ -22,7 +23,7 @@ const GlobalCart = () => {
   } = useCart();
   
   const cartRef = useRef(null);
-  const isMenuPage = location.pathname === '/menu';
+  const isMenuPage = location.pathname === '/menu' || location.pathname === '/breakfast' || location.pathname === '/dinner';
 
   // Auto-minimize cart when navigating away from menu
   useEffect(() => {
@@ -61,16 +62,28 @@ const GlobalCart = () => {
     setCartState('expanded');
   };
 
-  // Start editing a cart item - navigate to menu and trigger edit
+  // Start editing a cart item - navigate to correct menu page and trigger edit
   const startEditingCartItem = (cartKey) => {
     setEditingCartKey(cartKey);
     
-    // Navigate to menu if not already there
-    if (!isMenuPage) {
-      navigate('/menu', { state: { editCartKey: cartKey } });
+    // Determine which menu page to navigate to based on menuType
+    const entry = cart[cartKey];
+    let targetPath = '/menu'; // default to coffee menu
+    
+    if (entry && entry.menuType) {
+      if (entry.menuType === 'breakfast') {
+        targetPath = '/breakfast';
+      } else if (entry.menuType === 'dinner') {
+        targetPath = '/dinner';
+      }
+    }
+    
+    // Navigate to appropriate menu page if not already there
+    if (location.pathname !== targetPath) {
+      navigate(targetPath, { state: { editCartKey: cartKey } });
       toast.info('Opening item for editing...');
     } else {
-      // If already on menu, let Menu component handle it via editingCartKey
+      // If already on correct menu page, let the component handle it via editingCartKey
       toast.info('Editing item - make your changes and click "Update Order"');
     }
   };
@@ -93,7 +106,7 @@ const GlobalCart = () => {
     };
     
     // Generate unique key with timestamp
-    const { item, sizeIndex, customizations, fruitTea, customizationPrice } = entry;
+    const { item, sizeIndex, customizations, fruitTea, customizationPrice, menuType } = entry;
     const baseKey = cartKey.split('-split-')[0]; // Get base key without any split suffix
     const uniqueKey = `${baseKey}-split-${Date.now()}`;
     
@@ -103,15 +116,28 @@ const GlobalCart = () => {
       quantity: 1,
       customizations: { ...customizations }, // Clone customizations
       fruitTea,
-      customizationPrice
+      customizationPrice,
+      menuType // Preserve menuType
     };
     
     setCart(newCart);
     
+    // Determine which menu page to navigate to
+    let targetPath = '/menu'; // default to coffee menu
+    if (menuType === 'breakfast') {
+      targetPath = '/breakfast';
+    } else if (menuType === 'dinner') {
+      targetPath = '/dinner';
+    }
+    
     // Start editing the new single item
     toast.info('Split 1 item for editing');
     setTimeout(() => {
-      startEditingCartItem(uniqueKey);
+      // Set editing key and navigate
+      setEditingCartKey(uniqueKey);
+      if (location.pathname !== targetPath) {
+        navigate(targetPath);
+      }
     }, 100);
   };
 
@@ -254,11 +280,41 @@ const GlobalCart = () => {
 
       {/* Expanded Cart View */}
       {cartState === 'expanded' && (
-        <div className="p-4 max-h-[60vh] overflow-y-auto">
-          <div className="space-y-4 mb-4">
-            {Object.entries(cart).map(([key, entry]) => {
+        <div className="flex flex-col h-full">
+          {/* Scrollable Cart Items Section */}
+          <div className="flex-1 overflow-y-auto p-4 max-h-[calc(60vh-140px)]">
+            <div className="space-y-4">
+              {Object.entries(cart).map(([key, entry]) => {
               const customizations = entry.customizations || {};
-              const hasCustomizations = Object.keys(customizations).length > 0 || entry.fruitTea;
+              
+              // Helper function to get customization name and price from ID
+              const getCustomizationDetails = (customizationId) => {
+                // Search through all coffee customization categories
+                for (const category of ['milk', 'addOns', 'syrups', 'sauces', 'shots', 'toppings']) {
+                  if (coffeeCustomizations[category]) {
+                    const found = coffeeCustomizations[category].find(item => item.id === customizationId);
+                    if (found) return { name: found.name, price: found.price || 0 };
+                  }
+                }
+                return null;
+              };
+              
+              // Properly validate hasCustomizations - handle all formats (drink arrays, booleans, food objects)
+              const hasCustomizations = Object.entries(customizations).some(([key, value]) => {
+                // Arrays: either food items with objects or drink items with string IDs
+                if (Array.isArray(value) && value.length > 0) {
+                  return true;
+                }
+                // Food items: object with name property
+                if (value && typeof value === 'object' && value.name) {
+                  return true;
+                }
+                // Drink items: boolean true values
+                if (value === true) {
+                  return true;
+                }
+                return false;
+              }) || entry.fruitTea;
               
               return (
                 <div 
@@ -277,19 +333,92 @@ const GlobalCart = () => {
                   </button>
                   
                   <div className="flex gap-4">
-                    <div className="w-20 h-20 flex-shrink-0 bg-white rounded-lg overflow-hidden">
-                      <img 
-                        src={entry.item.image} 
-                        alt={entry.item.name}
-                        className="w-full h-full object-contain p-1"
-                      />
-                    </div>
+                    {/* Only show image for coffee/drink items, not food items */}
+                    {!entry.menuType || entry.menuType === 'coffee' ? (
+                      <div className="w-20 h-20 flex-shrink-0 bg-white rounded-lg overflow-hidden">
+                        <img 
+                          src={entry.item.image} 
+                          alt={entry.item.name}
+                          className="w-full h-full object-contain p-1"
+                        />
+                      </div>
+                    ) : null}
                     
                     <div className="flex-1 pr-6">
                       <div className="flex items-start justify-between">
                         <div>
                           <h4 className="font-bold text-gray-900 text-lg">{entry.item.name}</h4>
                           <p className="text-amber-600 font-medium">{entry.item.sizes[entry.sizeIndex].size}</p>
+                          
+                          {/* Display Customizations */}
+                          {entry.customizations && Object.keys(entry.customizations).length > 0 && (
+                            <div className="mt-2 text-xs text-gray-600 space-y-1">
+                              {Object.entries(entry.customizations).map(([key, value]) => {
+                                // Food items: Multi-select (array of objects with name property)
+                                if (Array.isArray(value) && value.length > 0 && value[0]?.name) {
+                                  return (
+                                    <div key={key} className="flex flex-wrap gap-1">
+                                      {value.map((item, idx) => (
+                                        <span key={idx} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded text-xs">
+                                          {item.name}
+                                          {item.price > 0 && ` +$${item.price.toFixed(2)}`}
+                                        </span>
+                                      ))}
+                                    </div>
+                                  );
+                                }
+                                // Drink items: Array of IDs (syrups, sauces, shots, etc.)
+                                else if (Array.isArray(value) && value.length > 0 && typeof value[0] === 'string') {
+                                  return (
+                                    <div key={key} className="flex flex-wrap gap-1">
+                                      {value.map((id, idx) => {
+                                        const details = getCustomizationDetails(id);
+                                        if (details) {
+                                          return (
+                                            <span key={idx} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded text-xs">
+                                              {details.name}
+                                              {details.price > 0 && ` +$${details.price.toFixed(2)}`}
+                                            </span>
+                                          );
+                                        }
+                                        return null;
+                                      })}
+                                    </div>
+                                  );
+                                }
+                                // Food items: Single-select (object with name)
+                                else if (value && typeof value === 'object' && value.name) {
+                                  return (
+                                    <span key={key} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded inline-block mr-1 mb-1 text-xs">
+                                      {value.name}
+                                      {value.price > 0 && ` +$${value.price.toFixed(2)}`}
+                                    </span>
+                                  );
+                                }
+                                // Drink items: Boolean flag (need to look up name)
+                                else if (value === true) {
+                                  const details = getCustomizationDetails(key);
+                                  if (details) {
+                                    return (
+                                      <span key={key} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded inline-block mr-1 mb-1 text-xs">
+                                        {details.name}
+                                        {details.price > 0 && ` +$${details.price.toFixed(2)}`}
+                                      </span>
+                                    );
+                                  }
+                                }
+                                return null;
+                              })}
+                            </div>
+                          )}
+                          
+                          {/* Display Special Instructions */}
+                          {entry.specialInstructions && entry.specialInstructions.trim() && (
+                            <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs">
+                              <span className="font-semibold text-blue-900">Note: </span>
+                              <span className="text-blue-800">{entry.specialInstructions}</span>
+                            </div>
+                          )}
                         </div>
                         <div className="text-right">
                           <p className="font-bold text-gray-900">
@@ -299,16 +428,7 @@ const GlobalCart = () => {
                         </div>
                       </div>
                       
-                      {hasCustomizations && (
-                        <div className="mt-2 text-sm text-gray-600">
-                          <p className="font-medium">Customizations</p>
-                          {entry.customizationPrice > 0 && (
-                            <p className="text-amber-600">+${entry.customizationPrice.toFixed(2)}</p>
-                          )}
-                        </div>
-                      )}
-                      
-                      {!hasCustomizations && (
+                      {!hasCustomizations && !entry.specialInstructions && (
                         <p className="mt-2 text-sm text-gray-400 italic">No customizations</p>
                       )}
                       
@@ -331,8 +451,10 @@ const GlobalCart = () => {
               );
             })}
           </div>
+          </div>
           
-          <div className="border-t pt-4">
+          {/* Sticky Footer with Order Total and Checkout */}
+          <div className="sticky bottom-0 bg-white border-t pt-4 px-4 pb-4">
             <div className="flex justify-between items-center mb-4">
               <span className="text-xl font-bold text-gray-900">Order Total</span>
               <span className="text-3xl font-bold text-amber-600">${totalPrice}</span>
