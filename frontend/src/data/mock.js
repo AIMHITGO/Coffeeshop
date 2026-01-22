@@ -97,7 +97,7 @@ export const menuCategories = [
         id: 'espresso',
         name: 'Espresso',
         description: 'Rich, concentrated shot of premium espresso',
-        image: 'https://images.unsplash.com/photo-1508088405209-fbd63b6a4f50?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Espresso.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Single', price: 3.00, calories: 10 },
@@ -109,7 +109,7 @@ export const menuCategories = [
         id: 'americano',
         name: 'Americano',
         description: 'Double espresso with hot water',
-        image: 'https://images.unsplash.com/photo-1576767540979-8d0de64942f7?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Americano.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 3.75, calories: 15 },
@@ -165,7 +165,7 @@ export const menuCategories = [
         id: 'flat-white',
         name: 'Flat White',
         description: 'Double espresso with silky microfoam',
-        image: 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Flat%20White.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 6.00, calories: 120 },
@@ -189,7 +189,7 @@ export const menuCategories = [
         id: 'caramel-macchiato',
         name: 'Caramel Macchiato',
         description: 'Espresso with vanilla, milk, and caramel drizzle',
-        image: 'https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Caramel%20Macchiato.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 4.25, calories: 300 },
@@ -201,7 +201,7 @@ export const menuCategories = [
         id: 'mocha',
         name: 'Mocha',
         description: 'Espresso with rich chocolate and steamed milk',
-        image: 'https://images.unsplash.com/photo-1608902905656-fc745a1bb551?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Mocha.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 6.50, calories: 360 },
@@ -246,7 +246,7 @@ export const menuCategories = [
         id: 'cappuccino',
         name: 'Cappuccino',
         description: 'The essence of handcrafting - our rich espresso artfully balanced with freshly micro-foamed milk',
-        image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Cappuccino.png',
         category: 'Cappuccino',
         sizes: [
           { size: 'Small', price: 4.65, calories: 120 },
@@ -314,7 +314,7 @@ export const menuCategories = [
         id: 'cold-brew',
         name: 'Cold Brew',
         description: 'Smooth, slow-steeped cold brew coffee',
-        image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Cold%20Brew.png',
         category: 'Cold Brew',
         sizes: [
           { size: 'Small', price: 3.75, calories: 0 },
@@ -326,7 +326,7 @@ export const menuCategories = [
         id: 'cold-brew-oat-latte',
         name: 'Cold Brew Oat Latte',
         description: 'Cold brew with creamy oat milk',
-        image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Cold%20Brew%20Oat%20Latte.png',
         category: 'Cold Brew',
         sizes: [
           { size: 'Small', price: 5.25, calories: 150 },
@@ -338,7 +338,7 @@ export const menuCategories = [
         id: 'horchata-espresso',
         name: 'Horchata & Espresso',
         description: 'Creamy horchata with bold espresso',
-        image: 'https://images.unsplash.com/photo-1592663527359-cf6642f54cff?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Horchata%20%26%20Espresso.png',
         category: 'Signature',
         sizes: [
           { size: 'Medium Only', price: 7.65, calories: 0 }
@@ -348,7 +348,7 @@ export const menuCategories = [
         id: 'horchata-cold-brew-latte',
         name: 'Horchata Cold Brew Oat Latte',
         description: 'Latin-inspired cold brew with horchata and oat milk',
-        image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Horchata%20Cold%20Brew%20Oat%20Latte.png',
         category: 'Signature',
         sizes: [
           { size: 'Medium', price: 7.40, calories: 150 }
