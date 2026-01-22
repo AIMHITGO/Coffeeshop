@@ -1,6 +1,6 @@
 # Image Index
 
-## HERO
+## Coffeepics
 - https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Americano.png
 - https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Brewed%20Tea.png
 - https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Caf%C3%A9%20au%20Lait.png
