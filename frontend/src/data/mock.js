@@ -73,7 +73,7 @@ export const menuCategories = [
         id: 'drip-coffee',
         name: 'Drip Coffee',
         description: 'Fresh roasted Jessy\'s Premium Coffee',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/drip-coffee-898d1d72-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Drip%20Coffee.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 3.55, calories: 0 },
@@ -85,7 +85,7 @@ export const menuCategories = [
         id: 'cafe-au-lait',
         name: 'Café Au Lait',
         description: 'Fresh drip coffee with steamed milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CAF-C3-89-AU-LAIT---FEATURED-DARK-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Caf%C3%A9%20au%20Lait.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 3.55, calories: 50 },
@@ -121,7 +121,7 @@ export const menuCategories = [
         id: 'short-black',
         name: 'Short Black',
         description: 'Single espresso shot - rich and intense',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Short-Black-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Short%20Black.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small Only', price: 3.00, calories: 10 }
@@ -131,7 +131,7 @@ export const menuCategories = [
         id: 'long-black',
         name: 'Long Black',
         description: 'Double espresso over hot water',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/long-black-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Long%20Black.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 3.70, calories: 15 },
@@ -143,7 +143,7 @@ export const menuCategories = [
         id: 'coffee-milk',
         name: 'Coffee & Milk (Doppio)',
         description: '2 espresso shots with milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/drip-coffee-898d1d72-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Coffee%20%26%20Milk.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: '6 oz', price: 5.50, calories: 0 }
@@ -153,7 +153,7 @@ export const menuCategories = [
         id: 'latte',
         name: 'Latte',
         description: 'Smooth espresso with velvety steamed milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/caffe-latte-990b710d-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Latte.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 5.00, calories: 170 },
