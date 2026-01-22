@@ -225,7 +225,7 @@ export const menuCategories = [
         id: 'dark-chocolate-mocha',
         name: 'Dark Chocolate Mocha',
         description: 'Espresso with rich dark chocolate',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Dark-chocolate-Mocha-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Mocha.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 6.00, calories: 410 },
