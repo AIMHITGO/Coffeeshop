@@ -31,3 +31,4 @@
 - https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Vanilla%20Steamer.png
 - https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Vanilla%20Latte.png
 - https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/White%20Chocolate%20Mocha.png
+- https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Dark%20Chocolate%20Mocha.png
