@@ -213,7 +213,7 @@ export const menuCategories = [
         id: 'white-chocolate-mocha',
         name: 'White Chocolate Mocha',
         description: 'Espresso with sweet white chocolate',
-        image: 'https://images.unsplash.com/photo-1593443320739-77f74939d0da?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Mocha.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 5.15, calories: 360 },
