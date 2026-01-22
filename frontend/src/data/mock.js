@@ -266,7 +266,7 @@ export const menuCategories = [
         id: 'little-havana-cappuccino',
         name: 'Little Havana Cappuccino',
         description: 'Cuban-inspired cappuccino with Latin flair',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Little-Havana-Capuccino-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Little%20Havana%20Cappuccino.png',
         category: 'Cappuccino',
         sizes: [
           { size: 'Small', price: 4.90, calories: 140 },
