@@ -358,7 +358,7 @@ export const menuCategories = [
         id: 'cloud-original',
         name: 'Cloud - Original',
         description: 'Cold brew with condensed milk, chicory syrup, and half & half',
-        image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Cloud.png',
         category: 'Signature',
         sizes: [
           { size: 'Small', price: 3.75, calories: 160 },
@@ -370,7 +370,7 @@ export const menuCategories = [
         id: 'cloud-coconut',
         name: 'Cloud - Coconut',
         description: 'Cold brew with coconut flavor, condensed milk, chicory syrup',
-        image: 'https://images.unsplash.com/photo-1592663527359-cf6642f54cff?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Cloud.png',
         category: 'Signature',
         sizes: [
           { size: 'Small', price: 4.95, calories: 160 },
