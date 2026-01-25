@@ -177,7 +177,7 @@ export const menuCategories = [
         id: 'vanilla-latte',
         name: 'Vanilla Latte',
         description: 'Classic latte sweetened with vanilla syrup',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Vanilla-Latte-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Vanilla%20Latte.png',
         category: 'Coffee & Espresso',
         sizes: [
           { size: 'Small', price: 5.85, calories: 240 },
@@ -287,7 +287,7 @@ export const menuCategories = [
         id: 'premium-dark-roast',
         name: 'Premium Dark Roast',
         description: 'A signature rotation brewed every 30 minutes for the most flavorful cup',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/drip-coffee-898d1d72-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Premium%20Dark%20Roast.png',
         category: 'Custom Drip',
         sizes: [
           { size: 'Small', price: 3.00, calories: 0 },
@@ -382,7 +382,7 @@ export const menuCategories = [
         id: 'brown-sugar-almond-latte',
         name: 'Brown Sugar Almond Latte with Jelly',
         description: 'Cold brew with brown sugar jelly and almond milk',
-        image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Brown%20Sugar%20Almond%20Latte%20with%20Jelly.png',
         category: 'Signature',
         sizes: [
           { size: 'Small', price: 6.50, calories: 230 },
@@ -394,7 +394,7 @@ export const menuCategories = [
         id: 'iced-matcha-jelly',
         name: 'Iced Matcha with Brown Sugar Jelly',
         description: 'Premium matcha with brown sugar jelly',
-        image: 'https://images.unsplash.com/photo-1592663527359-cf6642f54cff?w=800&q=80',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Iced%20Matcha%20with%20Brown%20Sugar%20Jelly.png',
         category: 'Signature',
         sizes: [
           { size: 'Small', price: 6.65, calories: 230 },
@@ -414,7 +414,7 @@ export const menuCategories = [
         id: 'mocha-frappe',
         name: 'Mocha Frappé',
         description: 'Double fresh cold brew blended with chocolate, milk, and ice',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/cafe-mocha-8f4d3834-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Mocha%20Frappe.png',
         category: 'Frappé',
         sizes: [
           { size: 'Small', price: 3.75, calories: 370 },
@@ -426,7 +426,7 @@ export const menuCategories = [
         id: 'caramel-frappe',
         name: 'Caramel Frappé',
         description: 'Cold brew blended with caramel, milk, and ice',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Caramel-Machiato-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Caramel%20Frappe.png',
         category: 'Frappé',
         sizes: [
           { size: 'Small', price: 3.75, calories: 400 },
@@ -438,7 +438,7 @@ export const menuCategories = [
         id: 'matcha-frappe',
         name: 'Matcha Frappé',
         description: 'Premium matcha blended with milk and ice',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice+Matcha+frappe-1920w.jpg',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Matcha%20Frappe.png',
         category: 'Frappé',
         sizes: [
           { size: 'Small', price: 3.75, calories: 290 },
@@ -458,7 +458,7 @@ export const menuCategories = [
         id: 'brewed-tea',
         name: 'Brewed Tea',
         description: 'Black, green, or herbal',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice+Matcha+frappe-1920w.jpg',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Brewed%20Tea.png',
         category: 'Tea',
         sizes: [
           { size: 'Small', price: 3.00, calories: 0 },
@@ -469,7 +469,7 @@ export const menuCategories = [
         id: 'matcha-latte',
         name: 'Matcha Latte',
         description: 'Premium matcha green tea with steamed milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Ice-Matcha-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Matcha%20Latte.png',
         category: 'Tea',
         sizes: [
           { size: 'Small', price: 5.95, calories: 210 },
@@ -481,7 +481,7 @@ export const menuCategories = [
         id: 'chai-latte',
         name: 'Chai Latte',
         description: 'Spiced chai tea with steamed milk',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Chai%20Latte.png',
         category: 'Tea',
         sizes: [
           { size: 'Small', price: 3.75, calories: 200 },
@@ -493,7 +493,7 @@ export const menuCategories = [
         id: 'iced-tea',
         name: 'Iced Tea',
         description: 'Black, green, or wild berry hibiscus',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Iced%20Tea.png',
         category: 'Tea',
         hasFruitTeaShaker: true,
         sizes: [
@@ -506,7 +506,7 @@ export const menuCategories = [
         id: 'iced-tea-lemonade',
         name: 'Iced Tea Lemonade',
         description: 'Refreshing blend of iced tea and lemonade',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Iced%20Tea%20Lemonade.png',
         category: 'Tea',
         hasFruitTeaShaker: true,
         sizes: [
@@ -527,7 +527,7 @@ export const menuCategories = [
         id: 'hot-cocoa',
         name: 'Hot Cocoa',
         description: 'Rich chocolate drink with whipped cream',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/CHAI-LATTE-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Hot%20Cocoa.png',
         category: 'Non-Coffee',
         sizes: [
           { size: 'Small', price: 3.00, calories: 420 },
@@ -539,7 +539,7 @@ export const menuCategories = [
         id: 'vanilla-steamer',
         name: 'Vanilla Steamer',
         description: 'Steamed milk with vanilla - no coffee',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Vanilla-Latte-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Vanilla%20Steamer.png',
         category: 'Non-Coffee',
         sizes: [
           { size: 'Small', price: 3.00, calories: 250 },
@@ -551,7 +551,7 @@ export const menuCategories = [
         id: 'vanilla-frappe-non-coffee',
         name: 'Vanilla Frappé',
         description: 'Creamy vanilla blended drink - no coffee',
-        image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/Vanilla-Latte-1920w.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Vanilla%20Frappe.png',
         category: 'Non-Coffee',
         sizes: [
           { size: 'Small', price: 3.00, calories: 370 },
