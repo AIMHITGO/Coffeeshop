@@ -611,161 +611,196 @@ const Menu = () => {
         </button>
 
         {isExpanded && (
-          <div className="mt-4 space-y-4 text-sm bg-white max-h-80 overflow-y-auto pr-2">
-            {itemHasCustomizations && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  clearItemCustomizations(item.id);
-                }}
-                className="flex items-center text-red-500 hover:text-red-600 text-sm font-medium mb-2"
-              >
-                <RotateCcw className="w-4 h-4 mr-1" />
-                Clear All Customizations
-              </button>
-            )}
+          <>
+            <div className="mt-4 space-y-4 text-sm bg-white max-h-80 overflow-y-auto pr-2">
+              {itemHasCustomizations && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    clearItemCustomizations(item.id);
+                  }}
+                  className="flex items-center text-red-500 hover:text-red-600 text-sm font-medium mb-2"
+                >
+                  <RotateCcw className="w-4 h-4 mr-1" />
+                  Clear All Customizations
+                </button>
+              )}
 
-            {/* Milk Options */}
-            <div>
-              <label className="block font-medium text-gray-700 mb-2">Milk Option</label>
-              <select
-                value={currentCustomizations.milk || ''}
-                onChange={(e) => {
-                  e.stopPropagation();
-                  updateItemCustomization(item.id, 'milk', e.target.value);
-                }}
-                className="w-full p-2 border rounded-lg text-sm"
-              >
-                <option value="">Default (2% Milk) - $0.00 / 0 cal</option>
-                {coffeeCustomizations.milk.map(opt => (
-                  <option key={opt.id} value={opt.id}>
-                    {opt.name} - +${opt.price.toFixed(2)} / {typeof opt.calories === 'number' ? `${opt.calories} cal` : opt.calories}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Add-ons */}
-            <div>
-              <label className="block font-medium text-gray-700 mb-2">Add-ons</label>
-              <div className="space-y-2">
-                {coffeeCustomizations.addOns.map(addon => (
-                  <label key={addon.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
-                    <input
-                      type="checkbox"
-                      checked={currentCustomizations[addon.id] || false}
-                      onChange={(e) => {
-                        e.stopPropagation();
-                        updateItemCustomization(item.id, addon.id, e.target.checked);
-                      }}
-                      className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
-                    />
-                    <span className="flex-1">{addon.name}</span>
-                    <span className="text-gray-500 text-xs">+${addon.price.toFixed(2)} / {addon.calories} cal</span>
-                  </label>
-                ))}
+              {/* Milk Options */}
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">Milk Option</label>
+                <select
+                  value={currentCustomizations.milk || ''}
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    updateItemCustomization(item.id, 'milk', e.target.value);
+                  }}
+                  className="w-full p-2 border rounded-lg text-sm"
+                >
+                  <option value="">Default (2% Milk) - $0.00 / 0 cal</option>
+                  {coffeeCustomizations.milk.map(opt => (
+                    <option key={opt.id} value={opt.id}>
+                      {opt.name} - +${opt.price.toFixed(2)} / {typeof opt.calories === 'number' ? `${opt.calories} cal` : opt.calories}
+                    </option>
+                  ))}
+                </select>
               </div>
-            </div>
 
-            {/* Syrups */}
-            <div>
-              <label className="block font-medium text-gray-700 mb-2">Syrups (Select Multiple)</label>
-              <div className="space-y-2">
-                {coffeeCustomizations.syrups.map(syrup => (
-                  <label key={syrup.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
-                    <input
-                      type="checkbox"
-                      checked={(currentCustomizations.syrups || []).includes(syrup.id)}
-                      onChange={(e) => {
-                        e.stopPropagation();
-                        toggleMultiSelect(item.id, 'syrups', syrup.id);
-                      }}
-                      className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
-                    />
-                    <span className="flex-1">{syrup.name}</span>
-                    <span className="text-gray-500 text-xs">+${syrup.price.toFixed(2)} / {syrup.calories}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Sauces */}
-            <div>
-              <label className="block font-medium text-gray-700 mb-2">Sauces (Select Multiple)</label>
-              <div className="space-y-2">
-                {coffeeCustomizations.sauces.map(sauce => (
-                  <label key={sauce.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
-                    <input
-                      type="checkbox"
-                      checked={(currentCustomizations.sauces || []).includes(sauce.id)}
-                      onChange={(e) => {
-                        e.stopPropagation();
-                        toggleMultiSelect(item.id, 'sauces', sauce.id);
-                      }}
-                      className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
-                    />
-                    <span className="flex-1">{sauce.name}</span>
-                    <span className="text-gray-500 text-xs">+${sauce.price.toFixed(2)} / {sauce.calories} cal</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Shots */}
-            <div>
-              <label className="block font-medium text-gray-700 mb-2">Extra Shots</label>
-              <div className="space-y-2">
-                {coffeeCustomizations.shots.map(shot => (
-                  <label key={shot.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
-                    <input
-                      type="checkbox"
-                      checked={(currentCustomizations.shots || []).includes(shot.id)}
-                      onChange={(e) => {
-                        e.stopPropagation();
-                        toggleMultiSelect(item.id, 'shots', shot.id);
-                      }}
-                      className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
-                    />
-                    <span className="flex-1">{shot.name}</span>
-                    <span className="text-gray-500 text-xs">+${shot.price.toFixed(2)} / {shot.calories} cal</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Toppings */}
-            <div>
-              <label className="block font-medium text-gray-700 mb-2">Toppings</label>
-              <div className="space-y-2">
-                {coffeeCustomizations.toppings.map(topping => (
-                  <label key={topping.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
-                    <input
-                      type="checkbox"
-                      checked={currentCustomizations[topping.id] || false}
-                      onChange={(e) => {
-                        e.stopPropagation();
-                        updateItemCustomization(item.id, topping.id, e.target.checked);
-                      }}
-                      className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
-                    />
-                    <span className="flex-1">{topping.name}</span>
-                    <span className="text-gray-500 text-xs">
-                      {topping.price > 0 ? `+$${topping.price.toFixed(2)}` : 'Free'} / {topping.calories} cal
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {calculateCustomizationPrice(item.id) > 0 && (
-              <div className="pt-3 border-t bg-amber-50 -mx-2 px-2 py-2 mt-4 rounded">
-                <div className="flex justify-between text-sm font-medium">
-                  <span>Customization Total:</span>
-                  <span className="text-amber-600">+${calculateCustomizationPrice(item.id).toFixed(2)}</span>
+              {/* Add-ons */}
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">Add-ons</label>
+                <div className="space-y-2">
+                  {coffeeCustomizations.addOns.map(addon => (
+                    <label key={addon.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
+                      <input
+                        type="checkbox"
+                        checked={currentCustomizations[addon.id] || false}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          updateItemCustomization(item.id, addon.id, e.target.checked);
+                        }}
+                        className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+                      />
+                      <span className="flex-1">{addon.name}</span>
+                      <span className="text-gray-500 text-xs">+${addon.price.toFixed(2)} / {addon.calories} cal</span>
+                    </label>
+                  ))}
                 </div>
               </div>
-            )}
-          </div>
+
+              {/* Syrups */}
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">Syrups (Select Multiple)</label>
+                <div className="space-y-2">
+                  {coffeeCustomizations.syrups.map(syrup => (
+                    <label key={syrup.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
+                      <input
+                        type="checkbox"
+                        checked={(currentCustomizations.syrups || []).includes(syrup.id)}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          toggleMultiSelect(item.id, 'syrups', syrup.id);
+                        }}
+                        className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+                      />
+                      <span className="flex-1">{syrup.name}</span>
+                      <span className="text-gray-500 text-xs">+${syrup.price.toFixed(2)} / {syrup.calories}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sauces */}
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">Sauces (Select Multiple)</label>
+                <div className="space-y-2">
+                  {coffeeCustomizations.sauces.map(sauce => (
+                    <label key={sauce.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
+                      <input
+                        type="checkbox"
+                        checked={(currentCustomizations.sauces || []).includes(sauce.id)}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          toggleMultiSelect(item.id, 'sauces', sauce.id);
+                        }}
+                        className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+                      />
+                      <span className="flex-1">{sauce.name}</span>
+                      <span className="text-gray-500 text-xs">+${sauce.price.toFixed(2)} / {sauce.calories} cal</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Shots */}
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">Extra Shots</label>
+                <div className="space-y-2">
+                  {coffeeCustomizations.shots.map(shot => (
+                    <label key={shot.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
+                      <input
+                        type="checkbox"
+                        checked={(currentCustomizations.shots || []).includes(shot.id)}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          toggleMultiSelect(item.id, 'shots', shot.id);
+                        }}
+                        className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+                      />
+                      <span className="flex-1">{shot.name}</span>
+                      <span className="text-gray-500 text-xs">+${shot.price.toFixed(2)} / {shot.calories} cal</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Toppings */}
+              <div>
+                <label className="block font-medium text-gray-700 mb-2">Toppings</label>
+                <div className="space-y-2">
+                  {coffeeCustomizations.toppings.map(topping => (
+                    <label key={topping.id} className="flex items-center cursor-pointer hover:bg-gray-50 p-1 rounded">
+                      <input
+                        type="checkbox"
+                        checked={currentCustomizations[topping.id] || false}
+                        onChange={(e) => {
+                          e.stopPropagation();
+                          updateItemCustomization(item.id, topping.id, e.target.checked);
+                        }}
+                        className="mr-2 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+                      />
+                      <span className="flex-1">{topping.name}</span>
+                      <span className="text-gray-500 text-xs">
+                        {topping.price > 0 ? `+$${topping.price.toFixed(2)}` : 'Free'} / {topping.calories} cal
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {calculateCustomizationPrice(item.id) > 0 && (
+                <div className="pt-3 border-t bg-amber-50 -mx-2 px-2 py-2 mt-4 rounded">
+                  <div className="flex justify-between text-sm font-medium">
+                    <span>Customization Total:</span>
+                    <span className="text-amber-600">+${calculateCustomizationPrice(item.id).toFixed(2)}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Special Instructions - Fixed at bottom of expanded section */}
+            <div className="mt-3 relative">
+              <textarea
+                value={specialInstructions[item.id] || ''}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (value.length <= 150) {
+                    setSpecialInstructions(prev => ({
+                      ...prev,
+                      [item.id]: value
+                    }));
+                  }
+                }}
+                onClick={(e) => e.stopPropagation()}
+                placeholder="Any special requests? (e.g., no dairy, less ice)"
+                className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none resize-none text-sm"
+                rows="2"
+                maxLength={150}
+              />
+              {/* Character counter - only shows when >= 130 chars */}
+              {(specialInstructions[item.id] || '').length >= 130 && (
+                <div 
+                  className={`absolute bottom-2 right-2 px-2 py-1 rounded text-white text-[11px] font-semibold pointer-events-none shadow-sm ${
+                    (specialInstructions[item.id] || '').length === 150 
+                      ? 'bg-red-600/95' 
+                      : 'bg-amber-500/95'
+                  }`}
+                >
+                  {(specialInstructions[item.id] || '').length}/150
+                </div>
+              )}
+            </div>
+          </>
         )}
       </div>
     );
