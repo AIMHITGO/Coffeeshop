@@ -382,7 +382,7 @@ export const menuCategories = [
         id: 'brown-sugar-almond-latte',
         name: 'Brown Sugar Almond Latte with Jelly',
         description: 'Cold brew with brown sugar jelly and almond milk',
-        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Brown%20Sugar%20Almond%20Latte%20with%20Jelly.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Cold%20Brew%20with%20brown%20sugar%20jelly.png',
         category: 'Signature',
         sizes: [
           { size: 'Small', price: 6.50, calories: 230 },
@@ -394,7 +394,7 @@ export const menuCategories = [
         id: 'iced-matcha-jelly',
         name: 'Iced Matcha with Brown Sugar Jelly',
         description: 'Premium matcha with brown sugar jelly',
-        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Iced%20Matcha%20with%20Brown%20Sugar%20Jelly.png',
+        image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Iced%20Matcha%20with%20brown%20sugar%20jelly.png',
         category: 'Signature',
         sizes: [
           { size: 'Small', price: 6.65, calories: 230 },
