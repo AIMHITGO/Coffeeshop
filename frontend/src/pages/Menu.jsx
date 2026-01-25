@@ -824,7 +824,7 @@ const Menu = () => {
           }`}
           style={isExpanded ? { minHeight: 'auto' } : {}}
         >
-          <div className="relative h-36 overflow-hidden flex-shrink-0">
+          <div className="relative h-36 overflow-hidden flex-shrink-0 bg-amber-50">
             {item.isBestSeller && (
               <div className="absolute top-2 left-2 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center z-10">
                 <Star className="w-3 h-3 mr-1" fill="white" />
@@ -834,7 +834,7 @@ const Menu = () => {
             <img
               src={item.image}
               alt={item.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
             {/* Calorie Counter - Overlaid on image */}
             <div className="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2 py-1 rounded-md">
@@ -882,9 +882,9 @@ const Menu = () => {
             {!isExpanded && <div className="flex-grow"></div>}
 
             {showPrice && customizationPrice > 0 && (
-              <div className="mt-2 flex justify-between items-center text-xs">
-                <span className="text-gray-600">Total:</span>
-                <span className="font-bold text-amber-600">${totalPrice.toFixed(2)}</span>
+              <div className="sticky bottom-[60px] mt-2 flex justify-between items-center text-xs bg-gradient-to-b from-white/95 to-white py-3 px-4 -mx-4 border-t-2 border-amber-500 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-10">
+                <span className="text-gray-700 font-semibold">Total:</span>
+                <span className="font-bold text-amber-600 text-base">${totalPrice.toFixed(2)}</span>
               </div>
             )}
 

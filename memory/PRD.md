@@ -1,57 +1,138 @@
 # Happy Place Coffee & Eats - Product Requirements Document
 
-## Final Implementation - January 5, 2025
+## Original Problem Statement
+Build a professional, conversion-optimized landing page for "Happy Place Coffee and Eats" business to increase online orders and provide information to new and existing customers.
 
-### COMPLETE DRINK-FOCUSED MENU ☕
-**80+ Menu Items Organized by Category:**
+## Target Audience
+- New and existing customers of Happy Place Coffee & Eats
+- Local Woodbridge, VA community members
+- Coffee enthusiasts and food lovers
 
-**DRINKS (Primary Focus):**
-1. **Coffee & Espresso** (7 items) - Drip Coffee, Café Au Lait, Espresso, Americano, Short Black, Long Black, Doppio
-2. **Specialty Lattes & Cappuccinos** (9 items) - Cappuccino, Little Havana Cappuccino, Latte, Flat White, Vanilla Latte, Caramel Macchiato, Mocha, White Chocolate Mocha, Dark Chocolate Mocha
-3. **Cold Brew & Signature Beverages** (8 items) - Cold Brew, Cold Brew Oat Latte, Horchata & Espresso, Horchata Cold Brew Oat Latte, Cloud Original, Cloud Coconut, Brown Sugar Almond Latte with Jelly, Iced Matcha with Brown Sugar Jelly
-4. **Frappés** (4 items) - Mocha, Caramel, Matcha, Vanilla (non-coffee)
-5. **Tea & Non-Coffee** (7 items) - Brewed Tea, Matcha Latte, Chai Latte, Iced Tea, Iced Tea Lemonade, Hot Cocoa, Vanilla Steamer
+## Core Requirements
 
-**FOOD:**
-6. **Breakfast Sandwiches** (5 items)
-7. **Latino Breakfast** (4 items)
-8. **Sandwiches & Burgers** (5 items)
-9. **Latin-Fusion Entrées** (3 items)
-10. **Desserts** (3 items)
+### Branding
+- Use company's actual logo and user-provided images
+- Latin-American and New-American cuisine theme
+- Family-owned, welcoming atmosphere
 
-### COFFEE BEANS FOR SALE
-**12 Single-Origin Coffees** ($23.95-$24.95):
-- House Espresso Blend, Colombia Supremo, Guatemala Antigua
-- Ethiopia Yirgacheffe, Brazil Premium, Sumatra Mandheling
-- Kenya AA Premium, Nicaragua, Costa Rica Tarrazu
-- Mexico Chiapas Jade, Guatemala Eterna Primavera, Honduras Catuai
+### Key Features
+1. **Menu System** (Implemented)
+   - Coffee/Drinks page with full customization
+   - Breakfast menu page
+   - Dinner menu page
+   - Cross-navigation between menus
 
-### ABOUT PAGE - COFFEE STORY
-✅ **"The Magic of Specialty Coffee"** - Third-wave coffee revolution
-✅ **Jessy's Premium Coffee** - Brand story and sourcing
-✅ **12+ Coffee Origins** - Displayed with flavor notes
-✅ **Quality from Source to Cup** - Farm partnerships
-✅ **Values**: Family First, Quality & Craftsmanship, Sustainable Practices, Community Hub, Third-Wave Coffee, Direct Trade
+2. **Cart Functionality** (Implemented)
+   - Global floating cart persistent across pages
+   - Item customization with dynamic pricing
+   - Edit/remove items capability
+   - Special instructions field for all items
 
-### COMPLETE IMPLEMENTATION
-- Clear logo (high-quality webp) in header and footer
-- All menu items with accurate pricing from website
-- Proper drink categorization emphasizing coffee culture
-- Coffee story integrated into About page
-- All images from Happy Place website
-- Menu tabs reorganized: Drinks first, then food
+3. **Pages** (Partially Implemented)
+   - Home page ✅
+   - Menu pages (Coffee, Breakfast, Dinner) ✅
+   - About Us page ✅
+   - Rewards page (placeholder) ✅
+   - Blog page (placeholder) ✅
+   - Locations page (placeholder) ✅
 
-### NEXT ACTION ITEMS
-1. Backend development with MongoDB for all categories
-2. Coffee bean e-commerce functionality
-3. User accounts & loyalty program tracking
-4. Blog/news section with coffee education content
-5. Integration with existing ordering system
-6. Admin panel for menu management
+4. **Online Ordering** (Future)
+   - Stripe payment integration
+   - Order confirmation flow
 
-## TECHNICAL NOTES
-- Menu data: 600+ lines with complete items and pricing
-- React components: Header, Footer, Home, Menu, Rewards, Blog, About, Locations
-- Drink-focused navigation tabs
-- Responsive design throughout
-- All original Happy Place images (no stock photos)
+---
+
+## What's Been Implemented
+
+### January 25, 2025 - Image Updates Complete
+- Updated all 15 remaining drink images with user-provided GitHub URLs
+- Added Premium Dark Roast and Iced Tea images
+- All drink menu items now display custom professional images
+
+### Previous Session Work
+- Menu UI/UX overhaul (compact cards, sticky price total)
+- Special instructions field with smart character counter
+- Cart customization display bug fixes (food, drink booleans, drink arrays)
+- ScrollToTop component for reliable navigation
+- Three interconnected menu pages (Coffee, Breakfast, Dinner)
+- Global cart with Context API and localStorage persistence
+
+---
+
+## Current Architecture
+
+### Frontend Only (React + TailwindCSS)
+```
+/app/frontend/src/
+├── components/
+│   ├── Header.jsx
+│   ├── Footer.jsx
+│   ├── GlobalCart.jsx      # Cart with customization display
+│   ├── FoodMenuItem.jsx    # Food item cards
+│   └── ScrollToTop.jsx     # Navigation scroll fix
+├── contexts/
+│   └── CartContext.jsx     # Global cart state
+├── data/
+│   └── mock.js             # ALL MENU DATA (100% mocked)
+├── pages/
+│   ├── Home.jsx
+│   ├── Menu.jsx            # Coffee/Drinks menu
+│   ├── Breakfast.jsx
+│   ├── Dinner.jsx
+│   ├── About.jsx
+│   ├── Rewards.jsx
+│   ├── Blog.jsx
+│   └── Locations.jsx
+└── App.js
+```
+
+### Backend (NOT YET IMPLEMENTED)
+- No backend exists
+- No database connection
+- All data hardcoded in mock.js
+
+---
+
+## Prioritized Backlog
+
+### P0 - Critical
+- [ ] Build FastAPI backend with MongoDB
+- [ ] Create APIs for menu data (CRUD)
+- [ ] Replace mock.js calls with API calls in frontend
+
+### P1 - High Priority
+- [ ] Stripe payment integration for online ordering
+- [ ] Order submission and confirmation flow
+- [ ] User accounts (optional)
+
+### P2 - Medium Priority
+- [ ] Implement Rewards Program functionality
+- [ ] Blog page with CMS-like backend
+- [ ] Locations page with Google Maps integration
+
+### P3 - Low Priority / Future
+- [ ] Admin dashboard for menu management
+- [ ] Order history and tracking
+- [ ] Email notifications for orders
+
+---
+
+## Technical Notes
+
+### Known Considerations
+- Cart customization display has been a recurring bug source - test thoroughly after any cart changes
+- Image URLs now use GitHub raw content URLs (raw.githubusercontent.com)
+- Hero images and blog images still use old lirp.cdn-website.com URLs (not menu items)
+
+### Data Model (for future backend)
+- Menu Categories with nested Items
+- Items have sizes array with price/calories
+- Customization options: milk, addOns, syrups, sauces, shots, toppings
+- Cart items include full customization state and special instructions
+
+---
+
+## Location Info
+- Address: 13840 Smoketown Road, Woodbridge, VA 22192
+- Phone: (571) 552-4070
+- Hours: Mon-Sat 8AM-8PM, Sun 8AM-5PM
