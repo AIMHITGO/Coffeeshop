@@ -379,8 +379,8 @@ export const menuCategories = [
         ]
       },
       {
-        id: 'brown-sugar-almond-latte',
-        name: 'Brown Sugar Almond Latte with Jelly',
+        id: 'cold-brew-brown-sugar-jelly',
+        name: 'Cold Brew with Brown Sugar Jelly',
         description: 'Cold brew with brown sugar jelly and almond milk',
         image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Cold%20Brew%20with%20brown%20sugar%20jelly.png',
         category: 'Signature',
