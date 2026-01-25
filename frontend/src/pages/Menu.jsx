@@ -951,39 +951,6 @@ const Menu = () => {
               </div>
             )}
 
-            {/* Special Instructions */}
-            <div className="mt-2 relative">
-              <textarea
-                value={specialInstructions[item.id] || ''}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  if (value.length <= 150) {
-                    setSpecialInstructions(prev => ({
-                      ...prev,
-                      [item.id]: value
-                    }));
-                  }
-                }}
-                onClick={(e) => e.stopPropagation()}
-                placeholder="Any special requests? (e.g., no dairy, less ice)"
-                className="w-full px-3 py-2 border-2 border-gray-200 rounded-lg focus:border-amber-500 focus:outline-none resize-none text-sm"
-                rows="2"
-                maxLength={150}
-              />
-              {/* Character counter - only shows when >= 130 chars */}
-              {(specialInstructions[item.id] || '').length >= 130 && (
-                <div 
-                  className={`absolute bottom-2 right-2 px-2 py-1 rounded text-white text-[11px] font-semibold pointer-events-none shadow-sm ${
-                    (specialInstructions[item.id] || '').length === 150 
-                      ? 'bg-red-600/95' 
-                      : 'bg-amber-500/95'
-                  }`}
-                >
-                  {(specialInstructions[item.id] || '').length}/150
-                </div>
-              )}
-            </div>
-
             {/* Add to Cart / Update Order / Cancel */}
             <div className="mt-3 flex-shrink-0 space-y-2">
               <Button
