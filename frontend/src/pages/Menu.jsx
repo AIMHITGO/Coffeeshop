@@ -862,7 +862,7 @@ const Menu = () => {
           }`}
           style={isExpanded ? { minHeight: 'auto' } : {}}
         >
-          <div className="relative h-36 overflow-hidden flex-shrink-0 bg-amber-50">
+          <div className="relative h-40 overflow-hidden flex-shrink-0 bg-amber-50">
             {item.isBestSeller && (
               <div className="absolute top-2 left-2 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center z-10">
                 <Star className="w-3 h-3 mr-1" fill="white" />
@@ -872,7 +872,7 @@ const Menu = () => {
             <img
               src={item.image}
               alt={item.name}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-cover"
             />
             {/* Calorie Counter - Overlaid on image */}
             <div className="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold px-2 py-1 rounded-md">
