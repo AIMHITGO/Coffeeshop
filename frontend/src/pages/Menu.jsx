@@ -989,32 +989,6 @@ const Menu = () => {
                 </Button>
               )}
             </div>
-                      } else {
-                        addToCart(item, currentSizeIndex, cardKey);
-                      }
-                    }}
-                  >
-                    <ShoppingBag className="mr-2 h-4 w-4" />
-                    {isEditingThisCard ? 'Update Order' : 'Add to Order'}
-                  </Button>
-                  
-                  {/* Cancel Button (only when editing THIS card) */}
-                  {isEditingThisCard && (
-                    <Button
-                      variant="outline"
-                      className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 text-sm py-2"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        cancelEditingCartItem(item.id);
-                      }}
-                    >
-                      <X className="mr-2 h-4 w-4" />
-                      Cancel Changes
-                    </Button>
-                  )}
-                </div>
-              </>
-            )}
           </CardContent>
         </Card>
       </div>
