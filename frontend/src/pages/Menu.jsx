@@ -922,73 +922,78 @@ const Menu = () => {
 
             {!isExpanded && <div className="flex-grow"></div>}
 
-            {showPrice && customizationPrice > 0 && (
-              <div className="sticky bottom-[60px] mt-2 flex justify-between items-center text-xs bg-gradient-to-b from-white/95 to-white py-3 px-4 -mx-4 border-t-2 border-amber-500 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-10">
-                <span className="text-gray-700 font-semibold">Total:</span>
-                <span className="font-bold text-amber-600 text-base">${totalPrice.toFixed(2)}</span>
-              </div>
-            )}
+            {/* Show these controls only when NOT expanded (they're in the dropdown when expanded) */}
+            {!isExpanded && (
+              <>
+                {showPrice && customizationPrice > 0 && (
+                  <div className="sticky bottom-[60px] mt-2 flex justify-between items-center text-xs bg-gradient-to-b from-white/95 to-white py-3 px-4 -mx-4 border-t-2 border-amber-500 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-10">
+                    <span className="text-gray-700 font-semibold">Total:</span>
+                    <span className="font-bold text-amber-600 text-base">${totalPrice.toFixed(2)}</span>
+                  </div>
+                )}
 
-            {/* Quantity Selector (only when not editing) - Compact Style */}
-            {!editingCartKey && (
-              <div className="mt-2 flex items-center justify-between">
-                <span className="text-xs font-medium text-gray-700">Quantity:</span>
-                <div className="flex items-center gap-2 border border-gray-300 rounded-lg px-2 py-1">
-                  <button
+                {/* Quantity Selector (only when not editing) - Compact Style */}
+                {!editingCartKey && (
+                  <div className="mt-2 flex items-center justify-between">
+                    <span className="text-xs font-medium text-gray-700">Quantity:</span>
+                    <div className="flex items-center gap-2 border border-gray-300 rounded-lg px-2 py-1">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          decrementItemQuantity(item.id);
+                        }}
+                        className="p-1 rounded-full hover:bg-gray-100"
+                      >
+                        <Minus className="h-3 w-3" />
+                      </button>
+                      <span className="w-6 text-center font-semibold text-sm">{getItemQuantity(item.id)}</span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          incrementItemQuantity(item.id);
+                        }}
+                        className="p-1 rounded-full hover:bg-gray-100"
+                      >
+                        <Plus className="h-3 w-3" />
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Add to Cart / Update Order / Cancel */}
+                <div className="mt-3 flex-shrink-0 space-y-2">
+                  <Button
+                    className="w-full bg-amber-600 hover:bg-amber-700 text-white text-sm py-2"
                     onClick={(e) => {
                       e.stopPropagation();
-                      decrementItemQuantity(item.id);
+                      if (isEditingThisCard) {
+                        updateCartItem(item, currentSizeIndex, cardKey);
+                      } else {
+                        addToCart(item, currentSizeIndex, cardKey);
+                      }
                     }}
-                    className="p-1 rounded-full hover:bg-gray-100"
                   >
-                    <Minus className="h-3 w-3" />
-                  </button>
-                  <span className="w-6 text-center font-semibold text-sm">{getItemQuantity(item.id)}</span>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      incrementItemQuantity(item.id);
-                    }}
-                    className="p-1 rounded-full hover:bg-gray-100"
-                  >
-                    <Plus className="h-3 w-3" />
-                  </button>
+                    <ShoppingBag className="mr-2 h-4 w-4" />
+                    {isEditingThisCard ? 'Update Order' : 'Add to Order'}
+                  </Button>
+                  
+                  {/* Cancel Button (only when editing THIS card) */}
+                  {isEditingThisCard && (
+                    <Button
+                      variant="outline"
+                      className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 text-sm py-2"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        cancelEditingCartItem(item.id);
+                      }}
+                    >
+                      <X className="mr-2 h-4 w-4" />
+                      Cancel Changes
+                    </Button>
+                  )}
                 </div>
-              </div>
+              </>
             )}
-
-            {/* Add to Cart / Update Order / Cancel */}
-            <div className="mt-3 flex-shrink-0 space-y-2">
-              <Button
-                className="w-full bg-amber-600 hover:bg-amber-700 text-white text-sm py-2"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (isEditingThisCard) {
-                    updateCartItem(item, currentSizeIndex, cardKey);
-                  } else {
-                    addToCart(item, currentSizeIndex, cardKey);
-                  }
-                }}
-              >
-                <ShoppingBag className="mr-2 h-4 w-4" />
-                {isEditingThisCard ? 'Update Order' : 'Add to Order'}
-              </Button>
-              
-              {/* Cancel Button (only when editing THIS card) */}
-              {isEditingThisCard && (
-                <Button
-                  variant="outline"
-                  className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 text-sm py-2"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    cancelEditingCartItem(item.id);
-                  }}
-                >
-                  <X className="mr-2 h-4 w-4" />
-                  Cancel Changes
-                </Button>
-              )}
-            </div>
           </CardContent>
         </Card>
       </div>
