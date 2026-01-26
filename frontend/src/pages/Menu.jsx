@@ -808,14 +808,6 @@ const Menu = () => {
       </div>
     );
   };
-                </Button>
-              )}
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  };
 
   const renderFruitTeaShakerOption = (item) => {
     if (!item.hasFruitTeaShaker) return null;
