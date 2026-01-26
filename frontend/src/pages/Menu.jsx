@@ -857,9 +857,6 @@ const Menu = () => {
         className="relative max-w-[280px] mx-auto"
         style={{ zIndex: isExpanded ? 50 : 0 }}
       >
-        {/* Placeholder to maintain grid cell height when card is absolute positioned */}
-        {isExpanded && <div className="h-[340px]"></div>}
-        
         <Card
           ref={isExpanded ? expandedCardRef : null}
           className={`group transition-all duration-300 border-0 bg-white flex flex-col hover:shadow-xl ${
