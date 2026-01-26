@@ -859,10 +859,10 @@ const Menu = () => {
       >
         <Card
           ref={isExpanded ? expandedCardRef : null}
-          className={`group transition-all duration-300 overflow-hidden border-0 bg-white flex flex-col hover:shadow-xl ${
+          className={`group transition-all duration-300 border-0 bg-white flex flex-col hover:shadow-xl ${
             isExpanded 
-              ? 'shadow-2xl ring-2 ring-amber-400' 
-              : 'h-full'
+              ? 'shadow-2xl ring-2 ring-amber-400 overflow-visible' 
+              : 'h-full overflow-hidden'
           }`}
         >
           <div className="relative h-40 overflow-hidden flex-shrink-0 bg-amber-50">
