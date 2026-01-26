@@ -991,7 +991,12 @@ const Menu = () => {
             {renderFruitTeaShakerOption(item)}
 
             {/* Customization Section - pass unique cardKey */}
-            {renderCustomizationSection(item, categoryHasCustomization, cardKey)}
+            {renderCustomizationSection(item, categoryHasCustomization, cardKey, {
+              currentSizeIndex,
+              customizationPrice,
+              totalPrice,
+              isEditingThisCard
+            })}
 
             {!isExpanded && <div className="flex-grow"></div>}
 
