@@ -854,13 +854,17 @@ const Menu = () => {
       <div
         id={`item-${item.id}`}
         key={cardKey}
-        className={`relative max-w-[280px] mx-auto ${isExpanded ? 'z-50' : 'z-0'}`}
+        className="relative max-w-[280px] mx-auto"
+        style={{ zIndex: isExpanded ? 50 : 0 }}
       >
+        {/* Placeholder to maintain grid space when card is expanded and absolute */}
+        {isExpanded && <div className="h-[340px] pointer-events-none"></div>}
+        
         <Card
           ref={isExpanded ? expandedCardRef : null}
           className={`group transition-all duration-300 overflow-hidden border-0 bg-white flex flex-col ${
             isExpanded 
-              ? 'shadow-2xl ring-2 ring-amber-400' 
+              ? 'shadow-2xl ring-2 ring-amber-400 absolute left-0 right-0 top-0' 
               : 'hover:shadow-xl h-full'
           }`}
         >
