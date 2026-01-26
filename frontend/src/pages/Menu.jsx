@@ -857,10 +857,9 @@ const Menu = () => {
           ref={isExpanded ? expandedCardRef : null}
           className={`group transition-all duration-300 overflow-hidden border-0 bg-white flex flex-col ${
             isExpanded 
-              ? 'shadow-2xl ring-2 ring-amber-400 absolute left-0 right-0 top-0' 
+              ? 'shadow-2xl ring-2 ring-amber-400' 
               : 'hover:shadow-xl h-full'
           }`}
-          style={isExpanded ? { minHeight: 'auto' } : {}}
         >
           <div className="relative h-40 overflow-hidden flex-shrink-0 bg-amber-50">
             {item.isBestSeller && (
