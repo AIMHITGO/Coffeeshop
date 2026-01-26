@@ -896,7 +896,7 @@ const Menu = () => {
                       e.stopPropagation();
                       if (!blockNextClick) setSelectedSize(item.id, idx);
                     }}
-                    className={`px-2 py-1.5 rounded-lg text-sm font-medium transition-all flex-1 min-w-[70px] ${
+                    className={`px-1.5 py-1 rounded-lg text-sm font-medium transition-all flex-1 min-w-[58px] ${
                       currentSizeIndex === idx
                         ? 'bg-amber-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-amber-50'
