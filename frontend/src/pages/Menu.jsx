@@ -861,7 +861,7 @@ const Menu = () => {
           ref={isExpanded ? expandedCardRef : null}
           className={`group transition-all duration-300 border-0 bg-white flex flex-col hover:shadow-xl ${
             isExpanded 
-              ? 'shadow-2xl ring-2 ring-amber-400 absolute left-0 right-0 top-0 overflow-hidden' 
+              ? 'shadow-2xl ring-2 ring-amber-400 absolute inset-0 overflow-hidden' 
               : 'h-full overflow-hidden'
           }`}
         >
