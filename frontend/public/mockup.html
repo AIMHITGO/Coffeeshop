@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Mockup - Before & After</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .card-before {
+      width: 320px;
+    }
+    .card-after {
+      width: 280px;
+    }
+    .image-before {
+      height: 144px; /* h-36 */
+    }
+    .image-after {
+      height: 160px; /* h-40 */
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-8">
+  <h1 class="text-2xl font-bold text-center mb-8">Card Mockup: Before vs After</h1>
+  
+  <div class="flex justify-center gap-12 flex-wrap">
+    
+    <!-- BEFORE Card -->
+    <div class="text-center">
+      <h2 class="text-lg font-semibold mb-4 text-red-600">BEFORE (Current)</h2>
+      <div class="card-before bg-white rounded-lg shadow-lg overflow-hidden">
+        <!-- Image Container -->
+        <div class="image-before bg-amber-50 flex items-center justify-center overflow-hidden">
+          <img 
+            src="https://raw.githubusercontent.com/krystianbajno/img/refs/heads/main/latte.png" 
+            alt="Latte"
+            class="h-full object-contain"
+          />
+        </div>
+        
+        <!-- Content -->
+        <div class="p-4">
+          <h3 class="text-lg font-bold text-gray-900">Latte</h3>
+          <p class="text-gray-600 text-xs mt-1">Smooth espresso with velvety steamed milk</p>
+          
+          <!-- Size Buttons -->
+          <div class="flex gap-2 mt-3">
+            <button class="px-2 py-1.5 rounded-lg text-sm font-medium bg-amber-600 text-white flex-1" style="min-width: 70px;">
+              <span class="block text-xs">Small</span>
+              <span class="block text-xs">$5.00</span>
+            </button>
+            <button class="px-2 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 flex-1" style="min-width: 70px;">
+              <span class="block text-xs">Medium</span>
+              <span class="block text-xs">$4.25</span>
+            </button>
+            <button class="px-2 py-1.5 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 flex-1" style="min-width: 70px;">
+              <span class="block text-xs">Large</span>
+              <span class="block text-xs">$5.50</span>
+            </button>
+          </div>
+          
+          <!-- Customize -->
+          <div class="mt-4 border-t pt-4">
+            <button class="flex items-center justify-between w-full text-sm font-medium text-amber-600">
+              <span>⚙️ Customize Your Drink</span>
+              <span>▼</span>
+            </button>
+          </div>
+          
+          <!-- Quantity -->
+          <div class="mt-2 flex items-center justify-between">
+            <span class="text-xs font-medium text-gray-700">Quantity:</span>
+            <div class="flex items-center gap-2 border border-gray-300 rounded-lg px-2 py-1">
+              <button class="p-1">−</button>
+              <span class="w-6 text-center font-semibold text-sm">1</span>
+              <button class="p-1">+</button>
+            </div>
+          </div>
+          
+          <!-- Add to Order -->
+          <button class="w-full mt-3 bg-amber-600 text-white py-2 rounded-lg text-sm font-medium">
+            🛒 Add to Order
+          </button>
+        </div>
+      </div>
+      <p class="mt-2 text-sm text-gray-500">Width: 320px, Image: h-36</p>
+    </div>
+    
+    <!-- AFTER Card -->
+    <div class="text-center">
+      <h2 class="text-lg font-semibold mb-4 text-green-600">AFTER (Proposed)</h2>
+      <div class="card-after bg-white rounded-lg shadow-lg overflow-hidden">
+        <!-- Image Container - Taller -->
+        <div class="image-after bg-amber-50 flex items-center justify-center overflow-hidden">
+          <img 
+            src="https://raw.githubusercontent.com/krystianbajno/img/refs/heads/main/latte.png" 
+            alt="Latte"
+            class="h-full object-contain"
+          />
+        </div>
+        
+        <!-- Content -->
+        <div class="p-4">
+          <h3 class="text-base font-bold text-gray-900">Latte</h3>
+          <p class="text-gray-600 text-xs mt-1">Smooth espresso with velvety steamed milk</p>
+          
+          <!-- Size Buttons - Narrower -->
+          <div class="flex gap-2 mt-3">
+            <button class="px-1.5 py-1 rounded-lg text-sm font-medium bg-amber-600 text-white flex-1" style="min-width: 58px;">
+              <span class="block text-xs">Small</span>
+              <span class="block text-xs">$5.00</span>
+            </button>
+            <button class="px-1.5 py-1 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 flex-1" style="min-width: 58px;">
+              <span class="block text-xs">Medium</span>
+              <span class="block text-xs">$4.25</span>
+            </button>
+            <button class="px-1.5 py-1 rounded-lg text-sm font-medium bg-gray-100 text-gray-700 flex-1" style="min-width: 58px;">
+              <span class="block text-xs">Large</span>
+              <span class="block text-xs">$5.50</span>
+            </button>
+          </div>
+          
+          <!-- Customize -->
+          <div class="mt-4 border-t pt-4">
+            <button class="flex items-center justify-between w-full text-sm font-medium text-amber-600">
+              <span>⚙️ Customize Your Drink</span>
+              <span>▼</span>
+            </button>
+          </div>
+          
+          <!-- Quantity -->
+          <div class="mt-2 flex items-center justify-between">
+            <span class="text-xs font-medium text-gray-700">Quantity:</span>
+            <div class="flex items-center gap-2 border border-gray-300 rounded-lg px-2 py-1">
+              <button class="p-1">−</button>
+              <span class="w-6 text-center font-semibold text-sm">1</span>
+              <button class="p-1">+</button>
+            </div>
+          </div>
+          
+          <!-- Add to Order -->
+          <button class="w-full mt-3 bg-amber-600 text-white py-2 rounded-lg text-sm font-medium">
+            🛒 Add to Order
+          </button>
+        </div>
+      </div>
+      <p class="mt-2 text-sm text-gray-500">Width: 280px, Image: h-40</p>
+    </div>
+    
+  </div>
+  
+  <div class="mt-8 text-center text-sm text-gray-600 max-w-2xl mx-auto">
+    <h3 class="font-bold mb-2">Changes Applied:</h3>
+    <ul class="text-left inline-block">
+      <li>✓ Image container: h-36 → h-40 (144px → 160px)</li>
+      <li>✓ Card width: 320px → 280px (12.5% reduction)</li>
+      <li>✓ Size buttons: min-w-[70px] → min-w-[58px]</li>
+      <li>✓ Drink name: text-lg → text-base</li>
+      <li>✓ Add to Order: unchanged (stays w-full)</li>
+    </ul>
+  </div>
+  
+</body>
+</html>
