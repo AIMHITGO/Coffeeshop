@@ -584,12 +584,12 @@ const Menu = () => {
   }, [selectedMainCategory]);
 
   // Render customization section - takes unique cardKey
+  // Now renders for ALL cards - shows full options if categoryHasCustomization, otherwise just Special Instructions
   const renderCustomizationSection = (item, categoryHasCustomization, cardKey) => {
-    if (!categoryHasCustomization) return null;
-
     const isExpanded = expandedCardKey === cardKey;
     const currentCustomizations = itemCustomizations[item.id] || {};
     const itemHasCustomizations = hasCustomizations(item.id);
+    const hasSpecialInstructions = specialInstructions[item.id]?.trim();
 
     return (
       <div className="mt-4 border-t pt-4">
@@ -603,7 +603,7 @@ const Menu = () => {
           <span className="flex items-center">
             <Settings className="w-4 h-4 mr-2" />
             Customize Your Drink
-            {itemHasCustomizations && !isExpanded && (
+            {(itemHasCustomizations || hasSpecialInstructions) && !isExpanded && (
               <span className="ml-2 text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">Modified</span>
             )}
           </span>
@@ -612,19 +612,21 @@ const Menu = () => {
 
         {isExpanded && (
           <>
-            <div className="mt-4 space-y-4 text-sm bg-white max-h-80 overflow-y-auto pr-2">
-              {itemHasCustomizations && (
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    clearItemCustomizations(item.id);
-                  }}
-                  className="flex items-center text-red-500 hover:text-red-600 text-sm font-medium mb-2"
-                >
-                  <RotateCcw className="w-4 h-4 mr-1" />
-                  Clear All Customizations
-                </button>
-              )}
+            {/* Full customization options - only for categories that support it */}
+            {categoryHasCustomization && (
+              <div className="mt-4 space-y-4 text-sm bg-white max-h-80 overflow-y-auto pr-2">
+                {itemHasCustomizations && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      clearItemCustomizations(item.id);
+                    }}
+                    className="flex items-center text-red-500 hover:text-red-600 text-sm font-medium mb-2"
+                  >
+                    <RotateCcw className="w-4 h-4 mr-1" />
+                    Clear All Customizations
+                  </button>
+                )}
 
               {/* Milk Options */}
               <div>
