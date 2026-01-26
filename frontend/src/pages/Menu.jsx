@@ -988,8 +988,6 @@ const Menu = () => {
             </div>
           </CardContent>
         </Card>
-        
-        {isExpanded && <div className="h-[600px]"></div>}
       </div>
     );
   };
