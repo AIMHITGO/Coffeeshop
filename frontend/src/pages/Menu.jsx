@@ -991,6 +991,9 @@ const Menu = () => {
             </div>
           </CardContent>
         </Card>
+        
+        {/* Placeholder to maintain grid cell height when card is absolute positioned */}
+        {isExpanded && <div className="h-[340px]"></div>}
       </div>
     );
   };
