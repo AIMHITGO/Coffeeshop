@@ -965,7 +965,7 @@ const Menu = () => {
                 className="w-full bg-amber-600 hover:bg-amber-700 text-white text-sm py-2"
                 onClick={(e) => {
                   e.stopPropagation();
-                  if (editingCartKey) {
+                  if (isEditingThisCard) {
                     updateCartItem(item, currentSizeIndex, cardKey);
                   } else {
                     addToCart(item, currentSizeIndex, cardKey);
@@ -973,11 +973,11 @@ const Menu = () => {
                 }}
               >
                 <ShoppingBag className="mr-2 h-4 w-4" />
-                {editingCartKey ? 'Update Order' : 'Add to Order'}
+                {isEditingThisCard ? 'Update Order' : 'Add to Order'}
               </Button>
               
-              {/* Cancel Button (only when editing) */}
-              {editingCartKey && (
+              {/* Cancel Button (only when editing THIS card) */}
+              {isEditingThisCard && (
                 <Button
                   variant="outline"
                   className="w-full border-gray-300 text-gray-700 hover:bg-gray-50 text-sm py-2"
