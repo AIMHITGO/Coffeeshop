@@ -592,7 +592,7 @@ const Menu = () => {
     const hasSpecialInstructions = specialInstructions[item.id]?.trim();
 
     return (
-      <div className="mt-4 border-t pt-4">
+      <div className="mt-4 border-t pt-4 relative">
         <button
           onClick={(e) => {
             e.stopPropagation();
@@ -611,10 +611,10 @@ const Menu = () => {
         </button>
 
         {isExpanded && (
-          <>
+          <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-lg shadow-xl border border-gray-200 p-4 z-50">
             {/* Full customization options - only for categories that support it */}
             {categoryHasCustomization && (
-              <div className="mt-4 space-y-4 text-sm bg-white max-h-80 overflow-y-auto pr-2">
+              <div className="space-y-4 text-sm bg-white max-h-60 overflow-y-auto pr-2">
                 {itemHasCustomizations && (
                   <button
                     onClick={(e) => {
