@@ -772,7 +772,7 @@ const Menu = () => {
             )}
 
             {/* Special Instructions - Fixed at bottom of expanded section, shows for ALL cards */}
-            <div className={`${categoryHasCustomization ? 'mt-3' : 'mt-4'} relative`}>
+            <div className={`${categoryHasCustomization ? 'mt-3' : ''} relative`}>
               <textarea
                 value={specialInstructions[item.id] || ''}
                 onChange={(e) => {
@@ -803,7 +803,7 @@ const Menu = () => {
                 </div>
               )}
             </div>
-          </>
+          </div>
         )}
       </div>
     );
