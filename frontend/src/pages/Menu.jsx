@@ -846,6 +846,9 @@ const Menu = () => {
     const totalPrice = currentSize.price + customizationPrice;
     const itemHasCustomizations = hasCustomizations(item.id);
     const showPrice = cartQty > 0 || itemHasCustomizations;
+    
+    // Check if THIS specific card is being edited (not just any card)
+    const isEditingThisCard = editingCartKey && isExpanded;
 
     return (
       <div
@@ -853,11 +856,14 @@ const Menu = () => {
         key={cardKey}
         className={`relative max-w-[280px] mx-auto ${isExpanded ? 'z-50' : 'z-0'}`}
       >
+        {/* Placeholder to maintain grid space when card is expanded */}
+        {isExpanded && <div className="h-[340px]"></div>}
+        
         <Card
           ref={isExpanded ? expandedCardRef : null}
           className={`group transition-all duration-300 overflow-hidden border-0 bg-white flex flex-col ${
             isExpanded 
-              ? 'shadow-2xl ring-2 ring-amber-400' 
+              ? 'shadow-2xl ring-2 ring-amber-400 absolute inset-x-0 top-0' 
               : 'hover:shadow-xl h-full'
           }`}
         >
