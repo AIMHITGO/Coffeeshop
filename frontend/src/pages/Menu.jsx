@@ -1099,7 +1099,7 @@ const Menu = () => {
                       </h2>
                       <p className="text-gray-600">{category.description}</p>
                     </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 items-start max-w-5xl">
                       {category.items.map(item => renderMenuItem(item, category.hasCustomization, category.id))}
                     </div>
                   </div>
