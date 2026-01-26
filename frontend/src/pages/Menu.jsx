@@ -585,7 +585,12 @@ const Menu = () => {
 
   // Render customization section - takes unique cardKey
   // Now renders for ALL cards - shows full options if categoryHasCustomization, otherwise just Special Instructions
-  const renderCustomizationSection = (item, categoryHasCustomization, cardKey) => {
+  const renderCustomizationSection = (item, categoryHasCustomization, cardKey, { 
+    currentSizeIndex, 
+    customizationPrice, 
+    totalPrice,
+    isEditingThisCard 
+  }) => {
     const isExpanded = expandedCardKey === cardKey;
     const currentCustomizations = itemCustomizations[item.id] || {};
     const itemHasCustomizations = hasCustomizations(item.id);
