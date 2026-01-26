@@ -851,7 +851,7 @@ const Menu = () => {
       <div
         id={`item-${item.id}`}
         key={cardKey}
-        className={`relative ${isExpanded ? 'z-50' : 'z-0'}`}
+        className={`relative max-w-[280px] mx-auto ${isExpanded ? 'z-50' : 'z-0'}`}
       >
         <Card
           ref={isExpanded ? expandedCardRef : null}
