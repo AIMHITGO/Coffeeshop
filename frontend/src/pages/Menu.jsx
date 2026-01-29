@@ -1078,20 +1078,20 @@ const Menu = () => {
                       <div className="border-t border-gray-200 my-3"></div>
                       
                       {/* Food Menu Links */}
-                      <button
-                        onClick={() => navigate('/breakfast')}
+                      <Link
+                        to="/breakfast"
                         className="w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center text-gray-700 hover:bg-amber-50"
                       >
                         <ChefHat className="w-4 h-4 mr-2 text-amber-500" />
                         Breakfast Menu
-                      </button>
-                      <button
-                        onClick={() => navigate('/dinner')}
+                      </Link>
+                      <Link
+                        to="/dinner"
                         className="w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center text-gray-700 hover:bg-amber-50"
                       >
                         <Utensils className="w-4 h-4 mr-2 text-amber-500" />
                         Dinner Menu
-                      </button>
+                      </Link>
                     </nav>
                   </div>
                 </div>
