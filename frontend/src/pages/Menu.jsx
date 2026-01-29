@@ -87,6 +87,38 @@ const Menu = () => {
     }
   }, [editingCartKey]); // Only run when editingCartKey changes
 
+  // Register callback to clear customizations when item is removed from cart
+  useEffect(() => {
+    const unregister = registerOnItemRemoved((itemId) => {
+      // Clear customizations for the removed item
+      setItemCustomizations(prev => {
+        const newCustomizations = { ...prev };
+        delete newCustomizations[itemId];
+        return newCustomizations;
+      });
+      // Clear special instructions for the removed item
+      setSpecialInstructions(prev => {
+        const newInstructions = { ...prev };
+        delete newInstructions[itemId];
+        return newInstructions;
+      });
+      // Clear selected fruit tea for the removed item
+      setSelectedFruitTea(prev => {
+        const newFruitTea = { ...prev };
+        delete newFruitTea[itemId];
+        return newFruitTea;
+      });
+      // Reset quantity
+      setItemQuantities(prev => {
+        const newQuantities = { ...prev };
+        delete newQuantities[itemId];
+        return newQuantities;
+      });
+    });
+    
+    return unregister; // Cleanup on unmount
+  }, [registerOnItemRemoved]);
+
   // Get best selling items from references
   const bestSellingCoffee = bestSellers.map(ref => {
     const category = menuCategories.find(cat => cat.id === ref.categoryId);
