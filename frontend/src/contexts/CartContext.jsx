@@ -61,12 +61,16 @@ export const CartProvider = ({ children }) => {
     }));
   };
 
-  const removeFromCart = (key) => {
+  const removeFromCart = (key, itemId = null) => {
     setCart(prev => {
       const newCart = { ...prev };
       delete newCart[key];
       return newCart;
     });
+    // Call all registered callbacks with the itemId
+    if (itemId) {
+      onItemRemovedCallbacks.forEach(callback => callback(itemId));
+    }
   };
 
   const clearCart = () => {
