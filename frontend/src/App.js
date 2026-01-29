@@ -26,9 +26,9 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/breakfast" element={<Breakfast />} />
-            <Route path="/dinner" element={<Dinner />} />
+            <Route path="/menu" element={<Menu key="menu" />} />
+            <Route path="/breakfast" element={<Breakfast key="breakfast" />} />
+            <Route path="/dinner" element={<Dinner key="dinner" />} />
             <Route path="/rewards" element={<Rewards />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
