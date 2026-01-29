@@ -1078,20 +1078,20 @@ const Menu = () => {
                       <div className="border-t border-gray-200 my-3"></div>
                       
                       {/* Food Menu Links */}
-                      <Link
-                        to="/breakfast"
+                      <a
+                        href="/breakfast"
                         className="w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center text-gray-700 hover:bg-amber-50"
                       >
                         <ChefHat className="w-4 h-4 mr-2 text-amber-500" />
                         Breakfast Menu
-                      </Link>
-                      <Link
-                        to="/dinner"
+                      </a>
+                      <a
+                        href="/dinner"
                         className="w-full text-left px-4 py-2 rounded-lg transition-colors text-sm flex items-center text-gray-700 hover:bg-amber-50"
                       >
                         <Utensils className="w-4 h-4 mr-2 text-amber-500" />
                         Dinner Menu
-                      </Link>
+                      </a>
                     </nav>
                   </div>
                 </div>
