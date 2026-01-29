@@ -51,7 +51,7 @@ const GlobalCart = () => {
   }, [cartState, setCartState]);
 
   const deleteFromCart = (key, itemId) => {
-    removeFromCart(key);
+    removeFromCart(key, itemId);
     toast.success('Item removed from cart');
   };
 
