@@ -10,7 +10,7 @@ import { useCart } from '../contexts/CartContext';
 
 const Menu = () => {
   const navigate = useNavigate();
-  const { cart, setCart, editingCartKey, setEditingCartKey } = useCart();
+  const { cart, setCart, editingCartKey, setEditingCartKey, registerOnItemRemoved } = useCart();
   const [selectedSizes, setSelectedSizes] = useState({});
   const [selectedMainCategory, setSelectedMainCategory] = useState('coffee');
   const [activeDrinkSection, setActiveDrinkSection] = useState('best-sellers');
