@@ -14,6 +14,16 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
   const [cartState, setCartState] = useState('regular'); // 'minimized' | 'regular' | 'expanded'
   const [editingCartKey, setEditingCartKey] = useState(null);
+  const [onItemRemovedCallbacks, setOnItemRemovedCallbacks] = useState([]);
+
+  // Register a callback to be called when an item is removed
+  const registerOnItemRemoved = (callback) => {
+    setOnItemRemovedCallbacks(prev => [...prev, callback]);
+    // Return unregister function
+    return () => {
+      setOnItemRemovedCallbacks(prev => prev.filter(cb => cb !== callback));
+    };
+  };
 
   // Load cart from localStorage on mount
   useEffect(() => {
