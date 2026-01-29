@@ -1102,20 +1102,20 @@ const Menu = () => {
                 {/* Quick Navigation to Other Menus - Mobile Only */}
                 <div className="lg:hidden mb-8 bg-white rounded-lg shadow-md p-4 border border-gray-200">
                   <div className="flex flex-col gap-3">
-                    <button
-                      onClick={() => navigate('/breakfast')}
+                    <Link
+                      to="/breakfast"
                       className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 transition-colors text-left"
                     >
                       <ChefHat className="w-5 h-5 text-amber-500 flex-shrink-0" />
                       <span className="font-medium text-gray-700">Breakfast Menu</span>
-                    </button>
-                    <button
-                      onClick={() => navigate('/dinner')}
+                    </Link>
+                    <Link
+                      to="/dinner"
                       className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-amber-50 transition-colors text-left"
                     >
                       <Utensils className="w-5 h-5 text-amber-500 flex-shrink-0" />
                       <span className="font-medium text-gray-700">Dinner Menu</span>
-                    </button>
+                    </Link>
                   </div>
                 </div>
 
