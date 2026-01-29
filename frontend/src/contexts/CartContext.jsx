@@ -12,7 +12,11 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
-  const [cartState, setCartState] = useState('regular'); // 'minimized' | 'regular' | 'expanded'
+  const [cartState, setCartState] = useState(() => {
+    // Load cart state from localStorage, default to 'minimized'
+    const savedState = localStorage.getItem('happyPlaceCartState');
+    return savedState || 'minimized';
+  });
   const [editingCartKey, setEditingCartKey] = useState(null);
   const [onItemRemovedCallbacks, setOnItemRemovedCallbacks] = useState([]);
 
@@ -37,6 +41,11 @@ export const CartProvider = ({ children }) => {
       }
     }
   }, []);
+
+  // Save cart state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('happyPlaceCartState', cartState);
+  }, [cartState]);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
