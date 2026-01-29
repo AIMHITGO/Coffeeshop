@@ -102,7 +102,8 @@ export const CartProvider = ({ children }) => {
     removeFromCart,
     clearCart,
     getCartItemCount,
-    getTotalPrice
+    getTotalPrice,
+    registerOnItemRemoved
   };
 
   return (
