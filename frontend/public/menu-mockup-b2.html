@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Page Mockup - B2 Tile Size</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+  
+  <!-- Mock Header -->
+  <header class="bg-white shadow-sm fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="text-amber-600 text-xl">☕</span>
+        <span class="font-bold text-gray-800">HAPPY PLACE</span>
+      </div>
+      <nav class="flex gap-6 text-sm text-gray-600">
+        <span class="text-amber-600 font-medium">Menu</span>
+        <span>Rewards</span>
+        <span>Blog</span>
+        <span>About</span>
+        <span>Locations</span>
+      </nav>
+      <button class="bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-medium">Order Now</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <div class="pt-16 relative h-64 bg-cover bg-center" style="background-image: url('https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/GettyImages-1367390655-1920w.jpg');">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative z-10 h-full flex flex-col items-center justify-center text-white">
+      <h1 class="text-4xl font-bold mb-2">Coffee & Drinks</h1>
+      <p class="text-lg opacity-90">Jessy's Premium Coffee - Fresh Roasted 100% Arabica Beans</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="flex gap-8">
+      
+      <!-- Sidebar -->
+      <aside class="w-56 flex-shrink-0">
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 sticky top-24">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="text-amber-500">☕</span>
+            <h2 class="font-bold text-gray-800">Drink Categories</h2>
+          </div>
+          <nav class="space-y-2 text-sm">
+            <a href="#" class="block py-2 px-3 rounded-lg bg-amber-50 text-amber-700 font-medium">Coffee & Espresso</a>
+            <a href="#" class="block py-2 px-3 rounded-lg text-gray-600 hover:bg-gray-50">Cappuccino</a>
+            <a href="#" class="block py-2 px-3 rounded-lg text-gray-600 hover:bg-gray-50">Custom Drip</a>
+            <a href="#" class="block py-2 px-3 rounded-lg text-gray-600 hover:bg-gray-50">Cold Brew & Signature</a>
+            <a href="#" class="block py-2 px-3 rounded-lg text-gray-600 hover:bg-gray-50">Frappés</a>
+            <a href="#" class="block py-2 px-3 rounded-lg text-gray-600 hover:bg-gray-50">Tea Options</a>
+            <a href="#" class="block py-2 px-3 rounded-lg text-gray-600 hover:bg-gray-50">Non-Coffee</a>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Menu Grid -->
+      <main class="flex-1">
+        <div class="mb-6">
+          <h2 class="text-2xl font-bold text-gray-800">Coffee & Espresso</h2>
+          <p class="text-gray-600">Jessy's Premium Coffee - Fresh Roasted 100% Arabica Beans</p>
+        </div>
+
+        <!-- B2 Size Grid: 240x160 (3:2 ratio) tiles -->
+        <div class="grid grid-cols-3 gap-4">
+          
+          <!-- Drip Coffee -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Drip%20Coffee.png" alt="Drip Coffee" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">0 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Drip Coffee</h3>
+            </div>
+          </a>
+
+          <!-- Café Au Lait -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Caf%C3%A9%20au%20Lait.png" alt="Café Au Lait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">50 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Café Au Lait</h3>
+            </div>
+          </a>
+
+          <!-- Espresso -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Espresso.png" alt="Espresso" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">10 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Espresso</h3>
+            </div>
+          </a>
+
+          <!-- Americano -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Americano.png" alt="Americano" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">15 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Americano</h3>
+            </div>
+          </a>
+
+          <!-- Short Black -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Short%20Black.png" alt="Short Black" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">10 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Short Black</h3>
+            </div>
+          </a>
+
+          <!-- Long Black -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Long%20Black.png" alt="Long Black" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">15 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Long Black</h3>
+            </div>
+          </a>
+
+          <!-- Coffee & Milk -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Coffee%20%26%20Milk.png" alt="Coffee & Milk" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">0 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Coffee & Milk (Doppio)</h3>
+            </div>
+          </a>
+
+          <!-- Latte -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Latte.png" alt="Latte" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">170 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Latte</h3>
+            </div>
+          </a>
+
+          <!-- Flat White -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Flat%20White.png" alt="Flat White" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">120 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Flat White</h3>
+            </div>
+          </a>
+
+          <!-- Vanilla Latte -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Vanilla%20Latte.png" alt="Vanilla Latte" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">240 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Vanilla Latte</h3>
+            </div>
+          </a>
+
+          <!-- Caramel Macchiato -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Caramel%20Macchiato.png" alt="Caramel Macchiato" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">300 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Caramel Macchiato</h3>
+            </div>
+          </a>
+
+          <!-- Mocha -->
+          <a href="#" class="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200">
+            <div class="relative w-full h-40 bg-amber-50 overflow-hidden">
+              <img src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Mocha.png" alt="Mocha" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white text-xs font-medium px-2 py-1 rounded-md backdrop-blur-sm">360 cal</div>
+            </div>
+            <div class="p-2.5">
+              <h3 class="font-semibold text-gray-900 text-sm leading-tight">Mocha</h3>
+            </div>
+          </a>
+
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Label showing this is B2 -->
+  <div class="fixed top-20 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg z-50">
+    B2: 240×160px tiles (3:2)
+  </div>
+
+</body>
+</html>
