@@ -453,7 +453,7 @@ const GlobalCart = () => {
                         </div>
                         <div className="text-right">
                           <p className="font-bold text-gray-900">
-                            ${((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity).toFixed(2)}
+                            ${totalItemPrice.toFixed(2)}
                           </p>
                           <p className="text-gray-500 text-sm">Qty: {entry.quantity}</p>
                         </div>
