@@ -519,20 +519,23 @@ const DrinkDetail = () => {
           </div>
         )}
 
-        {/* Special Instructions */}
-        <CustomizationSection title="Special Instructions" defaultOpen={false} borderColor="border-amber-300">
-          <textarea
-            value={specialInstructions}
-            onChange={(e) => setSpecialInstructions(e.target.value.slice(0, 150))}
-            placeholder="Any special requests?"
-            className="w-full p-3 border border-gray-200 rounded-lg text-sm focus:border-amber-500 focus:outline-none resize-none bg-white"
-            rows={2}
-            maxLength={150}
-          />
-          <div className="text-right text-xs text-gray-400 mt-1">
-            {specialInstructions.length}/150
+        {/* Special Instructions - Always visible */}
+        <div className="border-2 border-amber-300 rounded-xl overflow-hidden mt-4">
+          <div className="p-4 bg-white">
+            <span className="font-semibold text-gray-800 block mb-3">Special Instructions</span>
+            <textarea
+              value={specialInstructions}
+              onChange={(e) => setSpecialInstructions(e.target.value.slice(0, 150))}
+              placeholder="Any special requests?"
+              className="w-full p-3 border border-gray-200 rounded-lg text-sm focus:border-amber-500 focus:outline-none resize-none bg-gray-50"
+              rows={2}
+              maxLength={150}
+            />
+            <div className="text-right text-xs text-gray-400 mt-1">
+              {specialInstructions.length}/150
+            </div>
           </div>
-        </CustomizationSection>
+        </div>
       </div>
 
       {/* Fixed Bottom Bar with Quantity */}
