@@ -94,7 +94,12 @@ export const CartProvider = ({ children }) => {
   const getTotalPrice = () => {
     return Object.values(cart)
       .reduce((total, entry) => {
-        return total + ((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity);
+        // Handle new structure (from DrinkDetail) and old structure
+        if (entry.totalPrice !== undefined) {
+          return total + (entry.totalPrice * entry.quantity);
+        }
+        // Fallback for old structure
+        return total + ((entry.item?.sizes?.[entry.sizeIndex]?.price || 0) + (entry.customizationPrice || 0)) * entry.quantity;
       }, 0)
       .toFixed(2);
   };
