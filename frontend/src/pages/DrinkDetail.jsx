@@ -471,7 +471,7 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Add-ins */}
-            <CustomizationSection title="Add-ins">
+            <CustomizationSection title="Add-ins" borderColor="border-emerald-300">
               {coffeeCustomizations.addOns.map(addon => (
                 <QuantityControl
                   key={addon.id}
