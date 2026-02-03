@@ -218,55 +218,63 @@ const GlobalCart = () => {
       {cartState === 'regular' && (
         <div className="p-4">
           <div className="space-y-3 mb-4 max-h-48 overflow-y-auto">
-            {Object.entries(cart).map(([key, entry]) => (
-              <div 
-                key={key} 
-                className="border border-gray-200 rounded-lg p-3 hover:bg-amber-50 transition-colors"
-              >
+            {Object.entries(cart).map(([key, entry]) => {
+              // Handle both new structure (DrinkDetail) and old structure
+              const itemName = entry.name || entry.item?.name || 'Item';
+              const itemSize = entry.size || entry.item?.sizes?.[entry.sizeIndex]?.size || '';
+              const itemId = entry.id || entry.item?.id;
+              const basePrice = entry.totalPrice || (entry.item?.sizes?.[entry.sizeIndex]?.price || 0) + (entry.customizationPrice || 0);
+              const totalItemPrice = basePrice * entry.quantity;
+              
+              return (
                 <div 
-                  className="flex items-center justify-between text-sm group cursor-pointer"
-                  onClick={() => startEditingCartItem(key)}
+                  key={key} 
+                  className="border border-gray-200 rounded-lg p-3 hover:bg-amber-50 transition-colors"
                 >
-                  <div className="flex-1">
-                    <span className="text-gray-700 font-medium">
-                      {entry.quantity}x {entry.item.name}
-                    </span>
-                    <span className="text-gray-500 text-xs block">
-                      {entry.item.sizes[entry.sizeIndex].size}
-                      {entry.customizationPrice > 0 && ` (+$${entry.customizationPrice.toFixed(2)})`}
-                    </span>
+                  <div 
+                    className="flex items-center justify-between text-sm group cursor-pointer"
+                    onClick={() => startEditingCartItem(key)}
+                  >
+                    <div className="flex-1">
+                      <span className="text-gray-700 font-medium">
+                        {entry.quantity}x {itemName}
+                      </span>
+                      <span className="text-gray-500 text-xs block">
+                        {itemSize}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-gray-900">
+                        ${totalItemPrice.toFixed(2)}
+                      </span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteFromCart(key, itemId);
+                        }}
+                        className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-gray-900">
-                      ${((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity).toFixed(2)}
-                    </span>
+                  
+                  {/* Modify One button when quantity > 1 */}
+                  {entry.quantity > 1 && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        deleteFromCart(key, entry.item.id);
+                        splitCartItemForEditing(key, entry);
                       }}
-                      className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                      className="mt-2 w-full text-xs bg-amber-100 hover:bg-amber-200 text-amber-700 py-1.5 rounded transition-colors flex items-center justify-center"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Settings className="w-3 h-3 mr-1" />
+                      Modify One
                     </button>
-                  </div>
+                  )}
                 </div>
-                
-                {/* Modify One button when quantity > 1 */}
-                {entry.quantity > 1 && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      splitCartItemForEditing(key, entry);
-                    }}
-                    className="mt-2 w-full text-xs bg-amber-100 hover:bg-amber-200 text-amber-700 py-1.5 rounded transition-colors flex items-center justify-center"
-                  >
-                    <Settings className="w-3 h-3 mr-1" />
-                    Modify One
-                  </button>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="border-t pt-4 mb-4">
