@@ -319,9 +319,9 @@ const DrinkDetail = () => {
 
       <div className="max-w-2xl mx-auto px-4">
         {/* Top Section: Image + Info */}
-        <div className="flex gap-4 mb-6">
-          {/* Smaller Drink Image */}
-          <div className="w-32 h-32 flex-shrink-0 bg-amber-50 rounded-2xl overflow-hidden shadow-md">
+        <div className="flex gap-5 mb-6">
+          {/* B3 Size Drink Image: 300x200 (3:2 ratio) */}
+          <div className="w-[300px] h-[200px] flex-shrink-0 bg-amber-50 rounded-2xl overflow-hidden shadow-md">
             <img
               src={drink.image}
               alt={drink.name}
@@ -329,10 +329,10 @@ const DrinkDetail = () => {
             />
           </div>
           
-          {/* Drink Info */}
-          <div className="flex-1">
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">{drink.name}</h1>
-            <p className="text-gray-600 text-sm mb-2">{drink.description}</p>
+          {/* Drink Info - text wraps as needed */}
+          <div className="flex-1 pt-2">
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">{drink.name}</h1>
+            <p className="text-gray-600 text-sm mb-3 leading-relaxed">{drink.description}</p>
             <div className="flex items-center gap-3">
               <span className="text-xl font-bold text-amber-600">
                 ${currentSize.price.toFixed(2)}

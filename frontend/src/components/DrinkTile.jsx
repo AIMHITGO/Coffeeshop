@@ -14,8 +14,8 @@ const DrinkTile = ({ drink, categoryId }) => {
       className="group block bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 hover:border-amber-200"
       data-testid={`drink-tile-${slug}`}
     >
-      {/* Image Container - Fixed aspect ratio with calorie overlay */}
-      <div className="relative w-full aspect-[4/3] bg-amber-50 overflow-hidden">
+      {/* Image Container - B2 size: 240x160 (3:2 ratio) with calorie overlay */}
+      <div className="relative w-full h-40 bg-amber-50 overflow-hidden">
         <img
           src={drink.image}
           alt={drink.name}
