@@ -533,9 +533,12 @@ const DrinkDetail = () => {
             {specialInstructions.length}/150
           </div>
         </CustomizationSection>
+      </div>
 
-        {/* Quantity */}
-        <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mt-4">
+      {/* Fixed Bottom Bar with Quantity */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+        {/* Quantity Row */}
+        <div className="max-w-2xl mx-auto px-4 py-3 border-b border-gray-100">
           <div className="flex items-center justify-between">
             <span className="font-semibold text-gray-800">Quantity</span>
             <div className="flex items-center gap-4">
@@ -565,11 +568,9 @@ const DrinkDetail = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Fixed Bottom Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg z-50">
-        <div className="max-w-2xl mx-auto flex items-center justify-between gap-4">
+        
+        {/* Total and Add to Order Row */}
+        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
           <div>
             <span className="text-xs text-gray-500 block">Total</span>
             <span className="text-2xl font-bold text-amber-600">${calculateTotalPrice().toFixed(2)}</span>
