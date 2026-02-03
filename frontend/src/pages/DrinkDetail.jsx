@@ -391,7 +391,12 @@ const DrinkDetail = () => {
         {drink.hasCustomization && (
           <div className="space-y-3 mb-4">
             {/* Milk */}
-            <CustomizationSection title="Milk" defaultOpen={true}>
+            <CustomizationSection 
+              title="Milk" 
+              defaultOpen={false}
+              selectedValue={customizations.milk ? coffeeCustomizations.milk.find(m => m.id === customizations.milk)?.name : '2% Milk (Default)'}
+              borderColor="border-amber-300"
+            >
               <div className="space-y-2">
                 {[{ id: '', name: '2% Milk (Default)', price: 0 }, ...coffeeCustomizations.milk].map(milk => (
                   <label 
@@ -421,7 +426,7 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Flavors/Syrups */}
-            <CustomizationSection title="Flavors">
+            <CustomizationSection title="Flavors" borderColor="border-orange-300">
               {coffeeCustomizations.syrups.map(syrup => (
                 <QuantityControl
                   key={syrup.id}
