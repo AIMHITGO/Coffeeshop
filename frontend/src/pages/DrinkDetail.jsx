@@ -33,16 +33,21 @@ const MugIcon = ({ size, isSelected, onClick, sizeLabel, price, calories }) => {
 };
 
 // Expandable customization section component (Starbucks-style)
-const CustomizationSection = ({ title, children, defaultOpen = false }) => {
+const CustomizationSection = ({ title, children, defaultOpen = false, selectedValue = null, borderColor = 'border-amber-300' }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   
   return (
-    <div className="border border-gray-200 rounded-xl overflow-hidden">
+    <div className={`border-2 ${borderColor} rounded-xl overflow-hidden`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between p-4 bg-white hover:bg-gray-50 transition-colors"
       >
-        <span className="font-semibold text-gray-800">{title}</span>
+        <div className="flex items-center gap-2">
+          <span className="font-semibold text-gray-800">{title}</span>
+          {selectedValue && !isOpen && (
+            <span className="text-sm text-amber-600 font-medium">• {selectedValue}</span>
+          )}
+        </div>
         {isOpen ? (
           <ChevronUp className="w-5 h-5 text-gray-400" />
         ) : (
