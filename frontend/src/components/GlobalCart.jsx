@@ -62,29 +62,44 @@ const GlobalCart = () => {
     setCartState('expanded');
   };
 
-  // Start editing a cart item - navigate to correct menu page and trigger edit
+  // Start editing a cart item - navigate to drink detail page
   const startEditingCartItem = (cartKey) => {
-    setEditingCartKey(cartKey);
-    
-    // Determine which menu page to navigate to based on menuType
     const entry = cart[cartKey];
-    let targetPath = '/menu'; // default to coffee menu
     
-    if (entry && entry.menuType) {
-      if (entry.menuType === 'breakfast') {
-        targetPath = '/breakfast';
-      } else if (entry.menuType === 'dinner') {
-        targetPath = '/dinner';
-      }
+    if (!entry) return;
+    
+    // For new structure (DrinkDetail)
+    if (entry.id) {
+      navigate(`/menu/drinks/${entry.id}?edit=${cartKey}`);
+      toast.info('Opening item for editing...');
+      return;
     }
     
-    // Navigate to appropriate menu page if not already there
-    if (location.pathname !== targetPath) {
-      navigate(targetPath, { state: { editCartKey: cartKey } });
+    // For old structure (Breakfast/Dinner or legacy)
+    let targetPath = '/menu';
+    
+    if (entry.menuType === 'breakfast') {
+      targetPath = '/breakfast';
+      setEditingCartKey(cartKey);
+      if (location.pathname !== targetPath) {
+        navigate(targetPath, { state: { editCartKey: cartKey } });
+        toast.info('Opening item for editing...');
+      } else {
+        toast.info('Editing item - make your changes and click "Update Order"');
+      }
+    } else if (entry.menuType === 'dinner') {
+      targetPath = '/dinner';
+      setEditingCartKey(cartKey);
+      if (location.pathname !== targetPath) {
+        navigate(targetPath, { state: { editCartKey: cartKey } });
+        toast.info('Opening item for editing...');
+      } else {
+        toast.info('Editing item - make your changes and click "Update Order"');
+      }
+    } else if (entry.item && entry.item.id) {
+      // Legacy structure - navigate to drink detail
+      navigate(`/menu/drinks/${entry.item.id}?edit=${cartKey}`);
       toast.info('Opening item for editing...');
-    } else {
-      // If already on correct menu page, let the component handle it via editingCartKey
-      toast.info('Editing item - make your changes and click "Update Order"');
     }
   };
 
