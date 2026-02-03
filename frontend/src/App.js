@@ -10,6 +10,7 @@ import GlobalCart from './components/GlobalCart';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
+import DrinkDetail from './pages/DrinkDetail';
 import Breakfast from './pages/Breakfast';
 import Dinner from './pages/Dinner';
 import Rewards from './pages/Rewards';
@@ -27,6 +28,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/menu" element={<Menu key="menu" />} />
+            <Route path="/menu/drinks/:slug" element={<DrinkDetail />} />
             <Route path="/breakfast" element={<Breakfast key="breakfast" />} />
             <Route path="/dinner" element={<Dinner key="dinner" />} />
             <Route path="/rewards" element={<Rewards />} />
