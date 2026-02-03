@@ -456,7 +456,7 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Espresso Shots */}
-            <CustomizationSection title="Espresso">
+            <CustomizationSection title="Espresso" borderColor="border-yellow-600">
               {coffeeCustomizations.shots.map(shot => (
                 <QuantityControl
                   key={shot.id}
