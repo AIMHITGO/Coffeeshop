@@ -536,6 +536,17 @@ const DrinkDetail = () => {
             </div>
           </div>
         </div>
+
+        {/* Back to Menu Button */}
+        <div className="mt-6 mb-4">
+          <Link 
+            to="/menu" 
+            className="inline-flex items-center text-amber-600 hover:text-amber-700 font-medium text-sm"
+          >
+            <ChevronLeft className="w-5 h-5 mr-1" />
+            Back to Menu
+          </Link>
+        </div>
       </div>
 
       {/* Fixed Bottom Bar with Quantity */}
