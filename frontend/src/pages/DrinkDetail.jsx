@@ -486,7 +486,7 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Toppings */}
-            <CustomizationSection title="Toppings">
+            <CustomizationSection title="Toppings" borderColor="border-purple-300">
               <div className="space-y-2">
                 {coffeeCustomizations.toppings.map(topping => (
                   <label 
