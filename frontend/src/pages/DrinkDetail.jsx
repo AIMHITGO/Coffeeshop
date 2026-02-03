@@ -426,7 +426,7 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Flavors/Syrups */}
-            <CustomizationSection title="Flavors" borderColor="border-orange-300">
+            <CustomizationSection title="Flavors" borderColor="border-amber-300">
               {coffeeCustomizations.syrups.map(syrup => (
                 <QuantityControl
                   key={syrup.id}
@@ -441,7 +441,7 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Sauces */}
-            <CustomizationSection title="Sauces" borderColor="border-rose-300">
+            <CustomizationSection title="Sauces" borderColor="border-amber-300">
               {coffeeCustomizations.sauces.map(sauce => (
                 <QuantityControl
                   key={sauce.id}
@@ -456,7 +456,7 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Espresso Shots */}
-            <CustomizationSection title="Espresso" borderColor="border-yellow-600">
+            <CustomizationSection title="Espresso" borderColor="border-amber-300">
               {coffeeCustomizations.shots.map(shot => (
                 <QuantityControl
                   key={shot.id}
@@ -471,7 +471,7 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Add-ins */}
-            <CustomizationSection title="Add-ins" borderColor="border-emerald-300">
+            <CustomizationSection title="Add-ins" borderColor="border-amber-300">
               {coffeeCustomizations.addOns.map(addon => (
                 <QuantityControl
                   key={addon.id}
@@ -486,7 +486,7 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Toppings */}
-            <CustomizationSection title="Toppings" borderColor="border-purple-300">
+            <CustomizationSection title="Toppings" borderColor="border-amber-300">
               <div className="space-y-2">
                 {coffeeCustomizations.toppings.map(topping => (
                   <label 
@@ -520,7 +520,7 @@ const DrinkDetail = () => {
         )}
 
         {/* Special Instructions */}
-        <CustomizationSection title="Special Instructions" defaultOpen={false} borderColor="border-sky-300">
+        <CustomizationSection title="Special Instructions" defaultOpen={false} borderColor="border-amber-300">
           <textarea
             value={specialInstructions}
             onChange={(e) => setSpecialInstructions(e.target.value.slice(0, 150))}
