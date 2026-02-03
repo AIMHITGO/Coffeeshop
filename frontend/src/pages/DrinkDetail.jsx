@@ -441,7 +441,7 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Sauces */}
-            <CustomizationSection title="Sauces">
+            <CustomizationSection title="Sauces" borderColor="border-rose-300">
               {coffeeCustomizations.sauces.map(sauce => (
                 <QuantityControl
                   key={sauce.id}
