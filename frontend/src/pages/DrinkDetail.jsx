@@ -520,7 +520,7 @@ const DrinkDetail = () => {
         )}
 
         {/* Special Instructions */}
-        <CustomizationSection title="Special Instructions" defaultOpen={false}>
+        <CustomizationSection title="Special Instructions" defaultOpen={false} borderColor="border-sky-300">
           <textarea
             value={specialInstructions}
             onChange={(e) => setSpecialInstructions(e.target.value.slice(0, 150))}
