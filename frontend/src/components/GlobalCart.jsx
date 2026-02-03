@@ -339,6 +339,14 @@ const GlobalCart = () => {
                 return false;
               }) || entry.fruitTea;
               
+              // Handle both new structure (DrinkDetail) and old structure
+              const itemName = entry.name || entry.item?.name || 'Item';
+              const itemSize = entry.size || entry.item?.sizes?.[entry.sizeIndex]?.size || '';
+              const itemImage = entry.image || entry.item?.image;
+              const itemId = entry.id || entry.item?.id;
+              const basePrice = entry.totalPrice || (entry.item?.sizes?.[entry.sizeIndex]?.price || 0) + (entry.customizationPrice || 0);
+              const totalItemPrice = basePrice * entry.quantity;
+              
               return (
                 <div 
                   key={key} 
@@ -348,7 +356,7 @@ const GlobalCart = () => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      deleteFromCart(key, entry.item.id);
+                      deleteFromCart(key, itemId);
                     }}
                     className="absolute top-3 right-3 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
                   >
@@ -357,11 +365,11 @@ const GlobalCart = () => {
                   
                   <div className="flex gap-4">
                     {/* Only show image for coffee/drink items, not food items */}
-                    {!entry.menuType || entry.menuType === 'coffee' ? (
+                    {(!entry.menuType || entry.menuType === 'coffee') && itemImage ? (
                       <div className="w-20 h-20 flex-shrink-0 bg-white rounded-lg overflow-hidden">
                         <img 
-                          src={entry.item.image} 
-                          alt={entry.item.name}
+                          src={itemImage} 
+                          alt={itemName}
                           className="w-full h-full object-contain p-1"
                         />
                       </div>
@@ -370,8 +378,8 @@ const GlobalCart = () => {
                     <div className="flex-1 pr-6">
                       <div className="flex items-start justify-between">
                         <div>
-                          <h4 className="font-bold text-gray-900 text-lg">{entry.item.name}</h4>
-                          <p className="text-amber-600 font-medium">{entry.item.sizes[entry.sizeIndex].size}</p>
+                          <h4 className="font-bold text-gray-900 text-lg">{itemName}</h4>
+                          <p className="text-amber-600 font-medium">{itemSize}</p>
                           
                           {/* Display Customizations */}
                           {entry.customizations && Object.keys(entry.customizations).length > 0 && (
