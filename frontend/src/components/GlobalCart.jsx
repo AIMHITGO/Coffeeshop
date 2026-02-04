@@ -167,7 +167,7 @@ const GlobalCart = () => {
   return (
     <div 
       ref={cartRef}
-      className={`fixed bg-white rounded-2xl shadow-2xl border-2 border-amber-200 z-[100] transition-all duration-300 ${
+      className={`fixed bg-white rounded-2xl shadow-2xl border-2 border-amber-200 z-[100] transition-all duration-300 overflow-hidden ${
         cartState === 'expanded' 
           ? 'bottom-20 left-4 right-4 md:right-auto md:left-8 md:w-[500px] max-h-[70vh]' 
           : cartState === 'regular'
