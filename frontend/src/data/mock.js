@@ -619,7 +619,7 @@ export const blogPosts = [
     title: 'Our Latin-American Coffee Heritage',
     excerpt: 'Learn about the family traditions that inspire our unique menu offerings.',
     content: 'Coffee has always been at the heart of Latin-American culture...',
-    image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Horchata%20%26%20Espresso%20-%20Home%20page.png',
+    image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Horchata%20%26%20Espresso%20-%20Home%20page.png?v=' + Date.now(),
     category: 'Our Story',
     author: 'Happy Place Family',
     date: 'December 10, 2025',
