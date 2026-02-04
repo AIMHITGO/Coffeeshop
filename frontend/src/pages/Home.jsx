@@ -98,7 +98,7 @@ const Home = () => {
               <Card
                 key={category.id}
                 className="group hover:shadow-2xl transition-all duration-500 cursor-pointer border-0 bg-white hover:-translate-y-2"
-                onClick={() => navigate('/menu')}
+                onClick={() => navigate(`/menu#${category.id}`)}
               >
                 <div className="relative h-56 overflow-hidden rounded-t-lg">
                   <img
