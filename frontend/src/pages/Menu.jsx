@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { ChefHat, Utensils, Coffee } from 'lucide-react';
 import { menuCategories, coffeeHeroImage } from '../data/mock';
 import DrinkTile from '../components/DrinkTile';
@@ -6,6 +7,7 @@ import DrinkTile from '../components/DrinkTile';
 const Menu = () => {
   // Refs for category sections
   const drinkSectionRefs = useRef({});
+  const location = useLocation();
 
   // Scroll to category section
   const scrollToDrinkSection = (categoryId) => {
@@ -21,6 +23,17 @@ const Menu = () => {
       });
     }
   };
+
+  // Handle hash navigation on page load
+  useEffect(() => {
+    if (location.hash) {
+      const categoryId = location.hash.slice(1); // Remove the '#'
+      // Small delay to ensure refs are set
+      setTimeout(() => {
+        scrollToDrinkSection(categoryId);
+      }, 300);
+    }
+  }, [location.hash]);
 
   // Filter coffee/drink categories only
   const drinkCategories = menuCategories.filter(cat => 
