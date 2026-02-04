@@ -273,11 +273,11 @@ const Home = () => {
                 className="group cursor-pointer hover:shadow-2xl transition-all duration-500 border-0 overflow-hidden"
                 onClick={() => navigate('/blog')}
               >
-                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-amber-100 to-orange-50">
+                <div className="relative h-64 overflow-hidden">
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded-full">
