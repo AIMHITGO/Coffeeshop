@@ -505,7 +505,11 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Toppings */}
-            <CustomizationSection title="Toppings" borderColor="border-amber-300">
+            <CustomizationSection 
+              title="Toppings" 
+              borderColor="border-amber-300"
+              isCustomized={Object.values(customizations.toppings || {}).some(qty => qty > 0)}
+            >
               <div className="space-y-2">
                 {coffeeCustomizations.toppings.map(topping => (
                   <label 
