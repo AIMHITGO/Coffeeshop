@@ -120,13 +120,13 @@ const Home = () => {
                   </div>
                 </div>
                 <CardContent className="p-6">
-                  <p className="text-gray-600 mb-4">{category.description}</p>
+                  <p className="text-gray-600 mb-4 line-clamp-2">{category.description}</p>
                   <Button
                     variant="ghost"
-                    className="w-full text-amber-600 hover:text-amber-700 hover:bg-amber-50 group-hover:bg-amber-600 group-hover:text-white transition-all"
+                    className="w-full text-amber-600 hover:text-amber-700 hover:bg-amber-50 group-hover:bg-amber-600 group-hover:text-white transition-all truncate"
                   >
-                    Explore {category.name}
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <span className="truncate">Explore</span>
+                    <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
                   </Button>
                 </CardContent>
               </Card>
