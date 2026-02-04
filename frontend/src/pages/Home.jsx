@@ -277,7 +277,7 @@ const Home = () => {
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-contain bg-amber-50 group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded-full">
