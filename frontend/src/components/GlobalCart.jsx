@@ -171,7 +171,7 @@ const GlobalCart = () => {
         cartState === 'expanded' 
           ? 'bottom-20 left-4 right-4 md:right-auto md:left-8 md:w-[500px] max-h-[70vh]' 
           : cartState === 'regular'
-            ? 'bottom-20 left-8 w-80'
+            ? 'bottom-20 left-8 w-64'
             : 'bottom-20 left-8 w-auto'
       }`}
     >
