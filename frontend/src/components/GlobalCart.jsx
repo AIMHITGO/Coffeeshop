@@ -385,6 +385,45 @@ const GlobalCart = () => {
                           {entry.customizations && Object.keys(entry.customizations).length > 0 && (
                             <div className="mt-2 text-xs text-gray-600 space-y-1">
                               {Object.entries(entry.customizations).map(([key, value]) => {
+                                // Skip empty values
+                                if (!value) return null;
+                                
+                                // Milk selection (string ID)
+                                if (key === 'milk' && typeof value === 'string' && value !== '') {
+                                  const details = getCustomizationDetails(value);
+                                  if (details) {
+                                    return (
+                                      <span key={key} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded inline-block mr-1 mb-1 text-xs">
+                                        {details.name}
+                                        {details.price > 0 && ` +$${details.price.toFixed(2)}`}
+                                      </span>
+                                    );
+                                  }
+                                }
+                                
+                                // Quantity-based customizations (syrups, sauces, shots, addOns, toppings)
+                                if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+                                  const items = Object.entries(value).filter(([id, qty]) => qty > 0);
+                                  if (items.length > 0) {
+                                    return (
+                                      <div key={key} className="flex flex-wrap gap-1">
+                                        {items.map(([id, qty]) => {
+                                          const details = getCustomizationDetails(id);
+                                          if (details) {
+                                            return (
+                                              <span key={id} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded text-xs">
+                                                {qty > 1 ? `${qty}x ` : ''}{details.name}
+                                                {details.price > 0 && ` +$${(details.price * qty).toFixed(2)}`}
+                                              </span>
+                                            );
+                                          }
+                                          return null;
+                                        })}
+                                      </div>
+                                    );
+                                  }
+                                }
+                                
                                 // Food items: Multi-select (array of objects with name property)
                                 if (Array.isArray(value) && value.length > 0 && value[0]?.name) {
                                   return (
