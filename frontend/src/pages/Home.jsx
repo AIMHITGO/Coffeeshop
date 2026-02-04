@@ -46,19 +46,11 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-8 py-6 text-lg shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105"
+                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-12 py-8 text-xl font-semibold shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105 rounded-xl"
                 onClick={() => navigate('/menu')}
               >
                 Order Now
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-6 text-lg backdrop-blur-sm bg-white/10 transition-all duration-300 hover:scale-105"
-                onClick={() => navigate('/menu')}
-              >
-                View Menu
+                <ArrowRight className="ml-3 h-6 w-6" />
               </Button>
             </div>
 
