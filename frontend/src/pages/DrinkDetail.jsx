@@ -429,7 +429,11 @@ const DrinkDetail = () => {
             </CustomizationSection>
 
             {/* Flavors/Syrups */}
-            <CustomizationSection title="Flavors" borderColor="border-amber-300">
+            <CustomizationSection 
+              title="Flavors" 
+              borderColor="border-amber-300"
+              isCustomized={Object.values(customizations.syrups || {}).some(qty => qty > 0)}
+            >
               {coffeeCustomizations.syrups.map(syrup => (
                 <QuantityControl
                   key={syrup.id}
