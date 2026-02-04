@@ -121,24 +121,52 @@ const GlobalCart = () => {
     };
     
     // Generate unique key with timestamp
-    const { item, sizeIndex, customizations, fruitTea, customizationPrice, menuType } = entry;
     const baseKey = cartKey.split('-split-')[0]; // Get base key without any split suffix
     const uniqueKey = `${baseKey}-split-${Date.now()}`;
+    
+    // Handle new structure (DrinkDetail) - has `id`, `name`, `slug`, `size`, etc.
+    if (entry.id) {
+      newCart[uniqueKey] = {
+        id: entry.id,
+        name: entry.name,
+        slug: entry.slug,
+        size: entry.size,
+        basePrice: entry.basePrice,
+        totalPrice: entry.totalPrice,
+        image: entry.image,
+        quantity: 1,
+        customizations: { ...entry.customizations },
+        specialInstructions: entry.specialInstructions || '',
+        hasCustomization: entry.hasCustomization
+      };
+      
+      setCart(newCart);
+      
+      // Navigate to drink detail page for editing
+      toast.info('Split 1 item for editing');
+      setTimeout(() => {
+        navigate(`/menu/drinks/${entry.id}?edit=${uniqueKey}`);
+      }, 100);
+      return;
+    }
+    
+    // Handle old structure (Breakfast/Dinner or legacy) - has `item`, `sizeIndex`, `menuType`
+    const { item, sizeIndex, customizations, fruitTea, customizationPrice, menuType } = entry;
     
     newCart[uniqueKey] = {
       item,
       sizeIndex,
       quantity: 1,
-      customizations: { ...customizations }, // Clone customizations
+      customizations: customizations ? { ...customizations } : {},
       fruitTea,
       customizationPrice,
-      menuType // Preserve menuType
+      menuType
     };
     
     setCart(newCart);
     
     // Determine which menu page to navigate to
-    let targetPath = '/menu'; // default to coffee menu
+    let targetPath = '/menu';
     if (menuType === 'breakfast') {
       targetPath = '/breakfast';
     } else if (menuType === 'dinner') {
@@ -148,9 +176,11 @@ const GlobalCart = () => {
     // Start editing the new single item
     toast.info('Split 1 item for editing');
     setTimeout(() => {
-      // Set editing key and navigate
       setEditingCartKey(uniqueKey);
-      if (location.pathname !== targetPath) {
+      if (item && item.id) {
+        // Navigate to drink detail page
+        navigate(`/menu/drinks/${item.id}?edit=${uniqueKey}`);
+      } else if (location.pathname !== targetPath) {
         navigate(targetPath);
       }
     }, 100);
