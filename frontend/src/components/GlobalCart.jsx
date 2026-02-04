@@ -322,8 +322,21 @@ const GlobalCart = () => {
                 return null;
               };
               
-              // Properly validate hasCustomizations - handle all formats (drink arrays, booleans, food objects)
+              // Properly validate hasCustomizations - handle all formats
               const hasCustomizations = Object.entries(customizations).some(([key, value]) => {
+                // Skip empty/null values
+                if (!value) return false;
+                
+                // Milk: non-empty string ID
+                if (key === 'milk' && typeof value === 'string' && value !== '') {
+                  return true;
+                }
+                
+                // Quantity-based objects (syrups, sauces, shots, addOns, toppings)
+                if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+                  return Object.values(value).some(qty => qty > 0);
+                }
+                
                 // Arrays: either food items with objects or drink items with string IDs
                 if (Array.isArray(value) && value.length > 0) {
                   return true;
@@ -337,7 +350,7 @@ const GlobalCart = () => {
                   return true;
                 }
                 return false;
-              }) || entry.fruitTea;
+              }) || entry.fruitTea || (entry.specialInstructions && entry.specialInstructions.trim());
               
               // Handle both new structure (DrinkDetail) and old structure
               const itemName = entry.name || entry.item?.name || 'Item';
