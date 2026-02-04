@@ -33,7 +33,7 @@ const MugIcon = ({ size, isSelected, onClick, sizeLabel, price, calories }) => {
 };
 
 // Expandable customization section component (Starbucks-style)
-const CustomizationSection = ({ title, children, defaultOpen = false, selectedValue = null, borderColor = 'border-amber-300' }) => {
+const CustomizationSection = ({ title, children, defaultOpen = false, selectedValue = null, borderColor = 'border-amber-300', isCustomized = false }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   
   return (
@@ -46,6 +46,9 @@ const CustomizationSection = ({ title, children, defaultOpen = false, selectedVa
           <span className="font-semibold text-gray-800">{title}</span>
           {selectedValue && !isOpen && (
             <span className="text-sm text-amber-600 font-medium">• {selectedValue}</span>
+          )}
+          {isCustomized && !selectedValue && (
+            <span className="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium">Customized</span>
           )}
         </div>
         {isOpen ? (
