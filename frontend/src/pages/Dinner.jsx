@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import { dinnerCategories, dinnerCustomizations, dinnerHeroImage } from '../data/mock';
 import FoodMenuItem from '../components/FoodMenuItem';
-import { Utensils, ChefHat, Coffee } from 'lucide-react';
+import { Utensils, ChefHat, Coffee, ShoppingBag, ChevronRight } from 'lucide-react';
 
 const Dinner = () => {
   const navigate = useNavigate();
