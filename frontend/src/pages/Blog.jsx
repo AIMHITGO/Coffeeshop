@@ -290,7 +290,7 @@ const OurStorySection = () => {
 
       {/* Bottom CTA */}
       <div className="bg-gradient-to-r from-amber-600 to-orange-600 rounded-2xl p-8 md:p-12 text-center text-white">
-        <h3 className="text-2xl md:text-3xl font-bold mb-3">Jessy's Premium Coffee</h3>
+        <h3 className="text-2xl md:text-3xl font-bold mb-3">Jessy&apos;s Premium Coffee</h3>
         <p className="text-white/90 text-lg mb-2">No More Boring Coffee! No More Bitter Coffee!</p>
         <p className="text-white/80 text-base">The New Revolution for Coffee Lovers</p>
       </div>
