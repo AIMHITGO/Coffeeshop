@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ChefHat, Utensils, Coffee, ShoppingBag } from 'lucide-react';
+import { ChefHat, Utensils, Coffee, ShoppingBag, ChevronRight } from 'lucide-react';
 import { menuCategories, coffeeHeroImage } from '../data/mock';
 import DrinkTile from '../components/DrinkTile';
 
@@ -110,7 +110,7 @@ const Menu = () => {
                     <ShoppingBag className="w-4 h-4" />
                     Buy our Beans
                   </span>
-                  <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
+                  <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
             </div>
