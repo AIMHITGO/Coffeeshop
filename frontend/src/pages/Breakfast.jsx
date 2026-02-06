@@ -93,7 +93,7 @@ const Breakfast = () => {
             <div className="sticky top-24 space-y-4">
               {/* Breakfast Categories */}
               <div className="bg-white rounded-lg shadow-lg p-4">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">Breakfast Categories</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Breakfast Menu</h3>
                 <nav className="space-y-2">
                   {breakfastCategories.map((category) => (
                     <button

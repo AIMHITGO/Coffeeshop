@@ -93,7 +93,7 @@ const Dinner = () => {
             <div className="sticky top-24 space-y-4">
               {/* Dinner Categories */}
               <div className="bg-white rounded-lg shadow-lg p-4">
-                <h3 className="text-lg font-bold text-gray-900 mb-4">Dinner Categories</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Dinner Menu</h3>
                 <nav className="space-y-2">
                   {dinnerCategories.map((category) => (
                     <button

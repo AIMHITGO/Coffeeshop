@@ -62,9 +62,8 @@ const Menu = () => {
           {/* Sidebar Navigation - Desktop */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
             <div className="sticky top-24 bg-white rounded-xl shadow-md p-4 border border-gray-100">
-              <h3 className="font-bold text-gray-800 mb-4 flex items-center">
-                <Coffee className="w-5 h-5 mr-2 text-amber-500" />
-                Drink Categories
+              <h3 className="font-bold text-gray-800 mb-4">
+                Drink Menu
               </h3>
               <nav className="space-y-1">
                 {drinkCategories.map(category => (
