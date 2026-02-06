@@ -16,6 +16,7 @@ import Dinner from './pages/Dinner';
 import Rewards from './pages/Rewards';
 import Blog from './pages/Blog';
 import About from './pages/About';
+import BeanDetail from './pages/BeanDetail';
 import Locations from './pages/Locations';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/rewards" element={<Rewards />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/about" element={<About />} />
+            <Route path="/about/beans/:slug" element={<BeanDetail />} />
             <Route path="/locations" element={<Locations />} />
             <Route path="/contact" element={<Locations />} />
           </Routes>
