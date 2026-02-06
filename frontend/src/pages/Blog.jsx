@@ -224,7 +224,7 @@ const Coffee101Section = () => {
 
       {filteredSections.length === 0 && (
         <div className="text-center py-8 text-gray-500">
-          No topics found matching "{searchTerm}"
+          No topics found matching &ldquo;{searchTerm}&rdquo;
         </div>
       )}
 
