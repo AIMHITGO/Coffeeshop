@@ -129,6 +129,19 @@ const Breakfast = () => {
                   </button>
                 </nav>
               </div>
+              
+              {/* Buy our Beans Button */}
+              <button
+                onClick={() => navigate('/about#coffee-origins')}
+                className="w-full flex items-center justify-between px-4 py-3 bg-amber-50 border-2 border-amber-300 rounded-xl text-amber-800 font-semibold hover:bg-amber-100 hover:border-amber-400 transition-all"
+                data-testid="buy-our-beans-btn"
+              >
+                <span className="flex items-center gap-2">
+                  <ShoppingBag className="w-4 h-4" />
+                  Buy our Beans
+                </span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
 
