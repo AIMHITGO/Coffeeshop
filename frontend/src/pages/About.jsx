@@ -124,7 +124,7 @@ const About = () => {
         </section>
 
         {/* Coffee Origins Section */}
-        <section className="mb-24 bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-12">
+        <section id="coffee-origins" className="mb-24 bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-12 scroll-mt-24">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Our <span className="text-amber-600">Coffee Origins</span>
@@ -135,36 +135,23 @@ const About = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { name: 'Colombia Supremo', notes: 'Milk chocolate, grapes, cream' },
-              { name: 'Ethiopia Yirgacheffe', notes: 'Floral, tea-like, citrus' },
-              { name: 'Guatemala Antigua', notes: 'Clementine, white chocolate, stone fruit' },
-              { name: 'Brazil Premium', notes: 'Dark chocolate, peanut butter, roasty' },
-              { name: 'Sumatra Mandheling', notes: 'Chocolate malt, spicy, robust' },
-              { name: 'Kenya AA Premium', notes: 'Wine-like body, bright acidity' },
-              { name: 'Nicaragua', notes: 'Raisin, honey, grapefruit' },
-              { name: 'Costa Rica Tarrazu', notes: 'Cocoa, cinnamon, almond' },
-              { name: 'Mexico Chiapas Jade', notes: 'Cocoa, brown sugar, cashew' }
-            ].map((origin, idx) => (
-              <Card key={idx} className="border-0 bg-white shadow-md hover:shadow-xl transition-all">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{origin.name}</h3>
-                  <p className="text-gray-600 text-sm italic">{origin.notes}</p>
-                </CardContent>
-              </Card>
+            {coffeeBeans.map((bean) => (
+              <Link key={bean.id} to={`/about/beans/${bean.id}`} data-testid={`bean-card-${bean.id}`}>
+                <Card className="border-0 bg-white shadow-md hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer">
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{bean.name}</h3>
+                    <p className="text-gray-600 text-sm italic">{bean.notes}</p>
+                    <p className="text-amber-600 font-semibold mt-2">${bean.price.toFixed(2)}</p>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
 
           <div className="text-center mt-12">
             <p className="text-lg text-gray-700 mb-6">
-              All available as whole bean or ground • 12 oz bags • $23.95 - $24.95
+              All available as whole bean or ground &bull; 12 oz bags &bull; $23.95 - $24.95
             </p>
-            <a
-              href="/menu"
-              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all"
-            >
-              Browse Our Coffee Menu
-            </a>
           </div>
         </section>
 
