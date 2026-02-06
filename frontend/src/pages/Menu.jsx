@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { ChefHat, Utensils, Coffee } from 'lucide-react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { ChefHat, Utensils, Coffee, ShoppingBag } from 'lucide-react';
 import { menuCategories, coffeeHeroImage } from '../data/mock';
 import DrinkTile from '../components/DrinkTile';
 
@@ -8,6 +8,7 @@ const Menu = () => {
   // Refs for category sections
   const drinkSectionRefs = useRef({});
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Scroll to category section
   const scrollToDrinkSection = (categoryId) => {
