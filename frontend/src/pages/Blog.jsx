@@ -161,8 +161,26 @@ const Coffee101Section = () => {
     );
   });
 
+  // Close modal on Escape key
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === 'Escape') setActiveSection(null);
+  }, []);
+
+  useEffect(() => {
+    if (activeSection) {
+      document.addEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [activeSection, handleKeyDown]);
+
+  const activeData = coffee101Sections.find(s => s.id === activeSection);
+
   return (
-    <div className="space-y-6" data-testid="coffee-101-content">
+    <div className="space-y-8" data-testid="coffee-101-content">
       {/* Search */}
       <div className="relative max-w-md mx-auto">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -171,46 +189,31 @@ const Coffee101Section = () => {
           placeholder="Search coffee knowledge..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="pl-10 border-2 focus:border-amber-400"
+          className="pl-10 border-2 focus:border-teal-400"
           data-testid="coffee-101-search"
         />
       </div>
 
-      {/* Topic Cards */}
-      <div className="grid gap-4">
+      {/* Card Grid (Our Values style) */}
+      <div className="grid md:grid-cols-3 gap-8">
         {filteredSections.map((section) => {
-          const isOpen = activeSection === section.id;
           const IconComp = section.icon;
           return (
-            <div
+            <Card
               key={section.id}
-              className={`border-2 rounded-xl overflow-hidden transition-all ${section.color}`}
+              className="border-0 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-white cursor-pointer"
+              onClick={() => setActiveSection(section.id)}
               data-testid={`coffee-101-topic-${section.id}`}
             >
-              <button
-                onClick={() => setActiveSection(isOpen ? null : section.id)}
-                className="w-full flex items-center justify-between p-4 hover:bg-white/40 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-lg bg-white flex items-center justify-center shadow-sm`}>
-                    <IconComp className={`w-5 h-5 ${section.iconColor}`} />
-                  </div>
-                  <span className="font-semibold text-gray-800 text-left">{section.title}</span>
-                  <span className="text-xs text-gray-500 hidden sm:inline">({section.facts.length} facts)</span>
+              <CardContent className="p-8 text-center">
+                <div className="bg-gradient-to-br from-teal-50 to-cyan-50 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <IconComp className="w-10 h-10 text-teal-600" />
                 </div>
-                {isOpen ? <ChevronUp className="w-5 h-5 text-gray-400 flex-shrink-0" /> : <ChevronDown className="w-5 h-5 text-gray-400 flex-shrink-0" />}
-              </button>
-              {isOpen && (
-                <div className="px-4 pb-4 space-y-3">
-                  {section.facts.map((fact, idx) => (
-                    <div key={idx} className="flex gap-3 bg-white rounded-lg p-3 shadow-sm">
-                      <span className="text-amber-500 font-bold text-sm mt-0.5 flex-shrink-0">{idx + 1}.</span>
-                      <p className="text-gray-700 text-sm leading-relaxed">{fact}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{section.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-sm">{section.summary}</p>
+                <p className="text-teal-600 text-xs font-semibold mt-4">{section.facts.length} facts &rarr;</p>
+              </CardContent>
+            </Card>
           );
         })}
       </div>
@@ -218,6 +221,54 @@ const Coffee101Section = () => {
       {filteredSections.length === 0 && (
         <div className="text-center py-8 text-gray-500">
           No topics found matching &ldquo;{searchTerm}&rdquo;
+        </div>
+      )}
+
+      {/* Modal Overlay */}
+      {activeData && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+          onClick={() => setActiveSection(null)}
+          data-testid="coffee-101-modal-overlay"
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+
+          {/* Modal Content */}
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+            data-testid="coffee-101-modal-content"
+          >
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-teal-600 to-cyan-600 p-6 text-white flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="bg-white/20 w-10 h-10 rounded-xl flex items-center justify-center">
+                  <activeData.icon className="w-5 h-5" />
+                </div>
+                <h3 className="text-xl font-bold">{activeData.title}</h3>
+              </div>
+              <button
+                onClick={() => setActiveSection(null)}
+                className="p-1.5 hover:bg-white/20 rounded-full transition-colors"
+                data-testid="coffee-101-modal-close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6 overflow-y-auto max-h-[calc(80vh-88px)] space-y-3">
+              {activeData.facts.map((fact, idx) => (
+                <div key={idx} className="flex gap-3 bg-gray-50 rounded-lg p-3">
+                  <span className="bg-teal-100 text-teal-700 font-bold text-xs w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    {idx + 1}
+                  </span>
+                  <p className="text-gray-700 text-sm leading-relaxed">{fact}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
 
@@ -230,7 +281,7 @@ const Coffee101Section = () => {
           { label: 'Flavor Attributes', value: '110', icon: BookOpen }
         ].map((stat, idx) => (
           <div key={idx} className="bg-white rounded-xl p-4 text-center shadow-sm border border-gray-100">
-            <stat.icon className="w-6 h-6 text-amber-500 mx-auto mb-2" />
+            <stat.icon className="w-6 h-6 text-teal-500 mx-auto mb-2" />
             <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
             <p className="text-xs text-gray-500">{stat.label}</p>
           </div>
