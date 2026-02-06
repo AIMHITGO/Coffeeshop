@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import { Card, CardContent } from '../components/ui/card';
 import { Heart, Users, Coffee, Award, Target, Sparkles } from 'lucide-react';
-import { coffeeStory } from '../data/mock';
+import { coffeeStory, coffeeBeans } from '../data/mock';
 
 const About = () => {
   return (
