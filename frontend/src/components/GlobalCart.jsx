@@ -414,8 +414,8 @@ const GlobalCart = () => {
                   </button>
                   
                   <div className="flex gap-4">
-                    {/* Only show image for coffee/drink items, not food items */}
-                    {(!entry.menuType || entry.menuType === 'coffee') && itemImage ? (
+                    {/* Only show image for coffee/drink/bean items, not food items */}
+                    {(!entry.menuType || entry.menuType === 'coffee' || entry.menuType === 'beans') && itemImage ? (
                       <div className="w-20 h-20 flex-shrink-0 bg-white rounded-lg overflow-hidden">
                         <img 
                           src={itemImage} 
