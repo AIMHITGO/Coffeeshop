@@ -630,7 +630,7 @@ export const blogPosts = [
     title: 'Cold Brew vs Iced Coffee: Know the Difference',
     excerpt: 'Understanding what makes our slow-steeped cold brew uniquely smooth.',
     content: 'Many coffee lovers confuse cold brew with iced coffee, but they are quite different...',
-    image: 'https://lirp.cdn-website.com/ee24b866/dms3rep/multi/opt/COLD-Brew-1920w.png',
+    image: 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Cold%20Brew%20-%20Coffee%20Culture.png',
     category: 'Coffee 101',
     author: 'Happy Place Team',
     date: 'December 5, 2025',
