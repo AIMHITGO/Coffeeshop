@@ -5,6 +5,22 @@ import { Heart, Users, Coffee, Award, Target, Sparkles } from 'lucide-react';
 import { coffeeStory, coffeeBeans } from '../data/mock';
 
 const About = () => {
+  const location = useLocation();
+
+  // Handle anchor scrolling on load and hash change
+  useEffect(() => {
+    if (location.hash === '#coffee-origins') {
+      setTimeout(() => {
+        const el = document.getElementById('coffee-origins');
+        if (el) {
+          const offset = 100;
+          const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }, 300);
+    }
+  }, [location.hash]);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-amber-50/30 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
