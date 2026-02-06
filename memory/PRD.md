@@ -1,138 +1,73 @@
 # Happy Place Coffee & Eats - Product Requirements Document
 
 ## Original Problem Statement
-Build a professional, conversion-optimized landing page for "Happy Place Coffee and Eats" business to increase online orders and provide information to new and existing customers.
+Build and refine a landing page / full website for "Happy Place Coffee and Eats" — a family-owned coffee shop in Woodbridge, VA. The project includes a complete drink menu with customization, food menus (breakfast/dinner), a global shopping cart, blog/coffee culture pages, an about page, and more.
 
-## Target Audience
-- New and existing customers of Happy Place Coffee & Eats
-- Local Woodbridge, VA community members
-- Coffee enthusiasts and food lovers
-
-## Core Requirements
-
-### Branding
-- Use company's actual logo and user-provided images
-- Latin-American and New-American cuisine theme
-- Family-owned, welcoming atmosphere
-
-### Key Features
-1. **Menu System** (Implemented)
-   - Coffee/Drinks page with full customization
-   - Breakfast menu page
-   - Dinner menu page
-   - Cross-navigation between menus
-
-2. **Cart Functionality** (Implemented)
-   - Global floating cart persistent across pages
-   - Item customization with dynamic pricing
-   - Edit/remove items capability
-   - Special instructions field for all items
-
-3. **Pages** (Partially Implemented)
-   - Home page ✅
-   - Menu pages (Coffee, Breakfast, Dinner) ✅
-   - About Us page ✅
-   - Rewards page (placeholder) ✅
-   - Blog page (placeholder) ✅
-   - Locations page (placeholder) ✅
-
-4. **Online Ordering** (Future)
-   - Stripe payment integration
-   - Order confirmation flow
-
----
+## Core Architecture
+- **Frontend:** React + TailwindCSS + Shadcn/UI (frontend-only, no backend yet)
+- **Data:** All data from `/app/frontend/src/data/mock.js`
+- **Routing:** react-router-dom with hash-based anchor scrolling
+- **State:** CartContext + localStorage for cart persistence
+- **Styling:** TailwindCSS with amber/orange brand colors
 
 ## What's Been Implemented
 
-### January 25, 2025 - Image Updates Complete
-- Updated all 15 remaining drink images with user-provided GitHub URLs
-- Added Premium Dark Roast and Iced Tea images
-- All drink menu items now display custom professional images
+### Pages
+- **Home** — Hero section, best sellers, category cards, coffee culture stories
+- **Menu (Drink)** — Side nav with category jump, drink tile grid, "Buy our Beans" button
+- **Drink Detail** — Full customization UI (milk, syrups, sauces, shots, toppings), quantity selector, add to cart
+- **Breakfast Menu** — Side nav, food items with customization
+- **Dinner Menu** — Side nav, food items with customization
+- **About** — Coffee story, values, clickable coffee bean cards → bean product pages, stats, CTA
+- **Bean Detail** — Individual product page per bean with grind selector (Whole/Ground), quantity, add to cart
+- **Blog** — Category-filtered articles, interactive Coffee 101 section (from PDF), Our Story section (from original site)
+- **Rewards, Locations** — Placeholder/basic pages
 
-### Previous Session Work
-- Menu UI/UX overhaul (compact cards, sticky price total)
-- Special instructions field with smart character counter
-- Cart customization display bug fixes (food, drink booleans, drink arrays)
-- ScrollToTop component for reliable navigation
-- Three interconnected menu pages (Coffee, Breakfast, Dinner)
-- Global cart with Context API and localStorage persistence
+### Global Features
+- **Global Cart** — Bottom-left floating cart, minimized/regular/expanded states, customization display, "Modify One" for grouped items
+- **Back to Top** button
+- **Responsive** — Mobile/tablet/desktop layouts
 
----
+## Completed Work (Latest Session — Feb 6, 2026)
+- Removed icon from Drink Menu side nav header
+- Renamed side nav headers: "Drink Categories" → "Drink Menu", "Breakfast Categories" → "Breakfast Menu", "Dinner Categories" → "Dinner Menu"
+- Added "Buy our Beans" button to all three menu side navs (Drink, Breakfast, Dinner) → navigates to /about#coffee-origins
+- Made coffee bean cards clickable on About page → navigate to /about/beans/:slug
+- Created BeanDetail.jsx product page with grind selector, quantity, add-to-cart
+- Integrated beans with existing cart system (menuType: 'beans')
+- Fixed Coffee 101 blog image (replaced cropped image with correct Cold Brew image)
+- Built Coffee 101 interactive section with 7 expandable topic cards, search, and fun stats
+- Built Our Story section with hero image + 5 content sections from original Happy Place site
+- Updated GlobalCart to handle bean items for navigation
 
-## Current Architecture
-
-### Frontend Only (React + TailwindCSS)
-```
-/app/frontend/src/
-├── components/
-│   ├── Header.jsx
-│   ├── Footer.jsx
-│   ├── GlobalCart.jsx      # Cart with customization display
-│   ├── FoodMenuItem.jsx    # Food item cards
-│   └── ScrollToTop.jsx     # Navigation scroll fix
-├── contexts/
-│   └── CartContext.jsx     # Global cart state
-├── data/
-│   └── mock.js             # ALL MENU DATA (100% mocked)
-├── pages/
-│   ├── Home.jsx
-│   ├── Menu.jsx            # Coffee/Drinks menu
-│   ├── Breakfast.jsx
-│   ├── Dinner.jsx
-│   ├── About.jsx
-│   ├── Rewards.jsx
-│   ├── Blog.jsx
-│   └── Locations.jsx
-└── App.js
-```
-
-### Backend (NOT YET IMPLEMENTED)
-- No backend exists
-- No database connection
-- All data hardcoded in mock.js
-
----
+## Key Files
+- `/app/frontend/src/pages/Menu.jsx` — Drink menu with side nav
+- `/app/frontend/src/pages/Breakfast.jsx` — Breakfast menu
+- `/app/frontend/src/pages/Dinner.jsx` — Dinner menu
+- `/app/frontend/src/pages/About.jsx` — About page with clickable bean cards
+- `/app/frontend/src/pages/BeanDetail.jsx` — Bean product page (NEW)
+- `/app/frontend/src/pages/Blog.jsx` — Blog with Coffee 101 + Our Story
+- `/app/frontend/src/pages/DrinkDetail.jsx` — Drink customization page
+- `/app/frontend/src/components/GlobalCart.jsx` — Shopping cart
+- `/app/frontend/src/contexts/CartContext.jsx` — Cart state management
+- `/app/frontend/src/data/mock.js` — All mock data including coffeeBeans array
 
 ## Prioritized Backlog
 
-### P0 - Critical
-- [ ] Build FastAPI backend with MongoDB
-- [ ] Create APIs for menu data (CRUD)
-- [ ] Replace mock.js calls with API calls in frontend
+### P0 (Next Up)
+- Backend Development — FastAPI + MongoDB, create menu/bean APIs, replace mock.js
+- Verify "Modify One" cart feature (previously unverified)
 
-### P1 - High Priority
-- [ ] Stripe payment integration for online ordering
-- [ ] Order submission and confirmation flow
-- [ ] User accounts (optional)
+### P1
+- Online ordering with Stripe payment integration
+- Refactor GlobalCart.jsx for reliability
 
-### P2 - Medium Priority
-- [ ] Implement Rewards Program functionality
-- [ ] Blog page with CMS-like backend
-- [ ] Locations page with Google Maps integration
+### P2
+- Rewards Program page (full implementation)
+- Blog individual article pages
+- Locations page with map integration
 
-### P3 - Low Priority / Future
-- [ ] Admin dashboard for menu management
-- [ ] Order history and tracking
-- [ ] Email notifications for orders
-
----
-
-## Technical Notes
-
-### Known Considerations
-- Cart customization display has been a recurring bug source - test thoroughly after any cart changes
-- Image URLs now use GitHub raw content URLs (raw.githubusercontent.com)
-- Hero images and blog images still use old lirp.cdn-website.com URLs (not menu items)
-
-### Data Model (for future backend)
-- Menu Categories with nested Items
-- Items have sizes array with price/calories
-- Customization options: milk, addOns, syrups, sauces, shots, toppings
-- Cart items include full customization state and special instructions
-
----
-
-## Location Info
-- Address: 13840 Smoketown Road, Woodbridge, VA 22192
-- Phone: (571) 552-4070
-- Hours: Mon-Sat 8AM-8PM, Sun 8AM-5PM
+## Known Issues
+- "Modify One" cart feature was patched but never fully verified via testing
+- GlobalCart.jsx is complex and historically fragile
+- All data is MOCKED — no backend exists yet
