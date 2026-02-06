@@ -1005,3 +1005,22 @@ export const dinnerCategories = [
     ]
   }
 ];
+
+
+// =======================
+// COFFEE BEANS DATA
+// =======================
+
+export const coffeeBeans = [
+  { id: 'colombia-supremo', name: 'Colombia Supremo', notes: 'Milk chocolate, grapes, cream', price: 23.95, description: 'Our Colombia Supremo is a medium roast coffee that is made from 100% Colombian coffee beans. This coffee has a balanced flavor, with notes of chocolate, nuts, and a mild sweetness, making it a great option for those who are looking for a mild but flavorful coffee.' },
+  { id: 'ethiopia-yirgacheffe', name: 'Ethiopia Yirgacheffe', notes: 'Floral, tea-like, citrus', price: 24.95, description: 'Ethiopian coffee is known for its bright, fruity flavors and a tea-like acidity. Grown in the high-altitude regions of Ethiopia, these beans offer complex flavors that are a joy to discover in every sip.' },
+  { id: 'guatemala-antigua', name: 'Guatemala Antigua', notes: 'Clementine, white chocolate, stone fruit', price: 24.95, description: 'Grown in the volcanic valleys of Antigua, this coffee offers a vibrant combination of stone fruit and white chocolate notes with a sweet citrus finish.' },
+  { id: 'brazil-premium', name: 'Brazil Premium', notes: 'Dark chocolate, peanut butter, roasty', price: 23.95, description: 'Brazilian coffee is known for its nutty, caramel flavor and smooth body. Our Brazil Premium delivers rich dark chocolate notes with a satisfying peanut butter finish.' },
+  { id: 'sumatra-mandheling', name: 'Sumatra Mandheling', notes: 'Chocolate malt, spicy, robust', price: 24.95, description: 'A bold and earthy coffee from the highlands of Sumatra. Rich chocolate malt character with spicy undertones and a robust, full-bodied finish.' },
+  { id: 'kenya-aa-premium', name: 'Kenya AA Premium', notes: 'Wine-like body, bright acidity', price: 24.95, description: 'Kenya AA is renowned for its wine-like body and bright acidity. This premium grade delivers complex berry and citrus notes with a clean, sparkling finish.' },
+  { id: 'nicaragua', name: 'Nicaragua', notes: 'Raisin, honey, grapefruit', price: 23.95, description: 'A beautifully balanced Nicaraguan coffee with sweet raisin and honey notes complemented by a refreshing grapefruit-like brightness.' },
+  { id: 'costa-rica-tarrazu', name: 'Costa Rica Tarrazu', notes: 'Cocoa, cinnamon, almond', price: 24.95, description: 'From the Tarrazu highlands, this coffee brings warm cocoa and cinnamon spice with a smooth almond finish. One of Central America\'s finest growing regions.' },
+  { id: 'mexico-chiapas-jade', name: 'Mexico Chiapas Jade', notes: 'Cocoa, brown sugar, cashew', price: 23.95, description: 'Grown in the Chiapas highlands of Mexico, this coffee offers a sweet, nutty profile with rich cocoa and brown sugar notes rounded out by a smooth cashew finish.' }
+];
+
+export const beanImage = 'https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Coffee%20Beans.png';
