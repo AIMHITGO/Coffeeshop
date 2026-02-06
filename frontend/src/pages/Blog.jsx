@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { Calendar, User, Tag, Search, ArrowRight, ChevronDown, ChevronUp, BookOpen, Coffee, Beaker, Heart, Lightbulb, Flame } from 'lucide-react';
+import { Calendar, User, Tag, Search, ArrowRight, X, BookOpen, Coffee, Beaker, Heart, Lightbulb, Flame, Leaf } from 'lucide-react';
 import { blogPosts } from '../data/mock';
 
 // ============================
@@ -11,10 +11,9 @@ import { blogPosts } from '../data/mock';
 const coffee101Sections = [
   {
     id: 'fruit-story',
-    icon: Coffee,
+    icon: Leaf,
     title: 'The Coffee Plant Is a Fruit',
-    color: 'bg-green-50 border-green-200',
-    iconColor: 'text-green-600',
+    summary: 'The "coffee bean" is actually a seed inside a cherry-like fruit, not a bean at all.',
     facts: [
       'The "coffee bean" is actually a seed inside a fruit called a coffee cherry.',
       'Each coffee fruit typically holds two seeds that are later roasted and ground.',
@@ -28,8 +27,7 @@ const coffee101Sections = [
     id: 'arabica-vs-robusta',
     icon: Beaker,
     title: 'Arabica vs Robusta',
-    color: 'bg-amber-50 border-amber-200',
-    iconColor: 'text-amber-600',
+    summary: 'Two species, very different personalities — from caffeine levels to plant resilience.',
     facts: [
       'Arabica is often described as "milder/smoother" with higher perceived quality in many markets.',
       'Robusta has roughly 2x the caffeine of Arabica in green coffee extracts.',
@@ -40,10 +38,9 @@ const coffee101Sections = [
   },
   {
     id: 'processing',
-    icon: Flame,
+    icon: Coffee,
     title: 'From Cherry to Green Bean',
-    color: 'bg-orange-50 border-orange-200',
-    iconColor: 'text-orange-600',
+    summary: 'Processing is controlled spoilage with a purpose — and it shapes every flavor you taste.',
     facts: [
       'Processing is where coffee becomes stable enough to ship and interesting enough to obsess over.',
       'Natural (dry): The whole fruit is dried with the seed inside, then hulled off.',
@@ -57,8 +54,7 @@ const coffee101Sections = [
     id: 'roasting',
     icon: Flame,
     title: 'Roasting & Flavor Chemistry',
-    color: 'bg-red-50 border-red-200',
-    iconColor: 'text-red-600',
+    summary: 'Over 1,000 volatile compounds — and "strong" taste does not mean more caffeine.',
     facts: [
       'More than 1,000 volatile compounds have been identified in roasted coffee, but only about 5% strongly drive the aroma we perceive.',
       'Green beans lose about a fifth of their weight and gain 50-80% in volume during roasting.',
@@ -71,8 +67,7 @@ const coffee101Sections = [
     id: 'brewing',
     icon: Coffee,
     title: 'Brewing Science',
-    color: 'bg-blue-50 border-blue-200',
-    iconColor: 'text-blue-600',
+    summary: 'Water chemistry, grind size, and method matter more than most people realize.',
     facts: [
       'The SCA "Golden Cup" standard: ~55g coffee per 1000g water, water temp 90-96C.',
       'Brewing water is a chemical solvent — its mineral balance changes what gets extracted. Target TDS: ~150 mg/L.',
@@ -86,8 +81,7 @@ const coffee101Sections = [
     id: 'caffeine-health',
     icon: Heart,
     title: 'Caffeine & Health',
-    color: 'bg-pink-50 border-pink-200',
-    iconColor: 'text-pink-600',
+    summary: '400 mg/day is generally safe — and coffee does not dehydrate you.',
     facts: [
       'For most adults, 400 mg/day is an amount "not generally associated with negative effects."',
       'Caffeine half-life: commonly ~5 hours, but ranges from 1.5 to 9.5 hours depending on the person.',
@@ -101,8 +95,7 @@ const coffee101Sections = [
     id: 'myths',
     icon: Lightbulb,
     title: 'Myths vs Reality',
-    color: 'bg-purple-50 border-purple-200',
-    iconColor: 'text-purple-600',
+    summary: 'Dark roast = more caffeine? Espresso is strongest? Think again.',
     facts: [
       'MYTH: "Dark roast has more caffeine." TRUTH: Caffeine doesn\'t change dramatically across roast levels.',
       'MYTH: "Espresso always gives you more caffeine." TRUTH: Per ounce yes, but a full mug of drip has more total caffeine.',
