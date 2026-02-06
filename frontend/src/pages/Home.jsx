@@ -46,19 +46,11 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-8 py-6 text-lg shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105"
+                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white px-12 py-8 text-xl font-semibold shadow-2xl hover:shadow-amber-500/50 transition-all duration-300 hover:scale-105 rounded-xl"
                 onClick={() => navigate('/menu')}
               >
                 Order Now
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-6 text-lg backdrop-blur-sm bg-white/10 transition-all duration-300 hover:scale-105"
-                onClick={() => navigate('/menu')}
-              >
-                View Menu
+                <ArrowRight className="ml-3 h-6 w-6" />
               </Button>
             </div>
 
@@ -106,7 +98,7 @@ const Home = () => {
               <Card
                 key={category.id}
                 className="group hover:shadow-2xl transition-all duration-500 cursor-pointer border-0 bg-white hover:-translate-y-2"
-                onClick={() => navigate('/menu')}
+                onClick={() => navigate(`/menu#${category.id}`)}
               >
                 <div className="relative h-56 overflow-hidden rounded-t-lg">
                   <img
@@ -120,13 +112,13 @@ const Home = () => {
                   </div>
                 </div>
                 <CardContent className="p-6">
-                  <p className="text-gray-600 mb-4">{category.description}</p>
+                  <p className="text-gray-600 mb-4 line-clamp-2">{category.description}</p>
                   <Button
                     variant="ghost"
-                    className="w-full text-amber-600 hover:text-amber-700 hover:bg-amber-50 group-hover:bg-amber-600 group-hover:text-white transition-all"
+                    className="w-full text-amber-600 hover:text-amber-700 hover:bg-amber-50 group-hover:bg-amber-600 group-hover:text-white transition-all truncate"
                   >
-                    Explore {category.name}
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <span className="truncate">Explore</span>
+                    <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0" />
                   </Button>
                 </CardContent>
               </Card>
@@ -277,7 +269,7 @@ const Home = () => {
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-amber-600 text-white text-xs font-semibold rounded-full">

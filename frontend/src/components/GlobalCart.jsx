@@ -51,7 +51,7 @@ const GlobalCart = () => {
   }, [cartState, setCartState]);
 
   const deleteFromCart = (key, itemId) => {
-    removeFromCart(key);
+    removeFromCart(key, itemId);
     toast.success('Item removed from cart');
   };
 
@@ -62,29 +62,44 @@ const GlobalCart = () => {
     setCartState('expanded');
   };
 
-  // Start editing a cart item - navigate to correct menu page and trigger edit
+  // Start editing a cart item - navigate to drink detail page
   const startEditingCartItem = (cartKey) => {
-    setEditingCartKey(cartKey);
-    
-    // Determine which menu page to navigate to based on menuType
     const entry = cart[cartKey];
-    let targetPath = '/menu'; // default to coffee menu
     
-    if (entry && entry.menuType) {
-      if (entry.menuType === 'breakfast') {
-        targetPath = '/breakfast';
-      } else if (entry.menuType === 'dinner') {
-        targetPath = '/dinner';
-      }
+    if (!entry) return;
+    
+    // For new structure (DrinkDetail)
+    if (entry.id) {
+      navigate(`/menu/drinks/${entry.id}?edit=${cartKey}`);
+      toast.info('Opening item for editing...');
+      return;
     }
     
-    // Navigate to appropriate menu page if not already there
-    if (location.pathname !== targetPath) {
-      navigate(targetPath, { state: { editCartKey: cartKey } });
+    // For old structure (Breakfast/Dinner or legacy)
+    let targetPath = '/menu';
+    
+    if (entry.menuType === 'breakfast') {
+      targetPath = '/breakfast';
+      setEditingCartKey(cartKey);
+      if (location.pathname !== targetPath) {
+        navigate(targetPath, { state: { editCartKey: cartKey } });
+        toast.info('Opening item for editing...');
+      } else {
+        toast.info('Editing item - make your changes and click "Update Order"');
+      }
+    } else if (entry.menuType === 'dinner') {
+      targetPath = '/dinner';
+      setEditingCartKey(cartKey);
+      if (location.pathname !== targetPath) {
+        navigate(targetPath, { state: { editCartKey: cartKey } });
+        toast.info('Opening item for editing...');
+      } else {
+        toast.info('Editing item - make your changes and click "Update Order"');
+      }
+    } else if (entry.item && entry.item.id) {
+      // Legacy structure - navigate to drink detail
+      navigate(`/menu/drinks/${entry.item.id}?edit=${cartKey}`);
       toast.info('Opening item for editing...');
-    } else {
-      // If already on correct menu page, let the component handle it via editingCartKey
-      toast.info('Editing item - make your changes and click "Update Order"');
     }
   };
 
@@ -106,24 +121,52 @@ const GlobalCart = () => {
     };
     
     // Generate unique key with timestamp
-    const { item, sizeIndex, customizations, fruitTea, customizationPrice, menuType } = entry;
     const baseKey = cartKey.split('-split-')[0]; // Get base key without any split suffix
     const uniqueKey = `${baseKey}-split-${Date.now()}`;
+    
+    // Handle new structure (DrinkDetail) - has `id`, `name`, `slug`, `size`, etc.
+    if (entry.id) {
+      newCart[uniqueKey] = {
+        id: entry.id,
+        name: entry.name,
+        slug: entry.slug,
+        size: entry.size,
+        basePrice: entry.basePrice,
+        totalPrice: entry.totalPrice,
+        image: entry.image,
+        quantity: 1,
+        customizations: { ...entry.customizations },
+        specialInstructions: entry.specialInstructions || '',
+        hasCustomization: entry.hasCustomization
+      };
+      
+      setCart(newCart);
+      
+      // Navigate to drink detail page for editing
+      toast.info('Split 1 item for editing');
+      setTimeout(() => {
+        navigate(`/menu/drinks/${entry.id}?edit=${uniqueKey}`);
+      }, 100);
+      return;
+    }
+    
+    // Handle old structure (Breakfast/Dinner or legacy) - has `item`, `sizeIndex`, `menuType`
+    const { item, sizeIndex, customizations, fruitTea, customizationPrice, menuType } = entry;
     
     newCart[uniqueKey] = {
       item,
       sizeIndex,
       quantity: 1,
-      customizations: { ...customizations }, // Clone customizations
+      customizations: customizations ? { ...customizations } : {},
       fruitTea,
       customizationPrice,
-      menuType // Preserve menuType
+      menuType
     };
     
     setCart(newCart);
     
     // Determine which menu page to navigate to
-    let targetPath = '/menu'; // default to coffee menu
+    let targetPath = '/menu';
     if (menuType === 'breakfast') {
       targetPath = '/breakfast';
     } else if (menuType === 'dinner') {
@@ -133,9 +176,11 @@ const GlobalCart = () => {
     // Start editing the new single item
     toast.info('Split 1 item for editing');
     setTimeout(() => {
-      // Set editing key and navigate
       setEditingCartKey(uniqueKey);
-      if (location.pathname !== targetPath) {
+      if (item && item.id) {
+        // Navigate to drink detail page
+        navigate(`/menu/drinks/${item.id}?edit=${uniqueKey}`);
+      } else if (location.pathname !== targetPath) {
         navigate(targetPath);
       }
     }, 100);
@@ -152,12 +197,12 @@ const GlobalCart = () => {
   return (
     <div 
       ref={cartRef}
-      className={`fixed bg-white rounded-2xl shadow-2xl border-2 border-amber-200 z-[100] transition-all duration-300 ${
+      className={`fixed bg-white rounded-2xl shadow-2xl border-2 border-amber-200 z-[100] transition-all duration-300 overflow-hidden ${
         cartState === 'expanded' 
-          ? 'bottom-20 right-4 left-4 md:left-auto md:right-8 md:w-[500px] max-h-[70vh]' 
+          ? 'bottom-20 left-4 right-4 md:right-auto md:left-8 md:w-[500px] max-h-[70vh]' 
           : cartState === 'regular'
-            ? 'bottom-20 right-8 w-80'
-            : 'bottom-20 right-8 w-auto'
+            ? 'bottom-20 left-8 w-64'
+            : 'bottom-20 left-8 w-auto'
       }`}
     >
       {/* Cart Header */}
@@ -203,55 +248,63 @@ const GlobalCart = () => {
       {cartState === 'regular' && (
         <div className="p-4">
           <div className="space-y-3 mb-4 max-h-48 overflow-y-auto">
-            {Object.entries(cart).map(([key, entry]) => (
-              <div 
-                key={key} 
-                className="border border-gray-200 rounded-lg p-3 hover:bg-amber-50 transition-colors"
-              >
+            {Object.entries(cart).map(([key, entry]) => {
+              // Handle both new structure (DrinkDetail) and old structure
+              const itemName = entry.name || entry.item?.name || 'Item';
+              const itemSize = entry.size || entry.item?.sizes?.[entry.sizeIndex]?.size || '';
+              const itemId = entry.id || entry.item?.id;
+              const basePrice = entry.totalPrice || (entry.item?.sizes?.[entry.sizeIndex]?.price || 0) + (entry.customizationPrice || 0);
+              const totalItemPrice = basePrice * entry.quantity;
+              
+              return (
                 <div 
-                  className="flex items-center justify-between text-sm group cursor-pointer"
-                  onClick={() => startEditingCartItem(key)}
+                  key={key} 
+                  className="border border-gray-200 rounded-lg p-3 hover:bg-amber-50 transition-colors"
                 >
-                  <div className="flex-1">
-                    <span className="text-gray-700 font-medium">
-                      {entry.quantity}x {entry.item.name}
-                    </span>
-                    <span className="text-gray-500 text-xs block">
-                      {entry.item.sizes[entry.sizeIndex].size}
-                      {entry.customizationPrice > 0 && ` (+$${entry.customizationPrice.toFixed(2)})`}
-                    </span>
+                  <div 
+                    className="flex items-center justify-between text-sm group cursor-pointer"
+                    onClick={() => startEditingCartItem(key)}
+                  >
+                    <div className="flex-1">
+                      <span className="text-gray-700 font-medium">
+                        {entry.quantity}x {itemName}
+                      </span>
+                      <span className="text-gray-500 text-xs block">
+                        {itemSize}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-gray-900">
+                        ${totalItemPrice.toFixed(2)}
+                      </span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          deleteFromCart(key, itemId);
+                        }}
+                        className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-semibold text-gray-900">
-                      ${((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity).toFixed(2)}
-                    </span>
+                  
+                  {/* Modify One button when quantity > 1 */}
+                  {entry.quantity > 1 && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        deleteFromCart(key, entry.item.id);
+                        splitCartItemForEditing(key, entry);
                       }}
-                      className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+                      className="mt-2 w-full text-xs bg-amber-100 hover:bg-amber-200 text-amber-700 py-1.5 rounded transition-colors flex items-center justify-center"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Settings className="w-3 h-3 mr-1" />
+                      Modify One
                     </button>
-                  </div>
+                  )}
                 </div>
-                
-                {/* Modify One button when quantity > 1 */}
-                {entry.quantity > 1 && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      splitCartItemForEditing(key, entry);
-                    }}
-                    className="mt-2 w-full text-xs bg-amber-100 hover:bg-amber-200 text-amber-700 py-1.5 rounded transition-colors flex items-center justify-center"
-                  >
-                    <Settings className="w-3 h-3 mr-1" />
-                    Modify One
-                  </button>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           <div className="border-t pt-4 mb-4">
@@ -299,8 +352,21 @@ const GlobalCart = () => {
                 return null;
               };
               
-              // Properly validate hasCustomizations - handle all formats (drink arrays, booleans, food objects)
+              // Properly validate hasCustomizations - handle all formats
               const hasCustomizations = Object.entries(customizations).some(([key, value]) => {
+                // Skip empty/null values
+                if (!value) return false;
+                
+                // Milk: non-empty string ID
+                if (key === 'milk' && typeof value === 'string' && value !== '') {
+                  return true;
+                }
+                
+                // Quantity-based objects (syrups, sauces, shots, addOns, toppings)
+                if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+                  return Object.values(value).some(qty => qty > 0);
+                }
+                
                 // Arrays: either food items with objects or drink items with string IDs
                 if (Array.isArray(value) && value.length > 0) {
                   return true;
@@ -314,7 +380,15 @@ const GlobalCart = () => {
                   return true;
                 }
                 return false;
-              }) || entry.fruitTea;
+              }) || entry.fruitTea || (entry.specialInstructions && entry.specialInstructions.trim());
+              
+              // Handle both new structure (DrinkDetail) and old structure
+              const itemName = entry.name || entry.item?.name || 'Item';
+              const itemSize = entry.size || entry.item?.sizes?.[entry.sizeIndex]?.size || '';
+              const itemImage = entry.image || entry.item?.image;
+              const itemId = entry.id || entry.item?.id;
+              const basePrice = entry.totalPrice || (entry.item?.sizes?.[entry.sizeIndex]?.price || 0) + (entry.customizationPrice || 0);
+              const totalItemPrice = basePrice * entry.quantity;
               
               return (
                 <div 
@@ -325,7 +399,7 @@ const GlobalCart = () => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      deleteFromCart(key, entry.item.id);
+                      deleteFromCart(key, itemId);
                     }}
                     className="absolute top-3 right-3 p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
                   >
@@ -334,11 +408,11 @@ const GlobalCart = () => {
                   
                   <div className="flex gap-4">
                     {/* Only show image for coffee/drink items, not food items */}
-                    {!entry.menuType || entry.menuType === 'coffee' ? (
+                    {(!entry.menuType || entry.menuType === 'coffee') && itemImage ? (
                       <div className="w-20 h-20 flex-shrink-0 bg-white rounded-lg overflow-hidden">
                         <img 
-                          src={entry.item.image} 
-                          alt={entry.item.name}
+                          src={itemImage} 
+                          alt={itemName}
                           className="w-full h-full object-contain p-1"
                         />
                       </div>
@@ -347,13 +421,52 @@ const GlobalCart = () => {
                     <div className="flex-1 pr-6">
                       <div className="flex items-start justify-between">
                         <div>
-                          <h4 className="font-bold text-gray-900 text-lg">{entry.item.name}</h4>
-                          <p className="text-amber-600 font-medium">{entry.item.sizes[entry.sizeIndex].size}</p>
+                          <h4 className="font-bold text-gray-900 text-lg">{itemName}</h4>
+                          <p className="text-amber-600 font-medium">{itemSize}</p>
                           
                           {/* Display Customizations */}
                           {entry.customizations && Object.keys(entry.customizations).length > 0 && (
                             <div className="mt-2 text-xs text-gray-600 space-y-1">
                               {Object.entries(entry.customizations).map(([key, value]) => {
+                                // Skip empty values
+                                if (!value) return null;
+                                
+                                // Milk selection (string ID)
+                                if (key === 'milk' && typeof value === 'string' && value !== '') {
+                                  const details = getCustomizationDetails(value);
+                                  if (details) {
+                                    return (
+                                      <span key={key} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded inline-block mr-1 mb-1 text-xs">
+                                        {details.name}
+                                        {details.price > 0 && ` +$${details.price.toFixed(2)}`}
+                                      </span>
+                                    );
+                                  }
+                                }
+                                
+                                // Quantity-based customizations (syrups, sauces, shots, addOns, toppings)
+                                if (typeof value === 'object' && !Array.isArray(value) && value !== null) {
+                                  const items = Object.entries(value).filter(([id, qty]) => qty > 0);
+                                  if (items.length > 0) {
+                                    return (
+                                      <div key={key} className="flex flex-wrap gap-1">
+                                        {items.map(([id, qty]) => {
+                                          const details = getCustomizationDetails(id);
+                                          if (details) {
+                                            return (
+                                              <span key={id} className="bg-amber-50 text-amber-800 px-2 py-0.5 rounded text-xs">
+                                                {qty > 1 ? `${qty}x ` : ''}{details.name}
+                                                {details.price > 0 && ` +$${(details.price * qty).toFixed(2)}`}
+                                              </span>
+                                            );
+                                          }
+                                          return null;
+                                        })}
+                                      </div>
+                                    );
+                                  }
+                                }
+                                
                                 // Food items: Multi-select (array of objects with name property)
                                 if (Array.isArray(value) && value.length > 0 && value[0]?.name) {
                                   return (
@@ -422,7 +535,7 @@ const GlobalCart = () => {
                         </div>
                         <div className="text-right">
                           <p className="font-bold text-gray-900">
-                            ${((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity).toFixed(2)}
+                            ${totalItemPrice.toFixed(2)}
                           </p>
                           <p className="text-gray-500 text-sm">Qty: {entry.quantity}</p>
                         </div>

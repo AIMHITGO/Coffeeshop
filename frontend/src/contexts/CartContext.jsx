@@ -12,8 +12,22 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
-  const [cartState, setCartState] = useState('regular'); // 'minimized' | 'regular' | 'expanded'
+  const [cartState, setCartState] = useState(() => {
+    // Load cart state from localStorage, default to 'minimized'
+    const savedState = localStorage.getItem('happyPlaceCartState');
+    return savedState || 'minimized';
+  });
   const [editingCartKey, setEditingCartKey] = useState(null);
+  const [onItemRemovedCallbacks, setOnItemRemovedCallbacks] = useState([]);
+
+  // Register a callback to be called when an item is removed
+  const registerOnItemRemoved = (callback) => {
+    setOnItemRemovedCallbacks(prev => [...prev, callback]);
+    // Return unregister function
+    return () => {
+      setOnItemRemovedCallbacks(prev => prev.filter(cb => cb !== callback));
+    };
+  };
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -27,6 +41,11 @@ export const CartProvider = ({ children }) => {
       }
     }
   }, []);
+
+  // Save cart state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('happyPlaceCartState', cartState);
+  }, [cartState]);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
@@ -51,12 +70,16 @@ export const CartProvider = ({ children }) => {
     }));
   };
 
-  const removeFromCart = (key) => {
+  const removeFromCart = (key, itemId = null) => {
     setCart(prev => {
       const newCart = { ...prev };
       delete newCart[key];
       return newCart;
     });
+    // Call all registered callbacks with the itemId
+    if (itemId) {
+      onItemRemovedCallbacks.forEach(callback => callback(itemId));
+    }
   };
 
   const clearCart = () => {
@@ -71,7 +94,12 @@ export const CartProvider = ({ children }) => {
   const getTotalPrice = () => {
     return Object.values(cart)
       .reduce((total, entry) => {
-        return total + ((entry.item.sizes[entry.sizeIndex].price + (entry.customizationPrice || 0)) * entry.quantity);
+        // Handle new structure (from DrinkDetail) and old structure
+        if (entry.totalPrice !== undefined) {
+          return total + (entry.totalPrice * entry.quantity);
+        }
+        // Fallback for old structure
+        return total + ((entry.item?.sizes?.[entry.sizeIndex]?.price || 0) + (entry.customizationPrice || 0)) * entry.quantity;
       }, 0)
       .toFixed(2);
   };
@@ -88,7 +116,8 @@ export const CartProvider = ({ children }) => {
     removeFromCart,
     clearCart,
     getCartItemCount,
-    getTotalPrice
+    getTotalPrice,
+    registerOnItemRemoved
   };
 
   return (

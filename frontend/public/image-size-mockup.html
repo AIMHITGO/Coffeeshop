@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Size Comparison</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #f9fafb; }
+  </style>
+</head>
+<body class="p-8">
+  <h1 class="text-2xl font-bold text-gray-800 mb-2">Drink Detail Image Size Options</h1>
+  <p class="text-gray-600 mb-8">Compare how the Latte image looks at different sizes and aspect ratios</p>
+
+  <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+    
+    <!-- Current: 128x128 Square -->
+    <div class="bg-white rounded-xl p-4 shadow-sm border">
+      <h3 class="font-semibold text-gray-800 mb-1">Current</h3>
+      <p class="text-xs text-gray-500 mb-3">128×128px (Square)</p>
+      <div class="flex gap-4 items-start">
+        <div class="w-32 h-32 flex-shrink-0 bg-amber-50 rounded-xl overflow-hidden shadow-md">
+          <img
+            src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Latte.png"
+            alt="Latte"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div>
+          <h4 class="font-bold text-lg">Latte</h4>
+          <p class="text-gray-500 text-xs">Smooth espresso...</p>
+          <p class="text-amber-600 font-bold mt-1">$5.00</p>
+        </div>
+      </div>
+      <p class="text-xs text-red-500 mt-3">⚠️ Heavy cropping, loses edges</p>
+    </div>
+
+    <!-- Option A: 192x192 Square -->
+    <div class="bg-white rounded-xl p-4 shadow-sm border">
+      <h3 class="font-semibold text-gray-800 mb-1">Option A</h3>
+      <p class="text-xs text-gray-500 mb-3">192×192px (Larger Square)</p>
+      <div class="flex gap-4 items-start">
+        <div class="w-48 h-48 flex-shrink-0 bg-amber-50 rounded-xl overflow-hidden shadow-md">
+          <img
+            src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Latte.png"
+            alt="Latte"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div>
+          <h4 class="font-bold text-lg">Latte</h4>
+          <p class="text-gray-500 text-xs">Smooth espresso...</p>
+          <p class="text-amber-600 font-bold mt-1">$5.00</p>
+        </div>
+      </div>
+      <p class="text-xs text-yellow-600 mt-3">⚡ Better detail, still crops</p>
+    </div>
+
+    <!-- Option B: 240x160 (3:2 ratio) -->
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-green-300">
+      <h3 class="font-semibold text-green-700 mb-1">Option B ✨ Recommended</h3>
+      <p class="text-xs text-gray-500 mb-3">240×160px (3:2 Ratio)</p>
+      <div class="flex gap-4 items-start">
+        <div class="w-60 h-40 flex-shrink-0 bg-amber-50 rounded-xl overflow-hidden shadow-md">
+          <img
+            src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Latte.png"
+            alt="Latte"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div>
+          <h4 class="font-bold text-lg">Latte</h4>
+          <p class="text-gray-500 text-xs">Smooth espresso...</p>
+          <p class="text-amber-600 font-bold mt-1">$5.00</p>
+        </div>
+      </div>
+      <p class="text-xs text-green-600 mt-3">✅ Full image, no cropping, crisp</p>
+    </div>
+
+    <!-- Option C: 256x256 Square -->
+    <div class="bg-white rounded-xl p-4 shadow-sm border">
+      <h3 class="font-semibold text-gray-800 mb-1">Option C</h3>
+      <p class="text-xs text-gray-500 mb-3">256×256px (Large Square)</p>
+      <div class="flex gap-4 items-start">
+        <div class="w-64 h-64 flex-shrink-0 bg-amber-50 rounded-xl overflow-hidden shadow-md">
+          <img
+            src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Latte.png"
+            alt="Latte"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div>
+          <h4 class="font-bold text-lg">Latte</h4>
+          <p class="text-gray-500 text-xs">Smooth espresso...</p>
+          <p class="text-amber-600 font-bold mt-1">$5.00</p>
+        </div>
+      </div>
+      <p class="text-xs text-yellow-600 mt-3">⚡ Large but still crops edges</p>
+    </div>
+
+  </div>
+
+  <!-- Second row with more variations -->
+  <h2 class="text-xl font-bold text-gray-800 mt-12 mb-6">Alternative 3:2 Ratio Sizes</h2>
+  
+  <div class="grid grid-cols-3 gap-8">
+    
+    <!-- Small 3:2 -->
+    <div class="bg-white rounded-xl p-4 shadow-sm border">
+      <h3 class="font-semibold text-gray-800 mb-1">B1 - Small 3:2</h3>
+      <p class="text-xs text-gray-500 mb-3">180×120px</p>
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 bg-amber-50 rounded-xl overflow-hidden shadow-md" style="width: 180px; height: 120px;">
+          <img
+            src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Latte.png"
+            alt="Latte"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div>
+          <h4 class="font-bold text-lg">Latte</h4>
+          <p class="text-gray-500 text-xs">Smooth espresso with velvety steamed milk</p>
+          <p class="text-amber-600 font-bold mt-1">$5.00</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medium 3:2 (Recommended) -->
+    <div class="bg-white rounded-xl p-4 shadow-sm border border-green-300">
+      <h3 class="font-semibold text-green-700 mb-1">B2 - Medium 3:2 ✨</h3>
+      <p class="text-xs text-gray-500 mb-3">240×160px</p>
+      <div class="flex gap-4 items-start">
+        <div class="w-60 h-40 flex-shrink-0 bg-amber-50 rounded-xl overflow-hidden shadow-md">
+          <img
+            src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Latte.png"
+            alt="Latte"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div>
+          <h4 class="font-bold text-lg">Latte</h4>
+          <p class="text-gray-500 text-xs">Smooth espresso with velvety steamed milk</p>
+          <p class="text-amber-600 font-bold mt-1">$5.00</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Large 3:2 -->
+    <div class="bg-white rounded-xl p-4 shadow-sm border">
+      <h3 class="font-semibold text-gray-800 mb-1">B3 - Large 3:2</h3>
+      <p class="text-xs text-gray-500 mb-3">300×200px</p>
+      <div class="flex gap-4 items-start">
+        <div class="flex-shrink-0 bg-amber-50 rounded-xl overflow-hidden shadow-md" style="width: 300px; height: 200px;">
+          <img
+            src="https://raw.githubusercontent.com/AIMHITGO/Coffeeshop/refs/heads/main/images/coffeemenu/Latte.png"
+            alt="Latte"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div>
+          <h4 class="font-bold text-lg">Latte</h4>
+          <p class="text-gray-500 text-xs">Smooth espresso with velvety steamed milk</p>
+          <p class="text-amber-600 font-bold mt-1">$5.00</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-8 p-4 bg-blue-50 rounded-xl">
+    <h3 class="font-semibold text-blue-800 mb-2">📐 Why Aspect Ratio Matters</h3>
+    <p class="text-blue-700 text-sm">
+      Your drink images are natively <strong>1536×1024px (3:2 ratio)</strong>. 
+      When displayed in a square container, the image must be cropped, losing the edges and potentially important details.
+      Using a 3:2 container shows the full image without any cropping, resulting in maximum sharpness.
+    </p>
+  </div>
+
+</body>
+</html>
