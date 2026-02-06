@@ -68,6 +68,13 @@ const GlobalCart = () => {
     
     if (!entry) return;
     
+    // For beans - navigate to bean detail page
+    if (entry.menuType === 'beans') {
+      navigate(`/about/beans/${entry.id}`);
+      toast.info('Opening bean product page...');
+      return;
+    }
+    
     // For new structure (DrinkDetail)
     if (entry.id) {
       navigate(`/menu/drinks/${entry.id}?edit=${cartKey}`);
